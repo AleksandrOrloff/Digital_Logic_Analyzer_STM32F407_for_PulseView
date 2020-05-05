@@ -58,6 +58,7 @@ int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 		{
 			SetFlags(*(uint16_t*)(buffer+1));
 			result = 1;
+			
 		}
 		break;
 	}

@@ -17,3 +17,7 @@
 
 void SetBufferSize(uint32_t value);
 void SetDelayCount(uint32_t value);
+void SetTriggerMask(uint32_t value);
+void SetTriggerValue(uint32_t value);
+void SetFlags(uint32_t value);
+
