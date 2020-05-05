@@ -1,4 +1,5 @@
 #include "sump.h"
+#include "sampling.h"
 #include "usbd_cdc_if.h"
 
 static char metaData[]
@@ -27,6 +28,38 @@ int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 		CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData));
 		result = 1;
 	  break;
+	  case SUMP_CMD_SET_COUNTS:
+		if(len == 5)
+		{
+			uint16_t readCount  = 1 + *((uint16_t*)(buffer+1));
+			uint16_t delayCount = *((uint16_t*)(buffer+3));
+			SetBufferSize(4 * readCount);
+			SetDelayCount(4 * delayCount);
+			result = 1;
+			//GUI_Text(100, 14, (uint8_t*)text, White, Black);
+		}
+		break;
+	case SUMP_CMD_SET_BT0_MASK:
+		if(len == 5)
+		{
+			SetTriggerMask(*(uint32_t*)(buffer+1));
+			result = 1;
+		}
+		break;
+	case SUMP_CMD_SET_BT0_VALUE:
+		if(len == 5)
+		{
+			SetTriggerValue(*(uint32_t*)(buffer+1));
+			result = 1;
+		}
+		break;
+	case SUMP_CMD_SET_FLAGS:
+		if(len == 5)
+		{
+			SetFlags(*(uint16_t*)(buffer+1));
+			result = 1;
+		}
+		break;
 	}
 	return result;
 }
