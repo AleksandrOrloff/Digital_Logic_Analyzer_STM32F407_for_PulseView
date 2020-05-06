@@ -1,5 +1,4 @@
 #include "sampling.h"
-#include <stdlib.h>
 #include "sump.h"
 
 static uint32_t transferCount;
@@ -20,9 +19,16 @@ void SetDelayCount(uint32_t value){
 void SetTriggerMask(uint32_t value){
     triggerMask = value;
     }
+
 void SetTriggerValue(uint32_t value){
     triggerValue = value;
     }
+
 void SetFlags(uint32_t value){
     flags = value;
     }
+
+void SetSamplingPeriod(uint32_t value){
+    period = value;
+    }
+    

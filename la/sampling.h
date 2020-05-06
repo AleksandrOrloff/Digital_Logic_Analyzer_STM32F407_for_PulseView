@@ -1,3 +1,4 @@
+#include <stdint.h>
 #define MAX_SAMPLING_RAM (24*1024)
 //#define MAX_RLE_SAMPLE_COUNT	(64)
 #define MAX_RLE_SAMPLE_COUNT	(128)
@@ -16,8 +17,14 @@
 //#define SAMPLING_RLE_FORCE_ZERO_ON_MSB
 
 void SetBufferSize(uint32_t value);
+
 void SetDelayCount(uint32_t value);
+
 void SetTriggerMask(uint32_t value);
+
 void SetTriggerValue(uint32_t value);
+
 void SetFlags(uint32_t value);
+
+void SetSamplingPeriod(uint32_t value);
 

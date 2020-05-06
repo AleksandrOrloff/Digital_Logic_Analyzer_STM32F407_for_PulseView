@@ -1,4 +1,4 @@
-build/sump.o: la/sump.c la/sump.h Inc/usbd_cdc_if.h \
+build/sump.o: la/sump.c la/sump.h la/sampling.h Inc/usbd_cdc_if.h \
  Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
@@ -34,6 +34,8 @@ build/sump.o: la/sump.c la/sump.h Inc/usbd_cdc_if.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 
 la/sump.h:
+
+la/sampling.h:
 
 Inc/usbd_cdc_if.h:
 

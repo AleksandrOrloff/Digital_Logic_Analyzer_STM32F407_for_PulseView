@@ -2,6 +2,7 @@
 #include "sampling.h"
 #include "usbd_cdc_if.h"
 
+
 static char metaData[]
      = {SUMP_META_NAME, 'M', 'e', 'a', 's', 'u', 'r', 'i', 'n', 'g', ' ','C', 'o', 'm', 'p', 'l', 'e', 'x', 0,
 		SUMP_META_FPGA_VERSION, 'N', 'o', 'F', 'P', 'G', 'A', ' ', ':', '(', 0,
@@ -12,6 +13,13 @@ static char metaData[]
 		SUMP_META_PROTOCOL_B, 2,
 		SUMP_META_END
 };
+
+static uint32_t divider = 1;
+
+uint32_t CalcLocalDivider(uint32_t divider, const uint32_t localFrequency, const uint32_t sumpFrequency)
+{
+	return localFrequency / (sumpFrequency / (divider + 1)) - 1;
+}
 
 int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 {
@@ -28,6 +36,26 @@ int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 		CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData));
 		result = 1;
 	  break;
+	  case SUMP_CMD_SET_SAMPLE_RATE:
+		if(len == 5)
+		{
+			//div120 = 120MHz / (100MHz / (div100 + 1)) - 1;
+			divider = *((uint32_t*)(buffer+1));
+			//if maximum samplerate is 20MHz => 100/20 = 5, 5 - 1 = 4
+			if(divider != 0)
+			{
+				uint32_t clocks = 168000000; // сделать ф-ю для вычисления clocks
+				divider = CalcLocalDivider(divider, clocks, SUMP_ORIGINAL_FREQ);
+			}
+			if(divider == 0)
+			{
+				divider = 1;
+			}
+			SetSamplingPeriod(divider);
+			result = 1;
+			//GUI_Text(0, 14, (uint8_t*)text, White, Black);
+		}
+		break;
 	  case SUMP_CMD_SET_COUNTS:
 		if(len == 5)
 		{

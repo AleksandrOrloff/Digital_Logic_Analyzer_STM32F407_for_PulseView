@@ -1,0 +1,239 @@
+ARM GAS  /tmp/ccQ0oGlj.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"sampling.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.SetBufferSize,"ax",%progbits
+  18              		.align	1
+  19              		.global	SetBufferSize
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	SetBufferSize:
+  26              	.LFB0:
+  27              		.file 1 "la/sampling.c"
+   1:la/sampling.c **** #include "sampling.h"
+   2:la/sampling.c **** #include "sump.h"
+   3:la/sampling.c **** 
+   4:la/sampling.c **** static uint32_t transferCount;
+   5:la/sampling.c **** static uint32_t delayCount;
+   6:la/sampling.c **** uint32_t triggerMask;
+   7:la/sampling.c **** uint32_t triggerValue;
+   8:la/sampling.c **** uint16_t flags;
+   9:la/sampling.c **** uint16_t period;
+  10:la/sampling.c **** 
+  11:la/sampling.c **** void SetBufferSize(uint32_t value){
+  28              		.loc 1 11 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  12:la/sampling.c **** 	transferCount = value;
+  13:la/sampling.c ****     }
+  34              		.loc 1 13 0
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE0:
+  39              		.section	.text.SetDelayCount,"ax",%progbits
+  40              		.align	1
+  41              		.global	SetDelayCount
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  45              		.fpu fpv4-sp-d16
+  47              	SetDelayCount:
+ARM GAS  /tmp/ccQ0oGlj.s 			page 2
+
+
+  48              	.LFB1:
+  14:la/sampling.c **** 
+  15:la/sampling.c **** void SetDelayCount(uint32_t value){
+  49              		.loc 1 15 0
+  50              		.cfi_startproc
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+  54              	.LVL1:
+  16:la/sampling.c **** 	delayCount = value & 0xfffffffe;
+  17:la/sampling.c ****     }
+  55              		.loc 1 17 0
+  56 0000 7047     		bx	lr
+  57              		.cfi_endproc
+  58              	.LFE1:
+  60              		.section	.text.SetTriggerMask,"ax",%progbits
+  61              		.align	1
+  62              		.global	SetTriggerMask
+  63              		.syntax unified
+  64              		.thumb
+  65              		.thumb_func
+  66              		.fpu fpv4-sp-d16
+  68              	SetTriggerMask:
+  69              	.LFB2:
+  18:la/sampling.c **** 
+  19:la/sampling.c **** void SetTriggerMask(uint32_t value){
+  70              		.loc 1 19 0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 0, uses_anonymous_args = 0
+  74              		@ link register save eliminated.
+  75              	.LVL2:
+  20:la/sampling.c ****     triggerMask = value;
+  76              		.loc 1 20 0
+  77 0000 014B     		ldr	r3, .L4
+  78 0002 1860     		str	r0, [r3]
+  21:la/sampling.c ****     }
+  79              		.loc 1 21 0
+  80 0004 7047     		bx	lr
+  81              	.L5:
+  82 0006 00BF     		.align	2
+  83              	.L4:
+  84 0008 00000000 		.word	triggerMask
+  85              		.cfi_endproc
+  86              	.LFE2:
+  88              		.section	.text.SetTriggerValue,"ax",%progbits
+  89              		.align	1
+  90              		.global	SetTriggerValue
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  94              		.fpu fpv4-sp-d16
+  96              	SetTriggerValue:
+  97              	.LFB3:
+  22:la/sampling.c **** 
+  23:la/sampling.c **** void SetTriggerValue(uint32_t value){
+  98              		.loc 1 23 0
+ARM GAS  /tmp/ccQ0oGlj.s 			page 3
+
+
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103              	.LVL3:
+  24:la/sampling.c ****     triggerValue = value;
+ 104              		.loc 1 24 0
+ 105 0000 014B     		ldr	r3, .L7
+ 106 0002 1860     		str	r0, [r3]
+  25:la/sampling.c ****     }
+ 107              		.loc 1 25 0
+ 108 0004 7047     		bx	lr
+ 109              	.L8:
+ 110 0006 00BF     		.align	2
+ 111              	.L7:
+ 112 0008 00000000 		.word	triggerValue
+ 113              		.cfi_endproc
+ 114              	.LFE3:
+ 116              		.section	.text.SetFlags,"ax",%progbits
+ 117              		.align	1
+ 118              		.global	SetFlags
+ 119              		.syntax unified
+ 120              		.thumb
+ 121              		.thumb_func
+ 122              		.fpu fpv4-sp-d16
+ 124              	SetFlags:
+ 125              	.LFB4:
+  26:la/sampling.c **** 
+  27:la/sampling.c **** void SetFlags(uint32_t value){
+ 126              		.loc 1 27 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              		@ link register save eliminated.
+ 131              	.LVL4:
+  28:la/sampling.c ****     flags = value;
+ 132              		.loc 1 28 0
+ 133 0000 014B     		ldr	r3, .L10
+ 134 0002 1880     		strh	r0, [r3]	@ movhi
+  29:la/sampling.c ****     }
+ 135              		.loc 1 29 0
+ 136 0004 7047     		bx	lr
+ 137              	.L11:
+ 138 0006 00BF     		.align	2
+ 139              	.L10:
+ 140 0008 00000000 		.word	flags
+ 141              		.cfi_endproc
+ 142              	.LFE4:
+ 144              		.section	.text.SetSamplingPeriod,"ax",%progbits
+ 145              		.align	1
+ 146              		.global	SetSamplingPeriod
+ 147              		.syntax unified
+ 148              		.thumb
+ 149              		.thumb_func
+ 150              		.fpu fpv4-sp-d16
+ 152              	SetSamplingPeriod:
+ 153              	.LFB5:
+ARM GAS  /tmp/ccQ0oGlj.s 			page 4
+
+
+  30:la/sampling.c **** 
+  31:la/sampling.c **** void SetSamplingPeriod(uint32_t value){
+ 154              		.loc 1 31 0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158              		@ link register save eliminated.
+ 159              	.LVL5:
+  32:la/sampling.c ****     period = value;
+ 160              		.loc 1 32 0
+ 161 0000 014B     		ldr	r3, .L13
+ 162 0002 1880     		strh	r0, [r3]	@ movhi
+  33:la/sampling.c ****     }
+ 163              		.loc 1 33 0
+ 164 0004 7047     		bx	lr
+ 165              	.L14:
+ 166 0006 00BF     		.align	2
+ 167              	.L13:
+ 168 0008 00000000 		.word	period
+ 169              		.cfi_endproc
+ 170              	.LFE5:
+ 172              		.comm	period,2,2
+ 173              		.comm	flags,2,2
+ 174              		.comm	triggerValue,4,4
+ 175              		.comm	triggerMask,4,4
+ 176              		.text
+ 177              	.Letext0:
+ 178              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 179              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ARM GAS  /tmp/ccQ0oGlj.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 sampling.c
+     /tmp/ccQ0oGlj.s:18     .text.SetBufferSize:0000000000000000 $t
+     /tmp/ccQ0oGlj.s:25     .text.SetBufferSize:0000000000000000 SetBufferSize
+     /tmp/ccQ0oGlj.s:40     .text.SetDelayCount:0000000000000000 $t
+     /tmp/ccQ0oGlj.s:47     .text.SetDelayCount:0000000000000000 SetDelayCount
+     /tmp/ccQ0oGlj.s:61     .text.SetTriggerMask:0000000000000000 $t
+     /tmp/ccQ0oGlj.s:68     .text.SetTriggerMask:0000000000000000 SetTriggerMask
+     /tmp/ccQ0oGlj.s:84     .text.SetTriggerMask:0000000000000008 $d
+                            *COM*:0000000000000004 triggerMask
+     /tmp/ccQ0oGlj.s:89     .text.SetTriggerValue:0000000000000000 $t
+     /tmp/ccQ0oGlj.s:96     .text.SetTriggerValue:0000000000000000 SetTriggerValue
+     /tmp/ccQ0oGlj.s:112    .text.SetTriggerValue:0000000000000008 $d
+                            *COM*:0000000000000004 triggerValue
+     /tmp/ccQ0oGlj.s:117    .text.SetFlags:0000000000000000 $t
+     /tmp/ccQ0oGlj.s:124    .text.SetFlags:0000000000000000 SetFlags
+     /tmp/ccQ0oGlj.s:140    .text.SetFlags:0000000000000008 $d
+                            *COM*:0000000000000002 flags
+     /tmp/ccQ0oGlj.s:145    .text.SetSamplingPeriod:0000000000000000 $t
+     /tmp/ccQ0oGlj.s:152    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
+     /tmp/ccQ0oGlj.s:168    .text.SetSamplingPeriod:0000000000000008 $d
+                            *COM*:0000000000000002 period
+
+NO UNDEFINED SYMBOLS

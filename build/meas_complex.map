@@ -41,7 +41,11 @@ uwTick              0x4               build/stm32f4xx_hal.o
 pFlash              0x20              build/stm32f4xx_hal_flash.o
 UserRxBufferFS      0x800             build/usbd_cdc_if.o
 UserTxBufferFS      0x800             build/usbd_cdc_if.o
+triggerValue        0x4               build/sampling.o
+period              0x2               build/sampling.o
+flags               0x2               build/sampling.o
 USBD_StrDesc        0x200             build/usbd_desc.o
+triggerMask         0x4               build/sampling.o
 
 Discarded input sections
 
@@ -665,6 +669,9 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/sump.o
  .data          0x0000000000000000        0x0 build/sump.o
  .bss           0x0000000000000000        0x0 build/sump.o
+ .text          0x0000000000000000        0x0 build/sampling.o
+ .data          0x0000000000000000        0x0 build/sampling.o
+ .bss           0x0000000000000000        0x0 build/sampling.o
  .text          0x0000000000000000       0x14 build/startup_stm32f407xx.o
  .data          0x0000000000000000        0x0 build/startup_stm32f407xx.o
  .bss           0x0000000000000000        0x0 build/startup_stm32f407xx.o
@@ -779,6 +786,7 @@ LOAD build/usbd_ctlreq.o
 LOAD build/usbd_ioreq.o
 LOAD build/usbd_cdc.o
 LOAD build/sump.o
+LOAD build/sampling.o
 LOAD build/startup_stm32f407xx.o
 LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a
 LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libm.a
@@ -804,7 +812,7 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
                 0x0000000008000000                g_pfnVectors
                 0x0000000008000188                . = ALIGN (0x4)
 
-.text           0x0000000008000188     0x3878
+.text           0x0000000008000188     0x3974
                 0x0000000008000188                . = ALIGN (0x4)
  *(.text)
  .text          0x0000000008000188       0x40 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
@@ -1298,203 +1306,225 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  .text.USBD_CDC_ReceivePacket
                 0x000000000800372a       0x32 build/usbd_cdc.o
                 0x000000000800372a                USBD_CDC_ReceivePacket
+ .text.CalcLocalDivider
+                0x000000000800375c        0xe build/sump.o
+                0x000000000800375c                CalcLocalDivider
+ *fill*         0x000000000800376a        0x2 
  .text.SumpProcessRequest
-                0x000000000800375c       0x30 build/sump.o
-                0x000000000800375c                SumpProcessRequest
+                0x000000000800376c       0xe8 build/sump.o
+                0x000000000800376c                SumpProcessRequest
+ .text.SetBufferSize
+                0x0000000008003854        0x2 build/sampling.o
+                0x0000000008003854                SetBufferSize
+ .text.SetDelayCount
+                0x0000000008003856        0x2 build/sampling.o
+                0x0000000008003856                SetDelayCount
+ .text.SetTriggerMask
+                0x0000000008003858        0xc build/sampling.o
+                0x0000000008003858                SetTriggerMask
+ .text.SetTriggerValue
+                0x0000000008003864        0xc build/sampling.o
+                0x0000000008003864                SetTriggerValue
+ .text.SetFlags
+                0x0000000008003870        0xc build/sampling.o
+                0x0000000008003870                SetFlags
+ .text.SetSamplingPeriod
+                0x000000000800387c        0xc build/sampling.o
+                0x000000000800387c                SetSamplingPeriod
  .text.Reset_Handler
-                0x000000000800378c       0x50 build/startup_stm32f407xx.o
-                0x000000000800378c                Reset_Handler
+                0x0000000008003888       0x50 build/startup_stm32f407xx.o
+                0x0000000008003888                Reset_Handler
  .text.Default_Handler
-                0x00000000080037dc        0x2 build/startup_stm32f407xx.o
-                0x00000000080037dc                RTC_Alarm_IRQHandler
-                0x00000000080037dc                HASH_RNG_IRQHandler
-                0x00000000080037dc                EXTI2_IRQHandler
-                0x00000000080037dc                TIM8_CC_IRQHandler
-                0x00000000080037dc                TIM1_CC_IRQHandler
-                0x00000000080037dc                DMA2_Stream5_IRQHandler
-                0x00000000080037dc                DMA1_Stream5_IRQHandler
-                0x00000000080037dc                PVD_IRQHandler
-                0x00000000080037dc                SDIO_IRQHandler
-                0x00000000080037dc                TAMP_STAMP_IRQHandler
-                0x00000000080037dc                CAN2_RX1_IRQHandler
-                0x00000000080037dc                EXTI3_IRQHandler
-                0x00000000080037dc                TIM8_TRG_COM_TIM14_IRQHandler
-                0x00000000080037dc                TIM1_UP_TIM10_IRQHandler
-                0x00000000080037dc                TIM8_UP_TIM13_IRQHandler
-                0x00000000080037dc                I2C3_ER_IRQHandler
-                0x00000000080037dc                EXTI0_IRQHandler
-                0x00000000080037dc                I2C2_EV_IRQHandler
-                0x00000000080037dc                DMA1_Stream2_IRQHandler
-                0x00000000080037dc                CAN1_RX0_IRQHandler
-                0x00000000080037dc                FPU_IRQHandler
-                0x00000000080037dc                OTG_HS_WKUP_IRQHandler
-                0x00000000080037dc                CAN2_SCE_IRQHandler
-                0x00000000080037dc                DMA2_Stream2_IRQHandler
-                0x00000000080037dc                SPI1_IRQHandler
-                0x00000000080037dc                TIM6_DAC_IRQHandler
-                0x00000000080037dc                TIM1_BRK_TIM9_IRQHandler
-                0x00000000080037dc                DCMI_IRQHandler
-                0x00000000080037dc                CAN2_RX0_IRQHandler
-                0x00000000080037dc                DMA2_Stream3_IRQHandler
-                0x00000000080037dc                USART6_IRQHandler
-                0x00000000080037dc                USART3_IRQHandler
-                0x00000000080037dc                CAN1_RX1_IRQHandler
-                0x00000000080037dc                UART5_IRQHandler
-                0x00000000080037dc                DMA2_Stream0_IRQHandler
-                0x00000000080037dc                TIM4_IRQHandler
-                0x00000000080037dc                I2C1_EV_IRQHandler
-                0x00000000080037dc                DMA1_Stream6_IRQHandler
-                0x00000000080037dc                DMA1_Stream1_IRQHandler
-                0x00000000080037dc                UART4_IRQHandler
-                0x00000000080037dc                TIM3_IRQHandler
-                0x00000000080037dc                RCC_IRQHandler
-                0x00000000080037dc                TIM8_BRK_TIM12_IRQHandler
-                0x00000000080037dc                Default_Handler
-                0x00000000080037dc                EXTI15_10_IRQHandler
-                0x00000000080037dc                ADC_IRQHandler
-                0x00000000080037dc                DMA1_Stream7_IRQHandler
-                0x00000000080037dc                TIM7_IRQHandler
-                0x00000000080037dc                CAN2_TX_IRQHandler
-                0x00000000080037dc                TIM5_IRQHandler
-                0x00000000080037dc                DMA2_Stream7_IRQHandler
-                0x00000000080037dc                I2C3_EV_IRQHandler
-                0x00000000080037dc                EXTI9_5_IRQHandler
-                0x00000000080037dc                RTC_WKUP_IRQHandler
-                0x00000000080037dc                ETH_WKUP_IRQHandler
-                0x00000000080037dc                SPI2_IRQHandler
-                0x00000000080037dc                OTG_HS_EP1_IN_IRQHandler
-                0x00000000080037dc                DMA1_Stream0_IRQHandler
-                0x00000000080037dc                CAN1_TX_IRQHandler
-                0x00000000080037dc                EXTI4_IRQHandler
-                0x00000000080037dc                FSMC_IRQHandler
-                0x00000000080037dc                ETH_IRQHandler
-                0x00000000080037dc                OTG_HS_EP1_OUT_IRQHandler
-                0x00000000080037dc                WWDG_IRQHandler
-                0x00000000080037dc                TIM2_IRQHandler
-                0x00000000080037dc                OTG_FS_WKUP_IRQHandler
-                0x00000000080037dc                TIM1_TRG_COM_TIM11_IRQHandler
-                0x00000000080037dc                OTG_HS_IRQHandler
-                0x00000000080037dc                EXTI1_IRQHandler
-                0x00000000080037dc                USART2_IRQHandler
-                0x00000000080037dc                I2C2_ER_IRQHandler
-                0x00000000080037dc                DMA2_Stream1_IRQHandler
-                0x00000000080037dc                CAN1_SCE_IRQHandler
-                0x00000000080037dc                FLASH_IRQHandler
-                0x00000000080037dc                DMA2_Stream4_IRQHandler
-                0x00000000080037dc                USART1_IRQHandler
-                0x00000000080037dc                SPI3_IRQHandler
-                0x00000000080037dc                DMA1_Stream4_IRQHandler
-                0x00000000080037dc                I2C1_ER_IRQHandler
-                0x00000000080037dc                DMA2_Stream6_IRQHandler
-                0x00000000080037dc                DMA1_Stream3_IRQHandler
- *fill*         0x00000000080037de        0x2 
+                0x00000000080038d8        0x2 build/startup_stm32f407xx.o
+                0x00000000080038d8                RTC_Alarm_IRQHandler
+                0x00000000080038d8                HASH_RNG_IRQHandler
+                0x00000000080038d8                EXTI2_IRQHandler
+                0x00000000080038d8                TIM8_CC_IRQHandler
+                0x00000000080038d8                TIM1_CC_IRQHandler
+                0x00000000080038d8                DMA2_Stream5_IRQHandler
+                0x00000000080038d8                DMA1_Stream5_IRQHandler
+                0x00000000080038d8                PVD_IRQHandler
+                0x00000000080038d8                SDIO_IRQHandler
+                0x00000000080038d8                TAMP_STAMP_IRQHandler
+                0x00000000080038d8                CAN2_RX1_IRQHandler
+                0x00000000080038d8                EXTI3_IRQHandler
+                0x00000000080038d8                TIM8_TRG_COM_TIM14_IRQHandler
+                0x00000000080038d8                TIM1_UP_TIM10_IRQHandler
+                0x00000000080038d8                TIM8_UP_TIM13_IRQHandler
+                0x00000000080038d8                I2C3_ER_IRQHandler
+                0x00000000080038d8                EXTI0_IRQHandler
+                0x00000000080038d8                I2C2_EV_IRQHandler
+                0x00000000080038d8                DMA1_Stream2_IRQHandler
+                0x00000000080038d8                CAN1_RX0_IRQHandler
+                0x00000000080038d8                FPU_IRQHandler
+                0x00000000080038d8                OTG_HS_WKUP_IRQHandler
+                0x00000000080038d8                CAN2_SCE_IRQHandler
+                0x00000000080038d8                DMA2_Stream2_IRQHandler
+                0x00000000080038d8                SPI1_IRQHandler
+                0x00000000080038d8                TIM6_DAC_IRQHandler
+                0x00000000080038d8                TIM1_BRK_TIM9_IRQHandler
+                0x00000000080038d8                DCMI_IRQHandler
+                0x00000000080038d8                CAN2_RX0_IRQHandler
+                0x00000000080038d8                DMA2_Stream3_IRQHandler
+                0x00000000080038d8                USART6_IRQHandler
+                0x00000000080038d8                USART3_IRQHandler
+                0x00000000080038d8                CAN1_RX1_IRQHandler
+                0x00000000080038d8                UART5_IRQHandler
+                0x00000000080038d8                DMA2_Stream0_IRQHandler
+                0x00000000080038d8                TIM4_IRQHandler
+                0x00000000080038d8                I2C1_EV_IRQHandler
+                0x00000000080038d8                DMA1_Stream6_IRQHandler
+                0x00000000080038d8                DMA1_Stream1_IRQHandler
+                0x00000000080038d8                UART4_IRQHandler
+                0x00000000080038d8                TIM3_IRQHandler
+                0x00000000080038d8                RCC_IRQHandler
+                0x00000000080038d8                TIM8_BRK_TIM12_IRQHandler
+                0x00000000080038d8                Default_Handler
+                0x00000000080038d8                EXTI15_10_IRQHandler
+                0x00000000080038d8                ADC_IRQHandler
+                0x00000000080038d8                DMA1_Stream7_IRQHandler
+                0x00000000080038d8                TIM7_IRQHandler
+                0x00000000080038d8                CAN2_TX_IRQHandler
+                0x00000000080038d8                TIM5_IRQHandler
+                0x00000000080038d8                DMA2_Stream7_IRQHandler
+                0x00000000080038d8                I2C3_EV_IRQHandler
+                0x00000000080038d8                EXTI9_5_IRQHandler
+                0x00000000080038d8                RTC_WKUP_IRQHandler
+                0x00000000080038d8                ETH_WKUP_IRQHandler
+                0x00000000080038d8                SPI2_IRQHandler
+                0x00000000080038d8                OTG_HS_EP1_IN_IRQHandler
+                0x00000000080038d8                DMA1_Stream0_IRQHandler
+                0x00000000080038d8                CAN1_TX_IRQHandler
+                0x00000000080038d8                EXTI4_IRQHandler
+                0x00000000080038d8                FSMC_IRQHandler
+                0x00000000080038d8                ETH_IRQHandler
+                0x00000000080038d8                OTG_HS_EP1_OUT_IRQHandler
+                0x00000000080038d8                WWDG_IRQHandler
+                0x00000000080038d8                TIM2_IRQHandler
+                0x00000000080038d8                OTG_FS_WKUP_IRQHandler
+                0x00000000080038d8                TIM1_TRG_COM_TIM11_IRQHandler
+                0x00000000080038d8                OTG_HS_IRQHandler
+                0x00000000080038d8                EXTI1_IRQHandler
+                0x00000000080038d8                USART2_IRQHandler
+                0x00000000080038d8                I2C2_ER_IRQHandler
+                0x00000000080038d8                DMA2_Stream1_IRQHandler
+                0x00000000080038d8                CAN1_SCE_IRQHandler
+                0x00000000080038d8                FLASH_IRQHandler
+                0x00000000080038d8                DMA2_Stream4_IRQHandler
+                0x00000000080038d8                USART1_IRQHandler
+                0x00000000080038d8                SPI3_IRQHandler
+                0x00000000080038d8                DMA1_Stream4_IRQHandler
+                0x00000000080038d8                I2C1_ER_IRQHandler
+                0x00000000080038d8                DMA2_Stream6_IRQHandler
+                0x00000000080038d8                DMA1_Stream3_IRQHandler
+ *fill*         0x00000000080038da        0x2 
  .text.__libc_init_array
-                0x00000000080037e0       0x48 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
-                0x00000000080037e0                __libc_init_array
- .text.malloc   0x0000000008003828       0x10 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
-                0x0000000008003828                malloc
- .text.free     0x0000000008003838       0x10 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
-                0x0000000008003838                free
- .text.memset   0x0000000008003848       0x10 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
-                0x0000000008003848                memset
- .text._free_r  0x0000000008003858       0x9c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-freer.o)
-                0x0000000008003858                _free_r
+                0x00000000080038dc       0x48 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
+                0x00000000080038dc                __libc_init_array
+ .text.malloc   0x0000000008003924       0x10 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
+                0x0000000008003924                malloc
+ .text.free     0x0000000008003934       0x10 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
+                0x0000000008003934                free
+ .text.memset   0x0000000008003944       0x10 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
+                0x0000000008003944                memset
+ .text._free_r  0x0000000008003954       0x9c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-freer.o)
+                0x0000000008003954                _free_r
  .text._malloc_r
-                0x00000000080038f4       0xb4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
-                0x00000000080038f4                _malloc_r
- .text._sbrk_r  0x00000000080039a8       0x20 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
-                0x00000000080039a8                _sbrk_r
+                0x00000000080039f0       0xb4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000000080039f0                _malloc_r
+ .text._sbrk_r  0x0000000008003aa4       0x20 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000008003aa4                _sbrk_r
  .text.__malloc_lock
-                0x00000000080039c8        0x2 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
-                0x00000000080039c8                __malloc_lock
+                0x0000000008003ac4        0x2 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
+                0x0000000008003ac4                __malloc_lock
  .text.__malloc_unlock
-                0x00000000080039ca        0x2 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
-                0x00000000080039ca                __malloc_unlock
- .text._sbrk    0x00000000080039cc       0x1c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
-                0x00000000080039cc                _sbrk
+                0x0000000008003ac6        0x2 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
+                0x0000000008003ac6                __malloc_unlock
+ .text._sbrk    0x0000000008003ac8       0x1c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
+                0x0000000008003ac8                _sbrk
  *(.glue_7)
- .glue_7        0x00000000080039e8        0x0 linker stubs
+ .glue_7        0x0000000008003ae4        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x00000000080039e8        0x0 linker stubs
+ .glue_7t       0x0000000008003ae4        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x00000000080039e8        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .eh_frame      0x0000000008003ae4        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.init)
- .init          0x00000000080039e8        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00000000080039e8                _init
- .init          0x00000000080039ec        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+ .init          0x0000000008003ae4        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x0000000008003ae4                _init
+ .init          0x0000000008003ae8        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  *(.fini)
- .fini          0x00000000080039f4        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00000000080039f4                _fini
- .fini          0x00000000080039f8        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-                0x0000000008003a00                . = ALIGN (0x4)
-                0x0000000008003a00                _etext = .
+ .fini          0x0000000008003af0        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x0000000008003af0                _fini
+ .fini          0x0000000008003af4        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x0000000008003afc                . = ALIGN (0x4)
+                0x0000000008003afc                _etext = .
 
-.vfp11_veneer   0x0000000008003a00        0x0
- .vfp11_veneer  0x0000000008003a00        0x0 linker stubs
+.vfp11_veneer   0x0000000008003afc        0x0
+ .vfp11_veneer  0x0000000008003afc        0x0 linker stubs
 
-.v4_bx          0x0000000008003a00        0x0
- .v4_bx         0x0000000008003a00        0x0 linker stubs
+.v4_bx          0x0000000008003afc        0x0
+ .v4_bx         0x0000000008003afc        0x0 linker stubs
 
-.iplt           0x0000000008003a00        0x0
- .iplt          0x0000000008003a00        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x0000000008003afc        0x0
+ .iplt          0x0000000008003afc        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rodata         0x0000000008003a00       0x60
-                0x0000000008003a00                . = ALIGN (0x4)
+.rodata         0x0000000008003afc       0x60
+                0x0000000008003afc                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.USBD_FS_ConfigStrDescriptor.str1.4
-                0x0000000008003a00        0xb build/usbd_desc.o
- *fill*         0x0000000008003a0b        0x1 
+                0x0000000008003afc        0xb build/usbd_desc.o
+ *fill*         0x0000000008003b07        0x1 
  .rodata.USBD_FS_InterfaceStrDescriptor.str1.4
-                0x0000000008003a0c        0xe build/usbd_desc.o
- *fill*         0x0000000008003a1a        0x2 
+                0x0000000008003b08        0xe build/usbd_desc.o
+ *fill*         0x0000000008003b16        0x2 
  .rodata.USBD_FS_ManufacturerStrDescriptor.str1.4
-                0x0000000008003a1c       0x13 build/usbd_desc.o
- *fill*         0x0000000008003a2f        0x1 
+                0x0000000008003b18       0x13 build/usbd_desc.o
+ *fill*         0x0000000008003b2b        0x1 
  .rodata.USBD_FS_ProductStrDescriptor.str1.4
-                0x0000000008003a30       0x16 build/usbd_desc.o
- *fill*         0x0000000008003a46        0x2 
+                0x0000000008003b2c       0x16 build/usbd_desc.o
+ *fill*         0x0000000008003b42        0x2 
  .rodata.AHBPrescTable
-                0x0000000008003a48       0x10 build/system_stm32f4xx.o
-                0x0000000008003a48                AHBPrescTable
+                0x0000000008003b44       0x10 build/system_stm32f4xx.o
+                0x0000000008003b44                AHBPrescTable
  .rodata.SumpProcessRequest.str1.4
-                0x0000000008003a58        0x8 build/sump.o
+                0x0000000008003b54        0x8 build/sump.o
                                           0x5 (size before relaxing)
-                0x0000000008003a60                . = ALIGN (0x4)
+                0x0000000008003b5c                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x0000000008003a60        0x8
-                0x0000000008003a60                __exidx_start = .
+.ARM            0x0000000008003b5c        0x8
+                0x0000000008003b5c                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x0000000008003a60        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
-                0x0000000008003a68                __exidx_end = .
+ .ARM.exidx     0x0000000008003b5c        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
+                0x0000000008003b64                __exidx_end = .
 
-.rel.dyn        0x0000000008003a68        0x0
- .rel.iplt      0x0000000008003a68        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.rel.dyn        0x0000000008003b64        0x0
+ .rel.iplt      0x0000000008003b64        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.preinit_array  0x0000000008003a68        0x0
-                0x0000000008003a68                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0000000008003b64        0x0
+                0x0000000008003b64                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x0000000008003a68                PROVIDE (__preinit_array_end = .)
+                0x0000000008003b64                PROVIDE (__preinit_array_end = .)
 
-.init_array     0x0000000008003a68        0x4
-                0x0000000008003a68                PROVIDE (__init_array_start = .)
+.init_array     0x0000000008003b64        0x4
+                0x0000000008003b64                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x0000000008003a68        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x0000000008003a6c                PROVIDE (__init_array_end = .)
+ .init_array    0x0000000008003b64        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x0000000008003b68                PROVIDE (__init_array_end = .)
 
-.fini_array     0x0000000008003a6c        0x4
+.fini_array     0x0000000008003b68        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0000000008003a6c        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .fini_array    0x0000000008003b68        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x0000000008003a70                _sidata = LOADADDR (.data)
+                0x0000000008003b6c                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000      0x218 load address 0x0000000008003a70
+.data           0x0000000020000000      0x21c load address 0x0000000008003b6c
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -1543,21 +1573,22 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
                 0x0000000020000138       0x43 build/usbd_cdc.o
                 0x0000000020000138                USBD_CDC_OtherSpeedCfgDesc
  *fill*         0x000000002000017b        0x1 
+ .data.divider  0x000000002000017c        0x4 build/sump.o
  .data.metaData
-                0x000000002000017c       0x38 build/sump.o
+                0x0000000020000180       0x38 build/sump.o
  .data._impure_ptr
-                0x00000000200001b4        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
-                0x00000000200001b4                _impure_ptr
+                0x00000000200001b8        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
+                0x00000000200001b8                _impure_ptr
  .data.impure_data
-                0x00000000200001b8       0x60 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
-                0x0000000020000218                . = ALIGN (0x4)
-                0x0000000020000218                _edata = .
-                0x0000000008003c88                _siccmram = LOADADDR (.ccmram)
+                0x00000000200001bc       0x60 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
+                0x000000002000021c                . = ALIGN (0x4)
+                0x000000002000021c                _edata = .
+                0x0000000008003d88                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x0000000020000218        0x0 load address 0x0000000008003c88
- .igot.plt      0x0000000020000218        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.igot.plt       0x000000002000021c        0x0 load address 0x0000000008003d88
+ .igot.plt      0x000000002000021c        0x0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.ccmram         0x0000000010000000        0x0 load address 0x0000000008003c88
+.ccmram         0x0000000010000000        0x0 load address 0x0000000008003d88
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _sccmram = .
  *(.ccmram)
@@ -1566,51 +1597,56 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
                 0x0000000010000000                _eccmram = .
                 0x0000000010000000                . = ALIGN (0x4)
 
-.bss            0x0000000020000218     0x18d8
-                0x0000000020000218                _sbss = .
-                0x0000000020000218                __bss_start__ = _sbss
+.bss            0x000000002000021c     0x18e4
+                0x000000002000021c                _sbss = .
+                0x000000002000021c                __bss_start__ = _sbss
  *(.bss)
- .bss           0x0000000020000218       0x1c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .bss           0x000000002000021c       0x1c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.bss*)
  .bss.cfgidx.9725
-                0x0000000020000234        0x1 build/usbd_ctlreq.o
- *fill*         0x0000000020000235        0x3 
+                0x0000000020000238        0x1 build/usbd_ctlreq.o
+ *fill*         0x0000000020000239        0x3 
  .bss.__malloc_free_list
-                0x0000000020000238        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
-                0x0000000020000238                __malloc_free_list
- .bss.__malloc_sbrk_start
                 0x000000002000023c        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
-                0x000000002000023c                __malloc_sbrk_start
+                0x000000002000023c                __malloc_free_list
+ .bss.__malloc_sbrk_start
+                0x0000000020000240        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                0x0000000020000240                __malloc_sbrk_start
  .bss.heap_end.5377
-                0x0000000020000240        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
+                0x0000000020000244        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
  *(COMMON)
- COMMON         0x0000000020000244      0x29c build/usb_device.o
-                0x0000000020000244                hUsbDeviceFS
- COMMON         0x00000000200004e0      0x408 build/usbd_conf.o
-                0x00000000200004e0                hpcd_USB_OTG_FS
- COMMON         0x00000000200008e8      0x200 build/usbd_desc.o
-                0x00000000200008e8                USBD_StrDesc
- COMMON         0x0000000020000ae8     0x1000 build/usbd_cdc_if.o
-                0x0000000020000ae8                UserRxBufferFS
-                0x00000000200012e8                UserTxBufferFS
- COMMON         0x0000000020001ae8        0x4 build/stm32f4xx_hal.o
-                0x0000000020001ae8                uwTick
- COMMON         0x0000000020001aec        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
-                0x0000000020001aec                errno
-                0x0000000020001af0                . = ALIGN (0x4)
-                0x0000000020001af0                _ebss = .
-                0x0000000020001af0                __bss_end__ = _ebss
+ COMMON         0x0000000020000248      0x29c build/usb_device.o
+                0x0000000020000248                hUsbDeviceFS
+ COMMON         0x00000000200004e4      0x408 build/usbd_conf.o
+                0x00000000200004e4                hpcd_USB_OTG_FS
+ COMMON         0x00000000200008ec      0x200 build/usbd_desc.o
+                0x00000000200008ec                USBD_StrDesc
+ COMMON         0x0000000020000aec     0x1000 build/usbd_cdc_if.o
+                0x0000000020000aec                UserRxBufferFS
+                0x00000000200012ec                UserTxBufferFS
+ COMMON         0x0000000020001aec        0x4 build/stm32f4xx_hal.o
+                0x0000000020001aec                uwTick
+ COMMON         0x0000000020001af0        0xc build/sampling.o
+                0x0000000020001af0                triggerValue
+                0x0000000020001af4                period
+                0x0000000020001af6                flags
+                0x0000000020001af8                triggerMask
+ COMMON         0x0000000020001afc        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
+                0x0000000020001afc                errno
+                0x0000000020001b00                . = ALIGN (0x4)
+                0x0000000020001b00                _ebss = .
+                0x0000000020001b00                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x0000000020001af0      0x600
-                0x0000000020001af0                . = ALIGN (0x8)
-                0x0000000020001af0                PROVIDE (end = .)
+                0x0000000020001b00      0x600
+                0x0000000020001b00                . = ALIGN (0x8)
+                0x0000000020001b00                PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
-                0x0000000020001cf0                . = (. + _Min_Heap_Size)
- *fill*         0x0000000020001af0      0x200 
-                0x00000000200020f0                . = (. + _Min_Stack_Size)
- *fill*         0x0000000020001cf0      0x400 
-                0x00000000200020f0                . = ALIGN (0x8)
+                0x0000000020001d00                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020001b00      0x200 
+                0x0000000020002100                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020001d00      0x400 
+                0x0000000020002100                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -1665,38 +1701,40 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  .ARM.attributes
                 0x0000000000000491       0x39 build/sump.o
  .ARM.attributes
-                0x00000000000004ca       0x21 build/startup_stm32f407xx.o
+                0x00000000000004ca       0x39 build/sampling.o
  .ARM.attributes
-                0x00000000000004eb       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
+                0x0000000000000503       0x21 build/startup_stm32f407xx.o
  .ARM.attributes
-                0x000000000000051f       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
+                0x0000000000000524       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-impure.o)
  .ARM.attributes
-                0x0000000000000553       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
+                0x0000000000000558       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
  .ARM.attributes
-                0x0000000000000587       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
+                0x000000000000058c       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
  .ARM.attributes
-                0x00000000000005bb       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-freer.o)
+                0x00000000000005c0       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
  .ARM.attributes
-                0x00000000000005ef       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000000000005f4       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-freer.o)
  .ARM.attributes
-                0x0000000000000623       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000000000628       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
  .ARM.attributes
-                0x0000000000000657       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
+                0x000000000000065c       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
  .ARM.attributes
-                0x000000000000068b       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
+                0x0000000000000690       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
  .ARM.attributes
-                0x00000000000006bf       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
+                0x00000000000006c4       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
  .ARM.attributes
-                0x00000000000006f3       0x22 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_aeabi_uldivmod.o)
+                0x00000000000006f8       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
  .ARM.attributes
-                0x0000000000000715       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
+                0x000000000000072c       0x22 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x0000000000000749       0x22 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_dvmd_tls.o)
+                0x000000000000074e       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
  .ARM.attributes
-                0x000000000000076b       0x22 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x0000000000000782       0x22 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000000000007a4       0x22 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(build/meas_complex.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000    0x158f3
+.debug_info     0x0000000000000000    0x15c26
  .debug_info    0x0000000000000000      0xfb0 build/main.o
  .debug_info    0x0000000000000fb0     0x10ca build/usb_device.o
  .debug_info    0x000000000000207a     0x275c build/usbd_conf.o
@@ -1716,10 +1754,11 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_info    0x000000000000fffc     0x19b3 build/usbd_ctlreq.o
  .debug_info    0x00000000000119af     0x11c3 build/usbd_ioreq.o
  .debug_info    0x0000000000012b72     0x1d12 build/usbd_cdc.o
- .debug_info    0x0000000000014884     0x104d build/sump.o
- .debug_info    0x00000000000158d1       0x22 build/startup_stm32f407xx.o
+ .debug_info    0x0000000000014884     0x11a0 build/sump.o
+ .debug_info    0x0000000000015a24      0x1e0 build/sampling.o
+ .debug_info    0x0000000000015c04       0x22 build/startup_stm32f407xx.o
 
-.debug_abbrev   0x0000000000000000     0x2f14
+.debug_abbrev   0x0000000000000000     0x2fed
  .debug_abbrev  0x0000000000000000      0x294 build/main.o
  .debug_abbrev  0x0000000000000294      0x1fe build/usb_device.o
  .debug_abbrev  0x0000000000000492      0x2ec build/usbd_conf.o
@@ -1739,10 +1778,11 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_abbrev  0x000000000000246a      0x325 build/usbd_ctlreq.o
  .debug_abbrev  0x000000000000278f      0x1f7 build/usbd_ioreq.o
  .debug_abbrev  0x0000000000002986      0x351 build/usbd_cdc.o
- .debug_abbrev  0x0000000000002cd7      0x22b build/sump.o
- .debug_abbrev  0x0000000000002f02       0x12 build/startup_stm32f407xx.o
+ .debug_abbrev  0x0000000000002cd7      0x26c build/sump.o
+ .debug_abbrev  0x0000000000002f43       0x98 build/sampling.o
+ .debug_abbrev  0x0000000000002fdb       0x12 build/startup_stm32f407xx.o
 
-.debug_loc      0x0000000000000000     0x8466
+.debug_loc      0x0000000000000000     0x86c1
  .debug_loc     0x0000000000000000       0x85 build/main.o
  .debug_loc     0x0000000000000085       0x20 build/usb_device.o
  .debug_loc     0x00000000000000a5      0xe2a build/usbd_conf.o
@@ -1762,9 +1802,9 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_loc     0x0000000000006825      0xfe7 build/usbd_ctlreq.o
  .debug_loc     0x000000000000780c      0x31c build/usbd_ioreq.o
  .debug_loc     0x0000000000007b28      0x859 build/usbd_cdc.o
- .debug_loc     0x0000000000008381       0xe5 build/sump.o
+ .debug_loc     0x0000000000008381      0x340 build/sump.o
 
-.debug_aranges  0x0000000000000000      0xa88
+.debug_aranges  0x0000000000000000      0xad8
  .debug_aranges
                 0x0000000000000000       0x38 build/main.o
  .debug_aranges
@@ -1804,11 +1844,13 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_aranges
                 0x00000000000009b0       0x90 build/usbd_cdc.o
  .debug_aranges
-                0x0000000000000a40       0x20 build/sump.o
+                0x0000000000000a40       0x28 build/sump.o
  .debug_aranges
-                0x0000000000000a60       0x28 build/startup_stm32f407xx.o
+                0x0000000000000a68       0x48 build/sampling.o
+ .debug_aranges
+                0x0000000000000ab0       0x28 build/startup_stm32f407xx.o
 
-.debug_ranges   0x0000000000000000      0x9b8
+.debug_ranges   0x0000000000000000      0x9f8
  .debug_ranges  0x0000000000000000       0x28 build/main.o
  .debug_ranges  0x0000000000000028       0x10 build/usb_device.o
  .debug_ranges  0x0000000000000038       0xf0 build/usbd_conf.o
@@ -1828,10 +1870,11 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_ranges  0x0000000000000850       0x78 build/usbd_ctlreq.o
  .debug_ranges  0x00000000000008c8       0x40 build/usbd_ioreq.o
  .debug_ranges  0x0000000000000908       0x80 build/usbd_cdc.o
- .debug_ranges  0x0000000000000988       0x10 build/sump.o
- .debug_ranges  0x0000000000000998       0x20 build/startup_stm32f407xx.o
+ .debug_ranges  0x0000000000000988       0x18 build/sump.o
+ .debug_ranges  0x00000000000009a0       0x38 build/sampling.o
+ .debug_ranges  0x00000000000009d8       0x20 build/startup_stm32f407xx.o
 
-.debug_line     0x0000000000000000     0x49aa
+.debug_line     0x0000000000000000     0x4af2
  .debug_line    0x0000000000000000      0x27c build/main.o
  .debug_line    0x000000000000027c      0x285 build/usb_device.o
  .debug_line    0x0000000000000501      0x50a build/usbd_conf.o
@@ -1851,10 +1894,11 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_line    0x0000000000003a52      0x534 build/usbd_ctlreq.o
  .debug_line    0x0000000000003f86      0x2aa build/usbd_ioreq.o
  .debug_line    0x0000000000004230      0x4ae build/usbd_cdc.o
- .debug_line    0x00000000000046de      0x258 build/sump.o
- .debug_line    0x0000000000004936       0x74 build/startup_stm32f407xx.o
+ .debug_line    0x00000000000046de      0x2ab build/sump.o
+ .debug_line    0x0000000000004989       0xf5 build/sampling.o
+ .debug_line    0x0000000000004a7e       0x74 build/startup_stm32f407xx.o
 
-.debug_str      0x0000000000000000     0x374f
+.debug_str      0x0000000000000000     0x3833
  .debug_str     0x0000000000000000      0x8a7 build/main.o
                                         0x924 (size before relaxing)
  .debug_str     0x00000000000008a7      0x3dc build/usb_device.o
@@ -1893,9 +1937,11 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
                                         0xb28 (size before relaxing)
  .debug_str     0x000000000000357d      0x194 build/usbd_cdc.o
                                        0x10d2 (size before relaxing)
- .debug_str     0x0000000000003711       0x1a build/sump.o
-                                        0xa76 (size before relaxing)
- .debug_str     0x000000000000372b       0x24 build/startup_stm32f407xx.o
+ .debug_str     0x0000000000003711       0xc2 build/sump.o
+                                        0xb1e (size before relaxing)
+ .debug_str     0x00000000000037d3       0x3c build/sampling.o
+                                        0x231 (size before relaxing)
+ .debug_str     0x000000000000380f       0x24 build/startup_stm32f407xx.o
                                          0x47 (size before relaxing)
 
 .comment        0x0000000000000000       0x7f
@@ -1920,8 +1966,9 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .comment       0x000000000000007f       0x80 build/usbd_ioreq.o
  .comment       0x000000000000007f       0x80 build/usbd_cdc.o
  .comment       0x000000000000007f       0x80 build/sump.o
+ .comment       0x000000000000007f       0x80 build/sampling.o
 
-.debug_frame    0x0000000000000000     0x1df0
+.debug_frame    0x0000000000000000     0x1e70
  .debug_frame   0x0000000000000000       0x78 build/main.o
  .debug_frame   0x0000000000000078       0x2c build/usb_device.o
  .debug_frame   0x00000000000000a4      0x330 build/usbd_conf.o
@@ -1941,18 +1988,19 @@ OUTPUT(build/meas_complex.elf elf32-littlearm)
  .debug_frame   0x00000000000017a8      0x1ac build/usbd_ctlreq.o
  .debug_frame   0x0000000000001954       0xd4 build/usbd_ioreq.o
  .debug_frame   0x0000000000001a28      0x184 build/usbd_cdc.o
- .debug_frame   0x0000000000001bac       0x2c build/sump.o
- .debug_frame   0x0000000000001bd8       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
- .debug_frame   0x0000000000001c04       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
- .debug_frame   0x0000000000001c34       0x20 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
- .debug_frame   0x0000000000001c54       0x38 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x0000000000001c8c       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x0000000000001cb8       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x0000000000001ce4       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
- .debug_frame   0x0000000000001d14       0x5c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
- .debug_frame   0x0000000000001d70       0x20 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
- .debug_frame   0x0000000000001d90       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x0000000000001dbc       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x0000000000001bac       0x3c build/sump.o
+ .debug_frame   0x0000000000001be8       0x70 build/sampling.o
+ .debug_frame   0x0000000000001c58       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x0000000000001c84       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
+ .debug_frame   0x0000000000001cb4       0x20 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000001cd4       0x38 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000001d0c       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000001d38       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000001d64       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000001d94       0x5c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x0000000000001df0       0x20 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libnosys.a(sbrk.o)
+ .debug_frame   0x0000000000001e10       0x2c /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000000000001e3c       0x34 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/libgcc.a(_udivmoddi4.o)
 
 Cross Reference Table
 
@@ -1973,6 +2021,7 @@ CAN2_SCE_IRQHandler                               build/startup_stm32f407xx.o
 CAN2_TX_IRQHandler                                build/startup_stm32f407xx.o
 CDC_Transmit_FS                                   build/usbd_cdc_if.o
                                                   build/sump.o
+CalcLocalDivider                                  build/sump.o
 DCMI_IRQHandler                                   build/startup_stm32f407xx.o
 DMA1_Stream0_IRQHandler                           build/startup_stm32f407xx.o
 DMA1_Stream1_IRQHandler                           build/startup_stm32f407xx.o
@@ -2255,6 +2304,18 @@ SPI1_IRQHandler                                   build/startup_stm32f407xx.o
 SPI2_IRQHandler                                   build/startup_stm32f407xx.o
 SPI3_IRQHandler                                   build/startup_stm32f407xx.o
 SVC_Handler                                       build/stm32f4xx_it.o
+SetBufferSize                                     build/sampling.o
+                                                  build/sump.o
+SetDelayCount                                     build/sampling.o
+                                                  build/sump.o
+SetFlags                                          build/sampling.o
+                                                  build/sump.o
+SetSamplingPeriod                                 build/sampling.o
+                                                  build/sump.o
+SetTriggerMask                                    build/sampling.o
+                                                  build/sump.o
+SetTriggerValue                                   build/sampling.o
+                                                  build/sump.o
 SumpProcessRequest                                build/sump.o
                                                   build/usbd_cdc_if.o
 SysTick_Handler                                   build/stm32f4xx_it.o
@@ -2567,6 +2628,7 @@ errno                                             /usr/bin/../lib/gcc/arm-none-e
                                                   /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-sbrkr.o)
 exit                                              /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-exit.o)
                                                   /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
+flags                                             build/sampling.o
 free                                              /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-malloc.o)
                                                   build/usbd_cdc.o
 g_pfnVectors                                      build/startup_stm32f407xx.o
@@ -2585,7 +2647,10 @@ memset                                            /usr/bin/../lib/gcc/arm-none-e
                                                   /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
 pFlash                                            build/stm32f4xx_hal_flash.o
                                                   build/stm32f4xx_hal_flash_ex.o
+period                                            build/sampling.o
 software_init_hook                                /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
+triggerMask                                       build/sampling.o
+triggerValue                                      build/sampling.o
 uwTick                                            build/stm32f4xx_hal.o
 uwTickFreq                                        build/stm32f4xx_hal.o
 uwTickPrio                                        build/stm32f4xx_hal.o
