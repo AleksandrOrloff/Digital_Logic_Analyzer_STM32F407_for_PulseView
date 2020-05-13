@@ -8,8 +8,6 @@
 #ifndef SUMP_H_
 #define SUMP_H_
 
-#include <stdint.h>
-
 
 
 //frequency base of the original SUMP logic analyzer

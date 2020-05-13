@@ -26,6 +26,12 @@ int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 	int result = 0;
 	switch(buffer[0])
 	{
+	case SUMP_CMD_RUN://run
+		SamplingClearBuffer();
+		Start();
+		Arm();
+		result = 1;
+	  break;
 	case SUMP_CMD_ID://ID
 		//APP_FOPS.pIf_DataTx((uint8_t*)"1ALS", 4);
 		CDC_Transmit_FS((uint8_t*)"1ALS", 4);
