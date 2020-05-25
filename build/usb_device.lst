@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccKEfKMc.s 			page 1
+ARM GAS  /tmp/ccvrUN9W.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -10,23 +10,29 @@ ARM GAS  /tmp/ccKEfKMc.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.file	"usb_device.c"
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.MX_USB_DEVICE_Init,"ax",%progbits
-  18              		.align	1
-  19              		.global	MX_USB_DEVICE_Init
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv4-sp-d16
-  25              	MX_USB_DEVICE_Init:
-  26              	.LFB133:
-  27              		.file 1 "Src/usb_device.c"
+  17              		.comm	triggerMask,4,4
+  18              		.comm	triggerValue,4,4
+  19              		.comm	flags,2,2
+  20              		.comm	period,2,2
+  21              		.comm	transferSize,4,4
+  22              		.comm	hUsbDeviceFS,668,4
+  23              		.section	.text.MX_USB_DEVICE_Init,"ax",%progbits
+  24              		.align	1
+  25              		.global	MX_USB_DEVICE_Init
+  26              		.syntax unified
+  27              		.thumb
+  28              		.thumb_func
+  29              		.fpu fpv4-sp-d16
+  31              	MX_USB_DEVICE_Init:
+  32              	.LFB133:
+  33              		.file 1 "Src/usb_device.c"
    1:Src/usb_device.c **** /* USER CODE BEGIN Header */
    2:Src/usb_device.c **** /**
    3:Src/usb_device.c ****   ******************************************************************************
@@ -52,15 +58,15 @@ ARM GAS  /tmp/ccKEfKMc.s 			page 1
   23:Src/usb_device.c **** 
   24:Src/usb_device.c **** #include "usb_device.h"
   25:Src/usb_device.c **** #include "usbd_core.h"
+ARM GAS  /tmp/ccvrUN9W.s 			page 2
+
+
   26:Src/usb_device.c **** #include "usbd_desc.h"
   27:Src/usb_device.c **** #include "usbd_cdc.h"
   28:Src/usb_device.c **** #include "usbd_cdc_if.h"
   29:Src/usb_device.c **** 
   30:Src/usb_device.c **** /* USER CODE BEGIN Includes */
   31:Src/usb_device.c **** 
-ARM GAS  /tmp/ccKEfKMc.s 			page 2
-
-
   32:Src/usb_device.c **** /* USER CODE END Includes */
   33:Src/usb_device.c **** 
   34:Src/usb_device.c **** /* USER CODE BEGIN PV */
@@ -96,112 +102,102 @@ ARM GAS  /tmp/ccKEfKMc.s 			page 1
   64:Src/usb_device.c ****   */
   65:Src/usb_device.c **** void MX_USB_DEVICE_Init(void)
   66:Src/usb_device.c **** {
-  28              		.loc 1 66 0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32 0000 08B5     		push	{r3, lr}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 8
-  35              		.cfi_offset 3, -8
-  36              		.cfi_offset 14, -4
+  34              		.loc 1 66 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 00AF     		add	r7, sp, #0
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_register 7
   67:Src/usb_device.c ****   /* USER CODE BEGIN USB_DEVICE_Init_PreTreatment */
   68:Src/usb_device.c ****   
   69:Src/usb_device.c ****   /* USER CODE END USB_DEVICE_Init_PreTreatment */
   70:Src/usb_device.c ****   
+ARM GAS  /tmp/ccvrUN9W.s 			page 3
+
+
   71:Src/usb_device.c ****   /* Init Device Library, add supported class and start the library. */
   72:Src/usb_device.c ****   if (USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS) != USBD_OK)
-  37              		.loc 1 72 0
-  38 0002 0022     		movs	r2, #0
-  39 0004 0F49     		ldr	r1, .L11
-  40 0006 1048     		ldr	r0, .L11+4
-  41 0008 FFF7FEFF 		bl	USBD_Init
-  42              	.LVL0:
-  43 000c 70B9     		cbnz	r0, .L7
-ARM GAS  /tmp/ccKEfKMc.s 			page 3
-
-
-  44              	.L2:
+  46              		.loc 1 72 0
+  47 0004 0022     		movs	r2, #0
+  48 0006 1249     		ldr	r1, .L7
+  49 0008 1248     		ldr	r0, .L7+4
+  50 000a FFF7FEFF 		bl	USBD_Init
+  51 000e 0346     		mov	r3, r0
+  52 0010 002B     		cmp	r3, #0
+  53 0012 01D0     		beq	.L2
   73:Src/usb_device.c ****   {
   74:Src/usb_device.c ****     Error_Handler();
+  54              		.loc 1 74 0
+  55 0014 FFF7FEFF 		bl	Error_Handler
+  56              	.L2:
   75:Src/usb_device.c ****   }
   76:Src/usb_device.c ****   if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
-  45              		.loc 1 76 0
-  46 000e 0F49     		ldr	r1, .L11+8
-  47 0010 0D48     		ldr	r0, .L11+4
-  48 0012 FFF7FEFF 		bl	USBD_RegisterClass
-  49              	.LVL1:
-  50 0016 60B9     		cbnz	r0, .L8
-  51              	.L3:
+  57              		.loc 1 76 0
+  58 0018 0F49     		ldr	r1, .L7+8
+  59 001a 0E48     		ldr	r0, .L7+4
+  60 001c FFF7FEFF 		bl	USBD_RegisterClass
+  61 0020 0346     		mov	r3, r0
+  62 0022 002B     		cmp	r3, #0
+  63 0024 01D0     		beq	.L3
   77:Src/usb_device.c ****   {
   78:Src/usb_device.c ****     Error_Handler();
+  64              		.loc 1 78 0
+  65 0026 FFF7FEFF 		bl	Error_Handler
+  66              	.L3:
   79:Src/usb_device.c ****   }
   80:Src/usb_device.c ****   if (USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS) != USBD_OK)
-  52              		.loc 1 80 0
-  53 0018 0D49     		ldr	r1, .L11+12
-  54 001a 0B48     		ldr	r0, .L11+4
-  55 001c FFF7FEFF 		bl	USBD_CDC_RegisterInterface
-  56              	.LVL2:
-  57 0020 50B9     		cbnz	r0, .L9
-  58              	.L4:
+  67              		.loc 1 80 0
+  68 002a 0C49     		ldr	r1, .L7+12
+  69 002c 0948     		ldr	r0, .L7+4
+  70 002e FFF7FEFF 		bl	USBD_CDC_RegisterInterface
+  71 0032 0346     		mov	r3, r0
+  72 0034 002B     		cmp	r3, #0
+  73 0036 01D0     		beq	.L4
   81:Src/usb_device.c ****   {
   82:Src/usb_device.c ****     Error_Handler();
+  74              		.loc 1 82 0
+  75 0038 FFF7FEFF 		bl	Error_Handler
+  76              	.L4:
   83:Src/usb_device.c ****   }
   84:Src/usb_device.c ****   if (USBD_Start(&hUsbDeviceFS) != USBD_OK)
-  59              		.loc 1 84 0
-  60 0022 0948     		ldr	r0, .L11+4
-  61 0024 FFF7FEFF 		bl	USBD_Start
-  62              	.LVL3:
-  63 0028 48B9     		cbnz	r0, .L10
-  64              	.L1:
+  77              		.loc 1 84 0
+  78 003c 0548     		ldr	r0, .L7+4
+  79 003e FFF7FEFF 		bl	USBD_Start
+  80 0042 0346     		mov	r3, r0
+  81 0044 002B     		cmp	r3, #0
+  82 0046 01D0     		beq	.L6
   85:Src/usb_device.c ****   {
   86:Src/usb_device.c ****     Error_Handler();
+  83              		.loc 1 86 0
+  84 0048 FFF7FEFF 		bl	Error_Handler
+  85              	.L6:
   87:Src/usb_device.c ****   }
+ARM GAS  /tmp/ccvrUN9W.s 			page 4
+
+
   88:Src/usb_device.c **** 
   89:Src/usb_device.c ****   /* USER CODE BEGIN USB_DEVICE_Init_PostTreatment */
   90:Src/usb_device.c ****   
   91:Src/usb_device.c ****   /* USER CODE END USB_DEVICE_Init_PostTreatment */
   92:Src/usb_device.c **** }
-  65              		.loc 1 92 0
-  66 002a 08BD     		pop	{r3, pc}
-  67              	.L7:
-  74:Src/usb_device.c ****   }
-  68              		.loc 1 74 0
-  69 002c FFF7FEFF 		bl	Error_Handler
-  70              	.LVL4:
-  71 0030 EDE7     		b	.L2
-  72              	.L8:
-  78:Src/usb_device.c ****   }
-  73              		.loc 1 78 0
-  74 0032 FFF7FEFF 		bl	Error_Handler
-  75              	.LVL5:
-  76 0036 EFE7     		b	.L3
-  77              	.L9:
-  82:Src/usb_device.c ****   }
-ARM GAS  /tmp/ccKEfKMc.s 			page 4
-
-
-  78              		.loc 1 82 0
-  79 0038 FFF7FEFF 		bl	Error_Handler
-  80              	.LVL6:
-  81 003c F1E7     		b	.L4
-  82              	.L10:
-  86:Src/usb_device.c ****   }
-  83              		.loc 1 86 0
-  84 003e FFF7FEFF 		bl	Error_Handler
-  85              	.LVL7:
   86              		.loc 1 92 0
-  87 0042 F2E7     		b	.L1
-  88              	.L12:
-  89              		.align	2
-  90              	.L11:
-  91 0044 00000000 		.word	FS_Desc
-  92 0048 00000000 		.word	hUsbDeviceFS
-  93 004c 00000000 		.word	USBD_CDC
-  94 0050 00000000 		.word	USBD_Interface_fops_FS
-  95              		.cfi_endproc
-  96              	.LFE133:
-  98              		.comm	hUsbDeviceFS,668,4
+  87 004c 00BF     		nop
+  88 004e 80BD     		pop	{r7, pc}
+  89              	.L8:
+  90              		.align	2
+  91              	.L7:
+  92 0050 00000000 		.word	FS_Desc
+  93 0054 00000000 		.word	hUsbDeviceFS
+  94 0058 00000000 		.word	USBD_CDC
+  95 005c 00000000 		.word	USBD_Interface_fops_FS
+  96              		.cfi_endproc
+  97              	.LFE133:
   99              		.text
  100              	.Letext0:
  101              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
@@ -214,28 +210,32 @@ ARM GAS  /tmp/ccKEfKMc.s 			page 1
  108              		.file 9 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
  109              		.file 10 "/usr/arm-none-eabi/include/sys/reent.h"
  110              		.file 11 "/usr/arm-none-eabi/include/stdlib.h"
- 111              		.file 12 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 112              		.file 13 "Inc/usbd_desc.h"
- 113              		.file 14 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 114              		.file 15 "Inc/usbd_cdc_if.h"
- 115              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h"
- 116              		.file 17 "Inc/main.h"
-ARM GAS  /tmp/ccKEfKMc.s 			page 5
+ 111              		.file 12 "la/sampling.h"
+ 112              		.file 13 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 113              		.file 14 "Inc/usbd_desc.h"
+ 114              		.file 15 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 115              		.file 16 "Inc/usbd_cdc_if.h"
+ARM GAS  /tmp/ccvrUN9W.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usb_device.c
-     /tmp/ccKEfKMc.s:18     .text.MX_USB_DEVICE_Init:0000000000000000 $t
-     /tmp/ccKEfKMc.s:25     .text.MX_USB_DEVICE_Init:0000000000000000 MX_USB_DEVICE_Init
-     /tmp/ccKEfKMc.s:91     .text.MX_USB_DEVICE_Init:0000000000000044 $d
+                            *COM*:0000000000000004 triggerMask
+                            *COM*:0000000000000004 triggerValue
+                            *COM*:0000000000000002 flags
+                            *COM*:0000000000000002 period
+                            *COM*:0000000000000004 transferSize
                             *COM*:000000000000029c hUsbDeviceFS
+     /tmp/ccvrUN9W.s:24     .text.MX_USB_DEVICE_Init:0000000000000000 $t
+     /tmp/ccvrUN9W.s:31     .text.MX_USB_DEVICE_Init:0000000000000000 MX_USB_DEVICE_Init
+     /tmp/ccvrUN9W.s:92     .text.MX_USB_DEVICE_Init:0000000000000050 $d
 
 UNDEFINED SYMBOLS
 USBD_Init
+Error_Handler
 USBD_RegisterClass
 USBD_CDC_RegisterInterface
 USBD_Start
-Error_Handler
 FS_Desc
 USBD_CDC
 USBD_Interface_fops_FS

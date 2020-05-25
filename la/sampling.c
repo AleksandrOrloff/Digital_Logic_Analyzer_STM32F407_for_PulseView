@@ -1,14 +1,10 @@
 #include "sampling.h"
 #include "sump.h"
+#include "usbd_cdc_if.h"
 
 static uint32_t transferCount;
 static uint32_t delayCount;
-uint32_t triggerMask;
-uint32_t triggerValue;
-uint16_t flags;
-uint16_t period;
 uint32_t samplingRam[MAX_SAMPLING_RAM/4];
-int transferSize;
 
 void SetBufferSize(uint32_t value){
 	transferCount = value;
@@ -111,13 +107,15 @@ void SetupDelayTimer()
 	TIM8->SR &= ~TIM_SR_UIF;
 	TIM8->DIER = TIM_DIER_UIE;
 
+	EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0);
 	//InterruptController::EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0, SamplingFrameCompelte);
 }
 
 void SetupRegularEXTITrigger()
 {
+	//while (CDC_Transmit_FS((uint8_t *)"tessst", 6) != 0);
 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_SYSCFGEN, ENABLE);
-
+	__HAL_RCC_SYSCFG_CLK_ENABLE();
 	//Trigger setup
 	uint32_t rising = triggerMask & triggerValue;
 	uint32_t falling = triggerMask & ~triggerValue;
@@ -146,28 +144,29 @@ void SetupRegularEXTITrigger()
 	EXTI->FTSR = falling;
 
 	__DSB();
-
+	
 	if(triggerMask & 0x0001)EnableChannel(EXTI0_IRQn, 0, 0);
-	else DisableChannel(EXTI0_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI0_IRQn);
 	if(triggerMask & 0x0002)EnableChannel(EXTI1_IRQn, 0, 0);
-	else DisableChannel(EXTI1_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI1_IRQn);
 	if(triggerMask & 0x0004)EnableChannel(EXTI2_IRQn, 0, 0);
-	else DisableChannel(EXTI2_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI2_IRQn);
 	if(triggerMask & 0x0008)EnableChannel(EXTI3_IRQn, 0, 0);
-	else DisableChannel(EXTI3_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI3_IRQn);
 	if(triggerMask & 0x0010)EnableChannel(EXTI4_IRQn, 0, 0);
-	else DisableChannel(EXTI4_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI4_IRQn);
 	if(triggerMask & 0x03E0)EnableChannel(EXTI9_5_IRQn, 0, 0);
-	else DisableChannel(EXTI9_5_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 	if(triggerMask & 0xFC00)EnableChannel(EXTI15_10_IRQn, 0, 0);
-	else DisableChannel(EXTI15_10_IRQn);
+	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+
 
 #ifdef SAMPLING_MANUAL //push-button-trigger
 	TIM8->SMCR = TIM_SMCR_TS_0 | TIM_SMCR_TS_1 | TIM_SMCR_TS_2;//External trigger input
 	TIM8->SMCR |= TIM_SMCR_SMS_1 | TIM_SMCR_SMS_2;
 	TIM8->DIER |= TIM_DIER_TIE;
-	InterruptController::EnableChannel(TIM8_TRG_COM_TIM14_IRQn, 2, 0, SamplingManualStart);
-	samplingManualToExternalTransit = interruptHandler;
+	EnableChannel(TIM8_TRG_COM_TIM14_IRQn, 2, 0);
+	//samplingManualToExternalTransit = interruptHandler;
 #endif
 }
 
@@ -196,31 +195,106 @@ uint32_t CalcDMATransferSize()
 
 void SamplingClearBuffer()
 {
-	for(int i = 0; i < MAX_SAMPLING_RAM; i++)
+	int i;
+	for(i = 0; i < MAX_SAMPLING_RAM / 4; i++)
 		samplingRam[i] = 0;
 }
 
+void SamplingComplete()
+{
+	uint32_t i;
+	
+	//__disable_irq();
+	//SUMP requests samples to be sent in reverse order: newest items first
+	/*int BytesPerTransfer = GetBytesPerTransfer();
+	if(BytesPerTransfer == 1)
+	{
+		uint8_t* ptr = GetBufferTail() - 1;
+		//SUMP requests samples to be sent in reverse order: newest items first
+		uint8_t a;
+		for(i = 0; i < GetBufferTailSize(); i++)
+		{
+			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+			ptr--;
+		}
+		ptr = GetBuffer() + GetBufferSize() - 1;
+		for(; i < GetBufferSize(); i++)
+		{
+			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+			ptr--;
+		}
+	}
+	else if(GetBytesPerTransfer() == 2)
+	{
+		uint8_t *ptr = GetBufferTail() - GetBytesPerTransfer();
+		for(i = 0; i < GetBufferTailSize(); i += GetBytesPerTransfer())
+		{
+			CDC_Transmit_FS((uint8_t*)ptr, 2);
+			ptr -= GetBytesPerTransfer();
+		}
+		ptr = GetBuffer() + GetBufferSize() - GetBytesPerTransfer();
+		for(; i < GetBufferSize(); i += GetBytesPerTransfer())
+		{
+			CDC_Transmit_FS((uint8_t*)ptr, 2);
+			ptr -= GetBytesPerTransfer();
+		}
+	}
+	__enable_irq();*/
+	
+}
+
+uint32_t ActualTransferCount()
+{
+	return transferCount - (DMA2_Stream5->NDTR & ~3);
+}
+
+uint8_t* GetBufferTail()
+{
+	return (uint8_t*)(samplingRam) + ActualTransferCount() * transferSize;
+}
+
+int GetBytesPerTransfer(){return transferSize;}
+
+
+uint32_t GetBufferTailSize()
+{
+	return ActualTransferCount() * transferSize;
+}
+
+uint32_t GetBufferSize()
+{
+	return transferCount * transferSize;
+}
+
+uint8_t* GetBuffer()
+{
+	return (uint8_t*)samplingRam;
+}
 
 
 // Interrupts
 
-	//Âêëþ÷àåò ïðåðûâàíèå, çàäàåò ïðèîðèòåò è óñòàíàâëèâàåò îáðàáî÷èê
-	static void EnableChannel(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
+	void EnableChannel(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
 	{
-		DisableChannel(irqChannel);
+		//DisableChannel(irqChannel);
+		HAL_NVIC_DisableIRQ(irqChannel);
 		//SetHandler(irqChannel, handler);
-		SetChannelPriority(irqChannel, priority, subpriority);
-		NVIC->ISER[irqChannel >> 0x05] =
-	      (uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
+		//SetChannelPriority(irqChannel, priority, subpriority);
+		HAL_NVIC_SetPriority(irqChannel, 0, 0);
+		//NVIC->ISER[irqChannel >> 0x05] =
+	      //(uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
+		HAL_NVIC_EnableIRQ(irqChannel);
 
 	}
 	//Îòêëþ÷àåò ïðåðûâàíèå
-	static void DisableChannel(IRQn_Type irqChannel)
+	void DisableChannel(IRQn_Type irqChannel)
 	{
 	    NVIC->ICER[irqChannel >> 0x05] =
 	      (uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
 	}
-	static void SetChannelPriority(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
+
+	
+	void SetChannelPriority(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
 	{
 	#ifdef STM32L1XX
 		NVIC->IP[(uint32_t)(irqChannel)] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff);
@@ -241,7 +315,7 @@ void SamplingClearBuffer()
 	#define AIRCR_VECTKEY_MASK		((uint32_t)0x05FA0000)
 	#define AIRCR_SYSRESETREQ		((uint32_t)0x00000004)
 
-	static void PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
+	void PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
 	{
 		SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
 	}

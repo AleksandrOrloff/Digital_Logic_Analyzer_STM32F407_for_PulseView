@@ -26,6 +26,11 @@ int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 	int result = 0;
 	switch(buffer[0])
 	{
+	case SUMP_CMD_RESET://reset
+		//SamplingSetupTimer(16);
+		Stop();
+	    result = 1;
+	  break;
 	case SUMP_CMD_RUN://run
 		SamplingClearBuffer();
 		Start();
@@ -34,12 +39,12 @@ int SumpProcessRequest(uint8_t *buffer, uint16_t len)
 	  break;
 	case SUMP_CMD_ID://ID
 		//APP_FOPS.pIf_DataTx((uint8_t*)"1ALS", 4);
-		CDC_Transmit_FS((uint8_t*)"1ALS", 4);
+		while (CDC_Transmit_FS((uint8_t*)"1ALS", 4) != 0){};
 		result = 1;
 	  break;
 	case SUMP_CMD_META://Query metas
 		//APP_FOPS.pIf_DataTx((uint8_t*)metaData, sizeof(metaData));
-		CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData));
+		while (CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData)) != 0){};
 		result = 1;
 	  break;
 	  case SUMP_CMD_SET_SAMPLE_RATE:

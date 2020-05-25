@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIbusSG.s 			page 1
+ARM GAS  /tmp/cc7hr8NI.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -10,7 +10,7 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.file	"stm32f4xx_hal_pcd_ex.c"
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   */
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
   31:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** /** @defgroup PCDEx PCDEx
-ARM GAS  /tmp/ccIbusSG.s 			page 2
+ARM GAS  /tmp/cc7hr8NI.s 			page 2
 
 
   32:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @brief PCD Extended HAL module driver
@@ -104,23 +104,32 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
   72:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** {
   28              		.loc 1 72 0
   29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
   32              		@ link register save eliminated.
-  33              	.LVL0:
-  34 0000 30B4     		push	{r4, r5}
-  35              	.LCFI0:
-  36              		.cfi_def_cfa_offset 8
-  37              		.cfi_offset 4, -8
-  38              		.cfi_offset 5, -4
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 85B0     		sub	sp, sp, #20
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/cc7hr8NI.s 			page 3
+
+
+  44 0008 0B46     		mov	r3, r1
+  45 000a FB70     		strb	r3, [r7, #3]
+  46 000c 1346     		mov	r3, r2	@ movhi
+  47 000e 3B80     		strh	r3, [r7]	@ movhi
   73:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   uint8_t i;
   74:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   uint32_t Tx_Offset;
   75:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
   76:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   /*  TXn min size = 16 words. (n  : Transmit FIFO index)
   77:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****       When a TxFIFO is not used, the Configuration should be as follows:
-ARM GAS  /tmp/ccIbusSG.s 			page 3
-
-
   78:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****           case 1 :  n > m    and Txn is not used    (n,m  : Transmit FIFO indexes)
   79:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****          --> Txm can use the space allocated for Txn.
   80:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****          case2  :  n < m    and Txn is not used    (n,m  : Transmit FIFO indexes)
@@ -130,97 +139,129 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
   84:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****      When DMA is used 3n * FIFO locations should be reserved for internal DMA registers */
   85:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
   86:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   Tx_Offset = hpcd->Instance->GRXFSIZ;
-  39              		.loc 1 86 0
-  40 0002 0468     		ldr	r4, [r0]
-  41 0004 606A     		ldr	r0, [r4, #36]
-  42              	.LVL1:
+  48              		.loc 1 86 0
+  49 0010 7B68     		ldr	r3, [r7, #4]
+  50 0012 1B68     		ldr	r3, [r3]
+  51 0014 5B6A     		ldr	r3, [r3, #36]
+  52 0016 BB60     		str	r3, [r7, #8]
   87:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
   88:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   if (fifo == 0U)
-  43              		.loc 1 88 0
-  44 0006 29B1     		cbz	r1, .L7
-  45 0008 0D46     		mov	r5, r1
+  53              		.loc 1 88 0
+  54 0018 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+  55 001a 002B     		cmp	r3, #0
+  56 001c 07D1     		bne	.L2
   89:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   {
   90:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     hpcd->Instance->DIEPTXF0_HNPTXFSIZ = ((uint32_t)size << 16) | Tx_Offset;
+  57              		.loc 1 90 0
+  58 001e 3B88     		ldrh	r3, [r7]
+  59 0020 1904     		lsls	r1, r3, #16
+  60 0022 7B68     		ldr	r3, [r7, #4]
+  61 0024 1B68     		ldr	r3, [r3]
+  62 0026 BA68     		ldr	r2, [r7, #8]
+  63 0028 0A43     		orrs	r2, r2, r1
+  64 002a 9A62     		str	r2, [r3, #40]
+  65 002c 28E0     		b	.L3
+  66              	.L2:
   91:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   }
   92:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   else
   93:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   {
   94:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     Tx_Offset += (hpcd->Instance->DIEPTXF0_HNPTXFSIZ) >> 16;
-  46              		.loc 1 94 0
-  47 000a A36A     		ldr	r3, [r4, #40]
-  48 000c 00EB1340 		add	r0, r0, r3, lsr #16
-  49              	.LVL2:
+  67              		.loc 1 94 0
+  68 002e 7B68     		ldr	r3, [r7, #4]
+  69 0030 1B68     		ldr	r3, [r3]
+  70 0032 9B6A     		ldr	r3, [r3, #40]
+  71 0034 1B0C     		lsrs	r3, r3, #16
+  72 0036 BA68     		ldr	r2, [r7, #8]
+  73 0038 1344     		add	r3, r3, r2
+  74 003a BB60     		str	r3, [r7, #8]
   95:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
-  50              		.loc 1 95 0
-  51 0010 0023     		movs	r3, #0
-  52 0012 0CE0     		b	.L4
-  53              	.LVL3:
-  54              	.L7:
-  90:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   }
-  55              		.loc 1 90 0
-  56 0014 40EA0240 		orr	r0, r0, r2, lsl #16
-  57              	.LVL4:
-  58 0018 A062     		str	r0, [r4, #40]
-  59 001a 12E0     		b	.L3
-  60              	.LVL5:
-  61              	.L5:
+  75              		.loc 1 95 0
+  76 003c 0023     		movs	r3, #0
+  77 003e FB73     		strb	r3, [r7, #15]
+ARM GAS  /tmp/cc7hr8NI.s 			page 4
+
+
+  78 0040 0DE0     		b	.L4
+  79              	.L5:
   96:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     {
   97:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****       Tx_Offset += (hpcd->Instance->DIEPTXF[i] >> 16);
-  62              		.loc 1 97 0 discriminator 3
-  63 001c 03F14001 		add	r1, r3, #64
-  64 0020 04EB8101 		add	r1, r4, r1, lsl #2
-  65 0024 4968     		ldr	r1, [r1, #4]
-  66 0026 00EB1140 		add	r0, r0, r1, lsr #16
-  67              	.LVL6:
-  95:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     {
-  68              		.loc 1 95 0 discriminator 3
-  69 002a 0133     		adds	r3, r3, #1
-  70              	.LVL7:
-  71 002c DBB2     		uxtb	r3, r3
-  72              	.LVL8:
-  73              	.L4:
-ARM GAS  /tmp/ccIbusSG.s 			page 4
-
-
-  95:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     {
-  74              		.loc 1 95 0 is_stmt 0 discriminator 1
-  75 002e 691E     		subs	r1, r5, #1
-  76 0030 8B42     		cmp	r3, r1
-  77 0032 F3D3     		bcc	.L5
+  80              		.loc 1 97 0 discriminator 3
+  81 0042 7B68     		ldr	r3, [r7, #4]
+  82 0044 1A68     		ldr	r2, [r3]
+  83 0046 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  84 0048 4033     		adds	r3, r3, #64
+  85 004a 9B00     		lsls	r3, r3, #2
+  86 004c 1344     		add	r3, r3, r2
+  87 004e 5B68     		ldr	r3, [r3, #4]
+  88 0050 1B0C     		lsrs	r3, r3, #16
+  89 0052 BA68     		ldr	r2, [r7, #8]
+  90 0054 1344     		add	r3, r3, r2
+  91 0056 BB60     		str	r3, [r7, #8]
+  95:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
+  92              		.loc 1 95 0 discriminator 3
+  93 0058 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  94 005a 0133     		adds	r3, r3, #1
+  95 005c FB73     		strb	r3, [r7, #15]
+  96              	.L4:
+  95:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     for (i = 0U; i < (fifo - 1U); i++)
+  97              		.loc 1 95 0 is_stmt 0 discriminator 1
+  98 005e FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+  99 0060 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 100 0062 013B     		subs	r3, r3, #1
+ 101 0064 9A42     		cmp	r2, r3
+ 102 0066 ECD3     		bcc	.L5
   98:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     }
   99:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  100:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     /* Multiply Tx_Size by 2 to get higher performance */
  101:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     hpcd->Instance->DIEPTXF[fifo - 1U] = ((uint32_t)size << 16) | Tx_Offset;
-  78              		.loc 1 101 0 is_stmt 1
-  79 0034 40EA0240 		orr	r0, r0, r2, lsl #16
-  80              	.LVL9:
-  81 0038 05F13F01 		add	r1, r5, #63
-  82 003c 04EB8101 		add	r1, r4, r1, lsl #2
-  83 0040 4860     		str	r0, [r1, #4]
-  84              	.LVL10:
-  85              	.L3:
+ 103              		.loc 1 101 0 is_stmt 1
+ 104 0068 3B88     		ldrh	r3, [r7]
+ 105 006a 1804     		lsls	r0, r3, #16
+ 106 006c 7B68     		ldr	r3, [r7, #4]
+ 107 006e 1968     		ldr	r1, [r3]
+ 108 0070 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 109 0072 013B     		subs	r3, r3, #1
+ 110 0074 BA68     		ldr	r2, [r7, #8]
+ 111 0076 0243     		orrs	r2, r2, r0
+ 112 0078 4033     		adds	r3, r3, #64
+ 113 007a 9B00     		lsls	r3, r3, #2
+ 114 007c 0B44     		add	r3, r3, r1
+ 115 007e 5A60     		str	r2, [r3, #4]
+ 116              	.L3:
  102:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   }
  103:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  104:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 117              		.loc 1 104 0
+ 118 0080 0023     		movs	r3, #0
  105:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** }
-  86              		.loc 1 105 0
-  87 0042 0020     		movs	r0, #0
-  88 0044 30BC     		pop	{r4, r5}
-  89              	.LCFI1:
-  90              		.cfi_restore 5
-  91              		.cfi_restore 4
-  92              		.cfi_def_cfa_offset 0
-  93 0046 7047     		bx	lr
-  94              		.cfi_endproc
-  95              	.LFE130:
-  97              		.section	.text.HAL_PCDEx_SetRxFiFo,"ax",%progbits
-  98              		.align	1
-  99              		.global	HAL_PCDEx_SetRxFiFo
- 100              		.syntax unified
- 101              		.thumb
- 102              		.thumb_func
- 103              		.fpu fpv4-sp-d16
- 105              	HAL_PCDEx_SetRxFiFo:
- 106              	.LFB131:
+ 119              		.loc 1 105 0
+ 120 0082 1846     		mov	r0, r3
+ 121 0084 1437     		adds	r7, r7, #20
+ 122              	.LCFI3:
+ARM GAS  /tmp/cc7hr8NI.s 			page 5
+
+
+ 123              		.cfi_def_cfa_offset 4
+ 124 0086 BD46     		mov	sp, r7
+ 125              	.LCFI4:
+ 126              		.cfi_def_cfa_register 13
+ 127              		@ sp needed
+ 128 0088 5DF8047B 		ldr	r7, [sp], #4
+ 129              	.LCFI5:
+ 130              		.cfi_restore 7
+ 131              		.cfi_def_cfa_offset 0
+ 132 008c 7047     		bx	lr
+ 133              		.cfi_endproc
+ 134              	.LFE130:
+ 136              		.section	.text.HAL_PCDEx_SetRxFiFo,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	HAL_PCDEx_SetRxFiFo
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 142              		.fpu fpv4-sp-d16
+ 144              	HAL_PCDEx_SetRxFiFo:
+ 145              	.LFB131:
  106:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  107:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** /**
  108:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @brief  Set Rx FIFO
@@ -230,37 +271,63 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  112:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   */
  113:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_SetRxFiFo(PCD_HandleTypeDef *hpcd, uint16_t size)
  114:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** {
- 107              		.loc 1 114 0
- 108              		.cfi_startproc
- 109              		@ args = 0, pretend = 0, frame = 0
- 110              		@ frame_needed = 0, uses_anonymous_args = 0
- 111              		@ link register save eliminated.
- 112              	.LVL11:
+ 146              		.loc 1 114 0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 8
+ 149              		@ frame_needed = 1, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151 0000 80B4     		push	{r7}
+ 152              	.LCFI6:
+ 153              		.cfi_def_cfa_offset 4
+ 154              		.cfi_offset 7, -4
+ 155 0002 83B0     		sub	sp, sp, #12
+ 156              	.LCFI7:
+ 157              		.cfi_def_cfa_offset 16
+ 158 0004 00AF     		add	r7, sp, #0
+ 159              	.LCFI8:
+ 160              		.cfi_def_cfa_register 7
+ 161 0006 7860     		str	r0, [r7, #4]
+ 162 0008 0B46     		mov	r3, r1
+ 163 000a 7B80     		strh	r3, [r7, #2]	@ movhi
  115:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   hpcd->Instance->GRXFSIZ = size;
- 113              		.loc 1 115 0
-ARM GAS  /tmp/ccIbusSG.s 			page 5
-
-
- 114 0000 0368     		ldr	r3, [r0]
- 115 0002 5962     		str	r1, [r3, #36]
+ 164              		.loc 1 115 0
+ 165 000c 7B68     		ldr	r3, [r7, #4]
+ 166 000e 1B68     		ldr	r3, [r3]
+ 167 0010 7A88     		ldrh	r2, [r7, #2]
+ 168 0012 5A62     		str	r2, [r3, #36]
  116:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  117:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
+ 169              		.loc 1 117 0
+ARM GAS  /tmp/cc7hr8NI.s 			page 6
+
+
+ 170 0014 0023     		movs	r3, #0
  118:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** }
- 116              		.loc 1 118 0
- 117 0004 0020     		movs	r0, #0
- 118              	.LVL12:
- 119 0006 7047     		bx	lr
- 120              		.cfi_endproc
- 121              	.LFE131:
- 123              		.section	.text.HAL_PCDEx_LPM_Callback,"ax",%progbits
- 124              		.align	1
- 125              		.weak	HAL_PCDEx_LPM_Callback
- 126              		.syntax unified
- 127              		.thumb
- 128              		.thumb_func
- 129              		.fpu fpv4-sp-d16
- 131              	HAL_PCDEx_LPM_Callback:
- 132              	.LFB132:
+ 171              		.loc 1 118 0
+ 172 0016 1846     		mov	r0, r3
+ 173 0018 0C37     		adds	r7, r7, #12
+ 174              	.LCFI9:
+ 175              		.cfi_def_cfa_offset 4
+ 176 001a BD46     		mov	sp, r7
+ 177              	.LCFI10:
+ 178              		.cfi_def_cfa_register 13
+ 179              		@ sp needed
+ 180 001c 5DF8047B 		ldr	r7, [sp], #4
+ 181              	.LCFI11:
+ 182              		.cfi_restore 7
+ 183              		.cfi_def_cfa_offset 0
+ 184 0020 7047     		bx	lr
+ 185              		.cfi_endproc
+ 186              	.LFE131:
+ 188              		.section	.text.HAL_PCDEx_LPM_Callback,"ax",%progbits
+ 189              		.align	1
+ 190              		.weak	HAL_PCDEx_LPM_Callback
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 194              		.fpu fpv4-sp-d16
+ 196              	HAL_PCDEx_LPM_Callback:
+ 197              	.LFB132:
  119:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** #if defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F412Zx) ||
  120:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** /**
  121:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @brief  Activate LPM feature.
@@ -291,6 +358,9 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  146:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   hpcd->lpm_active = 0U;
  147:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   USBx->GINTMSK &= ~USB_OTG_GINTMSK_LPMINTM;
  148:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   USBx->GLPMCFG &= ~(USB_OTG_GLPMCFG_LPMEN | USB_OTG_GLPMCFG_LPMACK | USB_OTG_GLPMCFG_ENBESL);
+ARM GAS  /tmp/cc7hr8NI.s 			page 7
+
+
  149:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  150:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
  151:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** }
@@ -298,9 +368,6 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  153:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** #if defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F412Cx) ||
  154:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** /**
  155:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @brief  Handle BatteryCharging Process.
-ARM GAS  /tmp/ccIbusSG.s 			page 6
-
-
  156:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @param  hpcd PCD handle
  157:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @retval HAL status
  158:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   */
@@ -351,6 +418,9 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  203:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   if ((USBx->GCCFG & USB_OTG_GCCFG_PDET) == 0U)
  204:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   {
  205:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     /* Case of Standard Downstream Port */
+ARM GAS  /tmp/cc7hr8NI.s 			page 8
+
+
  206:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
  207:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     hpcd->BCDCallback(hpcd, PCD_BCD_STD_DOWNSTREAM_PORT);
  208:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** #else
@@ -358,9 +428,6 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  210:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
  211:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   }
  212:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   else
-ARM GAS  /tmp/ccIbusSG.s 			page 7
-
-
  213:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   {
  214:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     /* start secondary detection to check connection to Charging Downstream
  215:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****     Port or Dedicated Charging Port */
@@ -411,6 +478,9 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  260:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_PDEN);
  261:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_SDEN);
  262:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
+ARM GAS  /tmp/cc7hr8NI.s 			page 9
+
+
  263:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   /* Power Down USB tranceiver  */
  264:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG &= ~(USB_OTG_GCCFG_PWRDWN);
  265:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
@@ -418,9 +488,6 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  267:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   USBx->GCCFG |= USB_OTG_GCCFG_BCDEN;
  268:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  269:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   hpcd->battery_charging_active = 1U;
-ARM GAS  /tmp/ccIbusSG.s 			page 8
-
-
  270:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  271:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   return HAL_OK;
  272:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** }
@@ -455,12 +522,27 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  301:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   */
  302:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** __weak void HAL_PCDEx_LPM_Callback(PCD_HandleTypeDef *hpcd, PCD_LPM_MsgTypeDef msg)
  303:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** {
- 133              		.loc 1 303 0
- 134              		.cfi_startproc
- 135              		@ args = 0, pretend = 0, frame = 0
- 136              		@ frame_needed = 0, uses_anonymous_args = 0
- 137              		@ link register save eliminated.
- 138              	.LVL13:
+ 198              		.loc 1 303 0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 8
+ 201              		@ frame_needed = 1, uses_anonymous_args = 0
+ 202              		@ link register save eliminated.
+ 203 0000 80B4     		push	{r7}
+ 204              	.LCFI12:
+ 205              		.cfi_def_cfa_offset 4
+ 206              		.cfi_offset 7, -4
+ 207 0002 83B0     		sub	sp, sp, #12
+ 208              	.LCFI13:
+ 209              		.cfi_def_cfa_offset 16
+ 210 0004 00AF     		add	r7, sp, #0
+ 211              	.LCFI14:
+ 212              		.cfi_def_cfa_register 7
+ 213 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/cc7hr8NI.s 			page 10
+
+
+ 214 0008 0B46     		mov	r3, r1
+ 215 000a FB70     		strb	r3, [r7, #3]
  304:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   /* Prevent unused argument(s) compilation warning */
  305:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   UNUSED(hpcd);
  306:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   UNUSED(msg);
@@ -469,22 +551,31 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  309:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****             the HAL_PCDEx_LPM_Callback could be implemented in the user file
  310:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****    */
  311:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** }
- 139              		.loc 1 311 0
- 140 0000 7047     		bx	lr
- 141              		.cfi_endproc
- 142              	.LFE132:
- 144              		.section	.text.HAL_PCDEx_BCD_Callback,"ax",%progbits
- 145              		.align	1
- 146              		.weak	HAL_PCDEx_BCD_Callback
- 147              		.syntax unified
- 148              		.thumb
-ARM GAS  /tmp/ccIbusSG.s 			page 9
-
-
- 149              		.thumb_func
- 150              		.fpu fpv4-sp-d16
- 152              	HAL_PCDEx_BCD_Callback:
- 153              	.LFB133:
+ 216              		.loc 1 311 0
+ 217 000c 00BF     		nop
+ 218 000e 0C37     		adds	r7, r7, #12
+ 219              	.LCFI15:
+ 220              		.cfi_def_cfa_offset 4
+ 221 0010 BD46     		mov	sp, r7
+ 222              	.LCFI16:
+ 223              		.cfi_def_cfa_register 13
+ 224              		@ sp needed
+ 225 0012 5DF8047B 		ldr	r7, [sp], #4
+ 226              	.LCFI17:
+ 227              		.cfi_restore 7
+ 228              		.cfi_def_cfa_offset 0
+ 229 0016 7047     		bx	lr
+ 230              		.cfi_endproc
+ 231              	.LFE132:
+ 233              		.section	.text.HAL_PCDEx_BCD_Callback,"ax",%progbits
+ 234              		.align	1
+ 235              		.weak	HAL_PCDEx_BCD_Callback
+ 236              		.syntax unified
+ 237              		.thumb
+ 238              		.thumb_func
+ 239              		.fpu fpv4-sp-d16
+ 241              	HAL_PCDEx_BCD_Callback:
+ 242              	.LFB133:
  312:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** 
  313:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** /**
  314:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   * @brief  Send BatteryCharging message to user layer callback.
@@ -494,12 +585,27 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  318:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   */
  319:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** __weak void HAL_PCDEx_BCD_Callback(PCD_HandleTypeDef *hpcd, PCD_BCD_MsgTypeDef msg)
  320:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** {
- 154              		.loc 1 320 0
- 155              		.cfi_startproc
- 156              		@ args = 0, pretend = 0, frame = 0
- 157              		@ frame_needed = 0, uses_anonymous_args = 0
- 158              		@ link register save eliminated.
- 159              	.LVL14:
+ 243              		.loc 1 320 0
+ 244              		.cfi_startproc
+ 245              		@ args = 0, pretend = 0, frame = 8
+ 246              		@ frame_needed = 1, uses_anonymous_args = 0
+ 247              		@ link register save eliminated.
+ 248 0000 80B4     		push	{r7}
+ 249              	.LCFI18:
+ 250              		.cfi_def_cfa_offset 4
+ 251              		.cfi_offset 7, -4
+ 252 0002 83B0     		sub	sp, sp, #12
+ 253              	.LCFI19:
+ 254              		.cfi_def_cfa_offset 16
+ 255 0004 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/cc7hr8NI.s 			page 11
+
+
+ 256              	.LCFI20:
+ 257              		.cfi_def_cfa_register 7
+ 258 0006 7860     		str	r0, [r7, #4]
+ 259 0008 0B46     		mov	r3, r1
+ 260 000a FB70     		strb	r3, [r7, #3]
  321:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   /* Prevent unused argument(s) compilation warning */
  322:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   UNUSED(hpcd);
  323:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****   UNUSED(msg);
@@ -508,33 +614,45 @@ ARM GAS  /tmp/ccIbusSG.s 			page 1
  326:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****             the HAL_PCDEx_BCD_Callback could be implemented in the user file
  327:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c ****    */
  328:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c **** }
- 160              		.loc 1 328 0
- 161 0000 7047     		bx	lr
- 162              		.cfi_endproc
- 163              	.LFE133:
- 165              		.text
- 166              	.Letext0:
- 167              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 168              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 169              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
- 170              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 171              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
- 172              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 173              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h"
- 174              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h"
- 175              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/ccIbusSG.s 			page 10
+ 261              		.loc 1 328 0
+ 262 000c 00BF     		nop
+ 263 000e 0C37     		adds	r7, r7, #12
+ 264              	.LCFI21:
+ 265              		.cfi_def_cfa_offset 4
+ 266 0010 BD46     		mov	sp, r7
+ 267              	.LCFI22:
+ 268              		.cfi_def_cfa_register 13
+ 269              		@ sp needed
+ 270 0012 5DF8047B 		ldr	r7, [sp], #4
+ 271              	.LCFI23:
+ 272              		.cfi_restore 7
+ 273              		.cfi_def_cfa_offset 0
+ 274 0016 7047     		bx	lr
+ 275              		.cfi_endproc
+ 276              	.LFE133:
+ 278              		.text
+ 279              	.Letext0:
+ 280              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 281              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 282              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 283              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 284              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 285              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 286              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h"
+ 287              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h"
+ 288              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/cc7hr8NI.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_pcd_ex.c
-     /tmp/ccIbusSG.s:18     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 $t
-     /tmp/ccIbusSG.s:25     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 HAL_PCDEx_SetTxFiFo
-     /tmp/ccIbusSG.s:98     .text.HAL_PCDEx_SetRxFiFo:0000000000000000 $t
-     /tmp/ccIbusSG.s:105    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 HAL_PCDEx_SetRxFiFo
-     /tmp/ccIbusSG.s:124    .text.HAL_PCDEx_LPM_Callback:0000000000000000 $t
-     /tmp/ccIbusSG.s:131    .text.HAL_PCDEx_LPM_Callback:0000000000000000 HAL_PCDEx_LPM_Callback
-     /tmp/ccIbusSG.s:145    .text.HAL_PCDEx_BCD_Callback:0000000000000000 $t
-     /tmp/ccIbusSG.s:152    .text.HAL_PCDEx_BCD_Callback:0000000000000000 HAL_PCDEx_BCD_Callback
+     /tmp/cc7hr8NI.s:18     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 $t
+     /tmp/cc7hr8NI.s:25     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 HAL_PCDEx_SetTxFiFo
+     /tmp/cc7hr8NI.s:137    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 $t
+     /tmp/cc7hr8NI.s:144    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 HAL_PCDEx_SetRxFiFo
+     /tmp/cc7hr8NI.s:189    .text.HAL_PCDEx_LPM_Callback:0000000000000000 $t
+     /tmp/cc7hr8NI.s:196    .text.HAL_PCDEx_LPM_Callback:0000000000000000 HAL_PCDEx_LPM_Callback
+     /tmp/cc7hr8NI.s:234    .text.HAL_PCDEx_BCD_Callback:0000000000000000 $t
+     /tmp/cc7hr8NI.s:241    .text.HAL_PCDEx_BCD_Callback:0000000000000000 HAL_PCDEx_BCD_Callback
 
 NO UNDEFINED SYMBOLS

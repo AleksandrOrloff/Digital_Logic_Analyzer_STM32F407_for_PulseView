@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQ0oGlj.s 			page 1
+ARM GAS  /tmp/ccJRbtUJ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -10,230 +10,3245 @@ ARM GAS  /tmp/ccQ0oGlj.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.file	"sampling.c"
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.SetBufferSize,"ax",%progbits
-  18              		.align	1
-  19              		.global	SetBufferSize
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv4-sp-d16
-  25              	SetBufferSize:
-  26              	.LFB0:
-  27              		.file 1 "la/sampling.c"
+  17              		.comm	triggerMask,4,4
+  18              		.comm	triggerValue,4,4
+  19              		.comm	flags,2,2
+  20              		.comm	period,2,2
+  21              		.comm	transferSize,4,4
+  22              		.section	.bss.transferCount,"aw",%nobits
+  23              		.align	2
+  26              	transferCount:
+  27 0000 00000000 		.space	4
+  28              		.section	.bss.delayCount,"aw",%nobits
+  29              		.align	2
+  32              	delayCount:
+  33 0000 00000000 		.space	4
+  34              		.comm	samplingRam,24576,4
+  35              		.section	.text.SetBufferSize,"ax",%progbits
+  36              		.align	1
+  37              		.global	SetBufferSize
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  41              		.fpu fpv4-sp-d16
+  43              	SetBufferSize:
+  44              	.LFB133:
+  45              		.file 1 "la/sampling.c"
    1:la/sampling.c **** #include "sampling.h"
    2:la/sampling.c **** #include "sump.h"
-   3:la/sampling.c **** 
-   4:la/sampling.c **** static uint32_t transferCount;
-   5:la/sampling.c **** static uint32_t delayCount;
-   6:la/sampling.c **** uint32_t triggerMask;
-   7:la/sampling.c **** uint32_t triggerValue;
-   8:la/sampling.c **** uint16_t flags;
-   9:la/sampling.c **** uint16_t period;
-  10:la/sampling.c **** 
-  11:la/sampling.c **** void SetBufferSize(uint32_t value){
-  28              		.loc 1 11 0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
-  33              	.LVL0:
-  12:la/sampling.c **** 	transferCount = value;
-  13:la/sampling.c ****     }
-  34              		.loc 1 13 0
-  35 0000 7047     		bx	lr
-  36              		.cfi_endproc
-  37              	.LFE0:
-  39              		.section	.text.SetDelayCount,"ax",%progbits
-  40              		.align	1
-  41              		.global	SetDelayCount
-  42              		.syntax unified
-  43              		.thumb
-  44              		.thumb_func
-  45              		.fpu fpv4-sp-d16
-  47              	SetDelayCount:
-ARM GAS  /tmp/ccQ0oGlj.s 			page 2
+   3:la/sampling.c **** #include "usbd_cdc_if.h"
+   4:la/sampling.c **** 
+   5:la/sampling.c **** static uint32_t transferCount;
+   6:la/sampling.c **** static uint32_t delayCount;
+   7:la/sampling.c **** uint32_t samplingRam[MAX_SAMPLING_RAM/4];
+   8:la/sampling.c **** 
+   9:la/sampling.c **** void SetBufferSize(uint32_t value){
+  46              		.loc 1 9 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 8
+  49              		@ frame_needed = 1, uses_anonymous_args = 0
+  50              		@ link register save eliminated.
+  51 0000 80B4     		push	{r7}
+  52              	.LCFI0:
+  53              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/ccJRbtUJ.s 			page 2
 
 
-  48              	.LFB1:
-  14:la/sampling.c **** 
-  15:la/sampling.c **** void SetDelayCount(uint32_t value){
-  49              		.loc 1 15 0
-  50              		.cfi_startproc
-  51              		@ args = 0, pretend = 0, frame = 0
-  52              		@ frame_needed = 0, uses_anonymous_args = 0
-  53              		@ link register save eliminated.
-  54              	.LVL1:
-  16:la/sampling.c **** 	delayCount = value & 0xfffffffe;
-  17:la/sampling.c ****     }
-  55              		.loc 1 17 0
-  56 0000 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE1:
-  60              		.section	.text.SetTriggerMask,"ax",%progbits
-  61              		.align	1
-  62              		.global	SetTriggerMask
-  63              		.syntax unified
-  64              		.thumb
-  65              		.thumb_func
-  66              		.fpu fpv4-sp-d16
-  68              	SetTriggerMask:
-  69              	.LFB2:
-  18:la/sampling.c **** 
-  19:la/sampling.c **** void SetTriggerMask(uint32_t value){
-  70              		.loc 1 19 0
-  71              		.cfi_startproc
-  72              		@ args = 0, pretend = 0, frame = 0
-  73              		@ frame_needed = 0, uses_anonymous_args = 0
-  74              		@ link register save eliminated.
-  75              	.LVL2:
-  20:la/sampling.c ****     triggerMask = value;
-  76              		.loc 1 20 0
-  77 0000 014B     		ldr	r3, .L4
-  78 0002 1860     		str	r0, [r3]
-  21:la/sampling.c ****     }
-  79              		.loc 1 21 0
-  80 0004 7047     		bx	lr
-  81              	.L5:
-  82 0006 00BF     		.align	2
-  83              	.L4:
-  84 0008 00000000 		.word	triggerMask
-  85              		.cfi_endproc
-  86              	.LFE2:
-  88              		.section	.text.SetTriggerValue,"ax",%progbits
-  89              		.align	1
-  90              		.global	SetTriggerValue
-  91              		.syntax unified
-  92              		.thumb
-  93              		.thumb_func
-  94              		.fpu fpv4-sp-d16
-  96              	SetTriggerValue:
-  97              	.LFB3:
-  22:la/sampling.c **** 
-  23:la/sampling.c **** void SetTriggerValue(uint32_t value){
-  98              		.loc 1 23 0
-ARM GAS  /tmp/ccQ0oGlj.s 			page 3
+  54              		.cfi_offset 7, -4
+  55 0002 83B0     		sub	sp, sp, #12
+  56              	.LCFI1:
+  57              		.cfi_def_cfa_offset 16
+  58 0004 00AF     		add	r7, sp, #0
+  59              	.LCFI2:
+  60              		.cfi_def_cfa_register 7
+  61 0006 7860     		str	r0, [r7, #4]
+  10:la/sampling.c **** 	transferCount = value;
+  62              		.loc 1 10 0
+  63 0008 044A     		ldr	r2, .L2
+  64 000a 7B68     		ldr	r3, [r7, #4]
+  65 000c 1360     		str	r3, [r2]
+  11:la/sampling.c ****     }
+  66              		.loc 1 11 0
+  67 000e 00BF     		nop
+  68 0010 0C37     		adds	r7, r7, #12
+  69              	.LCFI3:
+  70              		.cfi_def_cfa_offset 4
+  71 0012 BD46     		mov	sp, r7
+  72              	.LCFI4:
+  73              		.cfi_def_cfa_register 13
+  74              		@ sp needed
+  75 0014 5DF8047B 		ldr	r7, [sp], #4
+  76              	.LCFI5:
+  77              		.cfi_restore 7
+  78              		.cfi_def_cfa_offset 0
+  79 0018 7047     		bx	lr
+  80              	.L3:
+  81 001a 00BF     		.align	2
+  82              	.L2:
+  83 001c 00000000 		.word	transferCount
+  84              		.cfi_endproc
+  85              	.LFE133:
+  87              		.section	.text.SetDelayCount,"ax",%progbits
+  88              		.align	1
+  89              		.global	SetDelayCount
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  93              		.fpu fpv4-sp-d16
+  95              	SetDelayCount:
+  96              	.LFB134:
+  12:la/sampling.c **** 
+  13:la/sampling.c **** void SetDelayCount(uint32_t value){
+  97              		.loc 1 13 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 8
+ 100              		@ frame_needed = 1, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 102 0000 80B4     		push	{r7}
+ 103              	.LCFI6:
+ 104              		.cfi_def_cfa_offset 4
+ 105              		.cfi_offset 7, -4
+ 106 0002 83B0     		sub	sp, sp, #12
+ 107              	.LCFI7:
+ 108              		.cfi_def_cfa_offset 16
+ARM GAS  /tmp/ccJRbtUJ.s 			page 3
 
 
-  99              		.cfi_startproc
- 100              		@ args = 0, pretend = 0, frame = 0
- 101              		@ frame_needed = 0, uses_anonymous_args = 0
- 102              		@ link register save eliminated.
- 103              	.LVL3:
-  24:la/sampling.c ****     triggerValue = value;
- 104              		.loc 1 24 0
- 105 0000 014B     		ldr	r3, .L7
- 106 0002 1860     		str	r0, [r3]
-  25:la/sampling.c ****     }
- 107              		.loc 1 25 0
- 108 0004 7047     		bx	lr
- 109              	.L8:
- 110 0006 00BF     		.align	2
- 111              	.L7:
- 112 0008 00000000 		.word	triggerValue
- 113              		.cfi_endproc
- 114              	.LFE3:
- 116              		.section	.text.SetFlags,"ax",%progbits
- 117              		.align	1
- 118              		.global	SetFlags
- 119              		.syntax unified
- 120              		.thumb
- 121              		.thumb_func
- 122              		.fpu fpv4-sp-d16
- 124              	SetFlags:
- 125              	.LFB4:
-  26:la/sampling.c **** 
-  27:la/sampling.c **** void SetFlags(uint32_t value){
- 126              		.loc 1 27 0
- 127              		.cfi_startproc
- 128              		@ args = 0, pretend = 0, frame = 0
- 129              		@ frame_needed = 0, uses_anonymous_args = 0
- 130              		@ link register save eliminated.
- 131              	.LVL4:
-  28:la/sampling.c ****     flags = value;
- 132              		.loc 1 28 0
- 133 0000 014B     		ldr	r3, .L10
- 134 0002 1880     		strh	r0, [r3]	@ movhi
-  29:la/sampling.c ****     }
- 135              		.loc 1 29 0
- 136 0004 7047     		bx	lr
- 137              	.L11:
- 138 0006 00BF     		.align	2
- 139              	.L10:
- 140 0008 00000000 		.word	flags
- 141              		.cfi_endproc
- 142              	.LFE4:
- 144              		.section	.text.SetSamplingPeriod,"ax",%progbits
- 145              		.align	1
- 146              		.global	SetSamplingPeriod
- 147              		.syntax unified
- 148              		.thumb
- 149              		.thumb_func
- 150              		.fpu fpv4-sp-d16
- 152              	SetSamplingPeriod:
- 153              	.LFB5:
-ARM GAS  /tmp/ccQ0oGlj.s 			page 4
+ 109 0004 00AF     		add	r7, sp, #0
+ 110              	.LCFI8:
+ 111              		.cfi_def_cfa_register 7
+ 112 0006 7860     		str	r0, [r7, #4]
+  14:la/sampling.c **** 	delayCount = value & 0xfffffffe;
+ 113              		.loc 1 14 0
+ 114 0008 7B68     		ldr	r3, [r7, #4]
+ 115 000a 23F00103 		bic	r3, r3, #1
+ 116 000e 044A     		ldr	r2, .L5
+ 117 0010 1360     		str	r3, [r2]
+  15:la/sampling.c ****     }
+ 118              		.loc 1 15 0
+ 119 0012 00BF     		nop
+ 120 0014 0C37     		adds	r7, r7, #12
+ 121              	.LCFI9:
+ 122              		.cfi_def_cfa_offset 4
+ 123 0016 BD46     		mov	sp, r7
+ 124              	.LCFI10:
+ 125              		.cfi_def_cfa_register 13
+ 126              		@ sp needed
+ 127 0018 5DF8047B 		ldr	r7, [sp], #4
+ 128              	.LCFI11:
+ 129              		.cfi_restore 7
+ 130              		.cfi_def_cfa_offset 0
+ 131 001c 7047     		bx	lr
+ 132              	.L6:
+ 133 001e 00BF     		.align	2
+ 134              	.L5:
+ 135 0020 00000000 		.word	delayCount
+ 136              		.cfi_endproc
+ 137              	.LFE134:
+ 139              		.section	.text.SetTriggerMask,"ax",%progbits
+ 140              		.align	1
+ 141              		.global	SetTriggerMask
+ 142              		.syntax unified
+ 143              		.thumb
+ 144              		.thumb_func
+ 145              		.fpu fpv4-sp-d16
+ 147              	SetTriggerMask:
+ 148              	.LFB135:
+  16:la/sampling.c **** 
+  17:la/sampling.c **** void SetTriggerMask(uint32_t value){
+ 149              		.loc 1 17 0
+ 150              		.cfi_startproc
+ 151              		@ args = 0, pretend = 0, frame = 8
+ 152              		@ frame_needed = 1, uses_anonymous_args = 0
+ 153              		@ link register save eliminated.
+ 154 0000 80B4     		push	{r7}
+ 155              	.LCFI12:
+ 156              		.cfi_def_cfa_offset 4
+ 157              		.cfi_offset 7, -4
+ 158 0002 83B0     		sub	sp, sp, #12
+ 159              	.LCFI13:
+ 160              		.cfi_def_cfa_offset 16
+ 161 0004 00AF     		add	r7, sp, #0
+ 162              	.LCFI14:
+ 163              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/ccJRbtUJ.s 			page 4
 
 
-  30:la/sampling.c **** 
-  31:la/sampling.c **** void SetSamplingPeriod(uint32_t value){
- 154              		.loc 1 31 0
- 155              		.cfi_startproc
- 156              		@ args = 0, pretend = 0, frame = 0
- 157              		@ frame_needed = 0, uses_anonymous_args = 0
- 158              		@ link register save eliminated.
- 159              	.LVL5:
-  32:la/sampling.c ****     period = value;
- 160              		.loc 1 32 0
- 161 0000 014B     		ldr	r3, .L13
- 162 0002 1880     		strh	r0, [r3]	@ movhi
-  33:la/sampling.c ****     }
- 163              		.loc 1 33 0
- 164 0004 7047     		bx	lr
- 165              	.L14:
- 166 0006 00BF     		.align	2
- 167              	.L13:
- 168 0008 00000000 		.word	period
- 169              		.cfi_endproc
- 170              	.LFE5:
- 172              		.comm	period,2,2
- 173              		.comm	flags,2,2
- 174              		.comm	triggerValue,4,4
- 175              		.comm	triggerMask,4,4
- 176              		.text
- 177              	.Letext0:
- 178              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 179              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
-ARM GAS  /tmp/ccQ0oGlj.s 			page 5
+ 164 0006 7860     		str	r0, [r7, #4]
+  18:la/sampling.c ****     triggerMask = value;
+ 165              		.loc 1 18 0
+ 166 0008 044A     		ldr	r2, .L8
+ 167 000a 7B68     		ldr	r3, [r7, #4]
+ 168 000c 1360     		str	r3, [r2]
+  19:la/sampling.c ****     }
+ 169              		.loc 1 19 0
+ 170 000e 00BF     		nop
+ 171 0010 0C37     		adds	r7, r7, #12
+ 172              	.LCFI15:
+ 173              		.cfi_def_cfa_offset 4
+ 174 0012 BD46     		mov	sp, r7
+ 175              	.LCFI16:
+ 176              		.cfi_def_cfa_register 13
+ 177              		@ sp needed
+ 178 0014 5DF8047B 		ldr	r7, [sp], #4
+ 179              	.LCFI17:
+ 180              		.cfi_restore 7
+ 181              		.cfi_def_cfa_offset 0
+ 182 0018 7047     		bx	lr
+ 183              	.L9:
+ 184 001a 00BF     		.align	2
+ 185              	.L8:
+ 186 001c 00000000 		.word	triggerMask
+ 187              		.cfi_endproc
+ 188              	.LFE135:
+ 190              		.section	.text.SetTriggerValue,"ax",%progbits
+ 191              		.align	1
+ 192              		.global	SetTriggerValue
+ 193              		.syntax unified
+ 194              		.thumb
+ 195              		.thumb_func
+ 196              		.fpu fpv4-sp-d16
+ 198              	SetTriggerValue:
+ 199              	.LFB136:
+  20:la/sampling.c **** 
+  21:la/sampling.c **** void SetTriggerValue(uint32_t value){
+ 200              		.loc 1 21 0
+ 201              		.cfi_startproc
+ 202              		@ args = 0, pretend = 0, frame = 8
+ 203              		@ frame_needed = 1, uses_anonymous_args = 0
+ 204              		@ link register save eliminated.
+ 205 0000 80B4     		push	{r7}
+ 206              	.LCFI18:
+ 207              		.cfi_def_cfa_offset 4
+ 208              		.cfi_offset 7, -4
+ 209 0002 83B0     		sub	sp, sp, #12
+ 210              	.LCFI19:
+ 211              		.cfi_def_cfa_offset 16
+ 212 0004 00AF     		add	r7, sp, #0
+ 213              	.LCFI20:
+ 214              		.cfi_def_cfa_register 7
+ 215 0006 7860     		str	r0, [r7, #4]
+  22:la/sampling.c ****     triggerValue = value;
+ 216              		.loc 1 22 0
+ 217 0008 044A     		ldr	r2, .L11
+ARM GAS  /tmp/ccJRbtUJ.s 			page 5
+
+
+ 218 000a 7B68     		ldr	r3, [r7, #4]
+ 219 000c 1360     		str	r3, [r2]
+  23:la/sampling.c ****     }
+ 220              		.loc 1 23 0
+ 221 000e 00BF     		nop
+ 222 0010 0C37     		adds	r7, r7, #12
+ 223              	.LCFI21:
+ 224              		.cfi_def_cfa_offset 4
+ 225 0012 BD46     		mov	sp, r7
+ 226              	.LCFI22:
+ 227              		.cfi_def_cfa_register 13
+ 228              		@ sp needed
+ 229 0014 5DF8047B 		ldr	r7, [sp], #4
+ 230              	.LCFI23:
+ 231              		.cfi_restore 7
+ 232              		.cfi_def_cfa_offset 0
+ 233 0018 7047     		bx	lr
+ 234              	.L12:
+ 235 001a 00BF     		.align	2
+ 236              	.L11:
+ 237 001c 00000000 		.word	triggerValue
+ 238              		.cfi_endproc
+ 239              	.LFE136:
+ 241              		.section	.text.SetFlags,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	SetFlags
+ 244              		.syntax unified
+ 245              		.thumb
+ 246              		.thumb_func
+ 247              		.fpu fpv4-sp-d16
+ 249              	SetFlags:
+ 250              	.LFB137:
+  24:la/sampling.c **** 
+  25:la/sampling.c **** void SetFlags(uint32_t value){
+ 251              		.loc 1 25 0
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 8
+ 254              		@ frame_needed = 1, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 256 0000 80B4     		push	{r7}
+ 257              	.LCFI24:
+ 258              		.cfi_def_cfa_offset 4
+ 259              		.cfi_offset 7, -4
+ 260 0002 83B0     		sub	sp, sp, #12
+ 261              	.LCFI25:
+ 262              		.cfi_def_cfa_offset 16
+ 263 0004 00AF     		add	r7, sp, #0
+ 264              	.LCFI26:
+ 265              		.cfi_def_cfa_register 7
+ 266 0006 7860     		str	r0, [r7, #4]
+  26:la/sampling.c ****     flags = value;
+ 267              		.loc 1 26 0
+ 268 0008 7B68     		ldr	r3, [r7, #4]
+ 269 000a 9AB2     		uxth	r2, r3
+ 270 000c 034B     		ldr	r3, .L14
+ 271 000e 1A80     		strh	r2, [r3]	@ movhi
+  27:la/sampling.c ****     }
+ARM GAS  /tmp/ccJRbtUJ.s 			page 6
+
+
+ 272              		.loc 1 27 0
+ 273 0010 00BF     		nop
+ 274 0012 0C37     		adds	r7, r7, #12
+ 275              	.LCFI27:
+ 276              		.cfi_def_cfa_offset 4
+ 277 0014 BD46     		mov	sp, r7
+ 278              	.LCFI28:
+ 279              		.cfi_def_cfa_register 13
+ 280              		@ sp needed
+ 281 0016 5DF8047B 		ldr	r7, [sp], #4
+ 282              	.LCFI29:
+ 283              		.cfi_restore 7
+ 284              		.cfi_def_cfa_offset 0
+ 285 001a 7047     		bx	lr
+ 286              	.L15:
+ 287              		.align	2
+ 288              	.L14:
+ 289 001c 00000000 		.word	flags
+ 290              		.cfi_endproc
+ 291              	.LFE137:
+ 293              		.section	.text.SetSamplingPeriod,"ax",%progbits
+ 294              		.align	1
+ 295              		.global	SetSamplingPeriod
+ 296              		.syntax unified
+ 297              		.thumb
+ 298              		.thumb_func
+ 299              		.fpu fpv4-sp-d16
+ 301              	SetSamplingPeriod:
+ 302              	.LFB138:
+  28:la/sampling.c **** 
+  29:la/sampling.c **** void SetSamplingPeriod(uint32_t value){
+ 303              		.loc 1 29 0
+ 304              		.cfi_startproc
+ 305              		@ args = 0, pretend = 0, frame = 8
+ 306              		@ frame_needed = 1, uses_anonymous_args = 0
+ 307              		@ link register save eliminated.
+ 308 0000 80B4     		push	{r7}
+ 309              	.LCFI30:
+ 310              		.cfi_def_cfa_offset 4
+ 311              		.cfi_offset 7, -4
+ 312 0002 83B0     		sub	sp, sp, #12
+ 313              	.LCFI31:
+ 314              		.cfi_def_cfa_offset 16
+ 315 0004 00AF     		add	r7, sp, #0
+ 316              	.LCFI32:
+ 317              		.cfi_def_cfa_register 7
+ 318 0006 7860     		str	r0, [r7, #4]
+  30:la/sampling.c ****     period = value;
+ 319              		.loc 1 30 0
+ 320 0008 7B68     		ldr	r3, [r7, #4]
+ 321 000a 9AB2     		uxth	r2, r3
+ 322 000c 034B     		ldr	r3, .L17
+ 323 000e 1A80     		strh	r2, [r3]	@ movhi
+  31:la/sampling.c ****     }
+ 324              		.loc 1 31 0
+ 325 0010 00BF     		nop
+ 326 0012 0C37     		adds	r7, r7, #12
+ARM GAS  /tmp/ccJRbtUJ.s 			page 7
+
+
+ 327              	.LCFI33:
+ 328              		.cfi_def_cfa_offset 4
+ 329 0014 BD46     		mov	sp, r7
+ 330              	.LCFI34:
+ 331              		.cfi_def_cfa_register 13
+ 332              		@ sp needed
+ 333 0016 5DF8047B 		ldr	r7, [sp], #4
+ 334              	.LCFI35:
+ 335              		.cfi_restore 7
+ 336              		.cfi_def_cfa_offset 0
+ 337 001a 7047     		bx	lr
+ 338              	.L18:
+ 339              		.align	2
+ 340              	.L17:
+ 341 001c 00000000 		.word	period
+ 342              		.cfi_endproc
+ 343              	.LFE138:
+ 345              		.section	.text.Start,"ax",%progbits
+ 346              		.align	1
+ 347              		.global	Start
+ 348              		.syntax unified
+ 349              		.thumb
+ 350              		.thumb_func
+ 351              		.fpu fpv4-sp-d16
+ 353              	Start:
+ 354              	.LFB139:
+  32:la/sampling.c **** 
+  33:la/sampling.c **** void Start()
+  34:la/sampling.c **** {
+ 355              		.loc 1 34 0
+ 356              		.cfi_startproc
+ 357              		@ args = 0, pretend = 0, frame = 0
+ 358              		@ frame_needed = 1, uses_anonymous_args = 0
+ 359 0000 80B5     		push	{r7, lr}
+ 360              	.LCFI36:
+ 361              		.cfi_def_cfa_offset 8
+ 362              		.cfi_offset 7, -8
+ 363              		.cfi_offset 14, -4
+ 364 0002 00AF     		add	r7, sp, #0
+ 365              	.LCFI37:
+ 366              		.cfi_def_cfa_register 7
+  35:la/sampling.c ****     SetupSamplingTimer();
+ 367              		.loc 1 35 0
+ 368 0004 FFF7FEFF 		bl	SetupSamplingTimer
+  36:la/sampling.c **** 	SetupSamplingDMA(samplingRam, transferCount);
+ 369              		.loc 1 36 0
+ 370 0008 0D4B     		ldr	r3, .L20
+ 371 000a 1B68     		ldr	r3, [r3]
+ 372 000c 1946     		mov	r1, r3
+ 373 000e 0D48     		ldr	r0, .L20+4
+ 374 0010 FFF7FEFF 		bl	SetupSamplingDMA
+  37:la/sampling.c **** 	SetupDelayTimer();
+ 375              		.loc 1 37 0
+ 376 0014 FFF7FEFF 		bl	SetupDelayTimer
+  38:la/sampling.c **** 	SetupRegularEXTITrigger();
+ 377              		.loc 1 38 0
+ 378 0018 FFF7FEFF 		bl	SetupRegularEXTITrigger
+ARM GAS  /tmp/ccJRbtUJ.s 			page 8
+
+
+  39:la/sampling.c **** 	DMA2->HIFCR = DMA_HIFCR_CTCIF5;
+ 379              		.loc 1 39 0
+ 380 001c 0A4B     		ldr	r3, .L20+8
+ 381 001e 4FF40062 		mov	r2, #2048
+ 382 0022 DA60     		str	r2, [r3, #12]
+  40:la/sampling.c **** 	DMA2_Stream5->CR |= DMA_SxCR_EN;
+ 383              		.loc 1 40 0
+ 384 0024 094B     		ldr	r3, .L20+12
+ 385 0026 1B68     		ldr	r3, [r3]
+ 386 0028 084A     		ldr	r2, .L20+12
+ 387 002a 43F00103 		orr	r3, r3, #1
+ 388 002e 1360     		str	r3, [r2]
+  41:la/sampling.c **** 	TIM1->CR1 |= TIM_CR1_CEN;//enable timer
+ 389              		.loc 1 41 0
+ 390 0030 074B     		ldr	r3, .L20+16
+ 391 0032 1B68     		ldr	r3, [r3]
+ 392 0034 064A     		ldr	r2, .L20+16
+ 393 0036 43F00103 		orr	r3, r3, #1
+ 394 003a 1360     		str	r3, [r2]
+  42:la/sampling.c **** }
+ 395              		.loc 1 42 0
+ 396 003c 00BF     		nop
+ 397 003e 80BD     		pop	{r7, pc}
+ 398              	.L21:
+ 399              		.align	2
+ 400              	.L20:
+ 401 0040 00000000 		.word	transferCount
+ 402 0044 00000000 		.word	samplingRam
+ 403 0048 00640240 		.word	1073898496
+ 404 004c 88640240 		.word	1073898632
+ 405 0050 00000140 		.word	1073807360
+ 406              		.cfi_endproc
+ 407              	.LFE139:
+ 409              		.section	.text.Stop,"ax",%progbits
+ 410              		.align	1
+ 411              		.global	Stop
+ 412              		.syntax unified
+ 413              		.thumb
+ 414              		.thumb_func
+ 415              		.fpu fpv4-sp-d16
+ 417              	Stop:
+ 418              	.LFB140:
+  43:la/sampling.c **** 
+  44:la/sampling.c **** void Stop()
+  45:la/sampling.c **** {
+ 419              		.loc 1 45 0
+ 420              		.cfi_startproc
+ 421              		@ args = 0, pretend = 0, frame = 0
+ 422              		@ frame_needed = 1, uses_anonymous_args = 0
+ 423              		@ link register save eliminated.
+ 424 0000 80B4     		push	{r7}
+ 425              	.LCFI38:
+ 426              		.cfi_def_cfa_offset 4
+ 427              		.cfi_offset 7, -4
+ 428 0002 00AF     		add	r7, sp, #0
+ 429              	.LCFI39:
+ 430              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/ccJRbtUJ.s 			page 9
+
+
+  46:la/sampling.c **** 	DMA2_Stream5->CR &= ~(DMA_SxCR_TCIE | DMA_SxCR_EN);//stop dma
+ 431              		.loc 1 46 0
+ 432 0004 084B     		ldr	r3, .L23
+ 433 0006 1B68     		ldr	r3, [r3]
+ 434 0008 074A     		ldr	r2, .L23
+ 435 000a 23F01103 		bic	r3, r3, #17
+ 436 000e 1360     		str	r3, [r2]
+  47:la/sampling.c **** 	TIM1->CR1 &= ~TIM_CR1_CEN;//stop sampling timer
+ 437              		.loc 1 47 0
+ 438 0010 064B     		ldr	r3, .L23+4
+ 439 0012 1B68     		ldr	r3, [r3]
+ 440 0014 054A     		ldr	r2, .L23+4
+ 441 0016 23F00103 		bic	r3, r3, #1
+ 442 001a 1360     		str	r3, [r2]
+  48:la/sampling.c **** }
+ 443              		.loc 1 48 0
+ 444 001c 00BF     		nop
+ 445 001e BD46     		mov	sp, r7
+ 446              	.LCFI40:
+ 447              		.cfi_def_cfa_register 13
+ 448              		@ sp needed
+ 449 0020 5DF8047B 		ldr	r7, [sp], #4
+ 450              	.LCFI41:
+ 451              		.cfi_restore 7
+ 452              		.cfi_def_cfa_offset 0
+ 453 0024 7047     		bx	lr
+ 454              	.L24:
+ 455 0026 00BF     		.align	2
+ 456              	.L23:
+ 457 0028 88640240 		.word	1073898632
+ 458 002c 00000140 		.word	1073807360
+ 459              		.cfi_endproc
+ 460              	.LFE140:
+ 462              		.section	.text.Arm,"ax",%progbits
+ 463              		.align	1
+ 464              		.global	Arm
+ 465              		.syntax unified
+ 466              		.thumb
+ 467              		.thumb_func
+ 468              		.fpu fpv4-sp-d16
+ 470              	Arm:
+ 471              	.LFB141:
+  49:la/sampling.c **** 
+  50:la/sampling.c **** void Arm()
+  51:la/sampling.c **** {
+ 472              		.loc 1 51 0
+ 473              		.cfi_startproc
+ 474              		@ args = 0, pretend = 0, frame = 0
+ 475              		@ frame_needed = 1, uses_anonymous_args = 0
+ 476              		@ link register save eliminated.
+ 477 0000 80B4     		push	{r7}
+ 478              	.LCFI42:
+ 479              		.cfi_def_cfa_offset 4
+ 480              		.cfi_offset 7, -4
+ 481 0002 00AF     		add	r7, sp, #0
+ 482              	.LCFI43:
+ 483              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/ccJRbtUJ.s 			page 10
+
+
+  52:la/sampling.c **** 	EXTI->PR = 0xffffffff;//clear pending
+ 484              		.loc 1 52 0
+ 485 0004 074B     		ldr	r3, .L26
+ 486 0006 4FF0FF32 		mov	r2, #-1
+ 487 000a 5A61     		str	r2, [r3, #20]
+ 488              	.LBB7:
+ 489              	.LBB8:
+ 490              		.file 2 "Drivers/CMSIS/Include/cmsis_gcc.h"
+   1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+   2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+   4:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V5.0.4
+   5:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     09. April 2018
+   6:Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
+   7:Drivers/CMSIS/Include/cmsis_gcc.h **** /*
+   8:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.
+   9:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  10:Drivers/CMSIS/Include/cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  11:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  12:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  13:Drivers/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  14:Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
+  15:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  16:Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+  17:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  18:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  19:Drivers/CMSIS/Include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  20:Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  21:Drivers/CMSIS/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  22:Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
+  23:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  24:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  25:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  26:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
+  27:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  28:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
+  29:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
+  30:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  31:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  32:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  33:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  34:Drivers/CMSIS/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
+  35:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __has_builtin
+  36:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  37:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  38:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  39:Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  40:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ASM
+  41:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ASM                                  __asm
+  42:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  43:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __INLINE
+  44:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __INLINE                               inline
+  45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+ARM GAS  /tmp/ccJRbtUJ.s 			page 11
+
+
+  50:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  51:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
+  52:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
+  53:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  54:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  55:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __USED
+  56:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  57:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  58:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __WEAK
+  59:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  60:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  61:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED
+  62:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  63:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  64:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  65:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+  66:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  67:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  68:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  69:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  70:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  71:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  72:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  73:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  74:Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  75:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  76:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  77:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  78:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  79:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  83:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  85:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  86:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  87:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  91:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  92:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+  93:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  94:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+  95:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+  99:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 101:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ 103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ARM GAS  /tmp/ccJRbtUJ.s 			page 12
+
+
+ 107:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 109:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 110:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
+ 111:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 112:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 113:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
+ 114:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 115:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 116:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 117:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 118:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+ 119:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 120:Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+ 121:Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 122:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 123:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 124:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 125:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+ 126:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 127:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 128:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 129:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
+ 130:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 131:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 132:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 133:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 134:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 135:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 136:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ 137:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+ 138:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 139:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 140:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
+ 141:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 142:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+ 143:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 144:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 145:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 146:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 147:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register
+ 148:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the Control Register.
+ 149:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Control Register value
+ 150:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 151:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_CONTROL(void)
+ 152:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 153:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 154:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 155:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
+ 156:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 157:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 158:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 159:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 160:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 161:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 162:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
+ 163:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the non-secure Control Register when in secure mode.
+ARM GAS  /tmp/ccJRbtUJ.s 			page 13
+
+
+ 164:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               non-secure Control Register value
+ 165:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 166:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_CONTROL_NS(void)
+ 167:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 168:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 169:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 170:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control_ns" : "=r" (result) );
+ 171:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 172:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 173:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 174:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 175:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 176:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 177:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Control Register
+ 178:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Writes the given value to the Control Register.
+ 179:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    control  Control Register value to set
+ 180:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 181:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_CONTROL(uint32_t control)
+ 182:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 183:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) : "memory");
+ 184:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 185:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 186:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 187:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 188:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 189:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Control Register (non-secure)
+ 190:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Writes the given value to the non-secure Control Register when in secure state.
+ 191:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    control  Control Register value to set
+ 192:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 193:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_CONTROL_NS(uint32_t control)
+ 194:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 195:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control_ns, %0" : : "r" (control) : "memory");
+ 196:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 197:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 198:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 199:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 200:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 201:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get IPSR Register
+ 202:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the IPSR Register.
+ 203:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               IPSR Register value
+ 204:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 205:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_IPSR(void)
+ 206:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 207:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 208:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 209:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
+ 210:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 211:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 212:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 213:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 214:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 215:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get APSR Register
+ 216:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
+ 217:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               APSR Register value
+ 218:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 219:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_APSR(void)
+ 220:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccJRbtUJ.s 			page 14
+
+
+ 221:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 222:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 223:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
+ 224:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 225:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 226:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 227:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 228:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 229:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get xPSR Register
+ 230:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the xPSR Register.
+ 231:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               xPSR Register value
+ 232:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 233:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_xPSR(void)
+ 234:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 235:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 236:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 237:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
+ 238:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 239:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 240:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 241:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 242:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 243:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer
+ 244:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Process Stack Pointer (PSP).
+ 245:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               PSP Register value
+ 246:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 247:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PSP(void)
+ 248:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 249:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 250:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 251:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp"  : "=r" (result) );
+ 252:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 253:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 254:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 255:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 256:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 257:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 258:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer (non-secure)
+ 259:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Process Stack Pointer (PSP) when in secure s
+ 260:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               PSP Register value
+ 261:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 262:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSP_NS(void)
+ 263:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 264:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 265:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 266:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp_ns"  : "=r" (result) );
+ 267:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 268:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 269:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 270:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 271:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 272:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 273:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
+ 274:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
+ 275:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 276:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 277:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PSP(uint32_t topOfProcStack)
+ARM GAS  /tmp/ccJRbtUJ.s 			page 15
+
+
+ 278:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 279:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psp, %0" : : "r" (topOfProcStack) : );
+ 280:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 281:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 282:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 283:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 284:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 285:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer (non-secure)
+ 286:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Process Stack Pointer (PSP) when in secure sta
+ 287:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 288:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 289:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PSP_NS(uint32_t topOfProcStack)
+ 290:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 291:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psp_ns, %0" : : "r" (topOfProcStack) : );
+ 292:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 293:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 294:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 295:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 296:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 297:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer
+ 298:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer (MSP).
+ 299:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSP Register value
+ 300:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 301:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_MSP(void)
+ 302:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 303:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 304:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 305:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp" : "=r" (result) );
+ 306:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 307:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 308:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 309:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 310:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 311:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 312:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer (non-secure)
+ 313:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Main Stack Pointer (MSP) when in secure stat
+ 314:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSP Register value
+ 315:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 316:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_MSP_NS(void)
+ 317:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 318:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 319:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 320:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp_ns" : "=r" (result) );
+ 321:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 322:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 323:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 324:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 325:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 326:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 327:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer
+ 328:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer (MSP).
+ 329:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 330:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 331:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
+ 332:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 333:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0" : : "r" (topOfMainStack) : );
+ 334:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccJRbtUJ.s 			page 16
+
+
+ 335:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 336:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 337:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 338:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 339:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer (non-secure)
+ 340:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Main Stack Pointer (MSP) when in secure state.
+ 341:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 342:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 343:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_MSP_NS(uint32_t topOfMainStack)
+ 344:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 345:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp_ns, %0" : : "r" (topOfMainStack) : );
+ 346:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 347:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 348:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 349:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 350:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 351:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 352:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Stack Pointer (non-secure)
+ 353:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Stack Pointer (SP) when in secure state.
+ 354:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               SP Register value
+ 355:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 356:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_SP_NS(void)
+ 357:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 358:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 359:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 360:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, sp_ns" : "=r" (result) );
+ 361:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 362:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 363:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 364:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 365:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 366:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Stack Pointer (non-secure)
+ 367:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Stack Pointer (SP) when in secure state.
+ 368:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfStack  Stack Pointer value to set
+ 369:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 370:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_SP_NS(uint32_t topOfStack)
+ 371:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 372:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR sp_ns, %0" : : "r" (topOfStack) : );
+ 373:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 374:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 375:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 376:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 377:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 378:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Priority Mask
+ 379:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
+ 380:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Priority Mask value
+ 381:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 382:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PRIMASK(void)
+ 383:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 384:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 385:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 386:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
+ 387:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 388:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 389:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 390:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 391:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ARM GAS  /tmp/ccJRbtUJ.s 			page 17
+
+
+ 392:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 393:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Priority Mask (non-secure)
+ 394:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current state of the non-secure priority mask bit from the Priority Mask Reg
+ 395:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Priority Mask value
+ 396:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 397:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PRIMASK_NS(void)
+ 398:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 399:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 400:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 401:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask_ns" : "=r" (result) :: "memory");
+ 402:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 403:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 404:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 405:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 406:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 407:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 408:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Priority Mask
+ 409:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Priority Mask Register.
+ 410:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
+ 411:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 412:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PRIMASK(uint32_t priMask)
+ 413:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 414:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
+ 415:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 416:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 417:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 418:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 419:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 420:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Priority Mask (non-secure)
+ 421:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Priority Mask Register when in secure state.
+ 422:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
+ 423:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 424:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask)
+ 425:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 426:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR primask_ns, %0" : : "r" (priMask) : "memory");
+ 427:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 428:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 429:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 430:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 431:Drivers/CMSIS/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
+ 432:Drivers/CMSIS/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
+ 433:Drivers/CMSIS/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    )
+ 434:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 435:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable FIQ
+ 436:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
+ 437:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 438:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 439:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_fault_irq(void)
+ 440:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 441:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie f" : : : "memory");
+ 442:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 443:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 444:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 445:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 446:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable FIQ
+ 447:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
+ 448:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ARM GAS  /tmp/ccJRbtUJ.s 			page 18
+
+
+ 449:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 450:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_fault_irq(void)
+ 451:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 452:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid f" : : : "memory");
+ 453:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 454:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 455:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 456:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 457:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Base Priority
+ 458:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Base Priority register.
+ 459:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Base Priority register value
+ 460:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 461:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_BASEPRI(void)
+ 462:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 463:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 464:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 465:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, basepri" : "=r" (result) );
+ 466:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 467:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 468:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 469:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 470:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 471:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 472:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Base Priority (non-secure)
+ 473:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Base Priority register when in secure state.
+ 474:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Base Priority register value
+ 475:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 476:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_BASEPRI_NS(void)
+ 477:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 478:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 479:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 480:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, basepri_ns" : "=r" (result) );
+ 481:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 482:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 483:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 484:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 485:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 486:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 487:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Base Priority
+ 488:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Base Priority register.
+ 489:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
+ 490:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 491:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_BASEPRI(uint32_t basePri)
+ 492:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 493:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri, %0" : : "r" (basePri) : "memory");
+ 494:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 495:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 496:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 497:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 498:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 499:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Base Priority (non-secure)
+ 500:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Base Priority register when in secure state.
+ 501:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
+ 502:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 503:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri)
+ 504:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 505:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri_ns, %0" : : "r" (basePri) : "memory");
+ARM GAS  /tmp/ccJRbtUJ.s 			page 19
+
+
+ 506:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 507:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 508:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 509:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 510:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 511:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Base Priority with condition
+ 512:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Base Priority register only if BASEPRI masking is disable
+ 513:Drivers/CMSIS/Include/cmsis_gcc.h ****            or the new value increases the BASEPRI priority level.
+ 514:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
+ 515:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 516:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_BASEPRI_MAX(uint32_t basePri)
+ 517:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 518:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri_max, %0" : : "r" (basePri) : "memory");
+ 519:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 520:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 521:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 522:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 523:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Fault Mask
+ 524:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Fault Mask register.
+ 525:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Fault Mask register value
+ 526:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 527:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_FAULTMASK(void)
+ 528:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 529:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 530:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 531:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, faultmask" : "=r" (result) );
+ 532:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 533:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 534:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 535:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 536:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 537:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 538:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Fault Mask (non-secure)
+ 539:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Fault Mask register when in secure state.
+ 540:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Fault Mask register value
+ 541:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 542:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_FAULTMASK_NS(void)
+ 543:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 544:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 545:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 546:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, faultmask_ns" : "=r" (result) );
+ 547:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 548:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 549:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 550:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 551:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 552:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 553:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Fault Mask
+ 554:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Fault Mask register.
+ 555:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
+ 556:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 557:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FAULTMASK(uint32_t faultMask)
+ 558:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 559:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
+ 560:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 561:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 562:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccJRbtUJ.s 			page 20
+
+
+ 563:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
+ 564:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 565:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Fault Mask (non-secure)
+ 566:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Fault Mask register when in secure state.
+ 567:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
+ 568:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 569:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_FAULTMASK_NS(uint32_t faultMask)
+ 570:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 571:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask_ns, %0" : : "r" (faultMask) : "memory");
+ 572:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 573:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 574:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 575:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
+ 576:Drivers/CMSIS/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
+ 577:Drivers/CMSIS/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    ) */
+ 578:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 579:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 580:Drivers/CMSIS/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
+ 581:Drivers/CMSIS/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    )
+ 582:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 583:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 584:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit
+ 585:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 586:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
+ 587:Drivers/CMSIS/Include/cmsis_gcc.h ****   mode.
+ 588:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 589:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Process Stack Pointer Limit (PSPLIM).
+ 590:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               PSPLIM Register value
+ 591:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 592:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PSPLIM(void)
+ 593:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 594:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
+ 595:Drivers/CMSIS/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
+ 596:Drivers/CMSIS/Include/cmsis_gcc.h ****     // without main extensions, the non-secure PSPLIM is RAZ/WI
+ 597:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
+ 598:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 599:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 600:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psplim"  : "=r" (result) );
+ 601:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
+ 602:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 603:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 604:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 605:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3))
+ 606:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 607:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit (non-secure)
+ 608:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 609:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
+ 610:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 611:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Process Stack Pointer Limit (PSPLIM) when in
+ 612:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               PSPLIM Register value
+ 613:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 614:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSPLIM_NS(void)
+ 615:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 616:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
+ 617:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
+ 618:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
+ 619:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ARM GAS  /tmp/ccJRbtUJ.s 			page 21
+
+
+ 620:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 621:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psplim_ns"  : "=r" (result) );
+ 622:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
+ 623:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 624:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 625:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 626:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 627:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 628:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 629:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer Limit
+ 630:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 631:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored in non-secure
+ 632:Drivers/CMSIS/Include/cmsis_gcc.h ****   mode.
+ 633:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 634:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer Limit (PSPLIM).
+ 635:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ProcStackPtrLimit  Process Stack Pointer Limit value to set
+ 636:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 637:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PSPLIM(uint32_t ProcStackPtrLimit)
+ 638:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 639:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
+ 640:Drivers/CMSIS/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
+ 641:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
+ 642:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)ProcStackPtrLimit;
+ 643:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 644:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psplim, %0" : : "r" (ProcStackPtrLimit));
+ 645:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 646:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 647:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 648:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 649:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE  ) && (__ARM_FEATURE_CMSE   == 3))
+ 650:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 651:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer (non-secure)
+ 652:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 653:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored.
+ 654:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 655:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Process Stack Pointer Limit (PSPLIM) when in s
+ 656:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ProcStackPtrLimit  Process Stack Pointer Limit value to set
+ 657:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 658:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PSPLIM_NS(uint32_t ProcStackPtrLimit)
+ 659:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 660:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
+ 661:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
+ 662:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)ProcStackPtrLimit;
+ 663:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 664:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psplim_ns, %0\n" : : "r" (ProcStackPtrLimit));
+ 665:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 666:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 667:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 668:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 669:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 670:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 671:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit
+ 672:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 673:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
+ 674:Drivers/CMSIS/Include/cmsis_gcc.h ****   mode.
+ 675:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 676:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer Limit (MSPLIM).
+ARM GAS  /tmp/ccJRbtUJ.s 			page 22
+
+
+ 677:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSPLIM Register value
+ 678:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 679:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_MSPLIM(void)
+ 680:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 681:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
+ 682:Drivers/CMSIS/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
+ 683:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
+ 684:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
+ 685:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 686:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 687:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msplim" : "=r" (result) );
+ 688:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
+ 689:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 690:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 691:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 692:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 693:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE  ) && (__ARM_FEATURE_CMSE   == 3))
+ 694:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 695:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit (non-secure)
+ 696:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 697:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
+ 698:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 699:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Main Stack Pointer Limit(MSPLIM) when in sec
+ 700:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSPLIM Register value
+ 701:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 702:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_MSPLIM_NS(void)
+ 703:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 704:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
+ 705:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
+ 706:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
+ 707:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 708:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 709:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msplim_ns" : "=r" (result) );
+ 710:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
+ 711:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 712:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 713:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 714:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 715:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 716:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 717:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer Limit
+ 718:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 719:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored in non-secure
+ 720:Drivers/CMSIS/Include/cmsis_gcc.h ****   mode.
+ 721:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 722:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer Limit (MSPLIM).
+ 723:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    MainStackPtrLimit  Main Stack Pointer Limit value to set
+ 724:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 725:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSPLIM(uint32_t MainStackPtrLimit)
+ 726:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 727:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
+ 728:Drivers/CMSIS/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
+ 729:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
+ 730:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
+ 731:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 732:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim, %0" : : "r" (MainStackPtrLimit));
+ 733:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccJRbtUJ.s 			page 23
+
+
+ 734:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 735:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 736:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 737:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE  ) && (__ARM_FEATURE_CMSE   == 3))
+ 738:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 739:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer Limit (non-secure)
+ 740:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ 741:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored.
+ 742:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 743:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Main Stack Pointer Limit (MSPLIM) when in secu
+ 744:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    MainStackPtrLimit  Main Stack Pointer value to set
+ 745:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 746:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_MSPLIM_NS(uint32_t MainStackPtrLimit)
+ 747:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 748:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
+ 749:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
+ 750:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
+ 751:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 752:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim_ns, %0" : : "r" (MainStackPtrLimit));
+ 753:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 754:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 755:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 756:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 757:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
+ 758:Drivers/CMSIS/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    ) */
+ 759:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 760:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 761:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 762:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get FPSCR
+ 763:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Floating Point Status/Control register.
+ 764:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               Floating Point Status/Control register value
+ 765:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 766:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_FPSCR(void)
+ 767:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 768:Drivers/CMSIS/Include/cmsis_gcc.h **** #if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) && \
+ 769:Drivers/CMSIS/Include/cmsis_gcc.h ****      (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
+ 770:Drivers/CMSIS/Include/cmsis_gcc.h **** #if __has_builtin(__builtin_arm_get_fpscr) 
+ 771:Drivers/CMSIS/Include/cmsis_gcc.h **** // Re-enable using built-in when GCC has been fixed
+ 772:Drivers/CMSIS/Include/cmsis_gcc.h **** // || (__GNUC__ > 7) || (__GNUC__ == 7 && __GNUC_MINOR__ >= 2)
+ 773:Drivers/CMSIS/Include/cmsis_gcc.h ****   /* see https://gcc.gnu.org/ml/gcc-patches/2017-04/msg00443.html */
+ 774:Drivers/CMSIS/Include/cmsis_gcc.h ****   return __builtin_arm_get_fpscr();
+ 775:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 776:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
+ 777:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 778:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("VMRS %0, fpscr" : "=r" (result) );
+ 779:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
+ 780:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 781:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 782:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(0U);
+ 783:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 784:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 785:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 786:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 787:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 788:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set FPSCR
+ 789:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Floating Point Status/Control register.
+ 790:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    fpscr  Floating Point Status/Control value to set
+ARM GAS  /tmp/ccJRbtUJ.s 			page 24
+
+
+ 791:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 792:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
+ 793:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 794:Drivers/CMSIS/Include/cmsis_gcc.h **** #if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) && \
+ 795:Drivers/CMSIS/Include/cmsis_gcc.h ****      (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
+ 796:Drivers/CMSIS/Include/cmsis_gcc.h **** #if __has_builtin(__builtin_arm_set_fpscr)
+ 797:Drivers/CMSIS/Include/cmsis_gcc.h **** // Re-enable using built-in when GCC has been fixed
+ 798:Drivers/CMSIS/Include/cmsis_gcc.h **** // || (__GNUC__ > 7) || (__GNUC__ == 7 && __GNUC_MINOR__ >= 2)
+ 799:Drivers/CMSIS/Include/cmsis_gcc.h ****   /* see https://gcc.gnu.org/ml/gcc-patches/2017-04/msg00443.html */
+ 800:Drivers/CMSIS/Include/cmsis_gcc.h ****   __builtin_arm_set_fpscr(fpscr);
+ 801:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 802:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("VMSR fpscr, %0" : : "r" (fpscr) : "vfpcc", "memory");
+ 803:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 804:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 805:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)fpscr;
+ 806:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 807:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 808:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 809:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 810:Drivers/CMSIS/Include/cmsis_gcc.h **** /*@} end of CMSIS_Core_RegAccFunctions */
+ 811:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 812:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 813:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
+ 814:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+ 815:Drivers/CMSIS/Include/cmsis_gcc.h ****   Access to dedicated instructions
+ 816:Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 817:Drivers/CMSIS/Include/cmsis_gcc.h **** */
+ 818:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 819:Drivers/CMSIS/Include/cmsis_gcc.h **** /* Define macros for porting to both thumb1 and thumb2.
+ 820:Drivers/CMSIS/Include/cmsis_gcc.h ****  * For thumb1, use low register (r0-r7), specified by constraint "l"
+ 821:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Otherwise, use general registers, specified by constraint "r" */
+ 822:Drivers/CMSIS/Include/cmsis_gcc.h **** #if defined (__thumb__) && !defined (__thumb2__)
+ 823:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=l" (r)
+ 824:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_RW_REG(r) "+l" (r)
+ 825:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "l" (r)
+ 826:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ 827:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=r" (r)
+ 828:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_RW_REG(r) "+r" (r)
+ 829:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "r" (r)
+ 830:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 831:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 832:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 833:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   No Operation
+ 834:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details No Operation does nothing. This instruction can be used for code alignment purposes.
+ 835:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 836:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __NOP()                             __ASM volatile ("nop")
+ 837:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 838:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 839:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Wait For Interrupt
+ 840:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Wait For Interrupt is a hint instruction that suspends execution until one of a number o
+ 841:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 842:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __WFI()                             __ASM volatile ("wfi")
+ 843:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 844:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 845:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 846:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Wait For Event
+ 847:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Wait For Event is a hint instruction that permits the processor to enter
+ARM GAS  /tmp/ccJRbtUJ.s 			page 25
+
+
+ 848:Drivers/CMSIS/Include/cmsis_gcc.h ****            a low-power state until one of a number of events occurs.
+ 849:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 850:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __WFE()                             __ASM volatile ("wfe")
+ 851:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 852:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 853:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 854:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Send Event
+ 855:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+ 856:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 857:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __SEV()                             __ASM volatile ("sev")
+ 858:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 859:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 860:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 861:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Instruction Synchronization Barrier
+ 862:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Instruction Synchronization Barrier flushes the pipeline in the processor,
+ 863:Drivers/CMSIS/Include/cmsis_gcc.h ****            so that all instructions following the ISB are fetched from cache or memory,
+ 864:Drivers/CMSIS/Include/cmsis_gcc.h ****            after the instruction has been completed.
+ 865:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 866:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __ISB(void)
+ 867:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 868:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("isb 0xF":::"memory");
+ 869:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 870:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 871:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 872:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 873:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Data Synchronization Barrier
+ 874:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Acts as a special kind of Data Memory Barrier.
+ 875:Drivers/CMSIS/Include/cmsis_gcc.h ****            It completes when all explicit memory accesses before this instruction complete.
+ 876:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 877:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __DSB(void)
+ 878:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 879:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("dsb 0xF":::"memory");
+ 491              		.loc 2 879 0
+ 492              		.syntax unified
+ 493              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 494 000c BFF34F8F 		dsb 0xF
+ 495              	@ 0 "" 2
+ 496              		.thumb
+ 497              		.syntax unified
+ 498              	.LBE8:
+ 499              	.LBE7:
+  53:la/sampling.c **** 	__DSB();
+  54:la/sampling.c **** 	EXTI->IMR = triggerMask;
+ 500              		.loc 1 54 0
+ 501 0010 044A     		ldr	r2, .L26
+ 502 0012 054B     		ldr	r3, .L26+4
+ 503 0014 1B68     		ldr	r3, [r3]
+ 504 0016 1360     		str	r3, [r2]
+  55:la/sampling.c **** 
+  56:la/sampling.c **** 	//comletionHandler = handler;
+  57:la/sampling.c **** }
+ 505              		.loc 1 57 0
+ 506 0018 00BF     		nop
+ 507 001a BD46     		mov	sp, r7
+ 508              	.LCFI44:
+ 509              		.cfi_def_cfa_register 13
+ 510              		@ sp needed
+ARM GAS  /tmp/ccJRbtUJ.s 			page 26
+
+
+ 511 001c 5DF8047B 		ldr	r7, [sp], #4
+ 512              	.LCFI45:
+ 513              		.cfi_restore 7
+ 514              		.cfi_def_cfa_offset 0
+ 515 0020 7047     		bx	lr
+ 516              	.L27:
+ 517 0022 00BF     		.align	2
+ 518              	.L26:
+ 519 0024 003C0140 		.word	1073822720
+ 520 0028 00000000 		.word	triggerMask
+ 521              		.cfi_endproc
+ 522              	.LFE141:
+ 524              		.section	.text.SetupSamplingTimer,"ax",%progbits
+ 525              		.align	1
+ 526              		.global	SetupSamplingTimer
+ 527              		.syntax unified
+ 528              		.thumb
+ 529              		.thumb_func
+ 530              		.fpu fpv4-sp-d16
+ 532              	SetupSamplingTimer:
+ 533              	.LFB142:
+  58:la/sampling.c **** 
+  59:la/sampling.c **** void SetupSamplingTimer()
+  60:la/sampling.c **** {
+ 534              		.loc 1 60 0
+ 535              		.cfi_startproc
+ 536              		@ args = 0, pretend = 0, frame = 8
+ 537              		@ frame_needed = 1, uses_anonymous_args = 0
+ 538              		@ link register save eliminated.
+ 539 0000 80B4     		push	{r7}
+ 540              	.LCFI46:
+ 541              		.cfi_def_cfa_offset 4
+ 542              		.cfi_offset 7, -4
+ 543 0002 83B0     		sub	sp, sp, #12
+ 544              	.LCFI47:
+ 545              		.cfi_def_cfa_offset 16
+ 546 0004 00AF     		add	r7, sp, #0
+ 547              	.LCFI48:
+ 548              		.cfi_def_cfa_register 7
+ 549              	.LBB9:
+  61:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM1EN, ENABLE);
+  62:la/sampling.c **** 	__HAL_RCC_TIM1_CLK_ENABLE();
+ 550              		.loc 1 62 0
+ 551 0006 0023     		movs	r3, #0
+ 552 0008 7B60     		str	r3, [r7, #4]
+ 553 000a 194B     		ldr	r3, .L29
+ 554 000c 5B6C     		ldr	r3, [r3, #68]
+ 555 000e 184A     		ldr	r2, .L29
+ 556 0010 43F00103 		orr	r3, r3, #1
+ 557 0014 5364     		str	r3, [r2, #68]
+ 558 0016 164B     		ldr	r3, .L29
+ 559 0018 5B6C     		ldr	r3, [r3, #68]
+ 560 001a 03F00103 		and	r3, r3, #1
+ 561 001e 7B60     		str	r3, [r7, #4]
+ 562 0020 7B68     		ldr	r3, [r7, #4]
+ 563              	.LBE9:
+  63:la/sampling.c **** 	//Main sampling timer
+ARM GAS  /tmp/ccJRbtUJ.s 			page 27
+
+
+  64:la/sampling.c **** 	TIM1->DIER = 0;
+ 564              		.loc 1 64 0
+ 565 0022 144B     		ldr	r3, .L29+4
+ 566 0024 0022     		movs	r2, #0
+ 567 0026 DA60     		str	r2, [r3, #12]
+  65:la/sampling.c **** 	TIM1->SR &= ~TIM_SR_UIF;
+ 568              		.loc 1 65 0
+ 569 0028 124B     		ldr	r3, .L29+4
+ 570 002a 1B69     		ldr	r3, [r3, #16]
+ 571 002c 114A     		ldr	r2, .L29+4
+ 572 002e 23F00103 		bic	r3, r3, #1
+ 573 0032 1361     		str	r3, [r2, #16]
+  66:la/sampling.c **** 	TIM1->CNT = 0;
+ 574              		.loc 1 66 0
+ 575 0034 0F4B     		ldr	r3, .L29+4
+ 576 0036 0022     		movs	r2, #0
+ 577 0038 5A62     		str	r2, [r3, #36]
+  67:la/sampling.c **** 	TIM1->PSC = 0;
+ 578              		.loc 1 67 0
+ 579 003a 0E4B     		ldr	r3, .L29+4
+ 580 003c 0022     		movs	r2, #0
+ 581 003e 9A62     		str	r2, [r3, #40]
+  68:la/sampling.c **** 	TIM1->CR1 = TIM_CR1_URS;
+ 582              		.loc 1 68 0
+ 583 0040 0C4B     		ldr	r3, .L29+4
+ 584 0042 0422     		movs	r2, #4
+ 585 0044 1A60     		str	r2, [r3]
+  69:la/sampling.c **** 	TIM1->ARR = period;//actual period is +1 of this value
+ 586              		.loc 1 69 0
+ 587 0046 0C4B     		ldr	r3, .L29+8
+ 588 0048 1A88     		ldrh	r2, [r3]
+ 589 004a 0A4B     		ldr	r3, .L29+4
+ 590 004c DA62     		str	r2, [r3, #44]
+  70:la/sampling.c **** 	TIM1->CR2 = 0;
+ 591              		.loc 1 70 0
+ 592 004e 094B     		ldr	r3, .L29+4
+ 593 0050 0022     		movs	r2, #0
+ 594 0052 5A60     		str	r2, [r3, #4]
+  71:la/sampling.c **** 	TIM1->DIER = TIM_DIER_UDE;
+ 595              		.loc 1 71 0
+ 596 0054 074B     		ldr	r3, .L29+4
+ 597 0056 4FF48072 		mov	r2, #256
+ 598 005a DA60     		str	r2, [r3, #12]
+  72:la/sampling.c **** 	TIM1->EGR = TIM_EGR_UG;
+ 599              		.loc 1 72 0
+ 600 005c 054B     		ldr	r3, .L29+4
+ 601 005e 0122     		movs	r2, #1
+ 602 0060 5A61     		str	r2, [r3, #20]
+  73:la/sampling.c **** }
+ 603              		.loc 1 73 0
+ 604 0062 00BF     		nop
+ 605 0064 0C37     		adds	r7, r7, #12
+ 606              	.LCFI49:
+ 607              		.cfi_def_cfa_offset 4
+ 608 0066 BD46     		mov	sp, r7
+ 609              	.LCFI50:
+ 610              		.cfi_def_cfa_register 13
+ARM GAS  /tmp/ccJRbtUJ.s 			page 28
+
+
+ 611              		@ sp needed
+ 612 0068 5DF8047B 		ldr	r7, [sp], #4
+ 613              	.LCFI51:
+ 614              		.cfi_restore 7
+ 615              		.cfi_def_cfa_offset 0
+ 616 006c 7047     		bx	lr
+ 617              	.L30:
+ 618 006e 00BF     		.align	2
+ 619              	.L29:
+ 620 0070 00380240 		.word	1073887232
+ 621 0074 00000140 		.word	1073807360
+ 622 0078 00000000 		.word	period
+ 623              		.cfi_endproc
+ 624              	.LFE142:
+ 626              		.section	.text.SetupSamplingDMA,"ax",%progbits
+ 627              		.align	1
+ 628              		.global	SetupSamplingDMA
+ 629              		.syntax unified
+ 630              		.thumb
+ 631              		.thumb_func
+ 632              		.fpu fpv4-sp-d16
+ 634              	SetupSamplingDMA:
+ 635              	.LFB143:
+  74:la/sampling.c **** 
+  75:la/sampling.c **** void SetupSamplingDMA(void *dataBuffer, uint32_t dataTransferCount)
+  76:la/sampling.c **** {
+ 636              		.loc 1 76 0
+ 637              		.cfi_startproc
+ 638              		@ args = 0, pretend = 0, frame = 16
+ 639              		@ frame_needed = 1, uses_anonymous_args = 0
+ 640 0000 80B5     		push	{r7, lr}
+ 641              	.LCFI52:
+ 642              		.cfi_def_cfa_offset 8
+ 643              		.cfi_offset 7, -8
+ 644              		.cfi_offset 14, -4
+ 645 0002 84B0     		sub	sp, sp, #16
+ 646              	.LCFI53:
+ 647              		.cfi_def_cfa_offset 24
+ 648 0004 00AF     		add	r7, sp, #0
+ 649              	.LCFI54:
+ 650              		.cfi_def_cfa_register 7
+ 651 0006 7860     		str	r0, [r7, #4]
+ 652 0008 3960     		str	r1, [r7]
+ 653              	.LBB10:
+  77:la/sampling.c **** 	//RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_DMA2EN, ENABLE);
+  78:la/sampling.c **** 	__HAL_RCC_DMA2_CLK_ENABLE();
+ 654              		.loc 1 78 0
+ 655 000a 0023     		movs	r3, #0
+ 656 000c BB60     		str	r3, [r7, #8]
+ 657 000e 134B     		ldr	r3, .L32
+ 658 0010 1B6B     		ldr	r3, [r3, #48]
+ 659 0012 124A     		ldr	r2, .L32
+ 660 0014 43F48003 		orr	r3, r3, #4194304
+ 661 0018 1363     		str	r3, [r2, #48]
+ 662 001a 104B     		ldr	r3, .L32
+ 663 001c 1B6B     		ldr	r3, [r3, #48]
+ 664 001e 03F48003 		and	r3, r3, #4194304
+ARM GAS  /tmp/ccJRbtUJ.s 			page 29
+
+
+ 665 0022 BB60     		str	r3, [r7, #8]
+ 666 0024 BB68     		ldr	r3, [r7, #8]
+ 667              	.LBE10:
+  79:la/sampling.c **** 	uint32_t dmaSize = CalcDMATransferSize();
+ 668              		.loc 1 79 0
+ 669 0026 FFF7FEFF 		bl	CalcDMATransferSize
+ 670 002a F860     		str	r0, [r7, #12]
+  80:la/sampling.c **** 
+  81:la/sampling.c **** 	//TIM8->DIER = 0;
+  82:la/sampling.c **** 	//TIM8->SR &= ~TIM_SR_UIF;
+  83:la/sampling.c **** 
+  84:la/sampling.c **** 	//TIM1_UP -> DMA2, Ch6, Stream5
+  85:la/sampling.c **** 	//DMA should be stopped before this point
+  86:la/sampling.c **** 	DMA2_Stream5->CR = (DMA_SxCR_CHSEL_1 | DMA_SxCR_CHSEL_2) | dmaSize | DMA_SxCR_MINC | DMA_SxCR_CIRC
+ 671              		.loc 1 86 0
+ 672 002c 0C4A     		ldr	r2, .L32+4
+ 673 002e FB68     		ldr	r3, [r7, #12]
+ 674 0030 43F04063 		orr	r3, r3, #201326592
+ 675 0034 43F4A063 		orr	r3, r3, #1280
+ 676 0038 1360     		str	r3, [r2]
+  87:la/sampling.c **** 	//DMA2_Stream5->CR = D<>| dmaSize | DMA_SxCR_MINC | DMA_SxCR_CIRC;
+  88:la/sampling.c **** 	DMA2_Stream5->M0AR = (uint32_t)dataBuffer;//samplingRam;
+ 677              		.loc 1 88 0
+ 678 003a 094A     		ldr	r2, .L32+4
+ 679 003c 7B68     		ldr	r3, [r7, #4]
+ 680 003e D360     		str	r3, [r2, #12]
+  89:la/sampling.c **** 
+  90:la/sampling.c **** 	DMA2_Stream5->PAR  = (uint32_t)&(SAMPLING_PORT->IDR);
+ 681              		.loc 1 90 0
+ 682 0040 074B     		ldr	r3, .L32+4
+ 683 0042 084A     		ldr	r2, .L32+8
+ 684 0044 9A60     		str	r2, [r3, #8]
+  91:la/sampling.c **** 
+  92:la/sampling.c **** 	DMA2_Stream5->NDTR = dataTransferCount;//transferCount;// / transferSize;
+ 685              		.loc 1 92 0
+ 686 0046 064A     		ldr	r2, .L32+4
+ 687 0048 3B68     		ldr	r3, [r7]
+ 688 004a 5360     		str	r3, [r2, #4]
+  93:la/sampling.c **** 	DMA2_Stream5->FCR = DMA_SxFCR_DMDIS | DMA_SxFCR_FTH;
+ 689              		.loc 1 93 0
+ 690 004c 044B     		ldr	r3, .L32+4
+ 691 004e 0722     		movs	r2, #7
+ 692 0050 5A61     		str	r2, [r3, #20]
+  94:la/sampling.c **** }
+ 693              		.loc 1 94 0
+ 694 0052 00BF     		nop
+ 695 0054 1037     		adds	r7, r7, #16
+ 696              	.LCFI55:
+ 697              		.cfi_def_cfa_offset 8
+ 698 0056 BD46     		mov	sp, r7
+ 699              	.LCFI56:
+ 700              		.cfi_def_cfa_register 13
+ 701              		@ sp needed
+ 702 0058 80BD     		pop	{r7, pc}
+ 703              	.L33:
+ 704 005a 00BF     		.align	2
+ 705              	.L32:
+ARM GAS  /tmp/ccJRbtUJ.s 			page 30
+
+
+ 706 005c 00380240 		.word	1073887232
+ 707 0060 88640240 		.word	1073898632
+ 708 0064 100C0240 		.word	1073875984
+ 709              		.cfi_endproc
+ 710              	.LFE143:
+ 712              		.section	.text.SetupDelayTimer,"ax",%progbits
+ 713              		.align	1
+ 714              		.global	SetupDelayTimer
+ 715              		.syntax unified
+ 716              		.thumb
+ 717              		.thumb_func
+ 718              		.fpu fpv4-sp-d16
+ 720              	SetupDelayTimer:
+ 721              	.LFB144:
+  95:la/sampling.c **** 
+  96:la/sampling.c **** void SetupDelayTimer()
+  97:la/sampling.c **** {
+ 722              		.loc 1 97 0
+ 723              		.cfi_startproc
+ 724              		@ args = 0, pretend = 0, frame = 8
+ 725              		@ frame_needed = 1, uses_anonymous_args = 0
+ 726 0000 80B5     		push	{r7, lr}
+ 727              	.LCFI57:
+ 728              		.cfi_def_cfa_offset 8
+ 729              		.cfi_offset 7, -8
+ 730              		.cfi_offset 14, -4
+ 731 0002 82B0     		sub	sp, sp, #8
+ 732              	.LCFI58:
+ 733              		.cfi_def_cfa_offset 16
+ 734 0004 00AF     		add	r7, sp, #0
+ 735              	.LCFI59:
+ 736              		.cfi_def_cfa_register 7
+ 737              	.LBB11:
+  98:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM8EN, ENABLE);
+  99:la/sampling.c **** 	__HAL_RCC_TIM8_CLK_ENABLE();
+ 738              		.loc 1 99 0
+ 739 0006 0023     		movs	r3, #0
+ 740 0008 7B60     		str	r3, [r7, #4]
+ 741 000a 194B     		ldr	r3, .L35
+ 742 000c 5B6C     		ldr	r3, [r3, #68]
+ 743 000e 184A     		ldr	r2, .L35
+ 744 0010 43F00203 		orr	r3, r3, #2
+ 745 0014 5364     		str	r3, [r2, #68]
+ 746 0016 164B     		ldr	r3, .L35
+ 747 0018 5B6C     		ldr	r3, [r3, #68]
+ 748 001a 03F00203 		and	r3, r3, #2
+ 749 001e 7B60     		str	r3, [r7, #4]
+ 750 0020 7B68     		ldr	r3, [r7, #4]
+ 751              	.LBE11:
+ 100:la/sampling.c **** 	//After-trigger delay timer
+ 101:la/sampling.c **** 	TIM8->CR1 = TIM_CR1_URS;//stop timer too
+ 752              		.loc 1 101 0
+ 753 0022 144B     		ldr	r3, .L35+4
+ 754 0024 0422     		movs	r2, #4
+ 755 0026 1A60     		str	r2, [r3]
+ 102:la/sampling.c **** 	TIM8->CNT = 0;
+ 756              		.loc 1 102 0
+ARM GAS  /tmp/ccJRbtUJ.s 			page 31
+
+
+ 757 0028 124B     		ldr	r3, .L35+4
+ 758 002a 0022     		movs	r2, #0
+ 759 002c 5A62     		str	r2, [r3, #36]
+ 103:la/sampling.c **** 	TIM8->ARR = delayCount;//  / transferSize;
+ 760              		.loc 1 103 0
+ 761 002e 114A     		ldr	r2, .L35+4
+ 762 0030 114B     		ldr	r3, .L35+8
+ 763 0032 1B68     		ldr	r3, [r3]
+ 764 0034 D362     		str	r3, [r2, #44]
+ 104:la/sampling.c **** 	TIM8->PSC = TIM1->ARR;
+ 765              		.loc 1 104 0
+ 766 0036 114B     		ldr	r3, .L35+12
+ 767 0038 0E4A     		ldr	r2, .L35+4
+ 768 003a DB6A     		ldr	r3, [r3, #44]
+ 769 003c 9362     		str	r3, [r2, #40]
+ 105:la/sampling.c **** 	TIM8->CR2 = 0;
+ 770              		.loc 1 105 0
+ 771 003e 0D4B     		ldr	r3, .L35+4
+ 772 0040 0022     		movs	r2, #0
+ 773 0042 5A60     		str	r2, [r3, #4]
+ 106:la/sampling.c **** 	TIM8->EGR = TIM_EGR_UG;
+ 774              		.loc 1 106 0
+ 775 0044 0B4B     		ldr	r3, .L35+4
+ 776 0046 0122     		movs	r2, #1
+ 777 0048 5A61     		str	r2, [r3, #20]
+ 107:la/sampling.c **** 	TIM8->SR &= ~TIM_SR_UIF;
+ 778              		.loc 1 107 0
+ 779 004a 0A4B     		ldr	r3, .L35+4
+ 780 004c 1B69     		ldr	r3, [r3, #16]
+ 781 004e 094A     		ldr	r2, .L35+4
+ 782 0050 23F00103 		bic	r3, r3, #1
+ 783 0054 1361     		str	r3, [r2, #16]
+ 108:la/sampling.c **** 	TIM8->DIER = TIM_DIER_UIE;
+ 784              		.loc 1 108 0
+ 785 0056 074B     		ldr	r3, .L35+4
+ 786 0058 0122     		movs	r2, #1
+ 787 005a DA60     		str	r2, [r3, #12]
+ 109:la/sampling.c **** 
+ 110:la/sampling.c **** 	EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0);
+ 788              		.loc 1 110 0
+ 789 005c 0022     		movs	r2, #0
+ 790 005e 0221     		movs	r1, #2
+ 791 0060 2C20     		movs	r0, #44
+ 792 0062 FFF7FEFF 		bl	EnableChannel
+ 111:la/sampling.c **** 	//InterruptController::EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0, SamplingFrameCompelte);
+ 112:la/sampling.c **** }
+ 793              		.loc 1 112 0
+ 794 0066 00BF     		nop
+ 795 0068 0837     		adds	r7, r7, #8
+ 796              	.LCFI60:
+ 797              		.cfi_def_cfa_offset 8
+ 798 006a BD46     		mov	sp, r7
+ 799              	.LCFI61:
+ 800              		.cfi_def_cfa_register 13
+ 801              		@ sp needed
+ 802 006c 80BD     		pop	{r7, pc}
+ 803              	.L36:
+ARM GAS  /tmp/ccJRbtUJ.s 			page 32
+
+
+ 804 006e 00BF     		.align	2
+ 805              	.L35:
+ 806 0070 00380240 		.word	1073887232
+ 807 0074 00040140 		.word	1073808384
+ 808 0078 00000000 		.word	delayCount
+ 809 007c 00000140 		.word	1073807360
+ 810              		.cfi_endproc
+ 811              	.LFE144:
+ 813              		.section	.text.SetupRegularEXTITrigger,"ax",%progbits
+ 814              		.align	1
+ 815              		.global	SetupRegularEXTITrigger
+ 816              		.syntax unified
+ 817              		.thumb
+ 818              		.thumb_func
+ 819              		.fpu fpv4-sp-d16
+ 821              	SetupRegularEXTITrigger:
+ 822              	.LFB145:
+ 113:la/sampling.c **** 
+ 114:la/sampling.c **** void SetupRegularEXTITrigger()
+ 115:la/sampling.c **** {
+ 823              		.loc 1 115 0
+ 824              		.cfi_startproc
+ 825              		@ args = 0, pretend = 0, frame = 16
+ 826              		@ frame_needed = 1, uses_anonymous_args = 0
+ 827 0000 80B5     		push	{r7, lr}
+ 828              	.LCFI62:
+ 829              		.cfi_def_cfa_offset 8
+ 830              		.cfi_offset 7, -8
+ 831              		.cfi_offset 14, -4
+ 832 0002 84B0     		sub	sp, sp, #16
+ 833              	.LCFI63:
+ 834              		.cfi_def_cfa_offset 24
+ 835 0004 00AF     		add	r7, sp, #0
+ 836              	.LCFI64:
+ 837              		.cfi_def_cfa_register 7
+ 838              	.LBB12:
+ 116:la/sampling.c **** 	//while (CDC_Transmit_FS((uint8_t *)"tessst", 6) != 0);
+ 117:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_SYSCFGEN, ENABLE);
+ 118:la/sampling.c **** 	__HAL_RCC_SYSCFG_CLK_ENABLE();
+ 839              		.loc 1 118 0
+ 840 0006 0023     		movs	r3, #0
+ 841 0008 3B60     		str	r3, [r7]
+ 842 000a 534B     		ldr	r3, .L53
+ 843 000c 5B6C     		ldr	r3, [r3, #68]
+ 844 000e 524A     		ldr	r2, .L53
+ 845 0010 43F48043 		orr	r3, r3, #16384
+ 846 0014 5364     		str	r3, [r2, #68]
+ 847 0016 504B     		ldr	r3, .L53
+ 848 0018 5B6C     		ldr	r3, [r3, #68]
+ 849 001a 03F48043 		and	r3, r3, #16384
+ 850 001e 3B60     		str	r3, [r7]
+ 851 0020 3B68     		ldr	r3, [r7]
+ 852              	.LBE12:
+ 119:la/sampling.c **** 	//Trigger setup
+ 120:la/sampling.c **** 	uint32_t rising = triggerMask & triggerValue;
+ 853              		.loc 1 120 0
+ 854 0022 4E4B     		ldr	r3, .L53+4
+ARM GAS  /tmp/ccJRbtUJ.s 			page 33
+
+
+ 855 0024 1A68     		ldr	r2, [r3]
+ 856 0026 4E4B     		ldr	r3, .L53+8
+ 857 0028 1B68     		ldr	r3, [r3]
+ 858 002a 1340     		ands	r3, r3, r2
+ 859 002c FB60     		str	r3, [r7, #12]
+ 121:la/sampling.c **** 	uint32_t falling = triggerMask & ~triggerValue;
+ 860              		.loc 1 121 0
+ 861 002e 4C4B     		ldr	r3, .L53+8
+ 862 0030 1B68     		ldr	r3, [r3]
+ 863 0032 DA43     		mvns	r2, r3
+ 864 0034 494B     		ldr	r3, .L53+4
+ 865 0036 1B68     		ldr	r3, [r3]
+ 866 0038 1340     		ands	r3, r3, r2
+ 867 003a BB60     		str	r3, [r7, #8]
+ 122:la/sampling.c **** 	//route exti to triggerMask GPIO port
+ 123:la/sampling.c **** 	uint32_t extiCR = 0;
+ 868              		.loc 1 123 0
+ 869 003c 0023     		movs	r3, #0
+ 870 003e 7B60     		str	r3, [r7, #4]
+ 124:la/sampling.c **** 	switch((uint32_t)SAMPLING_PORT)
+ 125:la/sampling.c **** 	{
+ 126:la/sampling.c **** 	case GPIOA_BASE:extiCR = 0x0000;break;
+ 127:la/sampling.c **** 	case GPIOB_BASE:extiCR = 0x1111;break;
+ 128:la/sampling.c **** 	case GPIOC_BASE:extiCR = 0x2222;break;
+ 129:la/sampling.c **** 	case GPIOD_BASE:extiCR = 0x3333;break;
+ 871              		.loc 1 129 0
+ 872 0040 43F23333 		movw	r3, #13107
+ 873 0044 7B60     		str	r3, [r7, #4]
+ 874 0046 00BF     		nop
+ 130:la/sampling.c **** 	case GPIOE_BASE:extiCR = 0x4444;break;
+ 131:la/sampling.c **** 	case GPIOF_BASE:extiCR = 0x5555;break;
+ 132:la/sampling.c **** 	case GPIOG_BASE:extiCR = 0x6666;break;
+ 133:la/sampling.c **** 	case GPIOH_BASE:extiCR = 0x7777;break;
+ 134:la/sampling.c **** 	case GPIOI_BASE:extiCR = 0x8888;break;
+ 135:la/sampling.c **** 	}
+ 136:la/sampling.c **** 	SYSCFG->EXTICR[0] = extiCR;
+ 875              		.loc 1 136 0
+ 876 0048 464A     		ldr	r2, .L53+12
+ 877 004a 7B68     		ldr	r3, [r7, #4]
+ 878 004c 9360     		str	r3, [r2, #8]
+ 137:la/sampling.c **** 	SYSCFG->EXTICR[1] = extiCR;
+ 879              		.loc 1 137 0
+ 880 004e 454A     		ldr	r2, .L53+12
+ 881 0050 7B68     		ldr	r3, [r7, #4]
+ 882 0052 D360     		str	r3, [r2, #12]
+ 138:la/sampling.c **** 	SYSCFG->EXTICR[2] = extiCR;
+ 883              		.loc 1 138 0
+ 884 0054 434A     		ldr	r2, .L53+12
+ 885 0056 7B68     		ldr	r3, [r7, #4]
+ 886 0058 1361     		str	r3, [r2, #16]
+ 139:la/sampling.c **** 	SYSCFG->EXTICR[3] = extiCR;
+ 887              		.loc 1 139 0
+ 888 005a 424A     		ldr	r2, .L53+12
+ 889 005c 7B68     		ldr	r3, [r7, #4]
+ 890 005e 5361     		str	r3, [r2, #20]
+ 140:la/sampling.c **** 
+ 141:la/sampling.c **** 	EXTI->IMR  = 0;//mask;
+ARM GAS  /tmp/ccJRbtUJ.s 			page 34
+
+
+ 891              		.loc 1 141 0
+ 892 0060 414B     		ldr	r3, .L53+16
+ 893 0062 0022     		movs	r2, #0
+ 894 0064 1A60     		str	r2, [r3]
+ 142:la/sampling.c **** 	EXTI->PR = 0xffffffff;
+ 895              		.loc 1 142 0
+ 896 0066 404B     		ldr	r3, .L53+16
+ 897 0068 4FF0FF32 		mov	r2, #-1
+ 898 006c 5A61     		str	r2, [r3, #20]
+ 143:la/sampling.c **** 	EXTI->RTSR = rising;
+ 899              		.loc 1 143 0
+ 900 006e 3E4A     		ldr	r2, .L53+16
+ 901 0070 FB68     		ldr	r3, [r7, #12]
+ 902 0072 9360     		str	r3, [r2, #8]
+ 144:la/sampling.c **** 	EXTI->FTSR = falling;
+ 903              		.loc 1 144 0
+ 904 0074 3C4A     		ldr	r2, .L53+16
+ 905 0076 BB68     		ldr	r3, [r7, #8]
+ 906 0078 D360     		str	r3, [r2, #12]
+ 907              	.LBB13:
+ 908              	.LBB14:
+ 909              		.loc 2 879 0
+ 910              		.syntax unified
+ 911              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 912 007a BFF34F8F 		dsb 0xF
+ 913              	@ 0 "" 2
+ 914              		.thumb
+ 915              		.syntax unified
+ 916              	.LBE14:
+ 917              	.LBE13:
+ 145:la/sampling.c **** 
+ 146:la/sampling.c **** 	__DSB();
+ 147:la/sampling.c **** 	
+ 148:la/sampling.c **** 	if(triggerMask & 0x0001)EnableChannel(EXTI0_IRQn, 0, 0);
+ 918              		.loc 1 148 0
+ 919 007e 374B     		ldr	r3, .L53+4
+ 920 0080 1B68     		ldr	r3, [r3]
+ 921 0082 03F00103 		and	r3, r3, #1
+ 922 0086 002B     		cmp	r3, #0
+ 923 0088 05D0     		beq	.L38
+ 924              		.loc 1 148 0 is_stmt 0 discriminator 1
+ 925 008a 0022     		movs	r2, #0
+ 926 008c 0021     		movs	r1, #0
+ 927 008e 0620     		movs	r0, #6
+ 928 0090 FFF7FEFF 		bl	EnableChannel
+ 929 0094 02E0     		b	.L39
+ 930              	.L38:
+ 149:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+ 931              		.loc 1 149 0 is_stmt 1
+ 932 0096 0620     		movs	r0, #6
+ 933 0098 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 934              	.L39:
+ 150:la/sampling.c **** 	if(triggerMask & 0x0002)EnableChannel(EXTI1_IRQn, 0, 0);
+ 935              		.loc 1 150 0
+ 936 009c 2F4B     		ldr	r3, .L53+4
+ 937 009e 1B68     		ldr	r3, [r3]
+ 938 00a0 03F00203 		and	r3, r3, #2
+ARM GAS  /tmp/ccJRbtUJ.s 			page 35
+
+
+ 939 00a4 002B     		cmp	r3, #0
+ 940 00a6 05D0     		beq	.L40
+ 941              		.loc 1 150 0 is_stmt 0 discriminator 1
+ 942 00a8 0022     		movs	r2, #0
+ 943 00aa 0021     		movs	r1, #0
+ 944 00ac 0720     		movs	r0, #7
+ 945 00ae FFF7FEFF 		bl	EnableChannel
+ 946 00b2 02E0     		b	.L41
+ 947              	.L40:
+ 151:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI1_IRQn);
+ 948              		.loc 1 151 0 is_stmt 1
+ 949 00b4 0720     		movs	r0, #7
+ 950 00b6 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 951              	.L41:
+ 152:la/sampling.c **** 	if(triggerMask & 0x0004)EnableChannel(EXTI2_IRQn, 0, 0);
+ 952              		.loc 1 152 0
+ 953 00ba 284B     		ldr	r3, .L53+4
+ 954 00bc 1B68     		ldr	r3, [r3]
+ 955 00be 03F00403 		and	r3, r3, #4
+ 956 00c2 002B     		cmp	r3, #0
+ 957 00c4 05D0     		beq	.L42
+ 958              		.loc 1 152 0 is_stmt 0 discriminator 1
+ 959 00c6 0022     		movs	r2, #0
+ 960 00c8 0021     		movs	r1, #0
+ 961 00ca 0820     		movs	r0, #8
+ 962 00cc FFF7FEFF 		bl	EnableChannel
+ 963 00d0 02E0     		b	.L43
+ 964              	.L42:
+ 153:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI2_IRQn);
+ 965              		.loc 1 153 0 is_stmt 1
+ 966 00d2 0820     		movs	r0, #8
+ 967 00d4 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 968              	.L43:
+ 154:la/sampling.c **** 	if(triggerMask & 0x0008)EnableChannel(EXTI3_IRQn, 0, 0);
+ 969              		.loc 1 154 0
+ 970 00d8 204B     		ldr	r3, .L53+4
+ 971 00da 1B68     		ldr	r3, [r3]
+ 972 00dc 03F00803 		and	r3, r3, #8
+ 973 00e0 002B     		cmp	r3, #0
+ 974 00e2 05D0     		beq	.L44
+ 975              		.loc 1 154 0 is_stmt 0 discriminator 1
+ 976 00e4 0022     		movs	r2, #0
+ 977 00e6 0021     		movs	r1, #0
+ 978 00e8 0920     		movs	r0, #9
+ 979 00ea FFF7FEFF 		bl	EnableChannel
+ 980 00ee 02E0     		b	.L45
+ 981              	.L44:
+ 155:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI3_IRQn);
+ 982              		.loc 1 155 0 is_stmt 1
+ 983 00f0 0920     		movs	r0, #9
+ 984 00f2 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 985              	.L45:
+ 156:la/sampling.c **** 	if(triggerMask & 0x0010)EnableChannel(EXTI4_IRQn, 0, 0);
+ 986              		.loc 1 156 0
+ 987 00f6 194B     		ldr	r3, .L53+4
+ 988 00f8 1B68     		ldr	r3, [r3]
+ 989 00fa 03F01003 		and	r3, r3, #16
+ARM GAS  /tmp/ccJRbtUJ.s 			page 36
+
+
+ 990 00fe 002B     		cmp	r3, #0
+ 991 0100 05D0     		beq	.L46
+ 992              		.loc 1 156 0 is_stmt 0 discriminator 1
+ 993 0102 0022     		movs	r2, #0
+ 994 0104 0021     		movs	r1, #0
+ 995 0106 0A20     		movs	r0, #10
+ 996 0108 FFF7FEFF 		bl	EnableChannel
+ 997 010c 02E0     		b	.L47
+ 998              	.L46:
+ 157:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+ 999              		.loc 1 157 0 is_stmt 1
+ 1000 010e 0A20     		movs	r0, #10
+ 1001 0110 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1002              	.L47:
+ 158:la/sampling.c **** 	if(triggerMask & 0x03E0)EnableChannel(EXTI9_5_IRQn, 0, 0);
+ 1003              		.loc 1 158 0
+ 1004 0114 114B     		ldr	r3, .L53+4
+ 1005 0116 1B68     		ldr	r3, [r3]
+ 1006 0118 03F47873 		and	r3, r3, #992
+ 1007 011c 002B     		cmp	r3, #0
+ 1008 011e 05D0     		beq	.L48
+ 1009              		.loc 1 158 0 is_stmt 0 discriminator 1
+ 1010 0120 0022     		movs	r2, #0
+ 1011 0122 0021     		movs	r1, #0
+ 1012 0124 1720     		movs	r0, #23
+ 1013 0126 FFF7FEFF 		bl	EnableChannel
+ 1014 012a 02E0     		b	.L49
+ 1015              	.L48:
+ 159:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+ 1016              		.loc 1 159 0 is_stmt 1
+ 1017 012c 1720     		movs	r0, #23
+ 1018 012e FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1019              	.L49:
+ 160:la/sampling.c **** 	if(triggerMask & 0xFC00)EnableChannel(EXTI15_10_IRQn, 0, 0);
+ 1020              		.loc 1 160 0
+ 1021 0132 0A4B     		ldr	r3, .L53+4
+ 1022 0134 1B68     		ldr	r3, [r3]
+ 1023 0136 03F47C43 		and	r3, r3, #64512
+ 1024 013a 002B     		cmp	r3, #0
+ 1025 013c 05D0     		beq	.L50
+ 1026              		.loc 1 160 0 is_stmt 0 discriminator 1
+ 1027 013e 0022     		movs	r2, #0
+ 1028 0140 0021     		movs	r1, #0
+ 1029 0142 2820     		movs	r0, #40
+ 1030 0144 FFF7FEFF 		bl	EnableChannel
+ 161:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+ 162:la/sampling.c **** 
+ 163:la/sampling.c **** 
+ 164:la/sampling.c **** #ifdef SAMPLING_MANUAL //push-button-trigger
+ 165:la/sampling.c **** 	TIM8->SMCR = TIM_SMCR_TS_0 | TIM_SMCR_TS_1 | TIM_SMCR_TS_2;//External trigger input
+ 166:la/sampling.c **** 	TIM8->SMCR |= TIM_SMCR_SMS_1 | TIM_SMCR_SMS_2;
+ 167:la/sampling.c **** 	TIM8->DIER |= TIM_DIER_TIE;
+ 168:la/sampling.c **** 	EnableChannel(TIM8_TRG_COM_TIM14_IRQn, 2, 0);
+ 169:la/sampling.c **** 	//samplingManualToExternalTransit = interruptHandler;
+ 170:la/sampling.c **** #endif
+ 171:la/sampling.c **** }
+ 1031              		.loc 1 171 0 is_stmt 1 discriminator 1
+ARM GAS  /tmp/ccJRbtUJ.s 			page 37
+
+
+ 1032 0148 02E0     		b	.L52
+ 1033              	.L50:
+ 161:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+ 1034              		.loc 1 161 0
+ 1035 014a 2820     		movs	r0, #40
+ 1036 014c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1037              	.L52:
+ 1038              		.loc 1 171 0
+ 1039 0150 00BF     		nop
+ 1040 0152 1037     		adds	r7, r7, #16
+ 1041              	.LCFI65:
+ 1042              		.cfi_def_cfa_offset 8
+ 1043 0154 BD46     		mov	sp, r7
+ 1044              	.LCFI66:
+ 1045              		.cfi_def_cfa_register 13
+ 1046              		@ sp needed
+ 1047 0156 80BD     		pop	{r7, pc}
+ 1048              	.L54:
+ 1049              		.align	2
+ 1050              	.L53:
+ 1051 0158 00380240 		.word	1073887232
+ 1052 015c 00000000 		.word	triggerMask
+ 1053 0160 00000000 		.word	triggerValue
+ 1054 0164 00380140 		.word	1073821696
+ 1055 0168 003C0140 		.word	1073822720
+ 1056              		.cfi_endproc
+ 1057              	.LFE145:
+ 1059              		.section	.text.CalcDMATransferSize,"ax",%progbits
+ 1060              		.align	1
+ 1061              		.global	CalcDMATransferSize
+ 1062              		.syntax unified
+ 1063              		.thumb
+ 1064              		.thumb_func
+ 1065              		.fpu fpv4-sp-d16
+ 1067              	CalcDMATransferSize:
+ 1068              	.LFB146:
+ 172:la/sampling.c **** 
+ 173:la/sampling.c **** uint32_t CalcDMATransferSize()
+ 174:la/sampling.c **** {
+ 1069              		.loc 1 174 0
+ 1070              		.cfi_startproc
+ 1071              		@ args = 0, pretend = 0, frame = 8
+ 1072              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1073              		@ link register save eliminated.
+ 1074 0000 80B4     		push	{r7}
+ 1075              	.LCFI67:
+ 1076              		.cfi_def_cfa_offset 4
+ 1077              		.cfi_offset 7, -4
+ 1078 0002 83B0     		sub	sp, sp, #12
+ 1079              	.LCFI68:
+ 1080              		.cfi_def_cfa_offset 16
+ 1081 0004 00AF     		add	r7, sp, #0
+ 1082              	.LCFI69:
+ 1083              		.cfi_def_cfa_register 7
+ 175:la/sampling.c **** 	uint32_t dmaSize = 0;
+ 1084              		.loc 1 175 0
+ 1085 0006 0023     		movs	r3, #0
+ARM GAS  /tmp/ccJRbtUJ.s 			page 38
+
+
+ 1086 0008 7B60     		str	r3, [r7, #4]
+ 176:la/sampling.c **** 	//handle 8/16/32 bit samplings
+ 177:la/sampling.c **** 	switch(flags & SUMP_FLAG1_GROUPS)
+ 1087              		.loc 1 177 0
+ 1088 000a 114B     		ldr	r3, .L62
+ 1089 000c 1B88     		ldrh	r3, [r3]
+ 1090 000e 03F03C03 		and	r3, r3, #60
+ 1091 0012 002B     		cmp	r3, #0
+ 1092 0014 08D0     		beq	.L57
+ 1093 0016 302B     		cmp	r3, #48
+ 1094 0018 0DD1     		bne	.L61
+ 178:la/sampling.c **** 	{
+ 179:la/sampling.c **** 	case SUMP_FLAG1_GR_16BIT:
+ 180:la/sampling.c **** 		transferSize = 2;
+ 1095              		.loc 1 180 0
+ 1096 001a 0E4B     		ldr	r3, .L62+4
+ 1097 001c 0222     		movs	r2, #2
+ 1098 001e 1A60     		str	r2, [r3]
+ 181:la/sampling.c **** 		dmaSize = DMA_SxCR_MSIZE_0 | DMA_SxCR_PSIZE_0;
+ 1099              		.loc 1 181 0
+ 1100 0020 4FF42053 		mov	r3, #10240
+ 1101 0024 7B60     		str	r3, [r7, #4]
+ 182:la/sampling.c **** 		break;
+ 1102              		.loc 1 182 0
+ 1103 0026 0CE0     		b	.L59
+ 1104              	.L57:
+ 183:la/sampling.c **** 	case SUMP_FLAG1_GR_32BIT:
+ 184:la/sampling.c **** 		transferSize = 4;
+ 1105              		.loc 1 184 0
+ 1106 0028 0A4B     		ldr	r3, .L62+4
+ 1107 002a 0422     		movs	r2, #4
+ 1108 002c 1A60     		str	r2, [r3]
+ 185:la/sampling.c **** 		dmaSize = DMA_SxCR_MSIZE_1 | DMA_SxCR_PSIZE_1;
+ 1109              		.loc 1 185 0
+ 1110 002e 4FF4A043 		mov	r3, #20480
+ 1111 0032 7B60     		str	r3, [r7, #4]
+ 186:la/sampling.c **** 		break;
+ 1112              		.loc 1 186 0
+ 1113 0034 05E0     		b	.L59
+ 1114              	.L61:
+ 187:la/sampling.c **** 	case SUMP_FLAG1_GR_8BIT:
+ 188:la/sampling.c **** 	default:
+ 189:la/sampling.c **** 		dmaSize = 0;
+ 1115              		.loc 1 189 0
+ 1116 0036 0023     		movs	r3, #0
+ 1117 0038 7B60     		str	r3, [r7, #4]
+ 190:la/sampling.c **** 		transferSize = 1;
+ 1118              		.loc 1 190 0
+ 1119 003a 064B     		ldr	r3, .L62+4
+ 1120 003c 0122     		movs	r2, #1
+ 1121 003e 1A60     		str	r2, [r3]
+ 191:la/sampling.c **** 		break;
+ 1122              		.loc 1 191 0
+ 1123 0040 00BF     		nop
+ 1124              	.L59:
+ 192:la/sampling.c **** 	}
+ 193:la/sampling.c **** 	return dmaSize;
+ARM GAS  /tmp/ccJRbtUJ.s 			page 39
+
+
+ 1125              		.loc 1 193 0
+ 1126 0042 7B68     		ldr	r3, [r7, #4]
+ 194:la/sampling.c **** }
+ 1127              		.loc 1 194 0
+ 1128 0044 1846     		mov	r0, r3
+ 1129 0046 0C37     		adds	r7, r7, #12
+ 1130              	.LCFI70:
+ 1131              		.cfi_def_cfa_offset 4
+ 1132 0048 BD46     		mov	sp, r7
+ 1133              	.LCFI71:
+ 1134              		.cfi_def_cfa_register 13
+ 1135              		@ sp needed
+ 1136 004a 5DF8047B 		ldr	r7, [sp], #4
+ 1137              	.LCFI72:
+ 1138              		.cfi_restore 7
+ 1139              		.cfi_def_cfa_offset 0
+ 1140 004e 7047     		bx	lr
+ 1141              	.L63:
+ 1142              		.align	2
+ 1143              	.L62:
+ 1144 0050 00000000 		.word	flags
+ 1145 0054 00000000 		.word	transferSize
+ 1146              		.cfi_endproc
+ 1147              	.LFE146:
+ 1149              		.section	.text.SamplingClearBuffer,"ax",%progbits
+ 1150              		.align	1
+ 1151              		.global	SamplingClearBuffer
+ 1152              		.syntax unified
+ 1153              		.thumb
+ 1154              		.thumb_func
+ 1155              		.fpu fpv4-sp-d16
+ 1157              	SamplingClearBuffer:
+ 1158              	.LFB147:
+ 195:la/sampling.c **** 
+ 196:la/sampling.c **** void SamplingClearBuffer()
+ 197:la/sampling.c **** {
+ 1159              		.loc 1 197 0
+ 1160              		.cfi_startproc
+ 1161              		@ args = 0, pretend = 0, frame = 8
+ 1162              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1163              		@ link register save eliminated.
+ 1164 0000 80B4     		push	{r7}
+ 1165              	.LCFI73:
+ 1166              		.cfi_def_cfa_offset 4
+ 1167              		.cfi_offset 7, -4
+ 1168 0002 83B0     		sub	sp, sp, #12
+ 1169              	.LCFI74:
+ 1170              		.cfi_def_cfa_offset 16
+ 1171 0004 00AF     		add	r7, sp, #0
+ 1172              	.LCFI75:
+ 1173              		.cfi_def_cfa_register 7
+ 198:la/sampling.c **** 	int i;
+ 199:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM / 4; i++)
+ 1174              		.loc 1 199 0
+ 1175 0006 0023     		movs	r3, #0
+ 1176 0008 7B60     		str	r3, [r7, #4]
+ 1177 000a 07E0     		b	.L65
+ARM GAS  /tmp/ccJRbtUJ.s 			page 40
+
+
+ 1178              	.L66:
+ 200:la/sampling.c **** 		samplingRam[i] = 0;
+ 1179              		.loc 1 200 0 discriminator 3
+ 1180 000c 084A     		ldr	r2, .L67
+ 1181 000e 7B68     		ldr	r3, [r7, #4]
+ 1182 0010 0021     		movs	r1, #0
+ 1183 0012 42F82310 		str	r1, [r2, r3, lsl #2]
+ 199:la/sampling.c **** 		samplingRam[i] = 0;
+ 1184              		.loc 1 199 0 discriminator 3
+ 1185 0016 7B68     		ldr	r3, [r7, #4]
+ 1186 0018 0133     		adds	r3, r3, #1
+ 1187 001a 7B60     		str	r3, [r7, #4]
+ 1188              	.L65:
+ 199:la/sampling.c **** 		samplingRam[i] = 0;
+ 1189              		.loc 1 199 0 is_stmt 0 discriminator 1
+ 1190 001c 7B68     		ldr	r3, [r7, #4]
+ 1191 001e B3F5C05F 		cmp	r3, #6144
+ 1192 0022 F3DB     		blt	.L66
+ 201:la/sampling.c **** }
+ 1193              		.loc 1 201 0 is_stmt 1
+ 1194 0024 00BF     		nop
+ 1195 0026 0C37     		adds	r7, r7, #12
+ 1196              	.LCFI76:
+ 1197              		.cfi_def_cfa_offset 4
+ 1198 0028 BD46     		mov	sp, r7
+ 1199              	.LCFI77:
+ 1200              		.cfi_def_cfa_register 13
+ 1201              		@ sp needed
+ 1202 002a 5DF8047B 		ldr	r7, [sp], #4
+ 1203              	.LCFI78:
+ 1204              		.cfi_restore 7
+ 1205              		.cfi_def_cfa_offset 0
+ 1206 002e 7047     		bx	lr
+ 1207              	.L68:
+ 1208              		.align	2
+ 1209              	.L67:
+ 1210 0030 00000000 		.word	samplingRam
+ 1211              		.cfi_endproc
+ 1212              	.LFE147:
+ 1214              		.section	.text.SamplingComplete,"ax",%progbits
+ 1215              		.align	1
+ 1216              		.global	SamplingComplete
+ 1217              		.syntax unified
+ 1218              		.thumb
+ 1219              		.thumb_func
+ 1220              		.fpu fpv4-sp-d16
+ 1222              	SamplingComplete:
+ 1223              	.LFB148:
+ 202:la/sampling.c **** 
+ 203:la/sampling.c **** void SamplingComplete()
+ 204:la/sampling.c **** {
+ 1224              		.loc 1 204 0
+ 1225              		.cfi_startproc
+ 1226              		@ args = 0, pretend = 0, frame = 0
+ 1227              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1228              		@ link register save eliminated.
+ 1229 0000 80B4     		push	{r7}
+ARM GAS  /tmp/ccJRbtUJ.s 			page 41
+
+
+ 1230              	.LCFI79:
+ 1231              		.cfi_def_cfa_offset 4
+ 1232              		.cfi_offset 7, -4
+ 1233 0002 00AF     		add	r7, sp, #0
+ 1234              	.LCFI80:
+ 1235              		.cfi_def_cfa_register 7
+ 205:la/sampling.c **** 	uint32_t i;
+ 206:la/sampling.c **** 	
+ 207:la/sampling.c **** 	//__disable_irq();
+ 208:la/sampling.c **** 	//SUMP requests samples to be sent in reverse order: newest items first
+ 209:la/sampling.c **** 	/*int BytesPerTransfer = GetBytesPerTransfer();
+ 210:la/sampling.c **** 	if(BytesPerTransfer == 1)
+ 211:la/sampling.c **** 	{
+ 212:la/sampling.c **** 		uint8_t* ptr = GetBufferTail() - 1;
+ 213:la/sampling.c **** 		//SUMP requests samples to be sent in reverse order: newest items first
+ 214:la/sampling.c **** 		uint8_t a;
+ 215:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i++)
+ 216:la/sampling.c **** 		{
+ 217:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+ 218:la/sampling.c **** 			ptr--;
+ 219:la/sampling.c **** 		}
+ 220:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - 1;
+ 221:la/sampling.c **** 		for(; i < GetBufferSize(); i++)
+ 222:la/sampling.c **** 		{
+ 223:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+ 224:la/sampling.c **** 			ptr--;
+ 225:la/sampling.c **** 		}
+ 226:la/sampling.c **** 	}
+ 227:la/sampling.c **** 	else if(GetBytesPerTransfer() == 2)
+ 228:la/sampling.c **** 	{
+ 229:la/sampling.c **** 		uint8_t *ptr = GetBufferTail() - GetBytesPerTransfer();
+ 230:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i += GetBytesPerTransfer())
+ 231:la/sampling.c **** 		{
+ 232:la/sampling.c **** 			CDC_Transmit_FS((uint8_t*)ptr, 2);
+ 233:la/sampling.c **** 			ptr -= GetBytesPerTransfer();
+ 234:la/sampling.c **** 		}
+ 235:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - GetBytesPerTransfer();
+ 236:la/sampling.c **** 		for(; i < GetBufferSize(); i += GetBytesPerTransfer())
+ 237:la/sampling.c **** 		{
+ 238:la/sampling.c **** 			CDC_Transmit_FS((uint8_t*)ptr, 2);
+ 239:la/sampling.c **** 			ptr -= GetBytesPerTransfer();
+ 240:la/sampling.c **** 		}
+ 241:la/sampling.c **** 	}
+ 242:la/sampling.c **** 	__enable_irq();*/
+ 243:la/sampling.c **** 	
+ 244:la/sampling.c **** }
+ 1236              		.loc 1 244 0
+ 1237 0004 00BF     		nop
+ 1238 0006 BD46     		mov	sp, r7
+ 1239              	.LCFI81:
+ 1240              		.cfi_def_cfa_register 13
+ 1241              		@ sp needed
+ 1242 0008 5DF8047B 		ldr	r7, [sp], #4
+ 1243              	.LCFI82:
+ 1244              		.cfi_restore 7
+ 1245              		.cfi_def_cfa_offset 0
+ 1246 000c 7047     		bx	lr
+ARM GAS  /tmp/ccJRbtUJ.s 			page 42
+
+
+ 1247              		.cfi_endproc
+ 1248              	.LFE148:
+ 1250              		.section	.text.ActualTransferCount,"ax",%progbits
+ 1251              		.align	1
+ 1252              		.global	ActualTransferCount
+ 1253              		.syntax unified
+ 1254              		.thumb
+ 1255              		.thumb_func
+ 1256              		.fpu fpv4-sp-d16
+ 1258              	ActualTransferCount:
+ 1259              	.LFB149:
+ 245:la/sampling.c **** 
+ 246:la/sampling.c **** uint32_t ActualTransferCount()
+ 247:la/sampling.c **** {
+ 1260              		.loc 1 247 0
+ 1261              		.cfi_startproc
+ 1262              		@ args = 0, pretend = 0, frame = 0
+ 1263              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1264              		@ link register save eliminated.
+ 1265 0000 80B4     		push	{r7}
+ 1266              	.LCFI83:
+ 1267              		.cfi_def_cfa_offset 4
+ 1268              		.cfi_offset 7, -4
+ 1269 0002 00AF     		add	r7, sp, #0
+ 1270              	.LCFI84:
+ 1271              		.cfi_def_cfa_register 7
+ 248:la/sampling.c **** 	return transferCount - (DMA2_Stream5->NDTR & ~3);
+ 1272              		.loc 1 248 0
+ 1273 0004 054B     		ldr	r3, .L72
+ 1274 0006 1A68     		ldr	r2, [r3]
+ 1275 0008 054B     		ldr	r3, .L72+4
+ 1276 000a 5B68     		ldr	r3, [r3, #4]
+ 1277 000c 23F00303 		bic	r3, r3, #3
+ 1278 0010 D31A     		subs	r3, r2, r3
+ 249:la/sampling.c **** }
+ 1279              		.loc 1 249 0
+ 1280 0012 1846     		mov	r0, r3
+ 1281 0014 BD46     		mov	sp, r7
+ 1282              	.LCFI85:
+ 1283              		.cfi_def_cfa_register 13
+ 1284              		@ sp needed
+ 1285 0016 5DF8047B 		ldr	r7, [sp], #4
+ 1286              	.LCFI86:
+ 1287              		.cfi_restore 7
+ 1288              		.cfi_def_cfa_offset 0
+ 1289 001a 7047     		bx	lr
+ 1290              	.L73:
+ 1291              		.align	2
+ 1292              	.L72:
+ 1293 001c 00000000 		.word	transferCount
+ 1294 0020 88640240 		.word	1073898632
+ 1295              		.cfi_endproc
+ 1296              	.LFE149:
+ 1298              		.section	.text.GetBufferTail,"ax",%progbits
+ 1299              		.align	1
+ 1300              		.global	GetBufferTail
+ 1301              		.syntax unified
+ARM GAS  /tmp/ccJRbtUJ.s 			page 43
+
+
+ 1302              		.thumb
+ 1303              		.thumb_func
+ 1304              		.fpu fpv4-sp-d16
+ 1306              	GetBufferTail:
+ 1307              	.LFB150:
+ 250:la/sampling.c **** 
+ 251:la/sampling.c **** uint8_t* GetBufferTail()
+ 252:la/sampling.c **** {
+ 1308              		.loc 1 252 0
+ 1309              		.cfi_startproc
+ 1310              		@ args = 0, pretend = 0, frame = 0
+ 1311              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1312 0000 80B5     		push	{r7, lr}
+ 1313              	.LCFI87:
+ 1314              		.cfi_def_cfa_offset 8
+ 1315              		.cfi_offset 7, -8
+ 1316              		.cfi_offset 14, -4
+ 1317 0002 00AF     		add	r7, sp, #0
+ 1318              	.LCFI88:
+ 1319              		.cfi_def_cfa_register 7
+ 253:la/sampling.c **** 	return (uint8_t*)(samplingRam) + ActualTransferCount() * transferSize;
+ 1320              		.loc 1 253 0
+ 1321 0004 FFF7FEFF 		bl	ActualTransferCount
+ 1322 0008 0246     		mov	r2, r0
+ 1323 000a 044B     		ldr	r3, .L76
+ 1324 000c 1B68     		ldr	r3, [r3]
+ 1325 000e 03FB02F3 		mul	r3, r3, r2
+ 1326 0012 034A     		ldr	r2, .L76+4
+ 1327 0014 1344     		add	r3, r3, r2
+ 254:la/sampling.c **** }
+ 1328              		.loc 1 254 0
+ 1329 0016 1846     		mov	r0, r3
+ 1330 0018 80BD     		pop	{r7, pc}
+ 1331              	.L77:
+ 1332 001a 00BF     		.align	2
+ 1333              	.L76:
+ 1334 001c 00000000 		.word	transferSize
+ 1335 0020 00000000 		.word	samplingRam
+ 1336              		.cfi_endproc
+ 1337              	.LFE150:
+ 1339              		.section	.text.GetBytesPerTransfer,"ax",%progbits
+ 1340              		.align	1
+ 1341              		.global	GetBytesPerTransfer
+ 1342              		.syntax unified
+ 1343              		.thumb
+ 1344              		.thumb_func
+ 1345              		.fpu fpv4-sp-d16
+ 1347              	GetBytesPerTransfer:
+ 1348              	.LFB151:
+ 255:la/sampling.c **** 
+ 256:la/sampling.c **** int GetBytesPerTransfer(){return transferSize;}
+ 1349              		.loc 1 256 0
+ 1350              		.cfi_startproc
+ 1351              		@ args = 0, pretend = 0, frame = 0
+ 1352              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1353              		@ link register save eliminated.
+ 1354 0000 80B4     		push	{r7}
+ARM GAS  /tmp/ccJRbtUJ.s 			page 44
+
+
+ 1355              	.LCFI89:
+ 1356              		.cfi_def_cfa_offset 4
+ 1357              		.cfi_offset 7, -4
+ 1358 0002 00AF     		add	r7, sp, #0
+ 1359              	.LCFI90:
+ 1360              		.cfi_def_cfa_register 7
+ 1361              		.loc 1 256 0
+ 1362 0004 034B     		ldr	r3, .L80
+ 1363 0006 1B68     		ldr	r3, [r3]
+ 1364 0008 1846     		mov	r0, r3
+ 1365 000a BD46     		mov	sp, r7
+ 1366              	.LCFI91:
+ 1367              		.cfi_def_cfa_register 13
+ 1368              		@ sp needed
+ 1369 000c 5DF8047B 		ldr	r7, [sp], #4
+ 1370              	.LCFI92:
+ 1371              		.cfi_restore 7
+ 1372              		.cfi_def_cfa_offset 0
+ 1373 0010 7047     		bx	lr
+ 1374              	.L81:
+ 1375 0012 00BF     		.align	2
+ 1376              	.L80:
+ 1377 0014 00000000 		.word	transferSize
+ 1378              		.cfi_endproc
+ 1379              	.LFE151:
+ 1381              		.section	.text.GetBufferTailSize,"ax",%progbits
+ 1382              		.align	1
+ 1383              		.global	GetBufferTailSize
+ 1384              		.syntax unified
+ 1385              		.thumb
+ 1386              		.thumb_func
+ 1387              		.fpu fpv4-sp-d16
+ 1389              	GetBufferTailSize:
+ 1390              	.LFB152:
+ 257:la/sampling.c **** 
+ 258:la/sampling.c **** 
+ 259:la/sampling.c **** uint32_t GetBufferTailSize()
+ 260:la/sampling.c **** {
+ 1391              		.loc 1 260 0
+ 1392              		.cfi_startproc
+ 1393              		@ args = 0, pretend = 0, frame = 0
+ 1394              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1395 0000 80B5     		push	{r7, lr}
+ 1396              	.LCFI93:
+ 1397              		.cfi_def_cfa_offset 8
+ 1398              		.cfi_offset 7, -8
+ 1399              		.cfi_offset 14, -4
+ 1400 0002 00AF     		add	r7, sp, #0
+ 1401              	.LCFI94:
+ 1402              		.cfi_def_cfa_register 7
+ 261:la/sampling.c **** 	return ActualTransferCount() * transferSize;
+ 1403              		.loc 1 261 0
+ 1404 0004 FFF7FEFF 		bl	ActualTransferCount
+ 1405 0008 0246     		mov	r2, r0
+ 1406 000a 034B     		ldr	r3, .L84
+ 1407 000c 1B68     		ldr	r3, [r3]
+ 1408 000e 03FB02F3 		mul	r3, r3, r2
+ARM GAS  /tmp/ccJRbtUJ.s 			page 45
+
+
+ 262:la/sampling.c **** }
+ 1409              		.loc 1 262 0
+ 1410 0012 1846     		mov	r0, r3
+ 1411 0014 80BD     		pop	{r7, pc}
+ 1412              	.L85:
+ 1413 0016 00BF     		.align	2
+ 1414              	.L84:
+ 1415 0018 00000000 		.word	transferSize
+ 1416              		.cfi_endproc
+ 1417              	.LFE152:
+ 1419              		.section	.text.GetBufferSize,"ax",%progbits
+ 1420              		.align	1
+ 1421              		.global	GetBufferSize
+ 1422              		.syntax unified
+ 1423              		.thumb
+ 1424              		.thumb_func
+ 1425              		.fpu fpv4-sp-d16
+ 1427              	GetBufferSize:
+ 1428              	.LFB153:
+ 263:la/sampling.c **** 
+ 264:la/sampling.c **** uint32_t GetBufferSize()
+ 265:la/sampling.c **** {
+ 1429              		.loc 1 265 0
+ 1430              		.cfi_startproc
+ 1431              		@ args = 0, pretend = 0, frame = 0
+ 1432              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1433              		@ link register save eliminated.
+ 1434 0000 80B4     		push	{r7}
+ 1435              	.LCFI95:
+ 1436              		.cfi_def_cfa_offset 4
+ 1437              		.cfi_offset 7, -4
+ 1438 0002 00AF     		add	r7, sp, #0
+ 1439              	.LCFI96:
+ 1440              		.cfi_def_cfa_register 7
+ 266:la/sampling.c **** 	return transferCount * transferSize;
+ 1441              		.loc 1 266 0
+ 1442 0004 054B     		ldr	r3, .L88
+ 1443 0006 1B68     		ldr	r3, [r3]
+ 1444 0008 054A     		ldr	r2, .L88+4
+ 1445 000a 1268     		ldr	r2, [r2]
+ 1446 000c 02FB03F3 		mul	r3, r2, r3
+ 267:la/sampling.c **** }
+ 1447              		.loc 1 267 0
+ 1448 0010 1846     		mov	r0, r3
+ 1449 0012 BD46     		mov	sp, r7
+ 1450              	.LCFI97:
+ 1451              		.cfi_def_cfa_register 13
+ 1452              		@ sp needed
+ 1453 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1454              	.LCFI98:
+ 1455              		.cfi_restore 7
+ 1456              		.cfi_def_cfa_offset 0
+ 1457 0018 7047     		bx	lr
+ 1458              	.L89:
+ 1459 001a 00BF     		.align	2
+ 1460              	.L88:
+ 1461 001c 00000000 		.word	transferCount
+ARM GAS  /tmp/ccJRbtUJ.s 			page 46
+
+
+ 1462 0020 00000000 		.word	transferSize
+ 1463              		.cfi_endproc
+ 1464              	.LFE153:
+ 1466              		.section	.text.GetBuffer,"ax",%progbits
+ 1467              		.align	1
+ 1468              		.global	GetBuffer
+ 1469              		.syntax unified
+ 1470              		.thumb
+ 1471              		.thumb_func
+ 1472              		.fpu fpv4-sp-d16
+ 1474              	GetBuffer:
+ 1475              	.LFB154:
+ 268:la/sampling.c **** 
+ 269:la/sampling.c **** uint8_t* GetBuffer()
+ 270:la/sampling.c **** {
+ 1476              		.loc 1 270 0
+ 1477              		.cfi_startproc
+ 1478              		@ args = 0, pretend = 0, frame = 0
+ 1479              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1480              		@ link register save eliminated.
+ 1481 0000 80B4     		push	{r7}
+ 1482              	.LCFI99:
+ 1483              		.cfi_def_cfa_offset 4
+ 1484              		.cfi_offset 7, -4
+ 1485 0002 00AF     		add	r7, sp, #0
+ 1486              	.LCFI100:
+ 1487              		.cfi_def_cfa_register 7
+ 271:la/sampling.c **** 	return (uint8_t*)samplingRam;
+ 1488              		.loc 1 271 0
+ 1489 0004 024B     		ldr	r3, .L92
+ 272:la/sampling.c **** }
+ 1490              		.loc 1 272 0
+ 1491 0006 1846     		mov	r0, r3
+ 1492 0008 BD46     		mov	sp, r7
+ 1493              	.LCFI101:
+ 1494              		.cfi_def_cfa_register 13
+ 1495              		@ sp needed
+ 1496 000a 5DF8047B 		ldr	r7, [sp], #4
+ 1497              	.LCFI102:
+ 1498              		.cfi_restore 7
+ 1499              		.cfi_def_cfa_offset 0
+ 1500 000e 7047     		bx	lr
+ 1501              	.L93:
+ 1502              		.align	2
+ 1503              	.L92:
+ 1504 0010 00000000 		.word	samplingRam
+ 1505              		.cfi_endproc
+ 1506              	.LFE154:
+ 1508              		.section	.text.EnableChannel,"ax",%progbits
+ 1509              		.align	1
+ 1510              		.global	EnableChannel
+ 1511              		.syntax unified
+ 1512              		.thumb
+ 1513              		.thumb_func
+ 1514              		.fpu fpv4-sp-d16
+ 1516              	EnableChannel:
+ 1517              	.LFB155:
+ARM GAS  /tmp/ccJRbtUJ.s 			page 47
+
+
+ 273:la/sampling.c **** 
+ 274:la/sampling.c **** 
+ 275:la/sampling.c **** // Interrupts
+ 276:la/sampling.c **** 
+ 277:la/sampling.c **** 	void EnableChannel(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
+ 278:la/sampling.c **** 	{
+ 1518              		.loc 1 278 0
+ 1519              		.cfi_startproc
+ 1520              		@ args = 0, pretend = 0, frame = 8
+ 1521              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1522 0000 80B5     		push	{r7, lr}
+ 1523              	.LCFI103:
+ 1524              		.cfi_def_cfa_offset 8
+ 1525              		.cfi_offset 7, -8
+ 1526              		.cfi_offset 14, -4
+ 1527 0002 82B0     		sub	sp, sp, #8
+ 1528              	.LCFI104:
+ 1529              		.cfi_def_cfa_offset 16
+ 1530 0004 00AF     		add	r7, sp, #0
+ 1531              	.LCFI105:
+ 1532              		.cfi_def_cfa_register 7
+ 1533 0006 0346     		mov	r3, r0
+ 1534 0008 FB71     		strb	r3, [r7, #7]
+ 1535 000a 0B46     		mov	r3, r1
+ 1536 000c BB71     		strb	r3, [r7, #6]
+ 1537 000e 1346     		mov	r3, r2
+ 1538 0010 7B71     		strb	r3, [r7, #5]
+ 279:la/sampling.c **** 		//DisableChannel(irqChannel);
+ 280:la/sampling.c **** 		HAL_NVIC_DisableIRQ(irqChannel);
+ 1539              		.loc 1 280 0
+ 1540 0012 97F90730 		ldrsb	r3, [r7, #7]
+ 1541 0016 1846     		mov	r0, r3
+ 1542 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 281:la/sampling.c **** 		//SetHandler(irqChannel, handler);
+ 282:la/sampling.c **** 		//SetChannelPriority(irqChannel, priority, subpriority);
+ 283:la/sampling.c **** 		HAL_NVIC_SetPriority(irqChannel, 0, 0);
+ 1543              		.loc 1 283 0
+ 1544 001c 97F90730 		ldrsb	r3, [r7, #7]
+ 1545 0020 0022     		movs	r2, #0
+ 1546 0022 0021     		movs	r1, #0
+ 1547 0024 1846     		mov	r0, r3
+ 1548 0026 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 284:la/sampling.c **** 		//NVIC->ISER[irqChannel >> 0x05] =
+ 285:la/sampling.c **** 	      //(uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
+ 286:la/sampling.c **** 		HAL_NVIC_EnableIRQ(irqChannel);
+ 1549              		.loc 1 286 0
+ 1550 002a 97F90730 		ldrsb	r3, [r7, #7]
+ 1551 002e 1846     		mov	r0, r3
+ 1552 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 287:la/sampling.c **** 
+ 288:la/sampling.c **** 	}
+ 1553              		.loc 1 288 0
+ 1554 0034 00BF     		nop
+ 1555 0036 0837     		adds	r7, r7, #8
+ 1556              	.LCFI106:
+ 1557              		.cfi_def_cfa_offset 8
+ 1558 0038 BD46     		mov	sp, r7
+ARM GAS  /tmp/ccJRbtUJ.s 			page 48
+
+
+ 1559              	.LCFI107:
+ 1560              		.cfi_def_cfa_register 13
+ 1561              		@ sp needed
+ 1562 003a 80BD     		pop	{r7, pc}
+ 1563              		.cfi_endproc
+ 1564              	.LFE155:
+ 1566              		.section	.text.DisableChannel,"ax",%progbits
+ 1567              		.align	1
+ 1568              		.global	DisableChannel
+ 1569              		.syntax unified
+ 1570              		.thumb
+ 1571              		.thumb_func
+ 1572              		.fpu fpv4-sp-d16
+ 1574              	DisableChannel:
+ 1575              	.LFB156:
+ 289:la/sampling.c **** 	//Îòêëþ÷àåò ïðåðûâàíèå
+ 290:la/sampling.c **** 	void DisableChannel(IRQn_Type irqChannel)
+ 291:la/sampling.c **** 	{
+ 1576              		.loc 1 291 0
+ 1577              		.cfi_startproc
+ 1578              		@ args = 0, pretend = 0, frame = 8
+ 1579              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1580              		@ link register save eliminated.
+ 1581 0000 80B4     		push	{r7}
+ 1582              	.LCFI108:
+ 1583              		.cfi_def_cfa_offset 4
+ 1584              		.cfi_offset 7, -4
+ 1585 0002 83B0     		sub	sp, sp, #12
+ 1586              	.LCFI109:
+ 1587              		.cfi_def_cfa_offset 16
+ 1588 0004 00AF     		add	r7, sp, #0
+ 1589              	.LCFI110:
+ 1590              		.cfi_def_cfa_register 7
+ 1591 0006 0346     		mov	r3, r0
+ 1592 0008 FB71     		strb	r3, [r7, #7]
+ 292:la/sampling.c **** 	    NVIC->ICER[irqChannel >> 0x05] =
+ 293:la/sampling.c **** 	      (uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
+ 1593              		.loc 1 293 0
+ 1594 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1595 000c 03F01F03 		and	r3, r3, #31
+ 292:la/sampling.c **** 	    NVIC->ICER[irqChannel >> 0x05] =
+ 1596              		.loc 1 292 0
+ 1597 0010 0849     		ldr	r1, .L96
+ 1598 0012 97F90720 		ldrsb	r2, [r7, #7]
+ 1599 0016 5211     		asrs	r2, r2, #5
+ 1600 0018 52B2     		sxtb	r2, r2
+ 1601 001a 1046     		mov	r0, r2
+ 1602              		.loc 1 293 0
+ 1603 001c 0122     		movs	r2, #1
+ 1604 001e 9A40     		lsls	r2, r2, r3
+ 292:la/sampling.c **** 	    NVIC->ICER[irqChannel >> 0x05] =
+ 1605              		.loc 1 292 0
+ 1606 0020 00F12003 		add	r3, r0, #32
+ 1607 0024 41F82320 		str	r2, [r1, r3, lsl #2]
+ 294:la/sampling.c **** 	}
+ 1608              		.loc 1 294 0
+ 1609 0028 00BF     		nop
+ARM GAS  /tmp/ccJRbtUJ.s 			page 49
+
+
+ 1610 002a 0C37     		adds	r7, r7, #12
+ 1611              	.LCFI111:
+ 1612              		.cfi_def_cfa_offset 4
+ 1613 002c BD46     		mov	sp, r7
+ 1614              	.LCFI112:
+ 1615              		.cfi_def_cfa_register 13
+ 1616              		@ sp needed
+ 1617 002e 5DF8047B 		ldr	r7, [sp], #4
+ 1618              	.LCFI113:
+ 1619              		.cfi_restore 7
+ 1620              		.cfi_def_cfa_offset 0
+ 1621 0032 7047     		bx	lr
+ 1622              	.L97:
+ 1623              		.align	2
+ 1624              	.L96:
+ 1625 0034 00E100E0 		.word	-536813312
+ 1626              		.cfi_endproc
+ 1627              	.LFE156:
+ 1629              		.section	.text.SetChannelPriority,"ax",%progbits
+ 1630              		.align	1
+ 1631              		.global	SetChannelPriority
+ 1632              		.syntax unified
+ 1633              		.thumb
+ 1634              		.thumb_func
+ 1635              		.fpu fpv4-sp-d16
+ 1637              	SetChannelPriority:
+ 1638              	.LFB157:
+ 295:la/sampling.c **** 
+ 296:la/sampling.c **** 	
+ 297:la/sampling.c **** 	void SetChannelPriority(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
+ 298:la/sampling.c **** 	{
+ 1639              		.loc 1 298 0
+ 1640              		.cfi_startproc
+ 1641              		@ args = 0, pretend = 0, frame = 24
+ 1642              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1643              		@ link register save eliminated.
+ 1644 0000 80B4     		push	{r7}
+ 1645              	.LCFI114:
+ 1646              		.cfi_def_cfa_offset 4
+ 1647              		.cfi_offset 7, -4
+ 1648 0002 87B0     		sub	sp, sp, #28
+ 1649              	.LCFI115:
+ 1650              		.cfi_def_cfa_offset 32
+ 1651 0004 00AF     		add	r7, sp, #0
+ 1652              	.LCFI116:
+ 1653              		.cfi_def_cfa_register 7
+ 1654 0006 0346     		mov	r3, r0
+ 1655 0008 FB71     		strb	r3, [r7, #7]
+ 1656 000a 0B46     		mov	r3, r1
+ 1657 000c BB71     		strb	r3, [r7, #6]
+ 1658 000e 1346     		mov	r3, r2
+ 1659 0010 7B71     		strb	r3, [r7, #5]
+ 299:la/sampling.c **** 	#ifdef STM32L1XX
+ 300:la/sampling.c **** 		NVIC->IP[(uint32_t)(irqChannel)] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff);
+ 301:la/sampling.c **** 	#else
+ 302:la/sampling.c **** 		uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
+ 1660              		.loc 1 302 0
+ARM GAS  /tmp/ccJRbtUJ.s 			page 50
+
+
+ 1661 0012 0023     		movs	r3, #0
+ 1662 0014 7B61     		str	r3, [r7, #20]
+ 1663 0016 0023     		movs	r3, #0
+ 1664 0018 3B61     		str	r3, [r7, #16]
+ 1665 001a 0F23     		movs	r3, #15
+ 1666 001c FB60     		str	r3, [r7, #12]
+ 303:la/sampling.c **** 		/* Compute the Corresponding IRQ Priority --------------------------------*/
+ 304:la/sampling.c **** 		tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
+ 1667              		.loc 1 304 0
+ 1668 001e 164B     		ldr	r3, .L99
+ 1669 0020 DB68     		ldr	r3, [r3, #12]
+ 1670 0022 DB43     		mvns	r3, r3
+ 1671 0024 1B0A     		lsrs	r3, r3, #8
+ 1672 0026 03F00703 		and	r3, r3, #7
+ 1673 002a 7B61     		str	r3, [r7, #20]
+ 305:la/sampling.c **** 		tmppre = (0x4 - tmppriority);
+ 1674              		.loc 1 305 0
+ 1675 002c 7B69     		ldr	r3, [r7, #20]
+ 1676 002e C3F10403 		rsb	r3, r3, #4
+ 1677 0032 3B61     		str	r3, [r7, #16]
+ 306:la/sampling.c **** 		tmpsub = tmpsub >> tmppriority;
+ 1678              		.loc 1 306 0
+ 1679 0034 FA68     		ldr	r2, [r7, #12]
+ 1680 0036 7B69     		ldr	r3, [r7, #20]
+ 1681 0038 22FA03F3 		lsr	r3, r2, r3
+ 1682 003c FB60     		str	r3, [r7, #12]
+ 307:la/sampling.c **** 
+ 308:la/sampling.c **** 		tmppriority = (uint32_t)priority << tmppre;
+ 1683              		.loc 1 308 0
+ 1684 003e BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+ 1685 0040 3B69     		ldr	r3, [r7, #16]
+ 1686 0042 02FA03F3 		lsl	r3, r2, r3
+ 1687 0046 7B61     		str	r3, [r7, #20]
+ 309:la/sampling.c **** 		tmppriority |=  subpriority & tmpsub;
+ 1688              		.loc 1 309 0
+ 1689 0048 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 1690 004a FB68     		ldr	r3, [r7, #12]
+ 1691 004c 1340     		ands	r3, r3, r2
+ 1692 004e 7A69     		ldr	r2, [r7, #20]
+ 1693 0050 1343     		orrs	r3, r3, r2
+ 1694 0052 7B61     		str	r3, [r7, #20]
+ 310:la/sampling.c **** 		tmppriority = tmppriority << 0x04;
+ 1695              		.loc 1 310 0
+ 1696 0054 7B69     		ldr	r3, [r7, #20]
+ 1697 0056 1B01     		lsls	r3, r3, #4
+ 1698 0058 7B61     		str	r3, [r7, #20]
+ 311:la/sampling.c **** 		NVIC->IP[irqChannel] = tmppriority;
+ 1699              		.loc 1 311 0
+ 1700 005a 084A     		ldr	r2, .L99+4
+ 1701 005c 97F90730 		ldrsb	r3, [r7, #7]
+ 1702 0060 7969     		ldr	r1, [r7, #20]
+ 1703 0062 C9B2     		uxtb	r1, r1
+ 1704 0064 1344     		add	r3, r3, r2
+ 1705 0066 0A46     		mov	r2, r1
+ 1706 0068 83F80023 		strb	r2, [r3, #768]
+ 312:la/sampling.c **** 	#endif
+ 313:la/sampling.c **** 	}
+ARM GAS  /tmp/ccJRbtUJ.s 			page 51
+
+
+ 1707              		.loc 1 313 0
+ 1708 006c 00BF     		nop
+ 1709 006e 1C37     		adds	r7, r7, #28
+ 1710              	.LCFI117:
+ 1711              		.cfi_def_cfa_offset 4
+ 1712 0070 BD46     		mov	sp, r7
+ 1713              	.LCFI118:
+ 1714              		.cfi_def_cfa_register 13
+ 1715              		@ sp needed
+ 1716 0072 5DF8047B 		ldr	r7, [sp], #4
+ 1717              	.LCFI119:
+ 1718              		.cfi_restore 7
+ 1719              		.cfi_def_cfa_offset 0
+ 1720 0076 7047     		bx	lr
+ 1721              	.L100:
+ 1722              		.align	2
+ 1723              	.L99:
+ 1724 0078 00ED00E0 		.word	-536810240
+ 1725 007c 00E100E0 		.word	-536813312
+ 1726              		.cfi_endproc
+ 1727              	.LFE157:
+ 1729              		.section	.text.PriorityGroupConfig,"ax",%progbits
+ 1730              		.align	1
+ 1731              		.global	PriorityGroupConfig
+ 1732              		.syntax unified
+ 1733              		.thumb
+ 1734              		.thumb_func
+ 1735              		.fpu fpv4-sp-d16
+ 1737              	PriorityGroupConfig:
+ 1738              	.LFB158:
+ 314:la/sampling.c **** 	
+ 315:la/sampling.c **** 	#define AIRCR_VECTKEY_MASK		((uint32_t)0x05FA0000)
+ 316:la/sampling.c **** 	#define AIRCR_SYSRESETREQ		((uint32_t)0x00000004)
+ 317:la/sampling.c **** 
+ 318:la/sampling.c **** 	void PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
+ 319:la/sampling.c **** 	{
+ 1739              		.loc 1 319 0
+ 1740              		.cfi_startproc
+ 1741              		@ args = 0, pretend = 0, frame = 8
+ 1742              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1743              		@ link register save eliminated.
+ 1744 0000 80B4     		push	{r7}
+ 1745              	.LCFI120:
+ 1746              		.cfi_def_cfa_offset 4
+ 1747              		.cfi_offset 7, -4
+ 1748 0002 83B0     		sub	sp, sp, #12
+ 1749              	.LCFI121:
+ 1750              		.cfi_def_cfa_offset 16
+ 1751 0004 00AF     		add	r7, sp, #0
+ 1752              	.LCFI122:
+ 1753              		.cfi_def_cfa_register 7
+ 1754 0006 7860     		str	r0, [r7, #4]
+ 320:la/sampling.c **** 		SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
+ 1755              		.loc 1 320 0
+ 1756 0008 064A     		ldr	r2, .L102
+ 1757 000a 7B68     		ldr	r3, [r7, #4]
+ 1758 000c 43F0BF63 		orr	r3, r3, #100139008
+ARM GAS  /tmp/ccJRbtUJ.s 			page 52
+
+
+ 1759 0010 43F40033 		orr	r3, r3, #131072
+ 1760 0014 D360     		str	r3, [r2, #12]
+ 321:la/sampling.c **** 	}
+ 1761              		.loc 1 321 0
+ 1762 0016 00BF     		nop
+ 1763 0018 0C37     		adds	r7, r7, #12
+ 1764              	.LCFI123:
+ 1765              		.cfi_def_cfa_offset 4
+ 1766 001a BD46     		mov	sp, r7
+ 1767              	.LCFI124:
+ 1768              		.cfi_def_cfa_register 13
+ 1769              		@ sp needed
+ 1770 001c 5DF8047B 		ldr	r7, [sp], #4
+ 1771              	.LCFI125:
+ 1772              		.cfi_restore 7
+ 1773              		.cfi_def_cfa_offset 0
+ 1774 0020 7047     		bx	lr
+ 1775              	.L103:
+ 1776 0022 00BF     		.align	2
+ 1777              	.L102:
+ 1778 0024 00ED00E0 		.word	-536810240
+ 1779              		.cfi_endproc
+ 1780              	.LFE158:
+ 1782              		.section	.text.SystemReset,"ax",%progbits
+ 1783              		.align	1
+ 1784              		.syntax unified
+ 1785              		.thumb
+ 1786              		.thumb_func
+ 1787              		.fpu fpv4-sp-d16
+ 1789              	SystemReset:
+ 1790              	.LFB159:
+ 322:la/sampling.c **** 	static void SystemReset()
+ 323:la/sampling.c **** 	{
+ 1791              		.loc 1 323 0
+ 1792              		.cfi_startproc
+ 1793              		@ args = 0, pretend = 0, frame = 0
+ 1794              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1795              		@ link register save eliminated.
+ 1796 0000 80B4     		push	{r7}
+ 1797              	.LCFI126:
+ 1798              		.cfi_def_cfa_offset 4
+ 1799              		.cfi_offset 7, -4
+ 1800 0002 00AF     		add	r7, sp, #0
+ 1801              	.LCFI127:
+ 1802              		.cfi_def_cfa_register 7
+ 324:la/sampling.c **** 		SCB->AIRCR = AIRCR_VECTKEY_MASK | AIRCR_SYSRESETREQ;
+ 1803              		.loc 1 324 0
+ 1804 0004 034B     		ldr	r3, .L105
+ 1805 0006 044A     		ldr	r2, .L105+4
+ 1806 0008 DA60     		str	r2, [r3, #12]
+ 325:la/sampling.c **** 	}...
+ 1807              		.loc 1 325 0
+ 1808 000a 00BF     		nop
+ 1809 000c BD46     		mov	sp, r7
+ 1810              	.LCFI128:
+ 1811              		.cfi_def_cfa_register 13
+ 1812              		@ sp needed
+ARM GAS  /tmp/ccJRbtUJ.s 			page 53
+
+
+ 1813 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1814              	.LCFI129:
+ 1815              		.cfi_restore 7
+ 1816              		.cfi_def_cfa_offset 0
+ 1817 0012 7047     		bx	lr
+ 1818              	.L106:
+ 1819              		.align	2
+ 1820              	.L105:
+ 1821 0014 00ED00E0 		.word	-536810240
+ 1822 0018 0400FA05 		.word	100270084
+ 1823              		.cfi_endproc
+ 1824              	.LFE159:
+ 1826              		.text
+ 1827              	.Letext0:
+ 1828              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 1829              		.file 4 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 1830              		.file 5 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 1831              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
+ 1832              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 1833              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 1834              		.file 9 "la/sampling.h"
+ 1835              		.file 10 "/usr/arm-none-eabi/include/sys/lock.h"
+ 1836              		.file 11 "/usr/arm-none-eabi/include/sys/_types.h"
+ 1837              		.file 12 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1838              		.file 13 "/usr/arm-none-eabi/include/sys/reent.h"
+ 1839              		.file 14 "/usr/arm-none-eabi/include/stdlib.h"
+ 1840              		.file 15 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 1841              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 1842              		.file 17 "Inc/usbd_cdc_if.h"
+ARM GAS  /tmp/ccJRbtUJ.s 			page 54
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sampling.c
-     /tmp/ccQ0oGlj.s:18     .text.SetBufferSize:0000000000000000 $t
-     /tmp/ccQ0oGlj.s:25     .text.SetBufferSize:0000000000000000 SetBufferSize
-     /tmp/ccQ0oGlj.s:40     .text.SetDelayCount:0000000000000000 $t
-     /tmp/ccQ0oGlj.s:47     .text.SetDelayCount:0000000000000000 SetDelayCount
-     /tmp/ccQ0oGlj.s:61     .text.SetTriggerMask:0000000000000000 $t
-     /tmp/ccQ0oGlj.s:68     .text.SetTriggerMask:0000000000000000 SetTriggerMask
-     /tmp/ccQ0oGlj.s:84     .text.SetTriggerMask:0000000000000008 $d
                             *COM*:0000000000000004 triggerMask
-     /tmp/ccQ0oGlj.s:89     .text.SetTriggerValue:0000000000000000 $t
-     /tmp/ccQ0oGlj.s:96     .text.SetTriggerValue:0000000000000000 SetTriggerValue
-     /tmp/ccQ0oGlj.s:112    .text.SetTriggerValue:0000000000000008 $d
                             *COM*:0000000000000004 triggerValue
-     /tmp/ccQ0oGlj.s:117    .text.SetFlags:0000000000000000 $t
-     /tmp/ccQ0oGlj.s:124    .text.SetFlags:0000000000000000 SetFlags
-     /tmp/ccQ0oGlj.s:140    .text.SetFlags:0000000000000008 $d
                             *COM*:0000000000000002 flags
-     /tmp/ccQ0oGlj.s:145    .text.SetSamplingPeriod:0000000000000000 $t
-     /tmp/ccQ0oGlj.s:152    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
-     /tmp/ccQ0oGlj.s:168    .text.SetSamplingPeriod:0000000000000008 $d
                             *COM*:0000000000000002 period
+                            *COM*:0000000000000004 transferSize
+     /tmp/ccJRbtUJ.s:23     .bss.transferCount:0000000000000000 $d
+     /tmp/ccJRbtUJ.s:26     .bss.transferCount:0000000000000000 transferCount
+     /tmp/ccJRbtUJ.s:29     .bss.delayCount:0000000000000000 $d
+     /tmp/ccJRbtUJ.s:32     .bss.delayCount:0000000000000000 delayCount
+                            *COM*:0000000000006000 samplingRam
+     /tmp/ccJRbtUJ.s:36     .text.SetBufferSize:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:43     .text.SetBufferSize:0000000000000000 SetBufferSize
+     /tmp/ccJRbtUJ.s:83     .text.SetBufferSize:000000000000001c $d
+     /tmp/ccJRbtUJ.s:88     .text.SetDelayCount:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:95     .text.SetDelayCount:0000000000000000 SetDelayCount
+     /tmp/ccJRbtUJ.s:135    .text.SetDelayCount:0000000000000020 $d
+     /tmp/ccJRbtUJ.s:140    .text.SetTriggerMask:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:147    .text.SetTriggerMask:0000000000000000 SetTriggerMask
+     /tmp/ccJRbtUJ.s:186    .text.SetTriggerMask:000000000000001c $d
+     /tmp/ccJRbtUJ.s:191    .text.SetTriggerValue:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:198    .text.SetTriggerValue:0000000000000000 SetTriggerValue
+     /tmp/ccJRbtUJ.s:237    .text.SetTriggerValue:000000000000001c $d
+     /tmp/ccJRbtUJ.s:242    .text.SetFlags:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:249    .text.SetFlags:0000000000000000 SetFlags
+     /tmp/ccJRbtUJ.s:289    .text.SetFlags:000000000000001c $d
+     /tmp/ccJRbtUJ.s:294    .text.SetSamplingPeriod:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:301    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
+     /tmp/ccJRbtUJ.s:341    .text.SetSamplingPeriod:000000000000001c $d
+     /tmp/ccJRbtUJ.s:346    .text.Start:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:353    .text.Start:0000000000000000 Start
+     /tmp/ccJRbtUJ.s:532    .text.SetupSamplingTimer:0000000000000000 SetupSamplingTimer
+     /tmp/ccJRbtUJ.s:634    .text.SetupSamplingDMA:0000000000000000 SetupSamplingDMA
+     /tmp/ccJRbtUJ.s:720    .text.SetupDelayTimer:0000000000000000 SetupDelayTimer
+     /tmp/ccJRbtUJ.s:821    .text.SetupRegularEXTITrigger:0000000000000000 SetupRegularEXTITrigger
+     /tmp/ccJRbtUJ.s:401    .text.Start:0000000000000040 $d
+     /tmp/ccJRbtUJ.s:410    .text.Stop:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:417    .text.Stop:0000000000000000 Stop
+     /tmp/ccJRbtUJ.s:457    .text.Stop:0000000000000028 $d
+     /tmp/ccJRbtUJ.s:463    .text.Arm:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:470    .text.Arm:0000000000000000 Arm
+     /tmp/ccJRbtUJ.s:519    .text.Arm:0000000000000024 $d
+     /tmp/ccJRbtUJ.s:525    .text.SetupSamplingTimer:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:620    .text.SetupSamplingTimer:0000000000000070 $d
+     /tmp/ccJRbtUJ.s:627    .text.SetupSamplingDMA:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1067   .text.CalcDMATransferSize:0000000000000000 CalcDMATransferSize
+     /tmp/ccJRbtUJ.s:706    .text.SetupSamplingDMA:000000000000005c $d
+     /tmp/ccJRbtUJ.s:713    .text.SetupDelayTimer:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1516   .text.EnableChannel:0000000000000000 EnableChannel
+     /tmp/ccJRbtUJ.s:806    .text.SetupDelayTimer:0000000000000070 $d
+     /tmp/ccJRbtUJ.s:814    .text.SetupRegularEXTITrigger:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1051   .text.SetupRegularEXTITrigger:0000000000000158 $d
+     /tmp/ccJRbtUJ.s:1060   .text.CalcDMATransferSize:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1144   .text.CalcDMATransferSize:0000000000000050 $d
+     /tmp/ccJRbtUJ.s:1150   .text.SamplingClearBuffer:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1157   .text.SamplingClearBuffer:0000000000000000 SamplingClearBuffer
+ARM GAS  /tmp/ccJRbtUJ.s 			page 55
 
-NO UNDEFINED SYMBOLS
+
+     /tmp/ccJRbtUJ.s:1210   .text.SamplingClearBuffer:0000000000000030 $d
+     /tmp/ccJRbtUJ.s:1215   .text.SamplingComplete:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1222   .text.SamplingComplete:0000000000000000 SamplingComplete
+     /tmp/ccJRbtUJ.s:1251   .text.ActualTransferCount:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1258   .text.ActualTransferCount:0000000000000000 ActualTransferCount
+     /tmp/ccJRbtUJ.s:1293   .text.ActualTransferCount:000000000000001c $d
+     /tmp/ccJRbtUJ.s:1299   .text.GetBufferTail:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1306   .text.GetBufferTail:0000000000000000 GetBufferTail
+     /tmp/ccJRbtUJ.s:1334   .text.GetBufferTail:000000000000001c $d
+     /tmp/ccJRbtUJ.s:1340   .text.GetBytesPerTransfer:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1347   .text.GetBytesPerTransfer:0000000000000000 GetBytesPerTransfer
+     /tmp/ccJRbtUJ.s:1377   .text.GetBytesPerTransfer:0000000000000014 $d
+     /tmp/ccJRbtUJ.s:1382   .text.GetBufferTailSize:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1389   .text.GetBufferTailSize:0000000000000000 GetBufferTailSize
+     /tmp/ccJRbtUJ.s:1415   .text.GetBufferTailSize:0000000000000018 $d
+     /tmp/ccJRbtUJ.s:1420   .text.GetBufferSize:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1427   .text.GetBufferSize:0000000000000000 GetBufferSize
+     /tmp/ccJRbtUJ.s:1461   .text.GetBufferSize:000000000000001c $d
+     /tmp/ccJRbtUJ.s:1467   .text.GetBuffer:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1474   .text.GetBuffer:0000000000000000 GetBuffer
+     /tmp/ccJRbtUJ.s:1504   .text.GetBuffer:0000000000000010 $d
+     /tmp/ccJRbtUJ.s:1509   .text.EnableChannel:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1567   .text.DisableChannel:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1574   .text.DisableChannel:0000000000000000 DisableChannel
+     /tmp/ccJRbtUJ.s:1625   .text.DisableChannel:0000000000000034 $d
+     /tmp/ccJRbtUJ.s:1630   .text.SetChannelPriority:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1637   .text.SetChannelPriority:0000000000000000 SetChannelPriority
+     /tmp/ccJRbtUJ.s:1724   .text.SetChannelPriority:0000000000000078 $d
+     /tmp/ccJRbtUJ.s:1730   .text.PriorityGroupConfig:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1737   .text.PriorityGroupConfig:0000000000000000 PriorityGroupConfig
+     /tmp/ccJRbtUJ.s:1778   .text.PriorityGroupConfig:0000000000000024 $d
+     /tmp/ccJRbtUJ.s:1783   .text.SystemReset:0000000000000000 $t
+     /tmp/ccJRbtUJ.s:1789   .text.SystemReset:0000000000000000 SystemReset
+     /tmp/ccJRbtUJ.s:1821   .text.SystemReset:0000000000000014 $d
+
+UNDEFINED SYMBOLS
+HAL_NVIC_DisableIRQ
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ

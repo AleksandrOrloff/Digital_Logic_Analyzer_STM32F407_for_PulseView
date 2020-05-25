@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2XYDxb.s 			page 1
+ARM GAS  /tmp/ccC38d87.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -10,23 +10,94 @@ ARM GAS  /tmp/cc2XYDxb.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.file	"sump.c"
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.CalcLocalDivider,"ax",%progbits
-  18              		.align	1
-  19              		.global	CalcLocalDivider
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv4-sp-d16
-  25              	CalcLocalDivider:
-  26              	.LFB133:
-  27              		.file 1 "la/sump.c"
+  17              		.comm	triggerMask,4,4
+  18              		.comm	triggerValue,4,4
+  19              		.comm	flags,2,2
+  20              		.comm	period,2,2
+  21              		.comm	transferSize,4,4
+  22              		.section	.data.metaData,"aw",%progbits
+  23              		.align	2
+  26              	metaData:
+  27 0000 01       		.byte	1
+  28 0001 4D       		.byte	77
+  29 0002 65       		.byte	101
+  30 0003 61       		.byte	97
+  31 0004 73       		.byte	115
+  32 0005 75       		.byte	117
+  33 0006 72       		.byte	114
+  34 0007 69       		.byte	105
+  35 0008 6E       		.byte	110
+  36 0009 67       		.byte	103
+  37 000a 20       		.byte	32
+  38 000b 43       		.byte	67
+  39 000c 6F       		.byte	111
+  40 000d 6D       		.byte	109
+  41 000e 70       		.byte	112
+  42 000f 6C       		.byte	108
+  43 0010 65       		.byte	101
+  44 0011 78       		.byte	120
+  45 0012 00       		.byte	0
+  46 0013 02       		.byte	2
+  47 0014 4E       		.byte	78
+  48 0015 6F       		.byte	111
+  49 0016 46       		.byte	70
+  50 0017 50       		.byte	80
+  51 0018 47       		.byte	71
+  52 0019 41       		.byte	65
+  53 001a 20       		.byte	32
+  54 001b 3A       		.byte	58
+  55 001c 28       		.byte	40
+  56 001d 00       		.byte	0
+  57 001e 03       		.byte	3
+  58 001f 56       		.byte	86
+  59 0020 65       		.byte	101
+ARM GAS  /tmp/ccC38d87.s 			page 2
+
+
+  60 0021 72       		.byte	114
+  61 0022 79       		.byte	121
+  62 0023 20       		.byte	32
+  63 0024 62       		.byte	98
+  64 0025 65       		.byte	101
+  65 0026 74       		.byte	116
+  66 0027 61       		.byte	97
+  67 0028 00       		.byte	0
+  68 0029 23       		.byte	35
+  69 002a 01       		.byte	1
+  70 002b 31       		.byte	49
+  71 002c 2D       		.byte	45
+  72 002d 00       		.byte	0
+  73 002e 21       		.byte	33
+  74 002f 00       		.byte	0
+  75 0030 00       		.byte	0
+  76 0031 70       		.byte	112
+  77 0032 00       		.byte	0
+  78 0033 40       		.byte	64
+  79 0034 08       		.byte	8
+  80 0035 41       		.byte	65
+  81 0036 02       		.byte	2
+  82 0037 00       		.byte	0
+  83              		.section	.data.divider,"aw",%progbits
+  84              		.align	2
+  87              	divider:
+  88 0000 01000000 		.word	1
+  89              		.section	.text.CalcLocalDivider,"ax",%progbits
+  90              		.align	1
+  91              		.global	CalcLocalDivider
+  92              		.syntax unified
+  93              		.thumb
+  94              		.thumb_func
+  95              		.fpu fpv4-sp-d16
+  97              	CalcLocalDivider:
+  98              	.LFB133:
+  99              		.file 1 "la/sump.c"
    1:la/sump.c     **** #include "sump.h"
    2:la/sump.c     **** #include "sampling.h"
    3:la/sump.c     **** #include "usbd_cdc_if.h"
@@ -47,477 +118,493 @@ ARM GAS  /tmp/cc2XYDxb.s 			page 1
   18:la/sump.c     **** 
   19:la/sump.c     **** uint32_t CalcLocalDivider(uint32_t divider, const uint32_t localFrequency, const uint32_t sumpFrequ
   20:la/sump.c     **** {
-  28              		.loc 1 20 0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
-  33              	.LVL0:
+ARM GAS  /tmp/ccC38d87.s 			page 3
+
+
+ 100              		.loc 1 20 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 16
+ 103              		@ frame_needed = 1, uses_anonymous_args = 0
+ 104              		@ link register save eliminated.
+ 105 0000 80B4     		push	{r7}
+ 106              	.LCFI0:
+ 107              		.cfi_def_cfa_offset 4
+ 108              		.cfi_offset 7, -4
+ 109 0002 85B0     		sub	sp, sp, #20
+ 110              	.LCFI1:
+ 111              		.cfi_def_cfa_offset 24
+ 112 0004 00AF     		add	r7, sp, #0
+ 113              	.LCFI2:
+ 114              		.cfi_def_cfa_register 7
+ 115 0006 F860     		str	r0, [r7, #12]
+ 116 0008 B960     		str	r1, [r7, #8]
+ 117 000a 7A60     		str	r2, [r7, #4]
   21:la/sump.c     **** 	return localFrequency / (sumpFrequency / (divider + 1)) - 1;
-  34              		.loc 1 21 0
-  35 0000 0130     		adds	r0, r0, #1
-  36              	.LVL1:
-  37 0002 B2FBF0F0 		udiv	r0, r2, r0
-ARM GAS  /tmp/cc2XYDxb.s 			page 2
-
-
-  38              	.LVL2:
-  39 0006 B1FBF0F0 		udiv	r0, r1, r0
+ 118              		.loc 1 21 0
+ 119 000c FB68     		ldr	r3, [r7, #12]
+ 120 000e 0133     		adds	r3, r3, #1
+ 121 0010 7A68     		ldr	r2, [r7, #4]
+ 122 0012 B2FBF3F3 		udiv	r3, r2, r3
+ 123 0016 BA68     		ldr	r2, [r7, #8]
+ 124 0018 B2FBF3F3 		udiv	r3, r2, r3
+ 125 001c 013B     		subs	r3, r3, #1
   22:la/sump.c     **** }
-  40              		.loc 1 22 0
-  41 000a 0138     		subs	r0, r0, #1
-  42 000c 7047     		bx	lr
-  43              		.cfi_endproc
-  44              	.LFE133:
-  46              		.section	.text.SumpProcessRequest,"ax",%progbits
-  47              		.align	1
-  48              		.global	SumpProcessRequest
-  49              		.syntax unified
-  50              		.thumb
-  51              		.thumb_func
-  52              		.fpu fpv4-sp-d16
-  54              	SumpProcessRequest:
-  55              	.LFB134:
+ 126              		.loc 1 22 0
+ 127 001e 1846     		mov	r0, r3
+ 128 0020 1437     		adds	r7, r7, #20
+ 129              	.LCFI3:
+ 130              		.cfi_def_cfa_offset 4
+ 131 0022 BD46     		mov	sp, r7
+ 132              	.LCFI4:
+ 133              		.cfi_def_cfa_register 13
+ 134              		@ sp needed
+ 135 0024 5DF8047B 		ldr	r7, [sp], #4
+ 136              	.LCFI5:
+ 137              		.cfi_restore 7
+ 138              		.cfi_def_cfa_offset 0
+ 139 0028 7047     		bx	lr
+ 140              		.cfi_endproc
+ 141              	.LFE133:
+ 143              		.section	.rodata
+ 144              		.align	2
+ 145              	.LC0:
+ 146 0000 31414C53 		.ascii	"1ALS\000"
+ 146      00
+ 147              		.section	.text.SumpProcessRequest,"ax",%progbits
+ 148              		.align	1
+ 149              		.global	SumpProcessRequest
+ 150              		.syntax unified
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.fpu fpv4-sp-d16
+ 155              	SumpProcessRequest:
+ARM GAS  /tmp/ccC38d87.s 			page 4
+
+
+ 156              	.LFB134:
   23:la/sump.c     **** 
   24:la/sump.c     **** int SumpProcessRequest(uint8_t *buffer, uint16_t len)
   25:la/sump.c     **** {
-  56              		.loc 1 25 0
-  57              		.cfi_startproc
-  58              		@ args = 0, pretend = 0, frame = 0
-  59              		@ frame_needed = 0, uses_anonymous_args = 0
-  60              	.LVL3:
-  61 0000 10B5     		push	{r4, lr}
-  62              	.LCFI0:
-  63              		.cfi_def_cfa_offset 8
-  64              		.cfi_offset 4, -8
-  65              		.cfi_offset 14, -4
-  66              	.LVL4:
+ 157              		.loc 1 25 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 24
+ 160              		@ frame_needed = 1, uses_anonymous_args = 0
+ 161 0000 80B5     		push	{r7, lr}
+ 162              	.LCFI6:
+ 163              		.cfi_def_cfa_offset 8
+ 164              		.cfi_offset 7, -8
+ 165              		.cfi_offset 14, -4
+ 166 0002 86B0     		sub	sp, sp, #24
+ 167              	.LCFI7:
+ 168              		.cfi_def_cfa_offset 32
+ 169 0004 00AF     		add	r7, sp, #0
+ 170              	.LCFI8:
+ 171              		.cfi_def_cfa_register 7
+ 172 0006 7860     		str	r0, [r7, #4]
+ 173 0008 0B46     		mov	r3, r1
+ 174 000a 7B80     		strh	r3, [r7, #2]	@ movhi
   26:la/sump.c     **** 	int result = 0;
+ 175              		.loc 1 26 0
+ 176 000c 0023     		movs	r3, #0
+ 177 000e 7B61     		str	r3, [r7, #20]
   27:la/sump.c     **** 	switch(buffer[0])
-  67              		.loc 1 27 0
-  68 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
-  69 0004 812B     		cmp	r3, #129
-  70 0006 39D0     		beq	.L4
-  71 0008 07D8     		bhi	.L5
-  72 000a 042B     		cmp	r3, #4
-  73 000c 15D0     		beq	.L6
-  74 000e 802B     		cmp	r3, #128
-  75 0010 19D0     		beq	.L7
-  76 0012 022B     		cmp	r3, #2
-  77 0014 0BD0     		beq	.L21
-  78              	.L14:
-  26:la/sump.c     **** 	int result = 0;
-  79              		.loc 1 26 0
-  80 0016 0020     		movs	r0, #0
-  81              	.LVL5:
-  82 0018 0EE0     		b	.L2
-  83              	.LVL6:
-  84              	.L5:
-  85              		.loc 1 27 0
-  86 001a C02B     		cmp	r3, #192
-  87 001c 40D0     		beq	.L9
-  88 001e C12B     		cmp	r3, #193
-  89 0020 48D0     		beq	.L10
-ARM GAS  /tmp/cc2XYDxb.s 			page 3
+ 178              		.loc 1 27 0
+ 179 0010 7B68     		ldr	r3, [r7, #4]
+ 180 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 181 0014 802B     		cmp	r3, #128
+ 182 0016 3BD0     		beq	.L5
+ 183 0018 802B     		cmp	r3, #128
+ 184 001a 0BDC     		bgt	.L6
+ 185 001c 012B     		cmp	r3, #1
+ 186 001e 18D0     		beq	.L7
+ 187 0020 012B     		cmp	r3, #1
+ 188 0022 02DC     		bgt	.L8
+ 189 0024 002B     		cmp	r3, #0
+ 190 0026 0FD0     		beq	.L9
+ 191 0028 9FE0     		b	.L4
+ 192              	.L8:
+ 193 002a 022B     		cmp	r3, #2
+ 194 002c 1AD0     		beq	.L31
+ 195 002e 042B     		cmp	r3, #4
+ 196 0030 23D0     		beq	.L32
+ 197 0032 9AE0     		b	.L4
+ 198              	.L6:
+ 199 0034 822B     		cmp	r3, #130
+ 200 0036 00F08380 		beq	.L12
+ 201 003a 822B     		cmp	r3, #130
+ 202 003c 4FDB     		blt	.L13
+ 203 003e C02B     		cmp	r3, #192
+ 204 0040 66D0     		beq	.L14
+ 205 0042 C12B     		cmp	r3, #193
+ 206 0044 70D0     		beq	.L15
+ 207 0046 90E0     		b	.L4
+ARM GAS  /tmp/ccC38d87.s 			page 5
 
 
-  90 0022 822B     		cmp	r3, #130
-  91 0024 F7D1     		bne	.L14
+ 208              	.L9:
   28:la/sump.c     **** 	{
-  29:la/sump.c     **** 	case SUMP_CMD_ID://ID
-  30:la/sump.c     **** 		//APP_FOPS.pIf_DataTx((uint8_t*)"1ALS", 4);
-  31:la/sump.c     **** 		CDC_Transmit_FS((uint8_t*)"1ALS", 4);
-  32:la/sump.c     **** 		result = 1;
+  29:la/sump.c     **** 	case SUMP_CMD_RESET://reset
+  30:la/sump.c     **** 		//SamplingSetupTimer(16);
+  31:la/sump.c     **** 		Stop();
+ 209              		.loc 1 31 0
+ 210 0048 FFF7FEFF 		bl	Stop
+  32:la/sump.c     **** 	    result = 1;
+ 211              		.loc 1 32 0
+ 212 004c 0123     		movs	r3, #1
+ 213 004e 7B61     		str	r3, [r7, #20]
   33:la/sump.c     **** 	  break;
-  34:la/sump.c     **** 	case SUMP_CMD_META://Query metas
-  35:la/sump.c     **** 		//APP_FOPS.pIf_DataTx((uint8_t*)metaData, sizeof(metaData));
-  36:la/sump.c     **** 		CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData));
-  37:la/sump.c     **** 		result = 1;
-  38:la/sump.c     **** 	  break;
-  39:la/sump.c     **** 	  case SUMP_CMD_SET_SAMPLE_RATE:
-  40:la/sump.c     **** 		if(len == 5)
-  41:la/sump.c     **** 		{
-  42:la/sump.c     **** 			//div120 = 120MHz / (100MHz / (div100 + 1)) - 1;
-  43:la/sump.c     **** 			divider = *((uint32_t*)(buffer+1));
-  44:la/sump.c     **** 			//if maximum samplerate is 20MHz => 100/20 = 5, 5 - 1 = 4
-  45:la/sump.c     **** 			if(divider != 0)
-  46:la/sump.c     **** 			{
-  47:la/sump.c     **** 				uint32_t clocks = 168000000; // сделать ф-ю для вычисления clocks
-  48:la/sump.c     **** 				divider = CalcLocalDivider(divider, clocks, SUMP_ORIGINAL_FREQ);
-  49:la/sump.c     **** 			}
-  50:la/sump.c     **** 			if(divider == 0)
-  51:la/sump.c     **** 			{
-  52:la/sump.c     **** 				divider = 1;
-  53:la/sump.c     **** 			}
-  54:la/sump.c     **** 			SetSamplingPeriod(divider);
-  55:la/sump.c     **** 			result = 1;
-  56:la/sump.c     **** 			//GUI_Text(0, 14, (uint8_t*)text, White, Black);
-  57:la/sump.c     **** 		}
-  58:la/sump.c     **** 		break;
-  59:la/sump.c     **** 	  case SUMP_CMD_SET_COUNTS:
-  60:la/sump.c     **** 		if(len == 5)
-  61:la/sump.c     **** 		{
-  62:la/sump.c     **** 			uint16_t readCount  = 1 + *((uint16_t*)(buffer+1));
-  63:la/sump.c     **** 			uint16_t delayCount = *((uint16_t*)(buffer+3));
-  64:la/sump.c     **** 			SetBufferSize(4 * readCount);
-  65:la/sump.c     **** 			SetDelayCount(4 * delayCount);
+ 214              		.loc 1 33 0
+ 215 0050 8BE0     		b	.L4
+ 216              	.L7:
+  34:la/sump.c     **** 	case SUMP_CMD_RUN://run
+  35:la/sump.c     **** 		SamplingClearBuffer();
+ 217              		.loc 1 35 0
+ 218 0052 FFF7FEFF 		bl	SamplingClearBuffer
+  36:la/sump.c     **** 		Start();
+ 219              		.loc 1 36 0
+ 220 0056 FFF7FEFF 		bl	Start
+  37:la/sump.c     **** 		Arm();
+ 221              		.loc 1 37 0
+ 222 005a FFF7FEFF 		bl	Arm
+  38:la/sump.c     **** 		result = 1;
+ 223              		.loc 1 38 0
+ 224 005e 0123     		movs	r3, #1
+ 225 0060 7B61     		str	r3, [r7, #20]
+  39:la/sump.c     **** 	  break;
+ 226              		.loc 1 39 0
+ 227 0062 82E0     		b	.L4
+ 228              	.L31:
+  40:la/sump.c     **** 	case SUMP_CMD_ID://ID
+  41:la/sump.c     **** 		//APP_FOPS.pIf_DataTx((uint8_t*)"1ALS", 4);
+  42:la/sump.c     **** 		while (CDC_Transmit_FS((uint8_t*)"1ALS", 4) != 0){};
+ 229              		.loc 1 42 0
+ 230 0064 00BF     		nop
+ 231              	.L16:
+ 232              		.loc 1 42 0 is_stmt 0 discriminator 1
+ 233 0066 0421     		movs	r1, #4
+ 234 0068 4248     		ldr	r0, .L33
+ 235 006a FFF7FEFF 		bl	CDC_Transmit_FS
+ 236 006e 0346     		mov	r3, r0
+ 237 0070 002B     		cmp	r3, #0
+ 238 0072 F8D1     		bne	.L16
+  43:la/sump.c     **** 		result = 1;
+ 239              		.loc 1 43 0 is_stmt 1
+ 240 0074 0123     		movs	r3, #1
+ 241 0076 7B61     		str	r3, [r7, #20]
+  44:la/sump.c     **** 	  break;
+ 242              		.loc 1 44 0
+ 243 0078 77E0     		b	.L4
+ 244              	.L32:
+  45:la/sump.c     **** 	case SUMP_CMD_META://Query metas
+  46:la/sump.c     **** 		//APP_FOPS.pIf_DataTx((uint8_t*)metaData, sizeof(metaData));
+  47:la/sump.c     **** 		while (CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData)) != 0){};
+ARM GAS  /tmp/ccC38d87.s 			page 6
+
+
+ 245              		.loc 1 47 0
+ 246 007a 00BF     		nop
+ 247              	.L17:
+ 248              		.loc 1 47 0 is_stmt 0 discriminator 1
+ 249 007c 3821     		movs	r1, #56
+ 250 007e 3E48     		ldr	r0, .L33+4
+ 251 0080 FFF7FEFF 		bl	CDC_Transmit_FS
+ 252 0084 0346     		mov	r3, r0
+ 253 0086 002B     		cmp	r3, #0
+ 254 0088 F8D1     		bne	.L17
+  48:la/sump.c     **** 		result = 1;
+ 255              		.loc 1 48 0 is_stmt 1
+ 256 008a 0123     		movs	r3, #1
+ 257 008c 7B61     		str	r3, [r7, #20]
+  49:la/sump.c     **** 	  break;
+ 258              		.loc 1 49 0
+ 259 008e 6CE0     		b	.L4
+ 260              	.L5:
+  50:la/sump.c     **** 	  case SUMP_CMD_SET_SAMPLE_RATE:
+  51:la/sump.c     **** 		if(len == 5)
+ 261              		.loc 1 51 0
+ 262 0090 7B88     		ldrh	r3, [r7, #2]
+ 263 0092 052B     		cmp	r3, #5
+ 264 0094 60D1     		bne	.L26
+  52:la/sump.c     **** 		{
+  53:la/sump.c     **** 			//div120 = 120MHz / (100MHz / (div100 + 1)) - 1;
+  54:la/sump.c     **** 			divider = *((uint32_t*)(buffer+1));
+ 265              		.loc 1 54 0
+ 266 0096 7B68     		ldr	r3, [r7, #4]
+ 267 0098 D3F80130 		ldr	r3, [r3, #1]
+ 268 009c 374A     		ldr	r2, .L33+8
+ 269 009e 1360     		str	r3, [r2]
+  55:la/sump.c     **** 			//if maximum samplerate is 20MHz => 100/20 = 5, 5 - 1 = 4
+  56:la/sump.c     **** 			if(divider != 0)
+ 270              		.loc 1 56 0
+ 271 00a0 364B     		ldr	r3, .L33+8
+ 272 00a2 1B68     		ldr	r3, [r3]
+ 273 00a4 002B     		cmp	r3, #0
+ 274 00a6 0BD0     		beq	.L19
+ 275              	.LBB2:
+  57:la/sump.c     **** 			{
+  58:la/sump.c     **** 				uint32_t clocks = 168000000; // сделать ф-ю для вычисления clocks
+ 276              		.loc 1 58 0
+ 277 00a8 354B     		ldr	r3, .L33+12
+ 278 00aa FB60     		str	r3, [r7, #12]
+  59:la/sump.c     **** 				divider = CalcLocalDivider(divider, clocks, SUMP_ORIGINAL_FREQ);
+ 279              		.loc 1 59 0
+ 280 00ac 334B     		ldr	r3, .L33+8
+ 281 00ae 1B68     		ldr	r3, [r3]
+ 282 00b0 344A     		ldr	r2, .L33+16
+ 283 00b2 F968     		ldr	r1, [r7, #12]
+ 284 00b4 1846     		mov	r0, r3
+ 285 00b6 FFF7FEFF 		bl	CalcLocalDivider
+ 286 00ba 0246     		mov	r2, r0
+ 287 00bc 2F4B     		ldr	r3, .L33+8
+ 288 00be 1A60     		str	r2, [r3]
+ 289              	.L19:
+ARM GAS  /tmp/ccC38d87.s 			page 7
+
+
+ 290              	.LBE2:
+  60:la/sump.c     **** 			}
+  61:la/sump.c     **** 			if(divider == 0)
+ 291              		.loc 1 61 0
+ 292 00c0 2E4B     		ldr	r3, .L33+8
+ 293 00c2 1B68     		ldr	r3, [r3]
+ 294 00c4 002B     		cmp	r3, #0
+ 295 00c6 02D1     		bne	.L20
+  62:la/sump.c     **** 			{
+  63:la/sump.c     **** 				divider = 1;
+ 296              		.loc 1 63 0
+ 297 00c8 2C4B     		ldr	r3, .L33+8
+ 298 00ca 0122     		movs	r2, #1
+ 299 00cc 1A60     		str	r2, [r3]
+ 300              	.L20:
+  64:la/sump.c     **** 			}
+  65:la/sump.c     **** 			SetSamplingPeriod(divider);
+ 301              		.loc 1 65 0
+ 302 00ce 2B4B     		ldr	r3, .L33+8
+ 303 00d0 1B68     		ldr	r3, [r3]
+ 304 00d2 1846     		mov	r0, r3
+ 305 00d4 FFF7FEFF 		bl	SetSamplingPeriod
   66:la/sump.c     **** 			result = 1;
-  67:la/sump.c     **** 			//GUI_Text(100, 14, (uint8_t*)text, White, Black);
+ 306              		.loc 1 66 0
+ 307 00d8 0123     		movs	r3, #1
+ 308 00da 7B61     		str	r3, [r7, #20]
+  67:la/sump.c     **** 			//GUI_Text(0, 14, (uint8_t*)text, White, Black);
   68:la/sump.c     **** 		}
   69:la/sump.c     **** 		break;
-  70:la/sump.c     **** 	case SUMP_CMD_SET_BT0_MASK:
+ 309              		.loc 1 69 0
+ 310 00dc 3CE0     		b	.L26
+ 311              	.L13:
+  70:la/sump.c     **** 	  case SUMP_CMD_SET_COUNTS:
   71:la/sump.c     **** 		if(len == 5)
+ 312              		.loc 1 71 0
+ 313 00de 7B88     		ldrh	r3, [r7, #2]
+ 314 00e0 052B     		cmp	r3, #5
+ 315 00e2 3BD1     		bne	.L27
+ 316              	.LBB3:
   72:la/sump.c     **** 		{
-  73:la/sump.c     **** 			SetTriggerMask(*(uint32_t*)(buffer+1));
-  74:la/sump.c     **** 			result = 1;
-  75:la/sump.c     **** 		}
-  76:la/sump.c     **** 		break;
-  77:la/sump.c     **** 	case SUMP_CMD_SET_BT0_VALUE:
-  78:la/sump.c     **** 		if(len == 5)
-  79:la/sump.c     **** 		{
-  80:la/sump.c     **** 			SetTriggerValue(*(uint32_t*)(buffer+1));
-  81:la/sump.c     **** 			result = 1;
-  82:la/sump.c     **** 		}
-ARM GAS  /tmp/cc2XYDxb.s 			page 4
+  73:la/sump.c     **** 			uint16_t readCount  = 1 + *((uint16_t*)(buffer+1));
+ 317              		.loc 1 73 0
+ 318 00e4 7B68     		ldr	r3, [r7, #4]
+ 319 00e6 0133     		adds	r3, r3, #1
+ 320 00e8 1B88     		ldrh	r3, [r3]
+ 321 00ea 0133     		adds	r3, r3, #1
+ 322 00ec 7B82     		strh	r3, [r7, #18]	@ movhi
+  74:la/sump.c     **** 			uint16_t delayCount = *((uint16_t*)(buffer+3));
+ 323              		.loc 1 74 0
+ 324 00ee 7B68     		ldr	r3, [r7, #4]
+ 325 00f0 B3F80330 		ldrh	r3, [r3, #3]	@ movhi
+ 326 00f4 3B82     		strh	r3, [r7, #16]	@ movhi
+  75:la/sump.c     **** 			SetBufferSize(4 * readCount);
+ 327              		.loc 1 75 0
+ 328 00f6 7B8A     		ldrh	r3, [r7, #18]
+ 329 00f8 9B00     		lsls	r3, r3, #2
+ 330 00fa 1846     		mov	r0, r3
+ARM GAS  /tmp/ccC38d87.s 			page 8
 
 
-  83:la/sump.c     **** 		break;
-  84:la/sump.c     **** 	case SUMP_CMD_SET_FLAGS:
-  85:la/sump.c     **** 		if(len == 5)
-  92              		.loc 1 85 0
-  93 0026 0529     		cmp	r1, #5
-  94 0028 4ED0     		beq	.L22
-  26:la/sump.c     **** 	int result = 0;
-  95              		.loc 1 26 0
-  96 002a 0020     		movs	r0, #0
-  97              	.LVL7:
-  86:la/sump.c     **** 		{
-  87:la/sump.c     **** 			SetFlags(*(uint16_t*)(buffer+1));
-  88:la/sump.c     **** 			result = 1;
-  89:la/sump.c     **** 			
-  90:la/sump.c     **** 		}
-  91:la/sump.c     **** 		break;
-  92:la/sump.c     **** 	}
-  93:la/sump.c     **** 	return result;
-  98              		.loc 1 93 0
-  99 002c 04E0     		b	.L2
- 100              	.LVL8:
- 101              	.L21:
-  31:la/sump.c     **** 		result = 1;
- 102              		.loc 1 31 0
- 103 002e 0421     		movs	r1, #4
- 104              	.LVL9:
- 105 0030 2848     		ldr	r0, .L27
- 106              	.LVL10:
- 107 0032 FFF7FEFF 		bl	CDC_Transmit_FS
- 108              	.LVL11:
-  32:la/sump.c     **** 	  break;
- 109              		.loc 1 32 0
- 110 0036 0120     		movs	r0, #1
- 111              	.LVL12:
- 112              	.L2:
-  94:la/sump.c     **** }...
- 113              		.loc 1 94 0
- 114 0038 10BD     		pop	{r4, pc}
- 115              	.LVL13:
- 116              	.L6:
-  36:la/sump.c     **** 		CDC_Transmit_FS((uint8_t*)metaData, sizeof(metaData));
- 117              		.loc 1 36 0
- 118 003a 3821     		movs	r1, #56
- 119              	.LVL14:
- 120 003c 2648     		ldr	r0, .L27+4
- 121              	.LVL15:
- 122 003e FFF7FEFF 		bl	CDC_Transmit_FS
- 123              	.LVL16:
-  37:la/sump.c     **** 		result = 1;
- 124              		.loc 1 37 0
- 125 0042 0120     		movs	r0, #1
-  38:la/sump.c     **** 	  break;
- 126              		.loc 1 38 0
- 127 0044 F8E7     		b	.L2
- 128              	.LVL17:
- 129              	.L7:
-  40:la/sump.c     **** 		if(len == 5)
-ARM GAS  /tmp/cc2XYDxb.s 			page 5
+ 331 00fc FFF7FEFF 		bl	SetBufferSize
+  76:la/sump.c     **** 			SetDelayCount(4 * delayCount);
+ 332              		.loc 1 76 0
+ 333 0100 3B8A     		ldrh	r3, [r7, #16]
+ 334 0102 9B00     		lsls	r3, r3, #2
+ 335 0104 1846     		mov	r0, r3
+ 336 0106 FFF7FEFF 		bl	SetDelayCount
+  77:la/sump.c     **** 			result = 1;
+ 337              		.loc 1 77 0
+ 338 010a 0123     		movs	r3, #1
+ 339 010c 7B61     		str	r3, [r7, #20]
+ 340              	.LBE3:
+  78:la/sump.c     **** 			//GUI_Text(100, 14, (uint8_t*)text, White, Black);
+  79:la/sump.c     **** 		}
+  80:la/sump.c     **** 		break;
+ 341              		.loc 1 80 0
+ 342 010e 25E0     		b	.L27
+ 343              	.L14:
+  81:la/sump.c     **** 	case SUMP_CMD_SET_BT0_MASK:
+  82:la/sump.c     **** 		if(len == 5)
+ 344              		.loc 1 82 0
+ 345 0110 7B88     		ldrh	r3, [r7, #2]
+ 346 0112 052B     		cmp	r3, #5
+ 347 0114 24D1     		bne	.L28
+  83:la/sump.c     **** 		{
+  84:la/sump.c     **** 			SetTriggerMask(*(uint32_t*)(buffer+1));
+ 348              		.loc 1 84 0
+ 349 0116 7B68     		ldr	r3, [r7, #4]
+ 350 0118 0133     		adds	r3, r3, #1
+ 351 011a 1B68     		ldr	r3, [r3]
+ 352 011c 1846     		mov	r0, r3
+ 353 011e FFF7FEFF 		bl	SetTriggerMask
+  85:la/sump.c     **** 			result = 1;
+ 354              		.loc 1 85 0
+ 355 0122 0123     		movs	r3, #1
+ 356 0124 7B61     		str	r3, [r7, #20]
+  86:la/sump.c     **** 		}
+  87:la/sump.c     **** 		break;
+ 357              		.loc 1 87 0
+ 358 0126 1BE0     		b	.L28
+ 359              	.L15:
+  88:la/sump.c     **** 	case SUMP_CMD_SET_BT0_VALUE:
+  89:la/sump.c     **** 		if(len == 5)
+ 360              		.loc 1 89 0
+ 361 0128 7B88     		ldrh	r3, [r7, #2]
+ 362 012a 052B     		cmp	r3, #5
+ 363 012c 1AD1     		bne	.L29
+  90:la/sump.c     **** 		{
+  91:la/sump.c     **** 			SetTriggerValue(*(uint32_t*)(buffer+1));
+ 364              		.loc 1 91 0
+ 365 012e 7B68     		ldr	r3, [r7, #4]
+ 366 0130 0133     		adds	r3, r3, #1
+ 367 0132 1B68     		ldr	r3, [r3]
+ 368 0134 1846     		mov	r0, r3
+ 369 0136 FFF7FEFF 		bl	SetTriggerValue
+  92:la/sump.c     **** 			result = 1;
+ 370              		.loc 1 92 0
+ARM GAS  /tmp/ccC38d87.s 			page 9
 
 
- 130              		.loc 1 40 0
- 131 0046 0529     		cmp	r1, #5
- 132 0048 01D0     		beq	.L23
-  26:la/sump.c     **** 	int result = 0;
- 133              		.loc 1 26 0
- 134 004a 0020     		movs	r0, #0
- 135              	.LVL18:
- 136 004c F4E7     		b	.L2
- 137              	.LVL19:
- 138              	.L23:
-  43:la/sump.c     **** 			divider = *((uint32_t*)(buffer+1));
- 139              		.loc 1 43 0
- 140 004e D0F80100 		ldr	r0, [r0, #1]
- 141              	.LVL20:
- 142 0052 224B     		ldr	r3, .L27+8
- 143 0054 1860     		str	r0, [r3]
-  45:la/sump.c     **** 			if(divider != 0)
- 144              		.loc 1 45 0
- 145 0056 28B1     		cbz	r0, .L12
- 146              	.LVL21:
- 147              	.LBB2:
-  48:la/sump.c     **** 				divider = CalcLocalDivider(divider, clocks, SUMP_ORIGINAL_FREQ);
- 148              		.loc 1 48 0
- 149 0058 214A     		ldr	r2, .L27+12
- 150 005a 2249     		ldr	r1, .L27+16
- 151              	.LVL22:
- 152 005c FFF7FEFF 		bl	CalcLocalDivider
- 153              	.LVL23:
- 154 0060 1E4B     		ldr	r3, .L27+8
- 155 0062 1860     		str	r0, [r3]
- 156              	.LVL24:
- 157              	.L12:
- 158              	.LBE2:
-  50:la/sump.c     **** 			if(divider == 0)
- 159              		.loc 1 50 0
- 160 0064 1D4B     		ldr	r3, .L27+8
- 161 0066 1B68     		ldr	r3, [r3]
- 162 0068 13B9     		cbnz	r3, .L13
-  52:la/sump.c     **** 				divider = 1;
- 163              		.loc 1 52 0
- 164 006a 1C4B     		ldr	r3, .L27+8
- 165 006c 0122     		movs	r2, #1
- 166 006e 1A60     		str	r2, [r3]
- 167              	.L13:
-  54:la/sump.c     **** 			SetSamplingPeriod(divider);
- 168              		.loc 1 54 0
- 169 0070 1A4B     		ldr	r3, .L27+8
- 170 0072 1868     		ldr	r0, [r3]
- 171 0074 FFF7FEFF 		bl	SetSamplingPeriod
- 172              	.LVL25:
-  55:la/sump.c     **** 			result = 1;
- 173              		.loc 1 55 0
- 174 0078 0120     		movs	r0, #1
- 175 007a DDE7     		b	.L2
- 176              	.LVL26:
- 177              	.L4:
-  60:la/sump.c     **** 		if(len == 5)
-ARM GAS  /tmp/cc2XYDxb.s 			page 6
+ 371 013a 0123     		movs	r3, #1
+ 372 013c 7B61     		str	r3, [r7, #20]
+  93:la/sump.c     **** 		}
+  94:la/sump.c     **** 		break;
+ 373              		.loc 1 94 0
+ 374 013e 11E0     		b	.L29
+ 375              	.L12:
+  95:la/sump.c     **** 	case SUMP_CMD_SET_FLAGS:
+  96:la/sump.c     **** 		if(len == 5)
+ 376              		.loc 1 96 0
+ 377 0140 7B88     		ldrh	r3, [r7, #2]
+ 378 0142 052B     		cmp	r3, #5
+ 379 0144 10D1     		bne	.L30
+  97:la/sump.c     **** 		{
+  98:la/sump.c     **** 			SetFlags(*(uint16_t*)(buffer+1));
+ 380              		.loc 1 98 0
+ 381 0146 7B68     		ldr	r3, [r7, #4]
+ 382 0148 0133     		adds	r3, r3, #1
+ 383 014a 1B88     		ldrh	r3, [r3]
+ 384 014c 1846     		mov	r0, r3
+ 385 014e FFF7FEFF 		bl	SetFlags
+  99:la/sump.c     **** 			result = 1;
+ 386              		.loc 1 99 0
+ 387 0152 0123     		movs	r3, #1
+ 388 0154 7B61     		str	r3, [r7, #20]
+ 100:la/sump.c     **** 			
+ 101:la/sump.c     **** 		}
+ 102:la/sump.c     **** 		break;
+ 389              		.loc 1 102 0
+ 390 0156 07E0     		b	.L30
+ 391              	.L26:
+  69:la/sump.c     **** 	  case SUMP_CMD_SET_COUNTS:
+ 392              		.loc 1 69 0
+ 393 0158 00BF     		nop
+ 394 015a 06E0     		b	.L4
+ 395              	.L27:
+  80:la/sump.c     **** 	case SUMP_CMD_SET_BT0_MASK:
+ 396              		.loc 1 80 0
+ 397 015c 00BF     		nop
+ 398 015e 04E0     		b	.L4
+ 399              	.L28:
+  87:la/sump.c     **** 	case SUMP_CMD_SET_BT0_VALUE:
+ 400              		.loc 1 87 0
+ 401 0160 00BF     		nop
+ 402 0162 02E0     		b	.L4
+ 403              	.L29:
+  94:la/sump.c     **** 	case SUMP_CMD_SET_FLAGS:
+ 404              		.loc 1 94 0
+ 405 0164 00BF     		nop
+ 406 0166 00E0     		b	.L4
+ 407              	.L30:
+ 408              		.loc 1 102 0
+ 409 0168 00BF     		nop
+ 410              	.L4:
+ 103:la/sump.c     **** 	}
+ 104:la/sump.c     **** 	return result;
+ 411              		.loc 1 104 0
+ARM GAS  /tmp/ccC38d87.s 			page 10
 
 
- 178              		.loc 1 60 0
- 179 007c 0529     		cmp	r1, #5
- 180 007e 01D0     		beq	.L24
-  26:la/sump.c     **** 	int result = 0;
- 181              		.loc 1 26 0
- 182 0080 0020     		movs	r0, #0
- 183              	.LVL27:
- 184 0082 D9E7     		b	.L2
- 185              	.LVL28:
- 186              	.L24:
- 187              	.LBB3:
-  62:la/sump.c     **** 			uint16_t readCount  = 1 + *((uint16_t*)(buffer+1));
- 188              		.loc 1 62 0
- 189 0084 B0F80130 		ldrh	r3, [r0, #1]
- 190 0088 0133     		adds	r3, r3, #1
- 191 008a 9BB2     		uxth	r3, r3
- 192              	.LVL29:
-  63:la/sump.c     **** 			uint16_t delayCount = *((uint16_t*)(buffer+3));
- 193              		.loc 1 63 0
- 194 008c B0F80340 		ldrh	r4, [r0, #3]
- 195              	.LVL30:
-  64:la/sump.c     **** 			SetBufferSize(4 * readCount);
- 196              		.loc 1 64 0
- 197 0090 9800     		lsls	r0, r3, #2
- 198              	.LVL31:
- 199 0092 FFF7FEFF 		bl	SetBufferSize
- 200              	.LVL32:
-  65:la/sump.c     **** 			SetDelayCount(4 * delayCount);
- 201              		.loc 1 65 0
- 202 0096 A000     		lsls	r0, r4, #2
- 203 0098 FFF7FEFF 		bl	SetDelayCount
- 204              	.LVL33:
-  66:la/sump.c     **** 			result = 1;
- 205              		.loc 1 66 0
- 206 009c 0120     		movs	r0, #1
- 207 009e CBE7     		b	.L2
- 208              	.LVL34:
- 209              	.L9:
- 210              	.LBE3:
-  71:la/sump.c     **** 		if(len == 5)
- 211              		.loc 1 71 0
- 212 00a0 0529     		cmp	r1, #5
- 213 00a2 01D0     		beq	.L25
-  26:la/sump.c     **** 	int result = 0;
- 214              		.loc 1 26 0
- 215 00a4 0020     		movs	r0, #0
- 216              	.LVL35:
- 217 00a6 C7E7     		b	.L2
- 218              	.LVL36:
- 219              	.L25:
-  73:la/sump.c     **** 			SetTriggerMask(*(uint32_t*)(buffer+1));
- 220              		.loc 1 73 0
- 221 00a8 D0F80100 		ldr	r0, [r0, #1]
- 222              	.LVL37:
- 223 00ac FFF7FEFF 		bl	SetTriggerMask
- 224              	.LVL38:
-  74:la/sump.c     **** 			result = 1;
-ARM GAS  /tmp/cc2XYDxb.s 			page 7
-
-
- 225              		.loc 1 74 0
- 226 00b0 0120     		movs	r0, #1
- 227 00b2 C1E7     		b	.L2
- 228              	.LVL39:
- 229              	.L10:
-  78:la/sump.c     **** 		if(len == 5)
- 230              		.loc 1 78 0
- 231 00b4 0529     		cmp	r1, #5
- 232 00b6 01D0     		beq	.L26
-  26:la/sump.c     **** 	int result = 0;
- 233              		.loc 1 26 0
- 234 00b8 0020     		movs	r0, #0
- 235              	.LVL40:
- 236 00ba BDE7     		b	.L2
- 237              	.LVL41:
- 238              	.L26:
-  80:la/sump.c     **** 			SetTriggerValue(*(uint32_t*)(buffer+1));
- 239              		.loc 1 80 0
- 240 00bc D0F80100 		ldr	r0, [r0, #1]
- 241              	.LVL42:
- 242 00c0 FFF7FEFF 		bl	SetTriggerValue
- 243              	.LVL43:
-  81:la/sump.c     **** 			result = 1;
- 244              		.loc 1 81 0
- 245 00c4 0120     		movs	r0, #1
- 246 00c6 B7E7     		b	.L2
- 247              	.LVL44:
- 248              	.L22:
-  87:la/sump.c     **** 			SetFlags(*(uint16_t*)(buffer+1));
- 249              		.loc 1 87 0
- 250 00c8 B0F80100 		ldrh	r0, [r0, #1]
- 251              	.LVL45:
- 252 00cc FFF7FEFF 		bl	SetFlags
- 253              	.LVL46:
-  88:la/sump.c     **** 			result = 1;
- 254              		.loc 1 88 0
- 255 00d0 0120     		movs	r0, #1
- 256 00d2 B1E7     		b	.L2
- 257              	.L28:
- 258              		.align	2
- 259              	.L27:
- 260 00d4 00000000 		.word	.LC0
- 261 00d8 00000000 		.word	.LANCHOR0
- 262 00dc 00000000 		.word	.LANCHOR1
- 263 00e0 00E1F505 		.word	100000000
- 264 00e4 007A030A 		.word	168000000
- 265              		.cfi_endproc
- 266              	.LFE134:
- 268              		.section	.data.divider,"aw",%progbits
- 269              		.align	2
- 270              		.set	.LANCHOR1,. + 0
- 273              	divider:
- 274 0000 01000000 		.word	1
- 275              		.section	.data.metaData,"aw",%progbits
- 276              		.align	2
- 277              		.set	.LANCHOR0,. + 0
- 280              	metaData:
-ARM GAS  /tmp/cc2XYDxb.s 			page 8
-
-
- 281 0000 01       		.byte	1
- 282 0001 4D       		.byte	77
- 283 0002 65       		.byte	101
- 284 0003 61       		.byte	97
- 285 0004 73       		.byte	115
- 286 0005 75       		.byte	117
- 287 0006 72       		.byte	114
- 288 0007 69       		.byte	105
- 289 0008 6E       		.byte	110
- 290 0009 67       		.byte	103
- 291 000a 20       		.byte	32
- 292 000b 43       		.byte	67
- 293 000c 6F       		.byte	111
- 294 000d 6D       		.byte	109
- 295 000e 70       		.byte	112
- 296 000f 6C       		.byte	108
- 297 0010 65       		.byte	101
- 298 0011 78       		.byte	120
- 299 0012 00       		.byte	0
- 300 0013 02       		.byte	2
- 301 0014 4E       		.byte	78
- 302 0015 6F       		.byte	111
- 303 0016 46       		.byte	70
- 304 0017 50       		.byte	80
- 305 0018 47       		.byte	71
- 306 0019 41       		.byte	65
- 307 001a 20       		.byte	32
- 308 001b 3A       		.byte	58
- 309 001c 28       		.byte	40
- 310 001d 00       		.byte	0
- 311 001e 03       		.byte	3
- 312 001f 56       		.byte	86
- 313 0020 65       		.byte	101
- 314 0021 72       		.byte	114
- 315 0022 79       		.byte	121
- 316 0023 20       		.byte	32
- 317 0024 62       		.byte	98
- 318 0025 65       		.byte	101
- 319 0026 74       		.byte	116
- 320 0027 61       		.byte	97
- 321 0028 00       		.byte	0
- 322 0029 23       		.byte	35
- 323 002a 01       		.byte	1
- 324 002b 31       		.byte	49
- 325 002c 2D       		.byte	45
- 326 002d 00       		.byte	0
- 327 002e 21       		.byte	33
- 328 002f 00       		.byte	0
- 329 0030 00       		.byte	0
- 330 0031 70       		.byte	112
- 331 0032 00       		.byte	0
- 332 0033 40       		.byte	64
- 333 0034 08       		.byte	8
- 334 0035 41       		.byte	65
- 335 0036 02       		.byte	2
- 336 0037 00       		.byte	0
- 337              		.section	.rodata.SumpProcessRequest.str1.4,"aMS",%progbits,1
-ARM GAS  /tmp/cc2XYDxb.s 			page 9
-
-
- 338              		.align	2
- 339              	.LC0:
- 340 0000 31414C53 		.ascii	"1ALS\000"
- 340      00
- 341              		.text
- 342              	.Letext0:
- 343              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 344              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 345              		.file 4 "/usr/arm-none-eabi/include/sys/lock.h"
- 346              		.file 5 "/usr/arm-none-eabi/include/sys/_types.h"
- 347              		.file 6 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 348              		.file 7 "/usr/arm-none-eabi/include/sys/reent.h"
- 349              		.file 8 "/usr/arm-none-eabi/include/stdlib.h"
- 350              		.file 9 "Drivers/CMSIS/Include/core_cm4.h"
- 351              		.file 10 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 352              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
- 353              		.file 12 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 354              		.file 13 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 355              		.file 14 "Inc/usbd_cdc_if.h"
- 356              		.file 15 "la/sampling.h"
-ARM GAS  /tmp/cc2XYDxb.s 			page 10
+ 412 016a 7B69     		ldr	r3, [r7, #20]
+ 105:la/sump.c     **** }...
+ 413              		.loc 1 105 0
+ 414 016c 1846     		mov	r0, r3
+ 415 016e 1837     		adds	r7, r7, #24
+ 416              	.LCFI9:
+ 417              		.cfi_def_cfa_offset 8
+ 418 0170 BD46     		mov	sp, r7
+ 419              	.LCFI10:
+ 420              		.cfi_def_cfa_register 13
+ 421              		@ sp needed
+ 422 0172 80BD     		pop	{r7, pc}
+ 423              	.L34:
+ 424              		.align	2
+ 425              	.L33:
+ 426 0174 00000000 		.word	.LC0
+ 427 0178 00000000 		.word	metaData
+ 428 017c 00000000 		.word	divider
+ 429 0180 007A030A 		.word	168000000
+ 430 0184 00E1F505 		.word	100000000
+ 431              		.cfi_endproc
+ 432              	.LFE134:
+ 434              		.text
+ 435              	.Letext0:
+ 436              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 437              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 438              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 439              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 440              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 441              		.file 7 "la/sampling.h"
+ 442              		.file 8 "/usr/arm-none-eabi/include/sys/lock.h"
+ 443              		.file 9 "/usr/arm-none-eabi/include/sys/_types.h"
+ 444              		.file 10 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 445              		.file 11 "/usr/arm-none-eabi/include/sys/reent.h"
+ 446              		.file 12 "/usr/arm-none-eabi/include/stdlib.h"
+ 447              		.file 13 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 448              		.file 14 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 449              		.file 15 "Inc/usbd_cdc_if.h"
+ARM GAS  /tmp/ccC38d87.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sump.c
-     /tmp/cc2XYDxb.s:18     .text.CalcLocalDivider:0000000000000000 $t
-     /tmp/cc2XYDxb.s:25     .text.CalcLocalDivider:0000000000000000 CalcLocalDivider
-     /tmp/cc2XYDxb.s:47     .text.SumpProcessRequest:0000000000000000 $t
-     /tmp/cc2XYDxb.s:54     .text.SumpProcessRequest:0000000000000000 SumpProcessRequest
-     /tmp/cc2XYDxb.s:260    .text.SumpProcessRequest:00000000000000d4 $d
-     /tmp/cc2XYDxb.s:269    .data.divider:0000000000000000 $d
-     /tmp/cc2XYDxb.s:273    .data.divider:0000000000000000 divider
-     /tmp/cc2XYDxb.s:276    .data.metaData:0000000000000000 $d
-     /tmp/cc2XYDxb.s:280    .data.metaData:0000000000000000 metaData
-     /tmp/cc2XYDxb.s:338    .rodata.SumpProcessRequest.str1.4:0000000000000000 $d
+                            *COM*:0000000000000004 triggerMask
+                            *COM*:0000000000000004 triggerValue
+                            *COM*:0000000000000002 flags
+                            *COM*:0000000000000002 period
+                            *COM*:0000000000000004 transferSize
+     /tmp/ccC38d87.s:23     .data.metaData:0000000000000000 $d
+     /tmp/ccC38d87.s:26     .data.metaData:0000000000000000 metaData
+     /tmp/ccC38d87.s:84     .data.divider:0000000000000000 $d
+     /tmp/ccC38d87.s:87     .data.divider:0000000000000000 divider
+     /tmp/ccC38d87.s:90     .text.CalcLocalDivider:0000000000000000 $t
+     /tmp/ccC38d87.s:97     .text.CalcLocalDivider:0000000000000000 CalcLocalDivider
+     /tmp/ccC38d87.s:144    .rodata:0000000000000000 $d
+     /tmp/ccC38d87.s:148    .text.SumpProcessRequest:0000000000000000 $t
+     /tmp/ccC38d87.s:155    .text.SumpProcessRequest:0000000000000000 SumpProcessRequest
+     /tmp/ccC38d87.s:426    .text.SumpProcessRequest:0000000000000174 $d
 
 UNDEFINED SYMBOLS
+Stop
+SamplingClearBuffer
+Start
+Arm
 CDC_Transmit_FS
 SetSamplingPeriod
 SetBufferSize

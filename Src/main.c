@@ -21,7 +21,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usb_device.h"
-//#include "sump.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -35,6 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -52,6 +52,8 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
+
+void Init(void);
 
 /* USER CODE END PFP */
 
@@ -84,7 +86,8 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  Init();
+  HAL_Delay(100);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -99,7 +102,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    __WFI();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -162,6 +165,31 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void Init(void)
+{
+  //PriorityGroupConfig(NVIC_PRIORITYGROUP_4);
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  GPIO_InitTypeDef gpioInit = {0};
+  gpioInit.Pin = 0xffff;
+	gpioInit.Mode = GPIO_MODE_INPUT;
+	gpioInit.Pull = GPIO_PULLDOWN;
+	gpioInit.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(SAMPLING_PORT, &gpioInit);
+
+  #ifdef SAMPLING_MANUAL
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  GPIO_InitTypeDef gpioInit_b = {0};
+	gpioInit_b.Pin = 0x0001;
+	gpioInit_b.Mode = GPIO_MODE_AF_PP;
+	gpioInit_b.Pull = GPIO_PULLDOWN;
+	gpioInit_b.Speed = GPIO_SPEED_FREQ_HIGH;
+  gpioInit_b.Alternate = GPIO_AF3_TIM8;
+	HAL_GPIO_Init(GPIOA, &gpioInit_b);
+
+	//GPIO_PinAFConfig(GPIOA, GPIO_PinSource0 , GPIO_AF_TIM8);
+#endif
+}
 
 /* USER CODE END 4 */
 

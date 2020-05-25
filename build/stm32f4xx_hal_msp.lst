@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cclBafJL.s 			page 1
+ARM GAS  /tmp/cc9P48RB.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -10,23 +10,28 @@ ARM GAS  /tmp/cclBafJL.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.file	"stm32f4xx_hal_msp.c"
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.HAL_MspInit,"ax",%progbits
-  18              		.align	1
-  19              		.global	HAL_MspInit
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv4-sp-d16
-  25              	HAL_MspInit:
-  26              	.LFB130:
-  27              		.file 1 "Src/stm32f4xx_hal_msp.c"
+  17              		.comm	triggerMask,4,4
+  18              		.comm	triggerValue,4,4
+  19              		.comm	flags,2,2
+  20              		.comm	period,2,2
+  21              		.comm	transferSize,4,4
+  22              		.section	.text.HAL_MspInit,"ax",%progbits
+  23              		.align	1
+  24              		.global	HAL_MspInit
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  28              		.fpu fpv4-sp-d16
+  30              	HAL_MspInit:
+  31              	.LFB130:
+  32              		.file 1 "Src/stm32f4xx_hal_msp.c"
    1:Src/stm32f4xx_hal_msp.c **** /* USER CODE BEGIN Header */
    2:Src/stm32f4xx_hal_msp.c **** /**
    3:Src/stm32f4xx_hal_msp.c ****   ******************************************************************************
@@ -53,14 +58,14 @@ ARM GAS  /tmp/cclBafJL.s 			page 1
   24:Src/stm32f4xx_hal_msp.c **** /* USER CODE BEGIN Includes */
   25:Src/stm32f4xx_hal_msp.c **** 
   26:Src/stm32f4xx_hal_msp.c **** /* USER CODE END Includes */
+ARM GAS  /tmp/cc9P48RB.s 			page 2
+
+
   27:Src/stm32f4xx_hal_msp.c **** 
   28:Src/stm32f4xx_hal_msp.c **** /* Private typedef -----------------------------------------------------------*/
   29:Src/stm32f4xx_hal_msp.c **** /* USER CODE BEGIN TD */
   30:Src/stm32f4xx_hal_msp.c **** 
   31:Src/stm32f4xx_hal_msp.c **** /* USER CODE END TD */
-ARM GAS  /tmp/cclBafJL.s 			page 2
-
-
   32:Src/stm32f4xx_hal_msp.c **** 
   33:Src/stm32f4xx_hal_msp.c **** /* Private define ------------------------------------------------------------*/
   34:Src/stm32f4xx_hal_msp.c **** /* USER CODE BEGIN Define */
@@ -95,47 +100,60 @@ ARM GAS  /tmp/cclBafJL.s 			page 1
   63:Src/stm32f4xx_hal_msp.c ****   */
   64:Src/stm32f4xx_hal_msp.c **** void HAL_MspInit(void)
   65:Src/stm32f4xx_hal_msp.c **** {
-  28              		.loc 1 65 0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 8
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
-  33 0000 82B0     		sub	sp, sp, #8
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              	.LBB2:
+  33              		.loc 1 65 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 8
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37              		@ link register save eliminated.
+  38 0000 80B4     		push	{r7}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 4
+  41              		.cfi_offset 7, -4
+  42 0002 83B0     		sub	sp, sp, #12
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 16
+  45 0004 00AF     		add	r7, sp, #0
+  46              	.LCFI2:
+  47              		.cfi_def_cfa_register 7
+  48              	.LBB2:
   66:Src/stm32f4xx_hal_msp.c ****   /* USER CODE BEGIN MspInit 0 */
   67:Src/stm32f4xx_hal_msp.c **** 
+ARM GAS  /tmp/cc9P48RB.s 			page 3
+
+
   68:Src/stm32f4xx_hal_msp.c ****   /* USER CODE END MspInit 0 */
   69:Src/stm32f4xx_hal_msp.c **** 
   70:Src/stm32f4xx_hal_msp.c ****   __HAL_RCC_SYSCFG_CLK_ENABLE();
-  37              		.loc 1 70 0
-  38 0002 0021     		movs	r1, #0
-  39 0004 0091     		str	r1, [sp]
-  40 0006 0B4B     		ldr	r3, .L3
-  41 0008 5A6C     		ldr	r2, [r3, #68]
-  42 000a 42F48042 		orr	r2, r2, #16384
-  43 000e 5A64     		str	r2, [r3, #68]
-  44 0010 5A6C     		ldr	r2, [r3, #68]
-  45 0012 02F48042 		and	r2, r2, #16384
-ARM GAS  /tmp/cclBafJL.s 			page 3
-
-
-  46 0016 0092     		str	r2, [sp]
-  47 0018 009A     		ldr	r2, [sp]
-  48              	.LBE2:
-  49              	.LBB3:
+  49              		.loc 1 70 0
+  50 0006 0023     		movs	r3, #0
+  51 0008 7B60     		str	r3, [r7, #4]
+  52 000a 104B     		ldr	r3, .L2
+  53 000c 5B6C     		ldr	r3, [r3, #68]
+  54 000e 0F4A     		ldr	r2, .L2
+  55 0010 43F48043 		orr	r3, r3, #16384
+  56 0014 5364     		str	r3, [r2, #68]
+  57 0016 0D4B     		ldr	r3, .L2
+  58 0018 5B6C     		ldr	r3, [r3, #68]
+  59 001a 03F48043 		and	r3, r3, #16384
+  60 001e 7B60     		str	r3, [r7, #4]
+  61 0020 7B68     		ldr	r3, [r7, #4]
+  62              	.LBE2:
+  63              	.LBB3:
   71:Src/stm32f4xx_hal_msp.c ****   __HAL_RCC_PWR_CLK_ENABLE();
-  50              		.loc 1 71 0
-  51 001a 0191     		str	r1, [sp, #4]
-  52 001c 1A6C     		ldr	r2, [r3, #64]
-  53 001e 42F08052 		orr	r2, r2, #268435456
-  54 0022 1A64     		str	r2, [r3, #64]
-  55 0024 1B6C     		ldr	r3, [r3, #64]
-  56 0026 03F08053 		and	r3, r3, #268435456
-  57 002a 0193     		str	r3, [sp, #4]
-  58 002c 019B     		ldr	r3, [sp, #4]
-  59              	.LBE3:
+  64              		.loc 1 71 0
+  65 0022 0023     		movs	r3, #0
+  66 0024 3B60     		str	r3, [r7]
+  67 0026 094B     		ldr	r3, .L2
+  68 0028 1B6C     		ldr	r3, [r3, #64]
+  69 002a 084A     		ldr	r2, .L2
+  70 002c 43F08053 		orr	r3, r3, #268435456
+  71 0030 1364     		str	r3, [r2, #64]
+  72 0032 064B     		ldr	r3, .L2
+  73 0034 1B6C     		ldr	r3, [r3, #64]
+  74 0036 03F08053 		and	r3, r3, #268435456
+  75 003a 3B60     		str	r3, [r7]
+  76 003c 3B68     		ldr	r3, [r7]
+  77              	.LBE3:
   72:Src/stm32f4xx_hal_msp.c **** 
   73:Src/stm32f4xx_hal_msp.c ****   /* System interrupt init*/
   74:Src/stm32f4xx_hal_msp.c **** 
@@ -143,33 +161,50 @@ ARM GAS  /tmp/cclBafJL.s 			page 1
   76:Src/stm32f4xx_hal_msp.c **** 
   77:Src/stm32f4xx_hal_msp.c ****   /* USER CODE END MspInit 1 */
   78:Src/stm32f4xx_hal_msp.c **** }
-  60              		.loc 1 78 0
-  61 002e 02B0     		add	sp, sp, #8
-  62              	.LCFI1:
-  63              		.cfi_def_cfa_offset 0
-  64              		@ sp needed
-  65 0030 7047     		bx	lr
-  66              	.L4:
-  67 0032 00BF     		.align	2
-  68              	.L3:
-  69 0034 00380240 		.word	1073887232
-  70              		.cfi_endproc
-  71              	.LFE130:
-  73              		.text
-  74              	.Letext0:
-  75              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
-  76              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
-  77              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
-  78              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
-  79              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
-  80              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/cclBafJL.s 			page 4
+  78              		.loc 1 78 0
+  79 003e 00BF     		nop
+  80 0040 0C37     		adds	r7, r7, #12
+  81              	.LCFI3:
+  82              		.cfi_def_cfa_offset 4
+  83 0042 BD46     		mov	sp, r7
+  84              	.LCFI4:
+  85              		.cfi_def_cfa_register 13
+  86              		@ sp needed
+  87 0044 5DF8047B 		ldr	r7, [sp], #4
+  88              	.LCFI5:
+  89              		.cfi_restore 7
+  90              		.cfi_def_cfa_offset 0
+  91 0048 7047     		bx	lr
+  92              	.L3:
+  93 004a 00BF     		.align	2
+  94              	.L2:
+ARM GAS  /tmp/cc9P48RB.s 			page 4
+
+
+  95 004c 00380240 		.word	1073887232
+  96              		.cfi_endproc
+  97              	.LFE130:
+  99              		.text
+ 100              	.Letext0:
+ 101              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 102              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 103              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 104              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 105              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 106              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 107              		.file 8 "la/sampling.h"
+ARM GAS  /tmp/cc9P48RB.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_hal_msp.c
-     /tmp/cclBafJL.s:18     .text.HAL_MspInit:0000000000000000 $t
-     /tmp/cclBafJL.s:25     .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/cclBafJL.s:69     .text.HAL_MspInit:0000000000000034 $d
+                            *COM*:0000000000000004 triggerMask
+                            *COM*:0000000000000004 triggerValue
+                            *COM*:0000000000000002 flags
+                            *COM*:0000000000000002 period
+                            *COM*:0000000000000004 transferSize
+     /tmp/cc9P48RB.s:23     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/cc9P48RB.s:30     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/cc9P48RB.s:95     .text.HAL_MspInit:000000000000004c $d
 
 NO UNDEFINED SYMBOLS
