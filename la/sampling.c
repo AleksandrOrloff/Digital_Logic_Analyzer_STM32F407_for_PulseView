@@ -5,6 +5,7 @@
 static uint32_t transferCount;
 static uint32_t delayCount;
 uint32_t samplingRam[MAX_SAMPLING_RAM/4];
+uint8_t arr[MAX_SAMPLING_RAM];
 
 void SetBufferSize(uint32_t value){
 	transferCount = value;
@@ -36,7 +37,7 @@ void Start()
 	SetupSamplingDMA(samplingRam, transferCount);
 	SetupDelayTimer();
 	SetupRegularEXTITrigger();
-	DMA2->HIFCR = DMA_HIFCR_CTCIF5;
+	DMA2->HIFCR = DMA_HIFCR_CTCIF5; //No half transfer event on stream 5
 	DMA2_Stream5->CR |= DMA_SxCR_EN;
 	TIM1->CR1 |= TIM_CR1_CEN;//enable timer
 }
@@ -75,7 +76,7 @@ void SetupSamplingTimer()
 void SetupSamplingDMA(void *dataBuffer, uint32_t dataTransferCount)
 {
 	//RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_DMA2EN, ENABLE);
-	__HAL_RCC_DMA2_CLK_ENABLE();
+	RCC->AHB1ENR |= RCC_AHB1ENR_DMA2EN;
 	uint32_t dmaSize = CalcDMATransferSize();
 
 	//TIM8->DIER = 0;
@@ -90,7 +91,7 @@ void SetupSamplingDMA(void *dataBuffer, uint32_t dataTransferCount)
 	DMA2_Stream5->PAR  = (uint32_t)&(SAMPLING_PORT->IDR);
 
 	DMA2_Stream5->NDTR = dataTransferCount;//transferCount;// / transferSize;
-	DMA2_Stream5->FCR = DMA_SxFCR_DMDIS | DMA_SxFCR_FTH;
+	DMA2_Stream5->FCR = DMA_SxFCR_DMDIS | DMA_SxFCR_FTH; //disable direct mode, set FIFO-threshold
 }
 
 void SetupDelayTimer()
@@ -198,21 +199,38 @@ void SamplingClearBuffer()
 	int i;
 	for(i = 0; i < MAX_SAMPLING_RAM / 4; i++)
 		samplingRam[i] = 0;
+	for(i = 0; i < MAX_SAMPLING_RAM; i++)
+		arr[i] = 0;
 }
 
 void SamplingComplete()
 {
 	uint32_t i;
 	
-	//__disable_irq();
+	__disable_irq();
 	//SUMP requests samples to be sent in reverse order: newest items first
-	/*int BytesPerTransfer = GetBytesPerTransfer();
-	if(BytesPerTransfer == 1)
+	if(GetBytesPerTransfer() == 1)
 	{
 		uint8_t* ptr = GetBufferTail() - 1;
-		//SUMP requests samples to be sent in reverse order: newest items first
-		uint8_t a;
+		//uint8_t arr[GetBufferSize()];
 		for(i = 0; i < GetBufferTailSize(); i++)
+		{
+			//while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+			arr[i] = *ptr;
+			ptr--;
+		}
+		ptr = GetBuffer() + GetBufferSize() - 1;
+		for(; i < GetBufferSize(); i++)
+		{
+			//while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+			arr[i] = *ptr;
+			ptr--;
+		}
+		uint16_t Len_Arr = (uint16_t)GetBufferSize();
+		while (CDC_Transmit_FS((uint8_t*)arr, Len_Arr) != 0){};
+
+		//SUMP requests samples to be sent in reverse order: newest items first
+		/*for(i = 0; i < GetBufferTailSize(); i++)
 		{
 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
 			ptr--;
@@ -222,7 +240,7 @@ void SamplingComplete()
 		{
 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
 			ptr--;
-		}
+		}*/
 	}
 	else if(GetBytesPerTransfer() == 2)
 	{
@@ -239,7 +257,7 @@ void SamplingComplete()
 			ptr -= GetBytesPerTransfer();
 		}
 	}
-	__enable_irq();*/
+	__enable_irq();
 	
 }
 
@@ -285,41 +303,4 @@ uint8_t* GetBuffer()
 	      //(uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
 		HAL_NVIC_EnableIRQ(irqChannel);
 
-	}
-	//Îòêëþ÷àåò ïðåðûâàíèå
-	void DisableChannel(IRQn_Type irqChannel)
-	{
-	    NVIC->ICER[irqChannel >> 0x05] =
-	      (uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
-	}
-
-	
-	void SetChannelPriority(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
-	{
-	#ifdef STM32L1XX
-		NVIC->IP[(uint32_t)(irqChannel)] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff);
-	#else
-		uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
-		/* Compute the Corresponding IRQ Priority --------------------------------*/
-		tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
-		tmppre = (0x4 - tmppriority);
-		tmpsub = tmpsub >> tmppriority;
-
-		tmppriority = (uint32_t)priority << tmppre;
-		tmppriority |=  subpriority & tmpsub;
-		tmppriority = tmppriority << 0x04;
-		NVIC->IP[irqChannel] = tmppriority;
-	#endif
-	}
-	
-	#define AIRCR_VECTKEY_MASK		((uint32_t)0x05FA0000)
-	#define AIRCR_SYSRESETREQ		((uint32_t)0x00000004)
-
-	void PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
-	{
-		SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
-	}
-	static void SystemReset()
-	{
-		SCB->AIRCR = AIRCR_VECTKEY_MASK | AIRCR_SYSRESETREQ;
 	}

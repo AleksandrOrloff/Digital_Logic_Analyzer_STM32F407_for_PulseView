@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccJRbtUJ.s 			page 1
+ARM GAS  /tmp/ccJjpe8F.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -31,16 +31,17 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
   32              	delayCount:
   33 0000 00000000 		.space	4
   34              		.comm	samplingRam,24576,4
-  35              		.section	.text.SetBufferSize,"ax",%progbits
-  36              		.align	1
-  37              		.global	SetBufferSize
-  38              		.syntax unified
-  39              		.thumb
-  40              		.thumb_func
-  41              		.fpu fpv4-sp-d16
-  43              	SetBufferSize:
-  44              	.LFB133:
-  45              		.file 1 "la/sampling.c"
+  35              		.comm	arr,24576,4
+  36              		.section	.text.SetBufferSize,"ax",%progbits
+  37              		.align	1
+  38              		.global	SetBufferSize
+  39              		.syntax unified
+  40              		.thumb
+  41              		.thumb_func
+  42              		.fpu fpv4-sp-d16
+  44              	SetBufferSize:
+  45              	.LFB133:
+  46              		.file 1 "la/sampling.c"
    1:la/sampling.c **** #include "sampling.h"
    2:la/sampling.c **** #include "sump.h"
    3:la/sampling.c **** #include "usbd_cdc_if.h"
@@ -48,507 +49,508 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
    5:la/sampling.c **** static uint32_t transferCount;
    6:la/sampling.c **** static uint32_t delayCount;
    7:la/sampling.c **** uint32_t samplingRam[MAX_SAMPLING_RAM/4];
-   8:la/sampling.c **** 
-   9:la/sampling.c **** void SetBufferSize(uint32_t value){
-  46              		.loc 1 9 0
-  47              		.cfi_startproc
-  48              		@ args = 0, pretend = 0, frame = 8
-  49              		@ frame_needed = 1, uses_anonymous_args = 0
-  50              		@ link register save eliminated.
-  51 0000 80B4     		push	{r7}
-  52              	.LCFI0:
-  53              		.cfi_def_cfa_offset 4
-ARM GAS  /tmp/ccJRbtUJ.s 			page 2
+   8:la/sampling.c **** uint8_t arr[MAX_SAMPLING_RAM];
+   9:la/sampling.c **** 
+  10:la/sampling.c **** void SetBufferSize(uint32_t value){
+  47              		.loc 1 10 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 8
+  50              		@ frame_needed = 1, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 80B4     		push	{r7}
+ARM GAS  /tmp/ccJjpe8F.s 			page 2
 
 
-  54              		.cfi_offset 7, -4
-  55 0002 83B0     		sub	sp, sp, #12
-  56              	.LCFI1:
-  57              		.cfi_def_cfa_offset 16
-  58 0004 00AF     		add	r7, sp, #0
-  59              	.LCFI2:
-  60              		.cfi_def_cfa_register 7
-  61 0006 7860     		str	r0, [r7, #4]
-  10:la/sampling.c **** 	transferCount = value;
-  62              		.loc 1 10 0
-  63 0008 044A     		ldr	r2, .L2
-  64 000a 7B68     		ldr	r3, [r7, #4]
-  65 000c 1360     		str	r3, [r2]
-  11:la/sampling.c ****     }
-  66              		.loc 1 11 0
-  67 000e 00BF     		nop
-  68 0010 0C37     		adds	r7, r7, #12
-  69              	.LCFI3:
-  70              		.cfi_def_cfa_offset 4
-  71 0012 BD46     		mov	sp, r7
-  72              	.LCFI4:
-  73              		.cfi_def_cfa_register 13
-  74              		@ sp needed
-  75 0014 5DF8047B 		ldr	r7, [sp], #4
-  76              	.LCFI5:
-  77              		.cfi_restore 7
-  78              		.cfi_def_cfa_offset 0
-  79 0018 7047     		bx	lr
-  80              	.L3:
-  81 001a 00BF     		.align	2
-  82              	.L2:
-  83 001c 00000000 		.word	transferCount
-  84              		.cfi_endproc
-  85              	.LFE133:
-  87              		.section	.text.SetDelayCount,"ax",%progbits
-  88              		.align	1
-  89              		.global	SetDelayCount
-  90              		.syntax unified
-  91              		.thumb
-  92              		.thumb_func
-  93              		.fpu fpv4-sp-d16
-  95              	SetDelayCount:
-  96              	.LFB134:
-  12:la/sampling.c **** 
-  13:la/sampling.c **** void SetDelayCount(uint32_t value){
-  97              		.loc 1 13 0
-  98              		.cfi_startproc
-  99              		@ args = 0, pretend = 0, frame = 8
- 100              		@ frame_needed = 1, uses_anonymous_args = 0
- 101              		@ link register save eliminated.
- 102 0000 80B4     		push	{r7}
- 103              	.LCFI6:
- 104              		.cfi_def_cfa_offset 4
- 105              		.cfi_offset 7, -4
- 106 0002 83B0     		sub	sp, sp, #12
- 107              	.LCFI7:
- 108              		.cfi_def_cfa_offset 16
-ARM GAS  /tmp/ccJRbtUJ.s 			page 3
+  53              	.LCFI0:
+  54              		.cfi_def_cfa_offset 4
+  55              		.cfi_offset 7, -4
+  56 0002 83B0     		sub	sp, sp, #12
+  57              	.LCFI1:
+  58              		.cfi_def_cfa_offset 16
+  59 0004 00AF     		add	r7, sp, #0
+  60              	.LCFI2:
+  61              		.cfi_def_cfa_register 7
+  62 0006 7860     		str	r0, [r7, #4]
+  11:la/sampling.c **** 	transferCount = value;
+  63              		.loc 1 11 0
+  64 0008 044A     		ldr	r2, .L2
+  65 000a 7B68     		ldr	r3, [r7, #4]
+  66 000c 1360     		str	r3, [r2]
+  12:la/sampling.c ****     }
+  67              		.loc 1 12 0
+  68 000e 00BF     		nop
+  69 0010 0C37     		adds	r7, r7, #12
+  70              	.LCFI3:
+  71              		.cfi_def_cfa_offset 4
+  72 0012 BD46     		mov	sp, r7
+  73              	.LCFI4:
+  74              		.cfi_def_cfa_register 13
+  75              		@ sp needed
+  76 0014 5DF8047B 		ldr	r7, [sp], #4
+  77              	.LCFI5:
+  78              		.cfi_restore 7
+  79              		.cfi_def_cfa_offset 0
+  80 0018 7047     		bx	lr
+  81              	.L3:
+  82 001a 00BF     		.align	2
+  83              	.L2:
+  84 001c 00000000 		.word	transferCount
+  85              		.cfi_endproc
+  86              	.LFE133:
+  88              		.section	.text.SetDelayCount,"ax",%progbits
+  89              		.align	1
+  90              		.global	SetDelayCount
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  94              		.fpu fpv4-sp-d16
+  96              	SetDelayCount:
+  97              	.LFB134:
+  13:la/sampling.c **** 
+  14:la/sampling.c **** void SetDelayCount(uint32_t value){
+  98              		.loc 1 14 0
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 8
+ 101              		@ frame_needed = 1, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103 0000 80B4     		push	{r7}
+ 104              	.LCFI6:
+ 105              		.cfi_def_cfa_offset 4
+ 106              		.cfi_offset 7, -4
+ 107 0002 83B0     		sub	sp, sp, #12
+ARM GAS  /tmp/ccJjpe8F.s 			page 3
 
 
- 109 0004 00AF     		add	r7, sp, #0
- 110              	.LCFI8:
- 111              		.cfi_def_cfa_register 7
- 112 0006 7860     		str	r0, [r7, #4]
-  14:la/sampling.c **** 	delayCount = value & 0xfffffffe;
- 113              		.loc 1 14 0
- 114 0008 7B68     		ldr	r3, [r7, #4]
- 115 000a 23F00103 		bic	r3, r3, #1
- 116 000e 044A     		ldr	r2, .L5
- 117 0010 1360     		str	r3, [r2]
-  15:la/sampling.c ****     }
- 118              		.loc 1 15 0
- 119 0012 00BF     		nop
- 120 0014 0C37     		adds	r7, r7, #12
- 121              	.LCFI9:
- 122              		.cfi_def_cfa_offset 4
- 123 0016 BD46     		mov	sp, r7
- 124              	.LCFI10:
- 125              		.cfi_def_cfa_register 13
- 126              		@ sp needed
- 127 0018 5DF8047B 		ldr	r7, [sp], #4
- 128              	.LCFI11:
- 129              		.cfi_restore 7
- 130              		.cfi_def_cfa_offset 0
- 131 001c 7047     		bx	lr
- 132              	.L6:
- 133 001e 00BF     		.align	2
- 134              	.L5:
- 135 0020 00000000 		.word	delayCount
- 136              		.cfi_endproc
- 137              	.LFE134:
- 139              		.section	.text.SetTriggerMask,"ax",%progbits
- 140              		.align	1
- 141              		.global	SetTriggerMask
- 142              		.syntax unified
- 143              		.thumb
- 144              		.thumb_func
- 145              		.fpu fpv4-sp-d16
- 147              	SetTriggerMask:
- 148              	.LFB135:
-  16:la/sampling.c **** 
-  17:la/sampling.c **** void SetTriggerMask(uint32_t value){
- 149              		.loc 1 17 0
- 150              		.cfi_startproc
- 151              		@ args = 0, pretend = 0, frame = 8
- 152              		@ frame_needed = 1, uses_anonymous_args = 0
- 153              		@ link register save eliminated.
- 154 0000 80B4     		push	{r7}
- 155              	.LCFI12:
- 156              		.cfi_def_cfa_offset 4
- 157              		.cfi_offset 7, -4
- 158 0002 83B0     		sub	sp, sp, #12
- 159              	.LCFI13:
- 160              		.cfi_def_cfa_offset 16
- 161 0004 00AF     		add	r7, sp, #0
- 162              	.LCFI14:
- 163              		.cfi_def_cfa_register 7
-ARM GAS  /tmp/ccJRbtUJ.s 			page 4
+ 108              	.LCFI7:
+ 109              		.cfi_def_cfa_offset 16
+ 110 0004 00AF     		add	r7, sp, #0
+ 111              	.LCFI8:
+ 112              		.cfi_def_cfa_register 7
+ 113 0006 7860     		str	r0, [r7, #4]
+  15:la/sampling.c **** 	delayCount = value & 0xfffffffe;
+ 114              		.loc 1 15 0
+ 115 0008 7B68     		ldr	r3, [r7, #4]
+ 116 000a 23F00103 		bic	r3, r3, #1
+ 117 000e 044A     		ldr	r2, .L5
+ 118 0010 1360     		str	r3, [r2]
+  16:la/sampling.c ****     }
+ 119              		.loc 1 16 0
+ 120 0012 00BF     		nop
+ 121 0014 0C37     		adds	r7, r7, #12
+ 122              	.LCFI9:
+ 123              		.cfi_def_cfa_offset 4
+ 124 0016 BD46     		mov	sp, r7
+ 125              	.LCFI10:
+ 126              		.cfi_def_cfa_register 13
+ 127              		@ sp needed
+ 128 0018 5DF8047B 		ldr	r7, [sp], #4
+ 129              	.LCFI11:
+ 130              		.cfi_restore 7
+ 131              		.cfi_def_cfa_offset 0
+ 132 001c 7047     		bx	lr
+ 133              	.L6:
+ 134 001e 00BF     		.align	2
+ 135              	.L5:
+ 136 0020 00000000 		.word	delayCount
+ 137              		.cfi_endproc
+ 138              	.LFE134:
+ 140              		.section	.text.SetTriggerMask,"ax",%progbits
+ 141              		.align	1
+ 142              		.global	SetTriggerMask
+ 143              		.syntax unified
+ 144              		.thumb
+ 145              		.thumb_func
+ 146              		.fpu fpv4-sp-d16
+ 148              	SetTriggerMask:
+ 149              	.LFB135:
+  17:la/sampling.c **** 
+  18:la/sampling.c **** void SetTriggerMask(uint32_t value){
+ 150              		.loc 1 18 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 8
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154              		@ link register save eliminated.
+ 155 0000 80B4     		push	{r7}
+ 156              	.LCFI12:
+ 157              		.cfi_def_cfa_offset 4
+ 158              		.cfi_offset 7, -4
+ 159 0002 83B0     		sub	sp, sp, #12
+ 160              	.LCFI13:
+ 161              		.cfi_def_cfa_offset 16
+ 162 0004 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/ccJjpe8F.s 			page 4
 
 
- 164 0006 7860     		str	r0, [r7, #4]
-  18:la/sampling.c ****     triggerMask = value;
- 165              		.loc 1 18 0
- 166 0008 044A     		ldr	r2, .L8
- 167 000a 7B68     		ldr	r3, [r7, #4]
- 168 000c 1360     		str	r3, [r2]
-  19:la/sampling.c ****     }
- 169              		.loc 1 19 0
- 170 000e 00BF     		nop
- 171 0010 0C37     		adds	r7, r7, #12
- 172              	.LCFI15:
- 173              		.cfi_def_cfa_offset 4
- 174 0012 BD46     		mov	sp, r7
- 175              	.LCFI16:
- 176              		.cfi_def_cfa_register 13
- 177              		@ sp needed
- 178 0014 5DF8047B 		ldr	r7, [sp], #4
- 179              	.LCFI17:
- 180              		.cfi_restore 7
- 181              		.cfi_def_cfa_offset 0
- 182 0018 7047     		bx	lr
- 183              	.L9:
- 184 001a 00BF     		.align	2
- 185              	.L8:
- 186 001c 00000000 		.word	triggerMask
- 187              		.cfi_endproc
- 188              	.LFE135:
- 190              		.section	.text.SetTriggerValue,"ax",%progbits
- 191              		.align	1
- 192              		.global	SetTriggerValue
- 193              		.syntax unified
- 194              		.thumb
- 195              		.thumb_func
- 196              		.fpu fpv4-sp-d16
- 198              	SetTriggerValue:
- 199              	.LFB136:
-  20:la/sampling.c **** 
-  21:la/sampling.c **** void SetTriggerValue(uint32_t value){
- 200              		.loc 1 21 0
- 201              		.cfi_startproc
- 202              		@ args = 0, pretend = 0, frame = 8
- 203              		@ frame_needed = 1, uses_anonymous_args = 0
- 204              		@ link register save eliminated.
- 205 0000 80B4     		push	{r7}
- 206              	.LCFI18:
- 207              		.cfi_def_cfa_offset 4
- 208              		.cfi_offset 7, -4
- 209 0002 83B0     		sub	sp, sp, #12
- 210              	.LCFI19:
- 211              		.cfi_def_cfa_offset 16
- 212 0004 00AF     		add	r7, sp, #0
- 213              	.LCFI20:
- 214              		.cfi_def_cfa_register 7
- 215 0006 7860     		str	r0, [r7, #4]
-  22:la/sampling.c ****     triggerValue = value;
- 216              		.loc 1 22 0
- 217 0008 044A     		ldr	r2, .L11
-ARM GAS  /tmp/ccJRbtUJ.s 			page 5
+ 163              	.LCFI14:
+ 164              		.cfi_def_cfa_register 7
+ 165 0006 7860     		str	r0, [r7, #4]
+  19:la/sampling.c ****     triggerMask = value;
+ 166              		.loc 1 19 0
+ 167 0008 044A     		ldr	r2, .L8
+ 168 000a 7B68     		ldr	r3, [r7, #4]
+ 169 000c 1360     		str	r3, [r2]
+  20:la/sampling.c ****     }
+ 170              		.loc 1 20 0
+ 171 000e 00BF     		nop
+ 172 0010 0C37     		adds	r7, r7, #12
+ 173              	.LCFI15:
+ 174              		.cfi_def_cfa_offset 4
+ 175 0012 BD46     		mov	sp, r7
+ 176              	.LCFI16:
+ 177              		.cfi_def_cfa_register 13
+ 178              		@ sp needed
+ 179 0014 5DF8047B 		ldr	r7, [sp], #4
+ 180              	.LCFI17:
+ 181              		.cfi_restore 7
+ 182              		.cfi_def_cfa_offset 0
+ 183 0018 7047     		bx	lr
+ 184              	.L9:
+ 185 001a 00BF     		.align	2
+ 186              	.L8:
+ 187 001c 00000000 		.word	triggerMask
+ 188              		.cfi_endproc
+ 189              	.LFE135:
+ 191              		.section	.text.SetTriggerValue,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	SetTriggerValue
+ 194              		.syntax unified
+ 195              		.thumb
+ 196              		.thumb_func
+ 197              		.fpu fpv4-sp-d16
+ 199              	SetTriggerValue:
+ 200              	.LFB136:
+  21:la/sampling.c **** 
+  22:la/sampling.c **** void SetTriggerValue(uint32_t value){
+ 201              		.loc 1 22 0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 8
+ 204              		@ frame_needed = 1, uses_anonymous_args = 0
+ 205              		@ link register save eliminated.
+ 206 0000 80B4     		push	{r7}
+ 207              	.LCFI18:
+ 208              		.cfi_def_cfa_offset 4
+ 209              		.cfi_offset 7, -4
+ 210 0002 83B0     		sub	sp, sp, #12
+ 211              	.LCFI19:
+ 212              		.cfi_def_cfa_offset 16
+ 213 0004 00AF     		add	r7, sp, #0
+ 214              	.LCFI20:
+ 215              		.cfi_def_cfa_register 7
+ 216 0006 7860     		str	r0, [r7, #4]
+  23:la/sampling.c ****     triggerValue = value;
+ARM GAS  /tmp/ccJjpe8F.s 			page 5
 
 
- 218 000a 7B68     		ldr	r3, [r7, #4]
- 219 000c 1360     		str	r3, [r2]
-  23:la/sampling.c ****     }
- 220              		.loc 1 23 0
- 221 000e 00BF     		nop
- 222 0010 0C37     		adds	r7, r7, #12
- 223              	.LCFI21:
- 224              		.cfi_def_cfa_offset 4
- 225 0012 BD46     		mov	sp, r7
- 226              	.LCFI22:
- 227              		.cfi_def_cfa_register 13
- 228              		@ sp needed
- 229 0014 5DF8047B 		ldr	r7, [sp], #4
- 230              	.LCFI23:
- 231              		.cfi_restore 7
- 232              		.cfi_def_cfa_offset 0
- 233 0018 7047     		bx	lr
- 234              	.L12:
- 235 001a 00BF     		.align	2
- 236              	.L11:
- 237 001c 00000000 		.word	triggerValue
- 238              		.cfi_endproc
- 239              	.LFE136:
- 241              		.section	.text.SetFlags,"ax",%progbits
- 242              		.align	1
- 243              		.global	SetFlags
- 244              		.syntax unified
- 245              		.thumb
- 246              		.thumb_func
- 247              		.fpu fpv4-sp-d16
- 249              	SetFlags:
- 250              	.LFB137:
-  24:la/sampling.c **** 
-  25:la/sampling.c **** void SetFlags(uint32_t value){
- 251              		.loc 1 25 0
- 252              		.cfi_startproc
- 253              		@ args = 0, pretend = 0, frame = 8
- 254              		@ frame_needed = 1, uses_anonymous_args = 0
- 255              		@ link register save eliminated.
- 256 0000 80B4     		push	{r7}
- 257              	.LCFI24:
- 258              		.cfi_def_cfa_offset 4
- 259              		.cfi_offset 7, -4
- 260 0002 83B0     		sub	sp, sp, #12
- 261              	.LCFI25:
- 262              		.cfi_def_cfa_offset 16
- 263 0004 00AF     		add	r7, sp, #0
- 264              	.LCFI26:
- 265              		.cfi_def_cfa_register 7
- 266 0006 7860     		str	r0, [r7, #4]
-  26:la/sampling.c ****     flags = value;
- 267              		.loc 1 26 0
- 268 0008 7B68     		ldr	r3, [r7, #4]
- 269 000a 9AB2     		uxth	r2, r3
- 270 000c 034B     		ldr	r3, .L14
- 271 000e 1A80     		strh	r2, [r3]	@ movhi
-  27:la/sampling.c ****     }
-ARM GAS  /tmp/ccJRbtUJ.s 			page 6
+ 217              		.loc 1 23 0
+ 218 0008 044A     		ldr	r2, .L11
+ 219 000a 7B68     		ldr	r3, [r7, #4]
+ 220 000c 1360     		str	r3, [r2]
+  24:la/sampling.c ****     }
+ 221              		.loc 1 24 0
+ 222 000e 00BF     		nop
+ 223 0010 0C37     		adds	r7, r7, #12
+ 224              	.LCFI21:
+ 225              		.cfi_def_cfa_offset 4
+ 226 0012 BD46     		mov	sp, r7
+ 227              	.LCFI22:
+ 228              		.cfi_def_cfa_register 13
+ 229              		@ sp needed
+ 230 0014 5DF8047B 		ldr	r7, [sp], #4
+ 231              	.LCFI23:
+ 232              		.cfi_restore 7
+ 233              		.cfi_def_cfa_offset 0
+ 234 0018 7047     		bx	lr
+ 235              	.L12:
+ 236 001a 00BF     		.align	2
+ 237              	.L11:
+ 238 001c 00000000 		.word	triggerValue
+ 239              		.cfi_endproc
+ 240              	.LFE136:
+ 242              		.section	.text.SetFlags,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	SetFlags
+ 245              		.syntax unified
+ 246              		.thumb
+ 247              		.thumb_func
+ 248              		.fpu fpv4-sp-d16
+ 250              	SetFlags:
+ 251              	.LFB137:
+  25:la/sampling.c **** 
+  26:la/sampling.c **** void SetFlags(uint32_t value){
+ 252              		.loc 1 26 0
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 8
+ 255              		@ frame_needed = 1, uses_anonymous_args = 0
+ 256              		@ link register save eliminated.
+ 257 0000 80B4     		push	{r7}
+ 258              	.LCFI24:
+ 259              		.cfi_def_cfa_offset 4
+ 260              		.cfi_offset 7, -4
+ 261 0002 83B0     		sub	sp, sp, #12
+ 262              	.LCFI25:
+ 263              		.cfi_def_cfa_offset 16
+ 264 0004 00AF     		add	r7, sp, #0
+ 265              	.LCFI26:
+ 266              		.cfi_def_cfa_register 7
+ 267 0006 7860     		str	r0, [r7, #4]
+  27:la/sampling.c ****     flags = value;
+ 268              		.loc 1 27 0
+ 269 0008 7B68     		ldr	r3, [r7, #4]
+ 270 000a 9AB2     		uxth	r2, r3
+ 271 000c 034B     		ldr	r3, .L14
+ARM GAS  /tmp/ccJjpe8F.s 			page 6
 
 
- 272              		.loc 1 27 0
- 273 0010 00BF     		nop
- 274 0012 0C37     		adds	r7, r7, #12
- 275              	.LCFI27:
- 276              		.cfi_def_cfa_offset 4
- 277 0014 BD46     		mov	sp, r7
- 278              	.LCFI28:
- 279              		.cfi_def_cfa_register 13
- 280              		@ sp needed
- 281 0016 5DF8047B 		ldr	r7, [sp], #4
- 282              	.LCFI29:
- 283              		.cfi_restore 7
- 284              		.cfi_def_cfa_offset 0
- 285 001a 7047     		bx	lr
- 286              	.L15:
- 287              		.align	2
- 288              	.L14:
- 289 001c 00000000 		.word	flags
- 290              		.cfi_endproc
- 291              	.LFE137:
- 293              		.section	.text.SetSamplingPeriod,"ax",%progbits
- 294              		.align	1
- 295              		.global	SetSamplingPeriod
- 296              		.syntax unified
- 297              		.thumb
- 298              		.thumb_func
- 299              		.fpu fpv4-sp-d16
- 301              	SetSamplingPeriod:
- 302              	.LFB138:
-  28:la/sampling.c **** 
-  29:la/sampling.c **** void SetSamplingPeriod(uint32_t value){
- 303              		.loc 1 29 0
- 304              		.cfi_startproc
- 305              		@ args = 0, pretend = 0, frame = 8
- 306              		@ frame_needed = 1, uses_anonymous_args = 0
- 307              		@ link register save eliminated.
- 308 0000 80B4     		push	{r7}
- 309              	.LCFI30:
- 310              		.cfi_def_cfa_offset 4
- 311              		.cfi_offset 7, -4
- 312 0002 83B0     		sub	sp, sp, #12
- 313              	.LCFI31:
- 314              		.cfi_def_cfa_offset 16
- 315 0004 00AF     		add	r7, sp, #0
- 316              	.LCFI32:
- 317              		.cfi_def_cfa_register 7
- 318 0006 7860     		str	r0, [r7, #4]
-  30:la/sampling.c ****     period = value;
- 319              		.loc 1 30 0
- 320 0008 7B68     		ldr	r3, [r7, #4]
- 321 000a 9AB2     		uxth	r2, r3
- 322 000c 034B     		ldr	r3, .L17
- 323 000e 1A80     		strh	r2, [r3]	@ movhi
-  31:la/sampling.c ****     }
- 324              		.loc 1 31 0
- 325 0010 00BF     		nop
- 326 0012 0C37     		adds	r7, r7, #12
-ARM GAS  /tmp/ccJRbtUJ.s 			page 7
+ 272 000e 1A80     		strh	r2, [r3]	@ movhi
+  28:la/sampling.c ****     }
+ 273              		.loc 1 28 0
+ 274 0010 00BF     		nop
+ 275 0012 0C37     		adds	r7, r7, #12
+ 276              	.LCFI27:
+ 277              		.cfi_def_cfa_offset 4
+ 278 0014 BD46     		mov	sp, r7
+ 279              	.LCFI28:
+ 280              		.cfi_def_cfa_register 13
+ 281              		@ sp needed
+ 282 0016 5DF8047B 		ldr	r7, [sp], #4
+ 283              	.LCFI29:
+ 284              		.cfi_restore 7
+ 285              		.cfi_def_cfa_offset 0
+ 286 001a 7047     		bx	lr
+ 287              	.L15:
+ 288              		.align	2
+ 289              	.L14:
+ 290 001c 00000000 		.word	flags
+ 291              		.cfi_endproc
+ 292              	.LFE137:
+ 294              		.section	.text.SetSamplingPeriod,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	SetSamplingPeriod
+ 297              		.syntax unified
+ 298              		.thumb
+ 299              		.thumb_func
+ 300              		.fpu fpv4-sp-d16
+ 302              	SetSamplingPeriod:
+ 303              	.LFB138:
+  29:la/sampling.c **** 
+  30:la/sampling.c **** void SetSamplingPeriod(uint32_t value){
+ 304              		.loc 1 30 0
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 8
+ 307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 308              		@ link register save eliminated.
+ 309 0000 80B4     		push	{r7}
+ 310              	.LCFI30:
+ 311              		.cfi_def_cfa_offset 4
+ 312              		.cfi_offset 7, -4
+ 313 0002 83B0     		sub	sp, sp, #12
+ 314              	.LCFI31:
+ 315              		.cfi_def_cfa_offset 16
+ 316 0004 00AF     		add	r7, sp, #0
+ 317              	.LCFI32:
+ 318              		.cfi_def_cfa_register 7
+ 319 0006 7860     		str	r0, [r7, #4]
+  31:la/sampling.c ****     period = value;
+ 320              		.loc 1 31 0
+ 321 0008 7B68     		ldr	r3, [r7, #4]
+ 322 000a 9AB2     		uxth	r2, r3
+ 323 000c 034B     		ldr	r3, .L17
+ 324 000e 1A80     		strh	r2, [r3]	@ movhi
+  32:la/sampling.c ****     }
+ 325              		.loc 1 32 0
+ARM GAS  /tmp/ccJjpe8F.s 			page 7
 
 
- 327              	.LCFI33:
- 328              		.cfi_def_cfa_offset 4
- 329 0014 BD46     		mov	sp, r7
- 330              	.LCFI34:
- 331              		.cfi_def_cfa_register 13
- 332              		@ sp needed
- 333 0016 5DF8047B 		ldr	r7, [sp], #4
- 334              	.LCFI35:
- 335              		.cfi_restore 7
- 336              		.cfi_def_cfa_offset 0
- 337 001a 7047     		bx	lr
- 338              	.L18:
- 339              		.align	2
- 340              	.L17:
- 341 001c 00000000 		.word	period
- 342              		.cfi_endproc
- 343              	.LFE138:
- 345              		.section	.text.Start,"ax",%progbits
- 346              		.align	1
- 347              		.global	Start
- 348              		.syntax unified
- 349              		.thumb
- 350              		.thumb_func
- 351              		.fpu fpv4-sp-d16
- 353              	Start:
- 354              	.LFB139:
-  32:la/sampling.c **** 
-  33:la/sampling.c **** void Start()
-  34:la/sampling.c **** {
- 355              		.loc 1 34 0
- 356              		.cfi_startproc
- 357              		@ args = 0, pretend = 0, frame = 0
- 358              		@ frame_needed = 1, uses_anonymous_args = 0
- 359 0000 80B5     		push	{r7, lr}
- 360              	.LCFI36:
- 361              		.cfi_def_cfa_offset 8
- 362              		.cfi_offset 7, -8
- 363              		.cfi_offset 14, -4
- 364 0002 00AF     		add	r7, sp, #0
- 365              	.LCFI37:
- 366              		.cfi_def_cfa_register 7
-  35:la/sampling.c ****     SetupSamplingTimer();
- 367              		.loc 1 35 0
- 368 0004 FFF7FEFF 		bl	SetupSamplingTimer
-  36:la/sampling.c **** 	SetupSamplingDMA(samplingRam, transferCount);
- 369              		.loc 1 36 0
- 370 0008 0D4B     		ldr	r3, .L20
- 371 000a 1B68     		ldr	r3, [r3]
- 372 000c 1946     		mov	r1, r3
- 373 000e 0D48     		ldr	r0, .L20+4
- 374 0010 FFF7FEFF 		bl	SetupSamplingDMA
-  37:la/sampling.c **** 	SetupDelayTimer();
- 375              		.loc 1 37 0
- 376 0014 FFF7FEFF 		bl	SetupDelayTimer
-  38:la/sampling.c **** 	SetupRegularEXTITrigger();
- 377              		.loc 1 38 0
- 378 0018 FFF7FEFF 		bl	SetupRegularEXTITrigger
-ARM GAS  /tmp/ccJRbtUJ.s 			page 8
+ 326 0010 00BF     		nop
+ 327 0012 0C37     		adds	r7, r7, #12
+ 328              	.LCFI33:
+ 329              		.cfi_def_cfa_offset 4
+ 330 0014 BD46     		mov	sp, r7
+ 331              	.LCFI34:
+ 332              		.cfi_def_cfa_register 13
+ 333              		@ sp needed
+ 334 0016 5DF8047B 		ldr	r7, [sp], #4
+ 335              	.LCFI35:
+ 336              		.cfi_restore 7
+ 337              		.cfi_def_cfa_offset 0
+ 338 001a 7047     		bx	lr
+ 339              	.L18:
+ 340              		.align	2
+ 341              	.L17:
+ 342 001c 00000000 		.word	period
+ 343              		.cfi_endproc
+ 344              	.LFE138:
+ 346              		.section	.text.Start,"ax",%progbits
+ 347              		.align	1
+ 348              		.global	Start
+ 349              		.syntax unified
+ 350              		.thumb
+ 351              		.thumb_func
+ 352              		.fpu fpv4-sp-d16
+ 354              	Start:
+ 355              	.LFB139:
+  33:la/sampling.c **** 
+  34:la/sampling.c **** void Start()
+  35:la/sampling.c **** {
+ 356              		.loc 1 35 0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 1, uses_anonymous_args = 0
+ 360 0000 80B5     		push	{r7, lr}
+ 361              	.LCFI36:
+ 362              		.cfi_def_cfa_offset 8
+ 363              		.cfi_offset 7, -8
+ 364              		.cfi_offset 14, -4
+ 365 0002 00AF     		add	r7, sp, #0
+ 366              	.LCFI37:
+ 367              		.cfi_def_cfa_register 7
+  36:la/sampling.c ****     SetupSamplingTimer();
+ 368              		.loc 1 36 0
+ 369 0004 FFF7FEFF 		bl	SetupSamplingTimer
+  37:la/sampling.c **** 	SetupSamplingDMA(samplingRam, transferCount);
+ 370              		.loc 1 37 0
+ 371 0008 0D4B     		ldr	r3, .L20
+ 372 000a 1B68     		ldr	r3, [r3]
+ 373 000c 1946     		mov	r1, r3
+ 374 000e 0D48     		ldr	r0, .L20+4
+ 375 0010 FFF7FEFF 		bl	SetupSamplingDMA
+  38:la/sampling.c **** 	SetupDelayTimer();
+ 376              		.loc 1 38 0
+ 377 0014 FFF7FEFF 		bl	SetupDelayTimer
+  39:la/sampling.c **** 	SetupRegularEXTITrigger();
+ARM GAS  /tmp/ccJjpe8F.s 			page 8
 
 
-  39:la/sampling.c **** 	DMA2->HIFCR = DMA_HIFCR_CTCIF5;
- 379              		.loc 1 39 0
- 380 001c 0A4B     		ldr	r3, .L20+8
- 381 001e 4FF40062 		mov	r2, #2048
- 382 0022 DA60     		str	r2, [r3, #12]
-  40:la/sampling.c **** 	DMA2_Stream5->CR |= DMA_SxCR_EN;
- 383              		.loc 1 40 0
- 384 0024 094B     		ldr	r3, .L20+12
- 385 0026 1B68     		ldr	r3, [r3]
- 386 0028 084A     		ldr	r2, .L20+12
- 387 002a 43F00103 		orr	r3, r3, #1
- 388 002e 1360     		str	r3, [r2]
-  41:la/sampling.c **** 	TIM1->CR1 |= TIM_CR1_CEN;//enable timer
- 389              		.loc 1 41 0
- 390 0030 074B     		ldr	r3, .L20+16
- 391 0032 1B68     		ldr	r3, [r3]
- 392 0034 064A     		ldr	r2, .L20+16
- 393 0036 43F00103 		orr	r3, r3, #1
- 394 003a 1360     		str	r3, [r2]
-  42:la/sampling.c **** }
- 395              		.loc 1 42 0
- 396 003c 00BF     		nop
- 397 003e 80BD     		pop	{r7, pc}
- 398              	.L21:
- 399              		.align	2
- 400              	.L20:
- 401 0040 00000000 		.word	transferCount
- 402 0044 00000000 		.word	samplingRam
- 403 0048 00640240 		.word	1073898496
- 404 004c 88640240 		.word	1073898632
- 405 0050 00000140 		.word	1073807360
- 406              		.cfi_endproc
- 407              	.LFE139:
- 409              		.section	.text.Stop,"ax",%progbits
- 410              		.align	1
- 411              		.global	Stop
- 412              		.syntax unified
- 413              		.thumb
- 414              		.thumb_func
- 415              		.fpu fpv4-sp-d16
- 417              	Stop:
- 418              	.LFB140:
-  43:la/sampling.c **** 
-  44:la/sampling.c **** void Stop()
-  45:la/sampling.c **** {
- 419              		.loc 1 45 0
- 420              		.cfi_startproc
- 421              		@ args = 0, pretend = 0, frame = 0
- 422              		@ frame_needed = 1, uses_anonymous_args = 0
- 423              		@ link register save eliminated.
- 424 0000 80B4     		push	{r7}
- 425              	.LCFI38:
- 426              		.cfi_def_cfa_offset 4
- 427              		.cfi_offset 7, -4
- 428 0002 00AF     		add	r7, sp, #0
- 429              	.LCFI39:
- 430              		.cfi_def_cfa_register 7
-ARM GAS  /tmp/ccJRbtUJ.s 			page 9
+ 378              		.loc 1 39 0
+ 379 0018 FFF7FEFF 		bl	SetupRegularEXTITrigger
+  40:la/sampling.c **** 	DMA2->HIFCR = DMA_HIFCR_CTCIF5; //No half transfer event on stream 5
+ 380              		.loc 1 40 0
+ 381 001c 0A4B     		ldr	r3, .L20+8
+ 382 001e 4FF40062 		mov	r2, #2048
+ 383 0022 DA60     		str	r2, [r3, #12]
+  41:la/sampling.c **** 	DMA2_Stream5->CR |= DMA_SxCR_EN;
+ 384              		.loc 1 41 0
+ 385 0024 094B     		ldr	r3, .L20+12
+ 386 0026 1B68     		ldr	r3, [r3]
+ 387 0028 084A     		ldr	r2, .L20+12
+ 388 002a 43F00103 		orr	r3, r3, #1
+ 389 002e 1360     		str	r3, [r2]
+  42:la/sampling.c **** 	TIM1->CR1 |= TIM_CR1_CEN;//enable timer
+ 390              		.loc 1 42 0
+ 391 0030 074B     		ldr	r3, .L20+16
+ 392 0032 1B68     		ldr	r3, [r3]
+ 393 0034 064A     		ldr	r2, .L20+16
+ 394 0036 43F00103 		orr	r3, r3, #1
+ 395 003a 1360     		str	r3, [r2]
+  43:la/sampling.c **** }
+ 396              		.loc 1 43 0
+ 397 003c 00BF     		nop
+ 398 003e 80BD     		pop	{r7, pc}
+ 399              	.L21:
+ 400              		.align	2
+ 401              	.L20:
+ 402 0040 00000000 		.word	transferCount
+ 403 0044 00000000 		.word	samplingRam
+ 404 0048 00640240 		.word	1073898496
+ 405 004c 88640240 		.word	1073898632
+ 406 0050 00000140 		.word	1073807360
+ 407              		.cfi_endproc
+ 408              	.LFE139:
+ 410              		.section	.text.Stop,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	Stop
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 416              		.fpu fpv4-sp-d16
+ 418              	Stop:
+ 419              	.LFB140:
+  44:la/sampling.c **** 
+  45:la/sampling.c **** void Stop()
+  46:la/sampling.c **** {
+ 420              		.loc 1 46 0
+ 421              		.cfi_startproc
+ 422              		@ args = 0, pretend = 0, frame = 0
+ 423              		@ frame_needed = 1, uses_anonymous_args = 0
+ 424              		@ link register save eliminated.
+ 425 0000 80B4     		push	{r7}
+ 426              	.LCFI38:
+ 427              		.cfi_def_cfa_offset 4
+ 428              		.cfi_offset 7, -4
+ 429 0002 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/ccJjpe8F.s 			page 9
 
 
-  46:la/sampling.c **** 	DMA2_Stream5->CR &= ~(DMA_SxCR_TCIE | DMA_SxCR_EN);//stop dma
- 431              		.loc 1 46 0
- 432 0004 084B     		ldr	r3, .L23
- 433 0006 1B68     		ldr	r3, [r3]
- 434 0008 074A     		ldr	r2, .L23
- 435 000a 23F01103 		bic	r3, r3, #17
- 436 000e 1360     		str	r3, [r2]
-  47:la/sampling.c **** 	TIM1->CR1 &= ~TIM_CR1_CEN;//stop sampling timer
- 437              		.loc 1 47 0
- 438 0010 064B     		ldr	r3, .L23+4
- 439 0012 1B68     		ldr	r3, [r3]
- 440 0014 054A     		ldr	r2, .L23+4
- 441 0016 23F00103 		bic	r3, r3, #1
- 442 001a 1360     		str	r3, [r2]
-  48:la/sampling.c **** }
- 443              		.loc 1 48 0
- 444 001c 00BF     		nop
- 445 001e BD46     		mov	sp, r7
- 446              	.LCFI40:
- 447              		.cfi_def_cfa_register 13
- 448              		@ sp needed
- 449 0020 5DF8047B 		ldr	r7, [sp], #4
- 450              	.LCFI41:
- 451              		.cfi_restore 7
- 452              		.cfi_def_cfa_offset 0
- 453 0024 7047     		bx	lr
- 454              	.L24:
- 455 0026 00BF     		.align	2
- 456              	.L23:
- 457 0028 88640240 		.word	1073898632
- 458 002c 00000140 		.word	1073807360
- 459              		.cfi_endproc
- 460              	.LFE140:
- 462              		.section	.text.Arm,"ax",%progbits
- 463              		.align	1
- 464              		.global	Arm
- 465              		.syntax unified
- 466              		.thumb
- 467              		.thumb_func
- 468              		.fpu fpv4-sp-d16
- 470              	Arm:
- 471              	.LFB141:
-  49:la/sampling.c **** 
-  50:la/sampling.c **** void Arm()
-  51:la/sampling.c **** {
- 472              		.loc 1 51 0
- 473              		.cfi_startproc
- 474              		@ args = 0, pretend = 0, frame = 0
- 475              		@ frame_needed = 1, uses_anonymous_args = 0
- 476              		@ link register save eliminated.
- 477 0000 80B4     		push	{r7}
- 478              	.LCFI42:
- 479              		.cfi_def_cfa_offset 4
- 480              		.cfi_offset 7, -4
- 481 0002 00AF     		add	r7, sp, #0
- 482              	.LCFI43:
- 483              		.cfi_def_cfa_register 7
-ARM GAS  /tmp/ccJRbtUJ.s 			page 10
+ 430              	.LCFI39:
+ 431              		.cfi_def_cfa_register 7
+  47:la/sampling.c **** 	DMA2_Stream5->CR &= ~(DMA_SxCR_TCIE | DMA_SxCR_EN);//stop dma
+ 432              		.loc 1 47 0
+ 433 0004 084B     		ldr	r3, .L23
+ 434 0006 1B68     		ldr	r3, [r3]
+ 435 0008 074A     		ldr	r2, .L23
+ 436 000a 23F01103 		bic	r3, r3, #17
+ 437 000e 1360     		str	r3, [r2]
+  48:la/sampling.c **** 	TIM1->CR1 &= ~TIM_CR1_CEN;//stop sampling timer
+ 438              		.loc 1 48 0
+ 439 0010 064B     		ldr	r3, .L23+4
+ 440 0012 1B68     		ldr	r3, [r3]
+ 441 0014 054A     		ldr	r2, .L23+4
+ 442 0016 23F00103 		bic	r3, r3, #1
+ 443 001a 1360     		str	r3, [r2]
+  49:la/sampling.c **** }
+ 444              		.loc 1 49 0
+ 445 001c 00BF     		nop
+ 446 001e BD46     		mov	sp, r7
+ 447              	.LCFI40:
+ 448              		.cfi_def_cfa_register 13
+ 449              		@ sp needed
+ 450 0020 5DF8047B 		ldr	r7, [sp], #4
+ 451              	.LCFI41:
+ 452              		.cfi_restore 7
+ 453              		.cfi_def_cfa_offset 0
+ 454 0024 7047     		bx	lr
+ 455              	.L24:
+ 456 0026 00BF     		.align	2
+ 457              	.L23:
+ 458 0028 88640240 		.word	1073898632
+ 459 002c 00000140 		.word	1073807360
+ 460              		.cfi_endproc
+ 461              	.LFE140:
+ 463              		.section	.text.Arm,"ax",%progbits
+ 464              		.align	1
+ 465              		.global	Arm
+ 466              		.syntax unified
+ 467              		.thumb
+ 468              		.thumb_func
+ 469              		.fpu fpv4-sp-d16
+ 471              	Arm:
+ 472              	.LFB141:
+  50:la/sampling.c **** 
+  51:la/sampling.c **** void Arm()
+  52:la/sampling.c **** {
+ 473              		.loc 1 52 0
+ 474              		.cfi_startproc
+ 475              		@ args = 0, pretend = 0, frame = 0
+ 476              		@ frame_needed = 1, uses_anonymous_args = 0
+ 477              		@ link register save eliminated.
+ 478 0000 80B4     		push	{r7}
+ 479              	.LCFI42:
+ 480              		.cfi_def_cfa_offset 4
+ 481              		.cfi_offset 7, -4
+ 482 0002 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/ccJjpe8F.s 			page 10
 
 
-  52:la/sampling.c **** 	EXTI->PR = 0xffffffff;//clear pending
- 484              		.loc 1 52 0
- 485 0004 074B     		ldr	r3, .L26
- 486 0006 4FF0FF32 		mov	r2, #-1
- 487 000a 5A61     		str	r2, [r3, #20]
- 488              	.LBB7:
- 489              	.LBB8:
- 490              		.file 2 "Drivers/CMSIS/Include/cmsis_gcc.h"
+ 483              	.LCFI43:
+ 484              		.cfi_def_cfa_register 7
+  53:la/sampling.c **** 	EXTI->PR = 0xffffffff;//clear pending
+ 485              		.loc 1 53 0
+ 486 0004 074B     		ldr	r3, .L26
+ 487 0006 4FF0FF32 		mov	r2, #-1
+ 488 000a 5A61     		str	r2, [r3, #20]
+ 489              	.LBB13:
+ 490              	.LBB14:
+ 491              		.file 2 "Drivers/CMSIS/Include/cmsis_gcc.h"
    1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -596,11 +598,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
   45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
   47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+ARM GAS  /tmp/ccJjpe8F.s 			page 11
+
+
   48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
-ARM GAS  /tmp/ccJRbtUJ.s 			page 11
-
-
   50:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
   51:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
   52:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
@@ -656,11 +658,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
  103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
  104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ARM GAS  /tmp/ccJjpe8F.s 			page 12
+
+
  105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
  106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
-ARM GAS  /tmp/ccJRbtUJ.s 			page 12
-
-
  107:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
  108:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
  109:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -716,11 +718,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  159:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  160:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  161:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccJjpe8F.s 			page 13
+
+
  162:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
  163:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the non-secure Control Register when in secure mode.
-ARM GAS  /tmp/ccJRbtUJ.s 			page 13
-
-
  164:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               non-secure Control Register value
  165:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  166:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_CONTROL_NS(void)
@@ -776,11 +778,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  216:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
  217:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               APSR Register value
  218:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccJjpe8F.s 			page 14
+
+
  219:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_APSR(void)
  220:Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccJRbtUJ.s 			page 14
-
-
  221:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
  222:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  223:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
@@ -836,11 +838,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  273:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
  274:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
  275:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
+ARM GAS  /tmp/ccJjpe8F.s 			page 15
+
+
  276:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  277:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PSP(uint32_t topOfProcStack)
-ARM GAS  /tmp/ccJRbtUJ.s 			page 15
-
-
  278:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  279:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psp, %0" : : "r" (topOfProcStack) : );
  280:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -896,11 +898,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  330:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  331:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
  332:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccJjpe8F.s 			page 16
+
+
  333:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0" : : "r" (topOfMainStack) : );
  334:Drivers/CMSIS/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccJRbtUJ.s 			page 16
-
-
  335:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  336:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  337:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -956,11 +958,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  387:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
  388:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  389:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccJjpe8F.s 			page 17
+
+
  390:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  391:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
-ARM GAS  /tmp/ccJRbtUJ.s 			page 17
-
-
  392:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  393:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Priority Mask (non-secure)
  394:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current state of the non-secure priority mask bit from the Priority Mask Reg
@@ -1016,11 +1018,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  444:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  445:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  446:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable FIQ
+ARM GAS  /tmp/ccJjpe8F.s 			page 18
+
+
  447:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
  448:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
-ARM GAS  /tmp/ccJRbtUJ.s 			page 18
-
-
  449:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  450:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_fault_irq(void)
  451:Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -1076,11 +1078,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  501:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
  502:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  503:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri)
+ARM GAS  /tmp/ccJjpe8F.s 			page 19
+
+
  504:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  505:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri_ns, %0" : : "r" (basePri) : "memory");
-ARM GAS  /tmp/ccJRbtUJ.s 			page 19
-
-
  506:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  507:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
  508:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1136,11 +1138,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  558:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  559:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
  560:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccJjpe8F.s 			page 20
+
+
  561:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  562:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccJRbtUJ.s 			page 20
-
-
  563:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  564:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  565:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Fault Mask (non-secure)
@@ -1196,11 +1198,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  615:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  616:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
  617:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
+ARM GAS  /tmp/ccJjpe8F.s 			page 21
+
+
  618:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
  619:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
-ARM GAS  /tmp/ccJRbtUJ.s 			page 21
-
-
  620:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
  621:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psplim_ns"  : "=r" (result) );
  622:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
@@ -1256,11 +1258,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  672:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  673:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
  674:Drivers/CMSIS/Include/cmsis_gcc.h ****   mode.
+ARM GAS  /tmp/ccJjpe8F.s 			page 22
+
+
  675:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  676:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer Limit (MSPLIM).
-ARM GAS  /tmp/ccJRbtUJ.s 			page 22
-
-
  677:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               MSPLIM Register value
  678:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  679:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_MSPLIM(void)
@@ -1316,11 +1318,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  729:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
  730:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
  731:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
+ARM GAS  /tmp/ccJjpe8F.s 			page 23
+
+
  732:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim, %0" : : "r" (MainStackPtrLimit));
  733:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccJRbtUJ.s 			page 23
-
-
  734:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  735:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  736:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1376,11 +1378,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  786:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  787:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  788:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set FPSCR
+ARM GAS  /tmp/ccJjpe8F.s 			page 24
+
+
  789:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Floating Point Status/Control register.
  790:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    fpscr  Floating Point Status/Control value to set
-ARM GAS  /tmp/ccJRbtUJ.s 			page 24
-
-
  791:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  792:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
  793:Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -1436,11 +1438,11 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  843:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  844:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  845:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccJjpe8F.s 			page 25
+
+
  846:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Wait For Event
  847:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Wait For Event is a hint instruction that permits the processor to enter
-ARM GAS  /tmp/ccJRbtUJ.s 			page 25
-
-
  848:Drivers/CMSIS/Include/cmsis_gcc.h ****            a low-power state until one of a number of events occurs.
  849:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  850:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __WFE()                             __ASM volatile ("wfe")
@@ -1473,1684 +1475,1636 @@ ARM GAS  /tmp/ccJRbtUJ.s 			page 1
  877:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __DSB(void)
  878:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  879:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("dsb 0xF":::"memory");
- 491              		.loc 2 879 0
- 492              		.syntax unified
- 493              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 494 000c BFF34F8F 		dsb 0xF
- 495              	@ 0 "" 2
- 496              		.thumb
- 497              		.syntax unified
- 498              	.LBE8:
- 499              	.LBE7:
-  53:la/sampling.c **** 	__DSB();
-  54:la/sampling.c **** 	EXTI->IMR = triggerMask;
- 500              		.loc 1 54 0
- 501 0010 044A     		ldr	r2, .L26
- 502 0012 054B     		ldr	r3, .L26+4
- 503 0014 1B68     		ldr	r3, [r3]
- 504 0016 1360     		str	r3, [r2]
-  55:la/sampling.c **** 
-  56:la/sampling.c **** 	//comletionHandler = handler;
-  57:la/sampling.c **** }
- 505              		.loc 1 57 0
- 506 0018 00BF     		nop
- 507 001a BD46     		mov	sp, r7
- 508              	.LCFI44:
- 509              		.cfi_def_cfa_register 13
- 510              		@ sp needed
-ARM GAS  /tmp/ccJRbtUJ.s 			page 26
+ 492              		.loc 2 879 0
+ 493              		.syntax unified
+ 494              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 495 000c BFF34F8F 		dsb 0xF
+ 496              	@ 0 "" 2
+ 497              		.thumb
+ 498              		.syntax unified
+ 499              	.LBE14:
+ 500              	.LBE13:
+  54:la/sampling.c **** 	__DSB();
+  55:la/sampling.c **** 	EXTI->IMR = triggerMask;
+ 501              		.loc 1 55 0
+ 502 0010 044A     		ldr	r2, .L26
+ 503 0012 054B     		ldr	r3, .L26+4
+ 504 0014 1B68     		ldr	r3, [r3]
+ 505 0016 1360     		str	r3, [r2]
+  56:la/sampling.c **** 
+  57:la/sampling.c **** 	//comletionHandler = handler;
+  58:la/sampling.c **** }
+ 506              		.loc 1 58 0
+ 507 0018 00BF     		nop
+ 508 001a BD46     		mov	sp, r7
+ 509              	.LCFI44:
+ARM GAS  /tmp/ccJjpe8F.s 			page 26
 
 
- 511 001c 5DF8047B 		ldr	r7, [sp], #4
- 512              	.LCFI45:
- 513              		.cfi_restore 7
- 514              		.cfi_def_cfa_offset 0
- 515 0020 7047     		bx	lr
- 516              	.L27:
- 517 0022 00BF     		.align	2
- 518              	.L26:
- 519 0024 003C0140 		.word	1073822720
- 520 0028 00000000 		.word	triggerMask
- 521              		.cfi_endproc
- 522              	.LFE141:
- 524              		.section	.text.SetupSamplingTimer,"ax",%progbits
- 525              		.align	1
- 526              		.global	SetupSamplingTimer
- 527              		.syntax unified
- 528              		.thumb
- 529              		.thumb_func
- 530              		.fpu fpv4-sp-d16
- 532              	SetupSamplingTimer:
- 533              	.LFB142:
-  58:la/sampling.c **** 
-  59:la/sampling.c **** void SetupSamplingTimer()
-  60:la/sampling.c **** {
- 534              		.loc 1 60 0
- 535              		.cfi_startproc
- 536              		@ args = 0, pretend = 0, frame = 8
- 537              		@ frame_needed = 1, uses_anonymous_args = 0
- 538              		@ link register save eliminated.
- 539 0000 80B4     		push	{r7}
- 540              	.LCFI46:
- 541              		.cfi_def_cfa_offset 4
- 542              		.cfi_offset 7, -4
- 543 0002 83B0     		sub	sp, sp, #12
- 544              	.LCFI47:
- 545              		.cfi_def_cfa_offset 16
- 546 0004 00AF     		add	r7, sp, #0
- 547              	.LCFI48:
- 548              		.cfi_def_cfa_register 7
- 549              	.LBB9:
-  61:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM1EN, ENABLE);
-  62:la/sampling.c **** 	__HAL_RCC_TIM1_CLK_ENABLE();
- 550              		.loc 1 62 0
- 551 0006 0023     		movs	r3, #0
- 552 0008 7B60     		str	r3, [r7, #4]
- 553 000a 194B     		ldr	r3, .L29
- 554 000c 5B6C     		ldr	r3, [r3, #68]
- 555 000e 184A     		ldr	r2, .L29
- 556 0010 43F00103 		orr	r3, r3, #1
- 557 0014 5364     		str	r3, [r2, #68]
- 558 0016 164B     		ldr	r3, .L29
- 559 0018 5B6C     		ldr	r3, [r3, #68]
- 560 001a 03F00103 		and	r3, r3, #1
- 561 001e 7B60     		str	r3, [r7, #4]
- 562 0020 7B68     		ldr	r3, [r7, #4]
- 563              	.LBE9:
-  63:la/sampling.c **** 	//Main sampling timer
-ARM GAS  /tmp/ccJRbtUJ.s 			page 27
+ 510              		.cfi_def_cfa_register 13
+ 511              		@ sp needed
+ 512 001c 5DF8047B 		ldr	r7, [sp], #4
+ 513              	.LCFI45:
+ 514              		.cfi_restore 7
+ 515              		.cfi_def_cfa_offset 0
+ 516 0020 7047     		bx	lr
+ 517              	.L27:
+ 518 0022 00BF     		.align	2
+ 519              	.L26:
+ 520 0024 003C0140 		.word	1073822720
+ 521 0028 00000000 		.word	triggerMask
+ 522              		.cfi_endproc
+ 523              	.LFE141:
+ 525              		.section	.text.SetupSamplingTimer,"ax",%progbits
+ 526              		.align	1
+ 527              		.global	SetupSamplingTimer
+ 528              		.syntax unified
+ 529              		.thumb
+ 530              		.thumb_func
+ 531              		.fpu fpv4-sp-d16
+ 533              	SetupSamplingTimer:
+ 534              	.LFB142:
+  59:la/sampling.c **** 
+  60:la/sampling.c **** void SetupSamplingTimer()
+  61:la/sampling.c **** {
+ 535              		.loc 1 61 0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 8
+ 538              		@ frame_needed = 1, uses_anonymous_args = 0
+ 539              		@ link register save eliminated.
+ 540 0000 80B4     		push	{r7}
+ 541              	.LCFI46:
+ 542              		.cfi_def_cfa_offset 4
+ 543              		.cfi_offset 7, -4
+ 544 0002 83B0     		sub	sp, sp, #12
+ 545              	.LCFI47:
+ 546              		.cfi_def_cfa_offset 16
+ 547 0004 00AF     		add	r7, sp, #0
+ 548              	.LCFI48:
+ 549              		.cfi_def_cfa_register 7
+ 550              	.LBB15:
+  62:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM1EN, ENABLE);
+  63:la/sampling.c **** 	__HAL_RCC_TIM1_CLK_ENABLE();
+ 551              		.loc 1 63 0
+ 552 0006 0023     		movs	r3, #0
+ 553 0008 7B60     		str	r3, [r7, #4]
+ 554 000a 194B     		ldr	r3, .L29
+ 555 000c 5B6C     		ldr	r3, [r3, #68]
+ 556 000e 184A     		ldr	r2, .L29
+ 557 0010 43F00103 		orr	r3, r3, #1
+ 558 0014 5364     		str	r3, [r2, #68]
+ 559 0016 164B     		ldr	r3, .L29
+ 560 0018 5B6C     		ldr	r3, [r3, #68]
+ 561 001a 03F00103 		and	r3, r3, #1
+ 562 001e 7B60     		str	r3, [r7, #4]
+ 563 0020 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccJjpe8F.s 			page 27
 
 
-  64:la/sampling.c **** 	TIM1->DIER = 0;
- 564              		.loc 1 64 0
- 565 0022 144B     		ldr	r3, .L29+4
- 566 0024 0022     		movs	r2, #0
- 567 0026 DA60     		str	r2, [r3, #12]
-  65:la/sampling.c **** 	TIM1->SR &= ~TIM_SR_UIF;
- 568              		.loc 1 65 0
- 569 0028 124B     		ldr	r3, .L29+4
- 570 002a 1B69     		ldr	r3, [r3, #16]
- 571 002c 114A     		ldr	r2, .L29+4
- 572 002e 23F00103 		bic	r3, r3, #1
- 573 0032 1361     		str	r3, [r2, #16]
-  66:la/sampling.c **** 	TIM1->CNT = 0;
- 574              		.loc 1 66 0
- 575 0034 0F4B     		ldr	r3, .L29+4
- 576 0036 0022     		movs	r2, #0
- 577 0038 5A62     		str	r2, [r3, #36]
-  67:la/sampling.c **** 	TIM1->PSC = 0;
- 578              		.loc 1 67 0
- 579 003a 0E4B     		ldr	r3, .L29+4
- 580 003c 0022     		movs	r2, #0
- 581 003e 9A62     		str	r2, [r3, #40]
-  68:la/sampling.c **** 	TIM1->CR1 = TIM_CR1_URS;
- 582              		.loc 1 68 0
- 583 0040 0C4B     		ldr	r3, .L29+4
- 584 0042 0422     		movs	r2, #4
- 585 0044 1A60     		str	r2, [r3]
-  69:la/sampling.c **** 	TIM1->ARR = period;//actual period is +1 of this value
- 586              		.loc 1 69 0
- 587 0046 0C4B     		ldr	r3, .L29+8
- 588 0048 1A88     		ldrh	r2, [r3]
- 589 004a 0A4B     		ldr	r3, .L29+4
- 590 004c DA62     		str	r2, [r3, #44]
-  70:la/sampling.c **** 	TIM1->CR2 = 0;
- 591              		.loc 1 70 0
- 592 004e 094B     		ldr	r3, .L29+4
- 593 0050 0022     		movs	r2, #0
- 594 0052 5A60     		str	r2, [r3, #4]
-  71:la/sampling.c **** 	TIM1->DIER = TIM_DIER_UDE;
- 595              		.loc 1 71 0
- 596 0054 074B     		ldr	r3, .L29+4
- 597 0056 4FF48072 		mov	r2, #256
- 598 005a DA60     		str	r2, [r3, #12]
-  72:la/sampling.c **** 	TIM1->EGR = TIM_EGR_UG;
- 599              		.loc 1 72 0
- 600 005c 054B     		ldr	r3, .L29+4
- 601 005e 0122     		movs	r2, #1
- 602 0060 5A61     		str	r2, [r3, #20]
-  73:la/sampling.c **** }
- 603              		.loc 1 73 0
- 604 0062 00BF     		nop
- 605 0064 0C37     		adds	r7, r7, #12
- 606              	.LCFI49:
- 607              		.cfi_def_cfa_offset 4
- 608 0066 BD46     		mov	sp, r7
- 609              	.LCFI50:
- 610              		.cfi_def_cfa_register 13
-ARM GAS  /tmp/ccJRbtUJ.s 			page 28
+ 564              	.LBE15:
+  64:la/sampling.c **** 	//Main sampling timer
+  65:la/sampling.c **** 	TIM1->DIER = 0;
+ 565              		.loc 1 65 0
+ 566 0022 144B     		ldr	r3, .L29+4
+ 567 0024 0022     		movs	r2, #0
+ 568 0026 DA60     		str	r2, [r3, #12]
+  66:la/sampling.c **** 	TIM1->SR &= ~TIM_SR_UIF;
+ 569              		.loc 1 66 0
+ 570 0028 124B     		ldr	r3, .L29+4
+ 571 002a 1B69     		ldr	r3, [r3, #16]
+ 572 002c 114A     		ldr	r2, .L29+4
+ 573 002e 23F00103 		bic	r3, r3, #1
+ 574 0032 1361     		str	r3, [r2, #16]
+  67:la/sampling.c **** 	TIM1->CNT = 0;
+ 575              		.loc 1 67 0
+ 576 0034 0F4B     		ldr	r3, .L29+4
+ 577 0036 0022     		movs	r2, #0
+ 578 0038 5A62     		str	r2, [r3, #36]
+  68:la/sampling.c **** 	TIM1->PSC = 0;
+ 579              		.loc 1 68 0
+ 580 003a 0E4B     		ldr	r3, .L29+4
+ 581 003c 0022     		movs	r2, #0
+ 582 003e 9A62     		str	r2, [r3, #40]
+  69:la/sampling.c **** 	TIM1->CR1 = TIM_CR1_URS;
+ 583              		.loc 1 69 0
+ 584 0040 0C4B     		ldr	r3, .L29+4
+ 585 0042 0422     		movs	r2, #4
+ 586 0044 1A60     		str	r2, [r3]
+  70:la/sampling.c **** 	TIM1->ARR = period;//actual period is +1 of this value
+ 587              		.loc 1 70 0
+ 588 0046 0C4B     		ldr	r3, .L29+8
+ 589 0048 1A88     		ldrh	r2, [r3]
+ 590 004a 0A4B     		ldr	r3, .L29+4
+ 591 004c DA62     		str	r2, [r3, #44]
+  71:la/sampling.c **** 	TIM1->CR2 = 0;
+ 592              		.loc 1 71 0
+ 593 004e 094B     		ldr	r3, .L29+4
+ 594 0050 0022     		movs	r2, #0
+ 595 0052 5A60     		str	r2, [r3, #4]
+  72:la/sampling.c **** 	TIM1->DIER = TIM_DIER_UDE;
+ 596              		.loc 1 72 0
+ 597 0054 074B     		ldr	r3, .L29+4
+ 598 0056 4FF48072 		mov	r2, #256
+ 599 005a DA60     		str	r2, [r3, #12]
+  73:la/sampling.c **** 	TIM1->EGR = TIM_EGR_UG;
+ 600              		.loc 1 73 0
+ 601 005c 054B     		ldr	r3, .L29+4
+ 602 005e 0122     		movs	r2, #1
+ 603 0060 5A61     		str	r2, [r3, #20]
+  74:la/sampling.c **** }
+ 604              		.loc 1 74 0
+ 605 0062 00BF     		nop
+ 606 0064 0C37     		adds	r7, r7, #12
+ 607              	.LCFI49:
+ 608              		.cfi_def_cfa_offset 4
+ 609 0066 BD46     		mov	sp, r7
+ARM GAS  /tmp/ccJjpe8F.s 			page 28
 
 
- 611              		@ sp needed
- 612 0068 5DF8047B 		ldr	r7, [sp], #4
- 613              	.LCFI51:
- 614              		.cfi_restore 7
- 615              		.cfi_def_cfa_offset 0
- 616 006c 7047     		bx	lr
- 617              	.L30:
- 618 006e 00BF     		.align	2
- 619              	.L29:
- 620 0070 00380240 		.word	1073887232
- 621 0074 00000140 		.word	1073807360
- 622 0078 00000000 		.word	period
- 623              		.cfi_endproc
- 624              	.LFE142:
- 626              		.section	.text.SetupSamplingDMA,"ax",%progbits
- 627              		.align	1
- 628              		.global	SetupSamplingDMA
- 629              		.syntax unified
- 630              		.thumb
- 631              		.thumb_func
- 632              		.fpu fpv4-sp-d16
- 634              	SetupSamplingDMA:
- 635              	.LFB143:
-  74:la/sampling.c **** 
-  75:la/sampling.c **** void SetupSamplingDMA(void *dataBuffer, uint32_t dataTransferCount)
-  76:la/sampling.c **** {
- 636              		.loc 1 76 0
- 637              		.cfi_startproc
- 638              		@ args = 0, pretend = 0, frame = 16
- 639              		@ frame_needed = 1, uses_anonymous_args = 0
- 640 0000 80B5     		push	{r7, lr}
- 641              	.LCFI52:
- 642              		.cfi_def_cfa_offset 8
- 643              		.cfi_offset 7, -8
- 644              		.cfi_offset 14, -4
- 645 0002 84B0     		sub	sp, sp, #16
- 646              	.LCFI53:
- 647              		.cfi_def_cfa_offset 24
- 648 0004 00AF     		add	r7, sp, #0
- 649              	.LCFI54:
- 650              		.cfi_def_cfa_register 7
- 651 0006 7860     		str	r0, [r7, #4]
- 652 0008 3960     		str	r1, [r7]
- 653              	.LBB10:
-  77:la/sampling.c **** 	//RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_DMA2EN, ENABLE);
-  78:la/sampling.c **** 	__HAL_RCC_DMA2_CLK_ENABLE();
- 654              		.loc 1 78 0
- 655 000a 0023     		movs	r3, #0
- 656 000c BB60     		str	r3, [r7, #8]
- 657 000e 134B     		ldr	r3, .L32
- 658 0010 1B6B     		ldr	r3, [r3, #48]
- 659 0012 124A     		ldr	r2, .L32
- 660 0014 43F48003 		orr	r3, r3, #4194304
- 661 0018 1363     		str	r3, [r2, #48]
- 662 001a 104B     		ldr	r3, .L32
- 663 001c 1B6B     		ldr	r3, [r3, #48]
- 664 001e 03F48003 		and	r3, r3, #4194304
-ARM GAS  /tmp/ccJRbtUJ.s 			page 29
+ 610              	.LCFI50:
+ 611              		.cfi_def_cfa_register 13
+ 612              		@ sp needed
+ 613 0068 5DF8047B 		ldr	r7, [sp], #4
+ 614              	.LCFI51:
+ 615              		.cfi_restore 7
+ 616              		.cfi_def_cfa_offset 0
+ 617 006c 7047     		bx	lr
+ 618              	.L30:
+ 619 006e 00BF     		.align	2
+ 620              	.L29:
+ 621 0070 00380240 		.word	1073887232
+ 622 0074 00000140 		.word	1073807360
+ 623 0078 00000000 		.word	period
+ 624              		.cfi_endproc
+ 625              	.LFE142:
+ 627              		.section	.text.SetupSamplingDMA,"ax",%progbits
+ 628              		.align	1
+ 629              		.global	SetupSamplingDMA
+ 630              		.syntax unified
+ 631              		.thumb
+ 632              		.thumb_func
+ 633              		.fpu fpv4-sp-d16
+ 635              	SetupSamplingDMA:
+ 636              	.LFB143:
+  75:la/sampling.c **** 
+  76:la/sampling.c **** void SetupSamplingDMA(void *dataBuffer, uint32_t dataTransferCount)
+  77:la/sampling.c **** {
+ 637              		.loc 1 77 0
+ 638              		.cfi_startproc
+ 639              		@ args = 0, pretend = 0, frame = 16
+ 640              		@ frame_needed = 1, uses_anonymous_args = 0
+ 641 0000 80B5     		push	{r7, lr}
+ 642              	.LCFI52:
+ 643              		.cfi_def_cfa_offset 8
+ 644              		.cfi_offset 7, -8
+ 645              		.cfi_offset 14, -4
+ 646 0002 84B0     		sub	sp, sp, #16
+ 647              	.LCFI53:
+ 648              		.cfi_def_cfa_offset 24
+ 649 0004 00AF     		add	r7, sp, #0
+ 650              	.LCFI54:
+ 651              		.cfi_def_cfa_register 7
+ 652 0006 7860     		str	r0, [r7, #4]
+ 653 0008 3960     		str	r1, [r7]
+  78:la/sampling.c **** 	//RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_DMA2EN, ENABLE);
+  79:la/sampling.c **** 	RCC->AHB1ENR |= RCC_AHB1ENR_DMA2EN;
+ 654              		.loc 1 79 0
+ 655 000a 104B     		ldr	r3, .L32
+ 656 000c 1B6B     		ldr	r3, [r3, #48]
+ 657 000e 0F4A     		ldr	r2, .L32
+ 658 0010 43F48003 		orr	r3, r3, #4194304
+ 659 0014 1363     		str	r3, [r2, #48]
+  80:la/sampling.c **** 	uint32_t dmaSize = CalcDMATransferSize();
+ 660              		.loc 1 80 0
+ 661 0016 FFF7FEFF 		bl	CalcDMATransferSize
+ 662 001a F860     		str	r0, [r7, #12]
+ARM GAS  /tmp/ccJjpe8F.s 			page 29
 
 
- 665 0022 BB60     		str	r3, [r7, #8]
- 666 0024 BB68     		ldr	r3, [r7, #8]
- 667              	.LBE10:
-  79:la/sampling.c **** 	uint32_t dmaSize = CalcDMATransferSize();
- 668              		.loc 1 79 0
- 669 0026 FFF7FEFF 		bl	CalcDMATransferSize
- 670 002a F860     		str	r0, [r7, #12]
-  80:la/sampling.c **** 
-  81:la/sampling.c **** 	//TIM8->DIER = 0;
-  82:la/sampling.c **** 	//TIM8->SR &= ~TIM_SR_UIF;
-  83:la/sampling.c **** 
-  84:la/sampling.c **** 	//TIM1_UP -> DMA2, Ch6, Stream5
-  85:la/sampling.c **** 	//DMA should be stopped before this point
-  86:la/sampling.c **** 	DMA2_Stream5->CR = (DMA_SxCR_CHSEL_1 | DMA_SxCR_CHSEL_2) | dmaSize | DMA_SxCR_MINC | DMA_SxCR_CIRC
- 671              		.loc 1 86 0
- 672 002c 0C4A     		ldr	r2, .L32+4
- 673 002e FB68     		ldr	r3, [r7, #12]
- 674 0030 43F04063 		orr	r3, r3, #201326592
- 675 0034 43F4A063 		orr	r3, r3, #1280
- 676 0038 1360     		str	r3, [r2]
-  87:la/sampling.c **** 	//DMA2_Stream5->CR = D<>| dmaSize | DMA_SxCR_MINC | DMA_SxCR_CIRC;
-  88:la/sampling.c **** 	DMA2_Stream5->M0AR = (uint32_t)dataBuffer;//samplingRam;
- 677              		.loc 1 88 0
- 678 003a 094A     		ldr	r2, .L32+4
- 679 003c 7B68     		ldr	r3, [r7, #4]
- 680 003e D360     		str	r3, [r2, #12]
-  89:la/sampling.c **** 
-  90:la/sampling.c **** 	DMA2_Stream5->PAR  = (uint32_t)&(SAMPLING_PORT->IDR);
- 681              		.loc 1 90 0
- 682 0040 074B     		ldr	r3, .L32+4
- 683 0042 084A     		ldr	r2, .L32+8
- 684 0044 9A60     		str	r2, [r3, #8]
-  91:la/sampling.c **** 
-  92:la/sampling.c **** 	DMA2_Stream5->NDTR = dataTransferCount;//transferCount;// / transferSize;
- 685              		.loc 1 92 0
- 686 0046 064A     		ldr	r2, .L32+4
- 687 0048 3B68     		ldr	r3, [r7]
- 688 004a 5360     		str	r3, [r2, #4]
-  93:la/sampling.c **** 	DMA2_Stream5->FCR = DMA_SxFCR_DMDIS | DMA_SxFCR_FTH;
- 689              		.loc 1 93 0
- 690 004c 044B     		ldr	r3, .L32+4
- 691 004e 0722     		movs	r2, #7
- 692 0050 5A61     		str	r2, [r3, #20]
-  94:la/sampling.c **** }
- 693              		.loc 1 94 0
- 694 0052 00BF     		nop
- 695 0054 1037     		adds	r7, r7, #16
- 696              	.LCFI55:
- 697              		.cfi_def_cfa_offset 8
- 698 0056 BD46     		mov	sp, r7
- 699              	.LCFI56:
- 700              		.cfi_def_cfa_register 13
- 701              		@ sp needed
- 702 0058 80BD     		pop	{r7, pc}
- 703              	.L33:
- 704 005a 00BF     		.align	2
- 705              	.L32:
-ARM GAS  /tmp/ccJRbtUJ.s 			page 30
+  81:la/sampling.c **** 
+  82:la/sampling.c **** 	//TIM8->DIER = 0;
+  83:la/sampling.c **** 	//TIM8->SR &= ~TIM_SR_UIF;
+  84:la/sampling.c **** 
+  85:la/sampling.c **** 	//TIM1_UP -> DMA2, Ch6, Stream5
+  86:la/sampling.c **** 	//DMA should be stopped before this point
+  87:la/sampling.c **** 	DMA2_Stream5->CR = (DMA_SxCR_CHSEL_1 | DMA_SxCR_CHSEL_2) | dmaSize | DMA_SxCR_MINC | DMA_SxCR_CIRC
+ 663              		.loc 1 87 0
+ 664 001c 0C4A     		ldr	r2, .L32+4
+ 665 001e FB68     		ldr	r3, [r7, #12]
+ 666 0020 43F04063 		orr	r3, r3, #201326592
+ 667 0024 43F4A063 		orr	r3, r3, #1280
+ 668 0028 1360     		str	r3, [r2]
+  88:la/sampling.c **** 	//DMA2_Stream5->CR = D<>| dmaSize | DMA_SxCR_MINC | DMA_SxCR_CIRC;
+  89:la/sampling.c **** 	DMA2_Stream5->M0AR = (uint32_t)dataBuffer;//samplingRam;
+ 669              		.loc 1 89 0
+ 670 002a 094A     		ldr	r2, .L32+4
+ 671 002c 7B68     		ldr	r3, [r7, #4]
+ 672 002e D360     		str	r3, [r2, #12]
+  90:la/sampling.c **** 
+  91:la/sampling.c **** 	DMA2_Stream5->PAR  = (uint32_t)&(SAMPLING_PORT->IDR);
+ 673              		.loc 1 91 0
+ 674 0030 074B     		ldr	r3, .L32+4
+ 675 0032 084A     		ldr	r2, .L32+8
+ 676 0034 9A60     		str	r2, [r3, #8]
+  92:la/sampling.c **** 
+  93:la/sampling.c **** 	DMA2_Stream5->NDTR = dataTransferCount;//transferCount;// / transferSize;
+ 677              		.loc 1 93 0
+ 678 0036 064A     		ldr	r2, .L32+4
+ 679 0038 3B68     		ldr	r3, [r7]
+ 680 003a 5360     		str	r3, [r2, #4]
+  94:la/sampling.c **** 	DMA2_Stream5->FCR = DMA_SxFCR_DMDIS | DMA_SxFCR_FTH; //disable direct mode, set FIFO-threshold
+ 681              		.loc 1 94 0
+ 682 003c 044B     		ldr	r3, .L32+4
+ 683 003e 0722     		movs	r2, #7
+ 684 0040 5A61     		str	r2, [r3, #20]
+  95:la/sampling.c **** }
+ 685              		.loc 1 95 0
+ 686 0042 00BF     		nop
+ 687 0044 1037     		adds	r7, r7, #16
+ 688              	.LCFI55:
+ 689              		.cfi_def_cfa_offset 8
+ 690 0046 BD46     		mov	sp, r7
+ 691              	.LCFI56:
+ 692              		.cfi_def_cfa_register 13
+ 693              		@ sp needed
+ 694 0048 80BD     		pop	{r7, pc}
+ 695              	.L33:
+ 696 004a 00BF     		.align	2
+ 697              	.L32:
+ 698 004c 00380240 		.word	1073887232
+ 699 0050 88640240 		.word	1073898632
+ 700 0054 100C0240 		.word	1073875984
+ 701              		.cfi_endproc
+ 702              	.LFE143:
+ 704              		.section	.text.SetupDelayTimer,"ax",%progbits
+ 705              		.align	1
+ARM GAS  /tmp/ccJjpe8F.s 			page 30
 
 
- 706 005c 00380240 		.word	1073887232
- 707 0060 88640240 		.word	1073898632
- 708 0064 100C0240 		.word	1073875984
- 709              		.cfi_endproc
- 710              	.LFE143:
- 712              		.section	.text.SetupDelayTimer,"ax",%progbits
- 713              		.align	1
- 714              		.global	SetupDelayTimer
- 715              		.syntax unified
- 716              		.thumb
- 717              		.thumb_func
- 718              		.fpu fpv4-sp-d16
- 720              	SetupDelayTimer:
- 721              	.LFB144:
-  95:la/sampling.c **** 
-  96:la/sampling.c **** void SetupDelayTimer()
-  97:la/sampling.c **** {
- 722              		.loc 1 97 0
- 723              		.cfi_startproc
- 724              		@ args = 0, pretend = 0, frame = 8
- 725              		@ frame_needed = 1, uses_anonymous_args = 0
- 726 0000 80B5     		push	{r7, lr}
- 727              	.LCFI57:
- 728              		.cfi_def_cfa_offset 8
- 729              		.cfi_offset 7, -8
- 730              		.cfi_offset 14, -4
- 731 0002 82B0     		sub	sp, sp, #8
- 732              	.LCFI58:
- 733              		.cfi_def_cfa_offset 16
- 734 0004 00AF     		add	r7, sp, #0
- 735              	.LCFI59:
- 736              		.cfi_def_cfa_register 7
- 737              	.LBB11:
-  98:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM8EN, ENABLE);
-  99:la/sampling.c **** 	__HAL_RCC_TIM8_CLK_ENABLE();
- 738              		.loc 1 99 0
- 739 0006 0023     		movs	r3, #0
- 740 0008 7B60     		str	r3, [r7, #4]
- 741 000a 194B     		ldr	r3, .L35
- 742 000c 5B6C     		ldr	r3, [r3, #68]
- 743 000e 184A     		ldr	r2, .L35
- 744 0010 43F00203 		orr	r3, r3, #2
- 745 0014 5364     		str	r3, [r2, #68]
- 746 0016 164B     		ldr	r3, .L35
- 747 0018 5B6C     		ldr	r3, [r3, #68]
- 748 001a 03F00203 		and	r3, r3, #2
- 749 001e 7B60     		str	r3, [r7, #4]
- 750 0020 7B68     		ldr	r3, [r7, #4]
- 751              	.LBE11:
- 100:la/sampling.c **** 	//After-trigger delay timer
- 101:la/sampling.c **** 	TIM8->CR1 = TIM_CR1_URS;//stop timer too
- 752              		.loc 1 101 0
- 753 0022 144B     		ldr	r3, .L35+4
- 754 0024 0422     		movs	r2, #4
- 755 0026 1A60     		str	r2, [r3]
- 102:la/sampling.c **** 	TIM8->CNT = 0;
- 756              		.loc 1 102 0
-ARM GAS  /tmp/ccJRbtUJ.s 			page 31
+ 706              		.global	SetupDelayTimer
+ 707              		.syntax unified
+ 708              		.thumb
+ 709              		.thumb_func
+ 710              		.fpu fpv4-sp-d16
+ 712              	SetupDelayTimer:
+ 713              	.LFB144:
+  96:la/sampling.c **** 
+  97:la/sampling.c **** void SetupDelayTimer()
+  98:la/sampling.c **** {
+ 714              		.loc 1 98 0
+ 715              		.cfi_startproc
+ 716              		@ args = 0, pretend = 0, frame = 8
+ 717              		@ frame_needed = 1, uses_anonymous_args = 0
+ 718 0000 80B5     		push	{r7, lr}
+ 719              	.LCFI57:
+ 720              		.cfi_def_cfa_offset 8
+ 721              		.cfi_offset 7, -8
+ 722              		.cfi_offset 14, -4
+ 723 0002 82B0     		sub	sp, sp, #8
+ 724              	.LCFI58:
+ 725              		.cfi_def_cfa_offset 16
+ 726 0004 00AF     		add	r7, sp, #0
+ 727              	.LCFI59:
+ 728              		.cfi_def_cfa_register 7
+ 729              	.LBB16:
+  99:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM8EN, ENABLE);
+ 100:la/sampling.c **** 	__HAL_RCC_TIM8_CLK_ENABLE();
+ 730              		.loc 1 100 0
+ 731 0006 0023     		movs	r3, #0
+ 732 0008 7B60     		str	r3, [r7, #4]
+ 733 000a 194B     		ldr	r3, .L35
+ 734 000c 5B6C     		ldr	r3, [r3, #68]
+ 735 000e 184A     		ldr	r2, .L35
+ 736 0010 43F00203 		orr	r3, r3, #2
+ 737 0014 5364     		str	r3, [r2, #68]
+ 738 0016 164B     		ldr	r3, .L35
+ 739 0018 5B6C     		ldr	r3, [r3, #68]
+ 740 001a 03F00203 		and	r3, r3, #2
+ 741 001e 7B60     		str	r3, [r7, #4]
+ 742 0020 7B68     		ldr	r3, [r7, #4]
+ 743              	.LBE16:
+ 101:la/sampling.c **** 	//After-trigger delay timer
+ 102:la/sampling.c **** 	TIM8->CR1 = TIM_CR1_URS;//stop timer too
+ 744              		.loc 1 102 0
+ 745 0022 144B     		ldr	r3, .L35+4
+ 746 0024 0422     		movs	r2, #4
+ 747 0026 1A60     		str	r2, [r3]
+ 103:la/sampling.c **** 	TIM8->CNT = 0;
+ 748              		.loc 1 103 0
+ 749 0028 124B     		ldr	r3, .L35+4
+ 750 002a 0022     		movs	r2, #0
+ 751 002c 5A62     		str	r2, [r3, #36]
+ 104:la/sampling.c **** 	TIM8->ARR = delayCount;//  / transferSize;
+ 752              		.loc 1 104 0
+ 753 002e 114A     		ldr	r2, .L35+4
+ 754 0030 114B     		ldr	r3, .L35+8
+ARM GAS  /tmp/ccJjpe8F.s 			page 31
 
 
- 757 0028 124B     		ldr	r3, .L35+4
- 758 002a 0022     		movs	r2, #0
- 759 002c 5A62     		str	r2, [r3, #36]
- 103:la/sampling.c **** 	TIM8->ARR = delayCount;//  / transferSize;
- 760              		.loc 1 103 0
- 761 002e 114A     		ldr	r2, .L35+4
- 762 0030 114B     		ldr	r3, .L35+8
- 763 0032 1B68     		ldr	r3, [r3]
- 764 0034 D362     		str	r3, [r2, #44]
- 104:la/sampling.c **** 	TIM8->PSC = TIM1->ARR;
- 765              		.loc 1 104 0
- 766 0036 114B     		ldr	r3, .L35+12
- 767 0038 0E4A     		ldr	r2, .L35+4
- 768 003a DB6A     		ldr	r3, [r3, #44]
- 769 003c 9362     		str	r3, [r2, #40]
- 105:la/sampling.c **** 	TIM8->CR2 = 0;
- 770              		.loc 1 105 0
- 771 003e 0D4B     		ldr	r3, .L35+4
- 772 0040 0022     		movs	r2, #0
- 773 0042 5A60     		str	r2, [r3, #4]
- 106:la/sampling.c **** 	TIM8->EGR = TIM_EGR_UG;
- 774              		.loc 1 106 0
- 775 0044 0B4B     		ldr	r3, .L35+4
- 776 0046 0122     		movs	r2, #1
- 777 0048 5A61     		str	r2, [r3, #20]
- 107:la/sampling.c **** 	TIM8->SR &= ~TIM_SR_UIF;
- 778              		.loc 1 107 0
- 779 004a 0A4B     		ldr	r3, .L35+4
- 780 004c 1B69     		ldr	r3, [r3, #16]
- 781 004e 094A     		ldr	r2, .L35+4
- 782 0050 23F00103 		bic	r3, r3, #1
- 783 0054 1361     		str	r3, [r2, #16]
- 108:la/sampling.c **** 	TIM8->DIER = TIM_DIER_UIE;
- 784              		.loc 1 108 0
- 785 0056 074B     		ldr	r3, .L35+4
- 786 0058 0122     		movs	r2, #1
- 787 005a DA60     		str	r2, [r3, #12]
- 109:la/sampling.c **** 
- 110:la/sampling.c **** 	EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0);
- 788              		.loc 1 110 0
- 789 005c 0022     		movs	r2, #0
- 790 005e 0221     		movs	r1, #2
- 791 0060 2C20     		movs	r0, #44
- 792 0062 FFF7FEFF 		bl	EnableChannel
- 111:la/sampling.c **** 	//InterruptController::EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0, SamplingFrameCompelte);
- 112:la/sampling.c **** }
- 793              		.loc 1 112 0
- 794 0066 00BF     		nop
- 795 0068 0837     		adds	r7, r7, #8
- 796              	.LCFI60:
- 797              		.cfi_def_cfa_offset 8
- 798 006a BD46     		mov	sp, r7
- 799              	.LCFI61:
- 800              		.cfi_def_cfa_register 13
- 801              		@ sp needed
- 802 006c 80BD     		pop	{r7, pc}
- 803              	.L36:
-ARM GAS  /tmp/ccJRbtUJ.s 			page 32
+ 755 0032 1B68     		ldr	r3, [r3]
+ 756 0034 D362     		str	r3, [r2, #44]
+ 105:la/sampling.c **** 	TIM8->PSC = TIM1->ARR;
+ 757              		.loc 1 105 0
+ 758 0036 114B     		ldr	r3, .L35+12
+ 759 0038 0E4A     		ldr	r2, .L35+4
+ 760 003a DB6A     		ldr	r3, [r3, #44]
+ 761 003c 9362     		str	r3, [r2, #40]
+ 106:la/sampling.c **** 	TIM8->CR2 = 0;
+ 762              		.loc 1 106 0
+ 763 003e 0D4B     		ldr	r3, .L35+4
+ 764 0040 0022     		movs	r2, #0
+ 765 0042 5A60     		str	r2, [r3, #4]
+ 107:la/sampling.c **** 	TIM8->EGR = TIM_EGR_UG;
+ 766              		.loc 1 107 0
+ 767 0044 0B4B     		ldr	r3, .L35+4
+ 768 0046 0122     		movs	r2, #1
+ 769 0048 5A61     		str	r2, [r3, #20]
+ 108:la/sampling.c **** 	TIM8->SR &= ~TIM_SR_UIF;
+ 770              		.loc 1 108 0
+ 771 004a 0A4B     		ldr	r3, .L35+4
+ 772 004c 1B69     		ldr	r3, [r3, #16]
+ 773 004e 094A     		ldr	r2, .L35+4
+ 774 0050 23F00103 		bic	r3, r3, #1
+ 775 0054 1361     		str	r3, [r2, #16]
+ 109:la/sampling.c **** 	TIM8->DIER = TIM_DIER_UIE;
+ 776              		.loc 1 109 0
+ 777 0056 074B     		ldr	r3, .L35+4
+ 778 0058 0122     		movs	r2, #1
+ 779 005a DA60     		str	r2, [r3, #12]
+ 110:la/sampling.c **** 
+ 111:la/sampling.c **** 	EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0);
+ 780              		.loc 1 111 0
+ 781 005c 0022     		movs	r2, #0
+ 782 005e 0221     		movs	r1, #2
+ 783 0060 2C20     		movs	r0, #44
+ 784 0062 FFF7FEFF 		bl	EnableChannel
+ 112:la/sampling.c **** 	//InterruptController::EnableChannel(TIM8_UP_TIM13_IRQn, 2, 0, SamplingFrameCompelte);
+ 113:la/sampling.c **** }
+ 785              		.loc 1 113 0
+ 786 0066 00BF     		nop
+ 787 0068 0837     		adds	r7, r7, #8
+ 788              	.LCFI60:
+ 789              		.cfi_def_cfa_offset 8
+ 790 006a BD46     		mov	sp, r7
+ 791              	.LCFI61:
+ 792              		.cfi_def_cfa_register 13
+ 793              		@ sp needed
+ 794 006c 80BD     		pop	{r7, pc}
+ 795              	.L36:
+ 796 006e 00BF     		.align	2
+ 797              	.L35:
+ 798 0070 00380240 		.word	1073887232
+ 799 0074 00040140 		.word	1073808384
+ 800 0078 00000000 		.word	delayCount
+ 801 007c 00000140 		.word	1073807360
+ 802              		.cfi_endproc
+ARM GAS  /tmp/ccJjpe8F.s 			page 32
 
 
- 804 006e 00BF     		.align	2
- 805              	.L35:
- 806 0070 00380240 		.word	1073887232
- 807 0074 00040140 		.word	1073808384
- 808 0078 00000000 		.word	delayCount
- 809 007c 00000140 		.word	1073807360
- 810              		.cfi_endproc
- 811              	.LFE144:
- 813              		.section	.text.SetupRegularEXTITrigger,"ax",%progbits
- 814              		.align	1
- 815              		.global	SetupRegularEXTITrigger
- 816              		.syntax unified
- 817              		.thumb
- 818              		.thumb_func
- 819              		.fpu fpv4-sp-d16
- 821              	SetupRegularEXTITrigger:
- 822              	.LFB145:
- 113:la/sampling.c **** 
- 114:la/sampling.c **** void SetupRegularEXTITrigger()
- 115:la/sampling.c **** {
- 823              		.loc 1 115 0
- 824              		.cfi_startproc
- 825              		@ args = 0, pretend = 0, frame = 16
- 826              		@ frame_needed = 1, uses_anonymous_args = 0
- 827 0000 80B5     		push	{r7, lr}
- 828              	.LCFI62:
- 829              		.cfi_def_cfa_offset 8
- 830              		.cfi_offset 7, -8
- 831              		.cfi_offset 14, -4
- 832 0002 84B0     		sub	sp, sp, #16
- 833              	.LCFI63:
- 834              		.cfi_def_cfa_offset 24
- 835 0004 00AF     		add	r7, sp, #0
- 836              	.LCFI64:
- 837              		.cfi_def_cfa_register 7
- 838              	.LBB12:
- 116:la/sampling.c **** 	//while (CDC_Transmit_FS((uint8_t *)"tessst", 6) != 0);
- 117:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_SYSCFGEN, ENABLE);
- 118:la/sampling.c **** 	__HAL_RCC_SYSCFG_CLK_ENABLE();
- 839              		.loc 1 118 0
- 840 0006 0023     		movs	r3, #0
- 841 0008 3B60     		str	r3, [r7]
- 842 000a 534B     		ldr	r3, .L53
- 843 000c 5B6C     		ldr	r3, [r3, #68]
- 844 000e 524A     		ldr	r2, .L53
- 845 0010 43F48043 		orr	r3, r3, #16384
- 846 0014 5364     		str	r3, [r2, #68]
- 847 0016 504B     		ldr	r3, .L53
- 848 0018 5B6C     		ldr	r3, [r3, #68]
- 849 001a 03F48043 		and	r3, r3, #16384
- 850 001e 3B60     		str	r3, [r7]
- 851 0020 3B68     		ldr	r3, [r7]
- 852              	.LBE12:
- 119:la/sampling.c **** 	//Trigger setup
- 120:la/sampling.c **** 	uint32_t rising = triggerMask & triggerValue;
- 853              		.loc 1 120 0
- 854 0022 4E4B     		ldr	r3, .L53+4
-ARM GAS  /tmp/ccJRbtUJ.s 			page 33
+ 803              	.LFE144:
+ 805              		.section	.text.SetupRegularEXTITrigger,"ax",%progbits
+ 806              		.align	1
+ 807              		.global	SetupRegularEXTITrigger
+ 808              		.syntax unified
+ 809              		.thumb
+ 810              		.thumb_func
+ 811              		.fpu fpv4-sp-d16
+ 813              	SetupRegularEXTITrigger:
+ 814              	.LFB145:
+ 114:la/sampling.c **** 
+ 115:la/sampling.c **** void SetupRegularEXTITrigger()
+ 116:la/sampling.c **** {
+ 815              		.loc 1 116 0
+ 816              		.cfi_startproc
+ 817              		@ args = 0, pretend = 0, frame = 16
+ 818              		@ frame_needed = 1, uses_anonymous_args = 0
+ 819 0000 80B5     		push	{r7, lr}
+ 820              	.LCFI62:
+ 821              		.cfi_def_cfa_offset 8
+ 822              		.cfi_offset 7, -8
+ 823              		.cfi_offset 14, -4
+ 824 0002 84B0     		sub	sp, sp, #16
+ 825              	.LCFI63:
+ 826              		.cfi_def_cfa_offset 24
+ 827 0004 00AF     		add	r7, sp, #0
+ 828              	.LCFI64:
+ 829              		.cfi_def_cfa_register 7
+ 830              	.LBB17:
+ 117:la/sampling.c **** 	//while (CDC_Transmit_FS((uint8_t *)"tessst", 6) != 0);
+ 118:la/sampling.c **** 	//RCC_APB2PeriphClockCmd(RCC_APB2ENR_SYSCFGEN, ENABLE);
+ 119:la/sampling.c **** 	__HAL_RCC_SYSCFG_CLK_ENABLE();
+ 831              		.loc 1 119 0
+ 832 0006 0023     		movs	r3, #0
+ 833 0008 3B60     		str	r3, [r7]
+ 834 000a 534B     		ldr	r3, .L53
+ 835 000c 5B6C     		ldr	r3, [r3, #68]
+ 836 000e 524A     		ldr	r2, .L53
+ 837 0010 43F48043 		orr	r3, r3, #16384
+ 838 0014 5364     		str	r3, [r2, #68]
+ 839 0016 504B     		ldr	r3, .L53
+ 840 0018 5B6C     		ldr	r3, [r3, #68]
+ 841 001a 03F48043 		and	r3, r3, #16384
+ 842 001e 3B60     		str	r3, [r7]
+ 843 0020 3B68     		ldr	r3, [r7]
+ 844              	.LBE17:
+ 120:la/sampling.c **** 	//Trigger setup
+ 121:la/sampling.c **** 	uint32_t rising = triggerMask & triggerValue;
+ 845              		.loc 1 121 0
+ 846 0022 4E4B     		ldr	r3, .L53+4
+ 847 0024 1A68     		ldr	r2, [r3]
+ 848 0026 4E4B     		ldr	r3, .L53+8
+ 849 0028 1B68     		ldr	r3, [r3]
+ 850 002a 1340     		ands	r3, r3, r2
+ 851 002c FB60     		str	r3, [r7, #12]
+ 122:la/sampling.c **** 	uint32_t falling = triggerMask & ~triggerValue;
+ 852              		.loc 1 122 0
+ARM GAS  /tmp/ccJjpe8F.s 			page 33
 
 
- 855 0024 1A68     		ldr	r2, [r3]
- 856 0026 4E4B     		ldr	r3, .L53+8
- 857 0028 1B68     		ldr	r3, [r3]
- 858 002a 1340     		ands	r3, r3, r2
- 859 002c FB60     		str	r3, [r7, #12]
- 121:la/sampling.c **** 	uint32_t falling = triggerMask & ~triggerValue;
- 860              		.loc 1 121 0
- 861 002e 4C4B     		ldr	r3, .L53+8
- 862 0030 1B68     		ldr	r3, [r3]
- 863 0032 DA43     		mvns	r2, r3
- 864 0034 494B     		ldr	r3, .L53+4
- 865 0036 1B68     		ldr	r3, [r3]
- 866 0038 1340     		ands	r3, r3, r2
- 867 003a BB60     		str	r3, [r7, #8]
- 122:la/sampling.c **** 	//route exti to triggerMask GPIO port
- 123:la/sampling.c **** 	uint32_t extiCR = 0;
- 868              		.loc 1 123 0
- 869 003c 0023     		movs	r3, #0
- 870 003e 7B60     		str	r3, [r7, #4]
- 124:la/sampling.c **** 	switch((uint32_t)SAMPLING_PORT)
- 125:la/sampling.c **** 	{
- 126:la/sampling.c **** 	case GPIOA_BASE:extiCR = 0x0000;break;
- 127:la/sampling.c **** 	case GPIOB_BASE:extiCR = 0x1111;break;
- 128:la/sampling.c **** 	case GPIOC_BASE:extiCR = 0x2222;break;
- 129:la/sampling.c **** 	case GPIOD_BASE:extiCR = 0x3333;break;
- 871              		.loc 1 129 0
- 872 0040 43F23333 		movw	r3, #13107
- 873 0044 7B60     		str	r3, [r7, #4]
- 874 0046 00BF     		nop
- 130:la/sampling.c **** 	case GPIOE_BASE:extiCR = 0x4444;break;
- 131:la/sampling.c **** 	case GPIOF_BASE:extiCR = 0x5555;break;
- 132:la/sampling.c **** 	case GPIOG_BASE:extiCR = 0x6666;break;
- 133:la/sampling.c **** 	case GPIOH_BASE:extiCR = 0x7777;break;
- 134:la/sampling.c **** 	case GPIOI_BASE:extiCR = 0x8888;break;
- 135:la/sampling.c **** 	}
- 136:la/sampling.c **** 	SYSCFG->EXTICR[0] = extiCR;
- 875              		.loc 1 136 0
- 876 0048 464A     		ldr	r2, .L53+12
- 877 004a 7B68     		ldr	r3, [r7, #4]
- 878 004c 9360     		str	r3, [r2, #8]
- 137:la/sampling.c **** 	SYSCFG->EXTICR[1] = extiCR;
- 879              		.loc 1 137 0
- 880 004e 454A     		ldr	r2, .L53+12
- 881 0050 7B68     		ldr	r3, [r7, #4]
- 882 0052 D360     		str	r3, [r2, #12]
- 138:la/sampling.c **** 	SYSCFG->EXTICR[2] = extiCR;
- 883              		.loc 1 138 0
- 884 0054 434A     		ldr	r2, .L53+12
- 885 0056 7B68     		ldr	r3, [r7, #4]
- 886 0058 1361     		str	r3, [r2, #16]
- 139:la/sampling.c **** 	SYSCFG->EXTICR[3] = extiCR;
- 887              		.loc 1 139 0
- 888 005a 424A     		ldr	r2, .L53+12
- 889 005c 7B68     		ldr	r3, [r7, #4]
- 890 005e 5361     		str	r3, [r2, #20]
- 140:la/sampling.c **** 
- 141:la/sampling.c **** 	EXTI->IMR  = 0;//mask;
-ARM GAS  /tmp/ccJRbtUJ.s 			page 34
+ 853 002e 4C4B     		ldr	r3, .L53+8
+ 854 0030 1B68     		ldr	r3, [r3]
+ 855 0032 DA43     		mvns	r2, r3
+ 856 0034 494B     		ldr	r3, .L53+4
+ 857 0036 1B68     		ldr	r3, [r3]
+ 858 0038 1340     		ands	r3, r3, r2
+ 859 003a BB60     		str	r3, [r7, #8]
+ 123:la/sampling.c **** 	//route exti to triggerMask GPIO port
+ 124:la/sampling.c **** 	uint32_t extiCR = 0;
+ 860              		.loc 1 124 0
+ 861 003c 0023     		movs	r3, #0
+ 862 003e 7B60     		str	r3, [r7, #4]
+ 125:la/sampling.c **** 	switch((uint32_t)SAMPLING_PORT)
+ 126:la/sampling.c **** 	{
+ 127:la/sampling.c **** 	case GPIOA_BASE:extiCR = 0x0000;break;
+ 128:la/sampling.c **** 	case GPIOB_BASE:extiCR = 0x1111;break;
+ 129:la/sampling.c **** 	case GPIOC_BASE:extiCR = 0x2222;break;
+ 130:la/sampling.c **** 	case GPIOD_BASE:extiCR = 0x3333;break;
+ 863              		.loc 1 130 0
+ 864 0040 43F23333 		movw	r3, #13107
+ 865 0044 7B60     		str	r3, [r7, #4]
+ 866 0046 00BF     		nop
+ 131:la/sampling.c **** 	case GPIOE_BASE:extiCR = 0x4444;break;
+ 132:la/sampling.c **** 	case GPIOF_BASE:extiCR = 0x5555;break;
+ 133:la/sampling.c **** 	case GPIOG_BASE:extiCR = 0x6666;break;
+ 134:la/sampling.c **** 	case GPIOH_BASE:extiCR = 0x7777;break;
+ 135:la/sampling.c **** 	case GPIOI_BASE:extiCR = 0x8888;break;
+ 136:la/sampling.c **** 	}
+ 137:la/sampling.c **** 	SYSCFG->EXTICR[0] = extiCR;
+ 867              		.loc 1 137 0
+ 868 0048 464A     		ldr	r2, .L53+12
+ 869 004a 7B68     		ldr	r3, [r7, #4]
+ 870 004c 9360     		str	r3, [r2, #8]
+ 138:la/sampling.c **** 	SYSCFG->EXTICR[1] = extiCR;
+ 871              		.loc 1 138 0
+ 872 004e 454A     		ldr	r2, .L53+12
+ 873 0050 7B68     		ldr	r3, [r7, #4]
+ 874 0052 D360     		str	r3, [r2, #12]
+ 139:la/sampling.c **** 	SYSCFG->EXTICR[2] = extiCR;
+ 875              		.loc 1 139 0
+ 876 0054 434A     		ldr	r2, .L53+12
+ 877 0056 7B68     		ldr	r3, [r7, #4]
+ 878 0058 1361     		str	r3, [r2, #16]
+ 140:la/sampling.c **** 	SYSCFG->EXTICR[3] = extiCR;
+ 879              		.loc 1 140 0
+ 880 005a 424A     		ldr	r2, .L53+12
+ 881 005c 7B68     		ldr	r3, [r7, #4]
+ 882 005e 5361     		str	r3, [r2, #20]
+ 141:la/sampling.c **** 
+ 142:la/sampling.c **** 	EXTI->IMR  = 0;//mask;
+ 883              		.loc 1 142 0
+ 884 0060 414B     		ldr	r3, .L53+16
+ 885 0062 0022     		movs	r2, #0
+ 886 0064 1A60     		str	r2, [r3]
+ 143:la/sampling.c **** 	EXTI->PR = 0xffffffff;
+ 887              		.loc 1 143 0
+ 888 0066 404B     		ldr	r3, .L53+16
+ARM GAS  /tmp/ccJjpe8F.s 			page 34
 
 
- 891              		.loc 1 141 0
- 892 0060 414B     		ldr	r3, .L53+16
- 893 0062 0022     		movs	r2, #0
- 894 0064 1A60     		str	r2, [r3]
- 142:la/sampling.c **** 	EXTI->PR = 0xffffffff;
- 895              		.loc 1 142 0
- 896 0066 404B     		ldr	r3, .L53+16
- 897 0068 4FF0FF32 		mov	r2, #-1
- 898 006c 5A61     		str	r2, [r3, #20]
- 143:la/sampling.c **** 	EXTI->RTSR = rising;
- 899              		.loc 1 143 0
- 900 006e 3E4A     		ldr	r2, .L53+16
- 901 0070 FB68     		ldr	r3, [r7, #12]
- 902 0072 9360     		str	r3, [r2, #8]
- 144:la/sampling.c **** 	EXTI->FTSR = falling;
- 903              		.loc 1 144 0
- 904 0074 3C4A     		ldr	r2, .L53+16
- 905 0076 BB68     		ldr	r3, [r7, #8]
- 906 0078 D360     		str	r3, [r2, #12]
- 907              	.LBB13:
- 908              	.LBB14:
- 909              		.loc 2 879 0
- 910              		.syntax unified
- 911              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
- 912 007a BFF34F8F 		dsb 0xF
- 913              	@ 0 "" 2
- 914              		.thumb
- 915              		.syntax unified
- 916              	.LBE14:
- 917              	.LBE13:
- 145:la/sampling.c **** 
- 146:la/sampling.c **** 	__DSB();
- 147:la/sampling.c **** 	
- 148:la/sampling.c **** 	if(triggerMask & 0x0001)EnableChannel(EXTI0_IRQn, 0, 0);
- 918              		.loc 1 148 0
- 919 007e 374B     		ldr	r3, .L53+4
- 920 0080 1B68     		ldr	r3, [r3]
- 921 0082 03F00103 		and	r3, r3, #1
- 922 0086 002B     		cmp	r3, #0
- 923 0088 05D0     		beq	.L38
- 924              		.loc 1 148 0 is_stmt 0 discriminator 1
- 925 008a 0022     		movs	r2, #0
- 926 008c 0021     		movs	r1, #0
- 927 008e 0620     		movs	r0, #6
- 928 0090 FFF7FEFF 		bl	EnableChannel
- 929 0094 02E0     		b	.L39
- 930              	.L38:
- 149:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI0_IRQn);
- 931              		.loc 1 149 0 is_stmt 1
- 932 0096 0620     		movs	r0, #6
- 933 0098 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 934              	.L39:
- 150:la/sampling.c **** 	if(triggerMask & 0x0002)EnableChannel(EXTI1_IRQn, 0, 0);
- 935              		.loc 1 150 0
- 936 009c 2F4B     		ldr	r3, .L53+4
- 937 009e 1B68     		ldr	r3, [r3]
- 938 00a0 03F00203 		and	r3, r3, #2
-ARM GAS  /tmp/ccJRbtUJ.s 			page 35
+ 889 0068 4FF0FF32 		mov	r2, #-1
+ 890 006c 5A61     		str	r2, [r3, #20]
+ 144:la/sampling.c **** 	EXTI->RTSR = rising;
+ 891              		.loc 1 144 0
+ 892 006e 3E4A     		ldr	r2, .L53+16
+ 893 0070 FB68     		ldr	r3, [r7, #12]
+ 894 0072 9360     		str	r3, [r2, #8]
+ 145:la/sampling.c **** 	EXTI->FTSR = falling;
+ 895              		.loc 1 145 0
+ 896 0074 3C4A     		ldr	r2, .L53+16
+ 897 0076 BB68     		ldr	r3, [r7, #8]
+ 898 0078 D360     		str	r3, [r2, #12]
+ 899              	.LBB18:
+ 900              	.LBB19:
+ 901              		.loc 2 879 0
+ 902              		.syntax unified
+ 903              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 904 007a BFF34F8F 		dsb 0xF
+ 905              	@ 0 "" 2
+ 906              		.thumb
+ 907              		.syntax unified
+ 908              	.LBE19:
+ 909              	.LBE18:
+ 146:la/sampling.c **** 
+ 147:la/sampling.c **** 	__DSB();
+ 148:la/sampling.c **** 	
+ 149:la/sampling.c **** 	if(triggerMask & 0x0001)EnableChannel(EXTI0_IRQn, 0, 0);
+ 910              		.loc 1 149 0
+ 911 007e 374B     		ldr	r3, .L53+4
+ 912 0080 1B68     		ldr	r3, [r3]
+ 913 0082 03F00103 		and	r3, r3, #1
+ 914 0086 002B     		cmp	r3, #0
+ 915 0088 05D0     		beq	.L38
+ 916              		.loc 1 149 0 is_stmt 0 discriminator 1
+ 917 008a 0022     		movs	r2, #0
+ 918 008c 0021     		movs	r1, #0
+ 919 008e 0620     		movs	r0, #6
+ 920 0090 FFF7FEFF 		bl	EnableChannel
+ 921 0094 02E0     		b	.L39
+ 922              	.L38:
+ 150:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+ 923              		.loc 1 150 0 is_stmt 1
+ 924 0096 0620     		movs	r0, #6
+ 925 0098 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 926              	.L39:
+ 151:la/sampling.c **** 	if(triggerMask & 0x0002)EnableChannel(EXTI1_IRQn, 0, 0);
+ 927              		.loc 1 151 0
+ 928 009c 2F4B     		ldr	r3, .L53+4
+ 929 009e 1B68     		ldr	r3, [r3]
+ 930 00a0 03F00203 		and	r3, r3, #2
+ 931 00a4 002B     		cmp	r3, #0
+ 932 00a6 05D0     		beq	.L40
+ 933              		.loc 1 151 0 is_stmt 0 discriminator 1
+ 934 00a8 0022     		movs	r2, #0
+ 935 00aa 0021     		movs	r1, #0
+ 936 00ac 0720     		movs	r0, #7
+ 937 00ae FFF7FEFF 		bl	EnableChannel
+ARM GAS  /tmp/ccJjpe8F.s 			page 35
 
 
- 939 00a4 002B     		cmp	r3, #0
- 940 00a6 05D0     		beq	.L40
- 941              		.loc 1 150 0 is_stmt 0 discriminator 1
- 942 00a8 0022     		movs	r2, #0
- 943 00aa 0021     		movs	r1, #0
- 944 00ac 0720     		movs	r0, #7
- 945 00ae FFF7FEFF 		bl	EnableChannel
- 946 00b2 02E0     		b	.L41
- 947              	.L40:
- 151:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI1_IRQn);
- 948              		.loc 1 151 0 is_stmt 1
- 949 00b4 0720     		movs	r0, #7
- 950 00b6 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 951              	.L41:
- 152:la/sampling.c **** 	if(triggerMask & 0x0004)EnableChannel(EXTI2_IRQn, 0, 0);
- 952              		.loc 1 152 0
- 953 00ba 284B     		ldr	r3, .L53+4
- 954 00bc 1B68     		ldr	r3, [r3]
- 955 00be 03F00403 		and	r3, r3, #4
- 956 00c2 002B     		cmp	r3, #0
- 957 00c4 05D0     		beq	.L42
- 958              		.loc 1 152 0 is_stmt 0 discriminator 1
- 959 00c6 0022     		movs	r2, #0
- 960 00c8 0021     		movs	r1, #0
- 961 00ca 0820     		movs	r0, #8
- 962 00cc FFF7FEFF 		bl	EnableChannel
- 963 00d0 02E0     		b	.L43
- 964              	.L42:
- 153:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI2_IRQn);
- 965              		.loc 1 153 0 is_stmt 1
- 966 00d2 0820     		movs	r0, #8
- 967 00d4 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 968              	.L43:
- 154:la/sampling.c **** 	if(triggerMask & 0x0008)EnableChannel(EXTI3_IRQn, 0, 0);
- 969              		.loc 1 154 0
- 970 00d8 204B     		ldr	r3, .L53+4
- 971 00da 1B68     		ldr	r3, [r3]
- 972 00dc 03F00803 		and	r3, r3, #8
- 973 00e0 002B     		cmp	r3, #0
- 974 00e2 05D0     		beq	.L44
- 975              		.loc 1 154 0 is_stmt 0 discriminator 1
- 976 00e4 0022     		movs	r2, #0
- 977 00e6 0021     		movs	r1, #0
- 978 00e8 0920     		movs	r0, #9
- 979 00ea FFF7FEFF 		bl	EnableChannel
- 980 00ee 02E0     		b	.L45
- 981              	.L44:
- 155:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI3_IRQn);
- 982              		.loc 1 155 0 is_stmt 1
- 983 00f0 0920     		movs	r0, #9
- 984 00f2 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 985              	.L45:
- 156:la/sampling.c **** 	if(triggerMask & 0x0010)EnableChannel(EXTI4_IRQn, 0, 0);
- 986              		.loc 1 156 0
- 987 00f6 194B     		ldr	r3, .L53+4
- 988 00f8 1B68     		ldr	r3, [r3]
- 989 00fa 03F01003 		and	r3, r3, #16
-ARM GAS  /tmp/ccJRbtUJ.s 			page 36
+ 938 00b2 02E0     		b	.L41
+ 939              	.L40:
+ 152:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI1_IRQn);
+ 940              		.loc 1 152 0 is_stmt 1
+ 941 00b4 0720     		movs	r0, #7
+ 942 00b6 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 943              	.L41:
+ 153:la/sampling.c **** 	if(triggerMask & 0x0004)EnableChannel(EXTI2_IRQn, 0, 0);
+ 944              		.loc 1 153 0
+ 945 00ba 284B     		ldr	r3, .L53+4
+ 946 00bc 1B68     		ldr	r3, [r3]
+ 947 00be 03F00403 		and	r3, r3, #4
+ 948 00c2 002B     		cmp	r3, #0
+ 949 00c4 05D0     		beq	.L42
+ 950              		.loc 1 153 0 is_stmt 0 discriminator 1
+ 951 00c6 0022     		movs	r2, #0
+ 952 00c8 0021     		movs	r1, #0
+ 953 00ca 0820     		movs	r0, #8
+ 954 00cc FFF7FEFF 		bl	EnableChannel
+ 955 00d0 02E0     		b	.L43
+ 956              	.L42:
+ 154:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI2_IRQn);
+ 957              		.loc 1 154 0 is_stmt 1
+ 958 00d2 0820     		movs	r0, #8
+ 959 00d4 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 960              	.L43:
+ 155:la/sampling.c **** 	if(triggerMask & 0x0008)EnableChannel(EXTI3_IRQn, 0, 0);
+ 961              		.loc 1 155 0
+ 962 00d8 204B     		ldr	r3, .L53+4
+ 963 00da 1B68     		ldr	r3, [r3]
+ 964 00dc 03F00803 		and	r3, r3, #8
+ 965 00e0 002B     		cmp	r3, #0
+ 966 00e2 05D0     		beq	.L44
+ 967              		.loc 1 155 0 is_stmt 0 discriminator 1
+ 968 00e4 0022     		movs	r2, #0
+ 969 00e6 0021     		movs	r1, #0
+ 970 00e8 0920     		movs	r0, #9
+ 971 00ea FFF7FEFF 		bl	EnableChannel
+ 972 00ee 02E0     		b	.L45
+ 973              	.L44:
+ 156:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI3_IRQn);
+ 974              		.loc 1 156 0 is_stmt 1
+ 975 00f0 0920     		movs	r0, #9
+ 976 00f2 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 977              	.L45:
+ 157:la/sampling.c **** 	if(triggerMask & 0x0010)EnableChannel(EXTI4_IRQn, 0, 0);
+ 978              		.loc 1 157 0
+ 979 00f6 194B     		ldr	r3, .L53+4
+ 980 00f8 1B68     		ldr	r3, [r3]
+ 981 00fa 03F01003 		and	r3, r3, #16
+ 982 00fe 002B     		cmp	r3, #0
+ 983 0100 05D0     		beq	.L46
+ 984              		.loc 1 157 0 is_stmt 0 discriminator 1
+ 985 0102 0022     		movs	r2, #0
+ 986 0104 0021     		movs	r1, #0
+ 987 0106 0A20     		movs	r0, #10
+ 988 0108 FFF7FEFF 		bl	EnableChannel
+ARM GAS  /tmp/ccJjpe8F.s 			page 36
 
 
- 990 00fe 002B     		cmp	r3, #0
- 991 0100 05D0     		beq	.L46
- 992              		.loc 1 156 0 is_stmt 0 discriminator 1
- 993 0102 0022     		movs	r2, #0
- 994 0104 0021     		movs	r1, #0
- 995 0106 0A20     		movs	r0, #10
- 996 0108 FFF7FEFF 		bl	EnableChannel
- 997 010c 02E0     		b	.L47
- 998              	.L46:
- 157:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI4_IRQn);
- 999              		.loc 1 157 0 is_stmt 1
- 1000 010e 0A20     		movs	r0, #10
- 1001 0110 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 1002              	.L47:
- 158:la/sampling.c **** 	if(triggerMask & 0x03E0)EnableChannel(EXTI9_5_IRQn, 0, 0);
- 1003              		.loc 1 158 0
- 1004 0114 114B     		ldr	r3, .L53+4
- 1005 0116 1B68     		ldr	r3, [r3]
- 1006 0118 03F47873 		and	r3, r3, #992
- 1007 011c 002B     		cmp	r3, #0
- 1008 011e 05D0     		beq	.L48
- 1009              		.loc 1 158 0 is_stmt 0 discriminator 1
- 1010 0120 0022     		movs	r2, #0
- 1011 0122 0021     		movs	r1, #0
- 1012 0124 1720     		movs	r0, #23
- 1013 0126 FFF7FEFF 		bl	EnableChannel
- 1014 012a 02E0     		b	.L49
- 1015              	.L48:
- 159:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
- 1016              		.loc 1 159 0 is_stmt 1
- 1017 012c 1720     		movs	r0, #23
- 1018 012e FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 1019              	.L49:
- 160:la/sampling.c **** 	if(triggerMask & 0xFC00)EnableChannel(EXTI15_10_IRQn, 0, 0);
- 1020              		.loc 1 160 0
- 1021 0132 0A4B     		ldr	r3, .L53+4
- 1022 0134 1B68     		ldr	r3, [r3]
- 1023 0136 03F47C43 		and	r3, r3, #64512
- 1024 013a 002B     		cmp	r3, #0
- 1025 013c 05D0     		beq	.L50
- 1026              		.loc 1 160 0 is_stmt 0 discriminator 1
- 1027 013e 0022     		movs	r2, #0
- 1028 0140 0021     		movs	r1, #0
- 1029 0142 2820     		movs	r0, #40
- 1030 0144 FFF7FEFF 		bl	EnableChannel
- 161:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
- 162:la/sampling.c **** 
+ 989 010c 02E0     		b	.L47
+ 990              	.L46:
+ 158:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+ 991              		.loc 1 158 0 is_stmt 1
+ 992 010e 0A20     		movs	r0, #10
+ 993 0110 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 994              	.L47:
+ 159:la/sampling.c **** 	if(triggerMask & 0x03E0)EnableChannel(EXTI9_5_IRQn, 0, 0);
+ 995              		.loc 1 159 0
+ 996 0114 114B     		ldr	r3, .L53+4
+ 997 0116 1B68     		ldr	r3, [r3]
+ 998 0118 03F47873 		and	r3, r3, #992
+ 999 011c 002B     		cmp	r3, #0
+ 1000 011e 05D0     		beq	.L48
+ 1001              		.loc 1 159 0 is_stmt 0 discriminator 1
+ 1002 0120 0022     		movs	r2, #0
+ 1003 0122 0021     		movs	r1, #0
+ 1004 0124 1720     		movs	r0, #23
+ 1005 0126 FFF7FEFF 		bl	EnableChannel
+ 1006 012a 02E0     		b	.L49
+ 1007              	.L48:
+ 160:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+ 1008              		.loc 1 160 0 is_stmt 1
+ 1009 012c 1720     		movs	r0, #23
+ 1010 012e FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1011              	.L49:
+ 161:la/sampling.c **** 	if(triggerMask & 0xFC00)EnableChannel(EXTI15_10_IRQn, 0, 0);
+ 1012              		.loc 1 161 0
+ 1013 0132 0A4B     		ldr	r3, .L53+4
+ 1014 0134 1B68     		ldr	r3, [r3]
+ 1015 0136 03F47C43 		and	r3, r3, #64512
+ 1016 013a 002B     		cmp	r3, #0
+ 1017 013c 05D0     		beq	.L50
+ 1018              		.loc 1 161 0 is_stmt 0 discriminator 1
+ 1019 013e 0022     		movs	r2, #0
+ 1020 0140 0021     		movs	r1, #0
+ 1021 0142 2820     		movs	r0, #40
+ 1022 0144 FFF7FEFF 		bl	EnableChannel
+ 162:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
  163:la/sampling.c **** 
- 164:la/sampling.c **** #ifdef SAMPLING_MANUAL //push-button-trigger
- 165:la/sampling.c **** 	TIM8->SMCR = TIM_SMCR_TS_0 | TIM_SMCR_TS_1 | TIM_SMCR_TS_2;//External trigger input
- 166:la/sampling.c **** 	TIM8->SMCR |= TIM_SMCR_SMS_1 | TIM_SMCR_SMS_2;
- 167:la/sampling.c **** 	TIM8->DIER |= TIM_DIER_TIE;
- 168:la/sampling.c **** 	EnableChannel(TIM8_TRG_COM_TIM14_IRQn, 2, 0);
- 169:la/sampling.c **** 	//samplingManualToExternalTransit = interruptHandler;
- 170:la/sampling.c **** #endif
- 171:la/sampling.c **** }
- 1031              		.loc 1 171 0 is_stmt 1 discriminator 1
-ARM GAS  /tmp/ccJRbtUJ.s 			page 37
+ 164:la/sampling.c **** 
+ 165:la/sampling.c **** #ifdef SAMPLING_MANUAL //push-button-trigger
+ 166:la/sampling.c **** 	TIM8->SMCR = TIM_SMCR_TS_0 | TIM_SMCR_TS_1 | TIM_SMCR_TS_2;//External trigger input
+ 167:la/sampling.c **** 	TIM8->SMCR |= TIM_SMCR_SMS_1 | TIM_SMCR_SMS_2;
+ 168:la/sampling.c **** 	TIM8->DIER |= TIM_DIER_TIE;
+ 169:la/sampling.c **** 	EnableChannel(TIM8_TRG_COM_TIM14_IRQn, 2, 0);
+ 170:la/sampling.c **** 	//samplingManualToExternalTransit = interruptHandler;
+ 171:la/sampling.c **** #endif
+ 172:la/sampling.c **** }
+ 1023              		.loc 1 172 0 is_stmt 1 discriminator 1
+ 1024 0148 02E0     		b	.L52
+ 1025              	.L50:
+ 162:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+ 1026              		.loc 1 162 0
+ 1027 014a 2820     		movs	r0, #40
+ 1028 014c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 1029              	.L52:
+ARM GAS  /tmp/ccJjpe8F.s 			page 37
 
 
- 1032 0148 02E0     		b	.L52
- 1033              	.L50:
- 161:la/sampling.c **** 	else HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
- 1034              		.loc 1 161 0
- 1035 014a 2820     		movs	r0, #40
- 1036 014c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 1037              	.L52:
- 1038              		.loc 1 171 0
- 1039 0150 00BF     		nop
- 1040 0152 1037     		adds	r7, r7, #16
- 1041              	.LCFI65:
- 1042              		.cfi_def_cfa_offset 8
- 1043 0154 BD46     		mov	sp, r7
- 1044              	.LCFI66:
- 1045              		.cfi_def_cfa_register 13
- 1046              		@ sp needed
- 1047 0156 80BD     		pop	{r7, pc}
- 1048              	.L54:
- 1049              		.align	2
- 1050              	.L53:
- 1051 0158 00380240 		.word	1073887232
- 1052 015c 00000000 		.word	triggerMask
- 1053 0160 00000000 		.word	triggerValue
- 1054 0164 00380140 		.word	1073821696
- 1055 0168 003C0140 		.word	1073822720
- 1056              		.cfi_endproc
- 1057              	.LFE145:
- 1059              		.section	.text.CalcDMATransferSize,"ax",%progbits
- 1060              		.align	1
- 1061              		.global	CalcDMATransferSize
- 1062              		.syntax unified
- 1063              		.thumb
- 1064              		.thumb_func
- 1065              		.fpu fpv4-sp-d16
- 1067              	CalcDMATransferSize:
- 1068              	.LFB146:
- 172:la/sampling.c **** 
- 173:la/sampling.c **** uint32_t CalcDMATransferSize()
- 174:la/sampling.c **** {
- 1069              		.loc 1 174 0
- 1070              		.cfi_startproc
- 1071              		@ args = 0, pretend = 0, frame = 8
- 1072              		@ frame_needed = 1, uses_anonymous_args = 0
- 1073              		@ link register save eliminated.
- 1074 0000 80B4     		push	{r7}
- 1075              	.LCFI67:
- 1076              		.cfi_def_cfa_offset 4
- 1077              		.cfi_offset 7, -4
- 1078 0002 83B0     		sub	sp, sp, #12
- 1079              	.LCFI68:
- 1080              		.cfi_def_cfa_offset 16
- 1081 0004 00AF     		add	r7, sp, #0
- 1082              	.LCFI69:
- 1083              		.cfi_def_cfa_register 7
- 175:la/sampling.c **** 	uint32_t dmaSize = 0;
- 1084              		.loc 1 175 0
- 1085 0006 0023     		movs	r3, #0
-ARM GAS  /tmp/ccJRbtUJ.s 			page 38
+ 1030              		.loc 1 172 0
+ 1031 0150 00BF     		nop
+ 1032 0152 1037     		adds	r7, r7, #16
+ 1033              	.LCFI65:
+ 1034              		.cfi_def_cfa_offset 8
+ 1035 0154 BD46     		mov	sp, r7
+ 1036              	.LCFI66:
+ 1037              		.cfi_def_cfa_register 13
+ 1038              		@ sp needed
+ 1039 0156 80BD     		pop	{r7, pc}
+ 1040              	.L54:
+ 1041              		.align	2
+ 1042              	.L53:
+ 1043 0158 00380240 		.word	1073887232
+ 1044 015c 00000000 		.word	triggerMask
+ 1045 0160 00000000 		.word	triggerValue
+ 1046 0164 00380140 		.word	1073821696
+ 1047 0168 003C0140 		.word	1073822720
+ 1048              		.cfi_endproc
+ 1049              	.LFE145:
+ 1051              		.section	.text.CalcDMATransferSize,"ax",%progbits
+ 1052              		.align	1
+ 1053              		.global	CalcDMATransferSize
+ 1054              		.syntax unified
+ 1055              		.thumb
+ 1056              		.thumb_func
+ 1057              		.fpu fpv4-sp-d16
+ 1059              	CalcDMATransferSize:
+ 1060              	.LFB146:
+ 173:la/sampling.c **** 
+ 174:la/sampling.c **** uint32_t CalcDMATransferSize()
+ 175:la/sampling.c **** {
+ 1061              		.loc 1 175 0
+ 1062              		.cfi_startproc
+ 1063              		@ args = 0, pretend = 0, frame = 8
+ 1064              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1065              		@ link register save eliminated.
+ 1066 0000 80B4     		push	{r7}
+ 1067              	.LCFI67:
+ 1068              		.cfi_def_cfa_offset 4
+ 1069              		.cfi_offset 7, -4
+ 1070 0002 83B0     		sub	sp, sp, #12
+ 1071              	.LCFI68:
+ 1072              		.cfi_def_cfa_offset 16
+ 1073 0004 00AF     		add	r7, sp, #0
+ 1074              	.LCFI69:
+ 1075              		.cfi_def_cfa_register 7
+ 176:la/sampling.c **** 	uint32_t dmaSize = 0;
+ 1076              		.loc 1 176 0
+ 1077 0006 0023     		movs	r3, #0
+ 1078 0008 7B60     		str	r3, [r7, #4]
+ 177:la/sampling.c **** 	//handle 8/16/32 bit samplings
+ 178:la/sampling.c **** 	switch(flags & SUMP_FLAG1_GROUPS)
+ 1079              		.loc 1 178 0
+ 1080 000a 114B     		ldr	r3, .L62
+ 1081 000c 1B88     		ldrh	r3, [r3]
+ 1082 000e 03F03C03 		and	r3, r3, #60
+ARM GAS  /tmp/ccJjpe8F.s 			page 38
 
 
- 1086 0008 7B60     		str	r3, [r7, #4]
- 176:la/sampling.c **** 	//handle 8/16/32 bit samplings
- 177:la/sampling.c **** 	switch(flags & SUMP_FLAG1_GROUPS)
- 1087              		.loc 1 177 0
- 1088 000a 114B     		ldr	r3, .L62
- 1089 000c 1B88     		ldrh	r3, [r3]
- 1090 000e 03F03C03 		and	r3, r3, #60
- 1091 0012 002B     		cmp	r3, #0
- 1092 0014 08D0     		beq	.L57
- 1093 0016 302B     		cmp	r3, #48
- 1094 0018 0DD1     		bne	.L61
- 178:la/sampling.c **** 	{
- 179:la/sampling.c **** 	case SUMP_FLAG1_GR_16BIT:
- 180:la/sampling.c **** 		transferSize = 2;
- 1095              		.loc 1 180 0
- 1096 001a 0E4B     		ldr	r3, .L62+4
- 1097 001c 0222     		movs	r2, #2
- 1098 001e 1A60     		str	r2, [r3]
- 181:la/sampling.c **** 		dmaSize = DMA_SxCR_MSIZE_0 | DMA_SxCR_PSIZE_0;
- 1099              		.loc 1 181 0
- 1100 0020 4FF42053 		mov	r3, #10240
- 1101 0024 7B60     		str	r3, [r7, #4]
- 182:la/sampling.c **** 		break;
- 1102              		.loc 1 182 0
- 1103 0026 0CE0     		b	.L59
- 1104              	.L57:
- 183:la/sampling.c **** 	case SUMP_FLAG1_GR_32BIT:
- 184:la/sampling.c **** 		transferSize = 4;
- 1105              		.loc 1 184 0
- 1106 0028 0A4B     		ldr	r3, .L62+4
- 1107 002a 0422     		movs	r2, #4
- 1108 002c 1A60     		str	r2, [r3]
- 185:la/sampling.c **** 		dmaSize = DMA_SxCR_MSIZE_1 | DMA_SxCR_PSIZE_1;
- 1109              		.loc 1 185 0
- 1110 002e 4FF4A043 		mov	r3, #20480
- 1111 0032 7B60     		str	r3, [r7, #4]
- 186:la/sampling.c **** 		break;
- 1112              		.loc 1 186 0
- 1113 0034 05E0     		b	.L59
- 1114              	.L61:
- 187:la/sampling.c **** 	case SUMP_FLAG1_GR_8BIT:
- 188:la/sampling.c **** 	default:
- 189:la/sampling.c **** 		dmaSize = 0;
- 1115              		.loc 1 189 0
- 1116 0036 0023     		movs	r3, #0
- 1117 0038 7B60     		str	r3, [r7, #4]
- 190:la/sampling.c **** 		transferSize = 1;
- 1118              		.loc 1 190 0
- 1119 003a 064B     		ldr	r3, .L62+4
- 1120 003c 0122     		movs	r2, #1
- 1121 003e 1A60     		str	r2, [r3]
- 191:la/sampling.c **** 		break;
- 1122              		.loc 1 191 0
- 1123 0040 00BF     		nop
- 1124              	.L59:
- 192:la/sampling.c **** 	}
- 193:la/sampling.c **** 	return dmaSize;
-ARM GAS  /tmp/ccJRbtUJ.s 			page 39
+ 1083 0012 002B     		cmp	r3, #0
+ 1084 0014 08D0     		beq	.L57
+ 1085 0016 302B     		cmp	r3, #48
+ 1086 0018 0DD1     		bne	.L61
+ 179:la/sampling.c **** 	{
+ 180:la/sampling.c **** 	case SUMP_FLAG1_GR_16BIT:
+ 181:la/sampling.c **** 		transferSize = 2;
+ 1087              		.loc 1 181 0
+ 1088 001a 0E4B     		ldr	r3, .L62+4
+ 1089 001c 0222     		movs	r2, #2
+ 1090 001e 1A60     		str	r2, [r3]
+ 182:la/sampling.c **** 		dmaSize = DMA_SxCR_MSIZE_0 | DMA_SxCR_PSIZE_0;
+ 1091              		.loc 1 182 0
+ 1092 0020 4FF42053 		mov	r3, #10240
+ 1093 0024 7B60     		str	r3, [r7, #4]
+ 183:la/sampling.c **** 		break;
+ 1094              		.loc 1 183 0
+ 1095 0026 0CE0     		b	.L59
+ 1096              	.L57:
+ 184:la/sampling.c **** 	case SUMP_FLAG1_GR_32BIT:
+ 185:la/sampling.c **** 		transferSize = 4;
+ 1097              		.loc 1 185 0
+ 1098 0028 0A4B     		ldr	r3, .L62+4
+ 1099 002a 0422     		movs	r2, #4
+ 1100 002c 1A60     		str	r2, [r3]
+ 186:la/sampling.c **** 		dmaSize = DMA_SxCR_MSIZE_1 | DMA_SxCR_PSIZE_1;
+ 1101              		.loc 1 186 0
+ 1102 002e 4FF4A043 		mov	r3, #20480
+ 1103 0032 7B60     		str	r3, [r7, #4]
+ 187:la/sampling.c **** 		break;
+ 1104              		.loc 1 187 0
+ 1105 0034 05E0     		b	.L59
+ 1106              	.L61:
+ 188:la/sampling.c **** 	case SUMP_FLAG1_GR_8BIT:
+ 189:la/sampling.c **** 	default:
+ 190:la/sampling.c **** 		dmaSize = 0;
+ 1107              		.loc 1 190 0
+ 1108 0036 0023     		movs	r3, #0
+ 1109 0038 7B60     		str	r3, [r7, #4]
+ 191:la/sampling.c **** 		transferSize = 1;
+ 1110              		.loc 1 191 0
+ 1111 003a 064B     		ldr	r3, .L62+4
+ 1112 003c 0122     		movs	r2, #1
+ 1113 003e 1A60     		str	r2, [r3]
+ 192:la/sampling.c **** 		break;
+ 1114              		.loc 1 192 0
+ 1115 0040 00BF     		nop
+ 1116              	.L59:
+ 193:la/sampling.c **** 	}
+ 194:la/sampling.c **** 	return dmaSize;
+ 1117              		.loc 1 194 0
+ 1118 0042 7B68     		ldr	r3, [r7, #4]
+ 195:la/sampling.c **** }
+ 1119              		.loc 1 195 0
+ 1120 0044 1846     		mov	r0, r3
+ 1121 0046 0C37     		adds	r7, r7, #12
+ 1122              	.LCFI70:
+ARM GAS  /tmp/ccJjpe8F.s 			page 39
 
 
- 1125              		.loc 1 193 0
- 1126 0042 7B68     		ldr	r3, [r7, #4]
- 194:la/sampling.c **** }
- 1127              		.loc 1 194 0
- 1128 0044 1846     		mov	r0, r3
- 1129 0046 0C37     		adds	r7, r7, #12
- 1130              	.LCFI70:
- 1131              		.cfi_def_cfa_offset 4
- 1132 0048 BD46     		mov	sp, r7
- 1133              	.LCFI71:
- 1134              		.cfi_def_cfa_register 13
- 1135              		@ sp needed
- 1136 004a 5DF8047B 		ldr	r7, [sp], #4
- 1137              	.LCFI72:
- 1138              		.cfi_restore 7
- 1139              		.cfi_def_cfa_offset 0
- 1140 004e 7047     		bx	lr
- 1141              	.L63:
- 1142              		.align	2
- 1143              	.L62:
- 1144 0050 00000000 		.word	flags
- 1145 0054 00000000 		.word	transferSize
- 1146              		.cfi_endproc
- 1147              	.LFE146:
- 1149              		.section	.text.SamplingClearBuffer,"ax",%progbits
- 1150              		.align	1
- 1151              		.global	SamplingClearBuffer
- 1152              		.syntax unified
- 1153              		.thumb
- 1154              		.thumb_func
- 1155              		.fpu fpv4-sp-d16
- 1157              	SamplingClearBuffer:
- 1158              	.LFB147:
- 195:la/sampling.c **** 
- 196:la/sampling.c **** void SamplingClearBuffer()
- 197:la/sampling.c **** {
- 1159              		.loc 1 197 0
- 1160              		.cfi_startproc
- 1161              		@ args = 0, pretend = 0, frame = 8
- 1162              		@ frame_needed = 1, uses_anonymous_args = 0
- 1163              		@ link register save eliminated.
- 1164 0000 80B4     		push	{r7}
- 1165              	.LCFI73:
- 1166              		.cfi_def_cfa_offset 4
- 1167              		.cfi_offset 7, -4
- 1168 0002 83B0     		sub	sp, sp, #12
- 1169              	.LCFI74:
- 1170              		.cfi_def_cfa_offset 16
- 1171 0004 00AF     		add	r7, sp, #0
- 1172              	.LCFI75:
- 1173              		.cfi_def_cfa_register 7
- 198:la/sampling.c **** 	int i;
- 199:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM / 4; i++)
- 1174              		.loc 1 199 0
- 1175 0006 0023     		movs	r3, #0
- 1176 0008 7B60     		str	r3, [r7, #4]
- 1177 000a 07E0     		b	.L65
-ARM GAS  /tmp/ccJRbtUJ.s 			page 40
+ 1123              		.cfi_def_cfa_offset 4
+ 1124 0048 BD46     		mov	sp, r7
+ 1125              	.LCFI71:
+ 1126              		.cfi_def_cfa_register 13
+ 1127              		@ sp needed
+ 1128 004a 5DF8047B 		ldr	r7, [sp], #4
+ 1129              	.LCFI72:
+ 1130              		.cfi_restore 7
+ 1131              		.cfi_def_cfa_offset 0
+ 1132 004e 7047     		bx	lr
+ 1133              	.L63:
+ 1134              		.align	2
+ 1135              	.L62:
+ 1136 0050 00000000 		.word	flags
+ 1137 0054 00000000 		.word	transferSize
+ 1138              		.cfi_endproc
+ 1139              	.LFE146:
+ 1141              		.section	.text.SamplingClearBuffer,"ax",%progbits
+ 1142              		.align	1
+ 1143              		.global	SamplingClearBuffer
+ 1144              		.syntax unified
+ 1145              		.thumb
+ 1146              		.thumb_func
+ 1147              		.fpu fpv4-sp-d16
+ 1149              	SamplingClearBuffer:
+ 1150              	.LFB147:
+ 196:la/sampling.c **** 
+ 197:la/sampling.c **** void SamplingClearBuffer()
+ 198:la/sampling.c **** {
+ 1151              		.loc 1 198 0
+ 1152              		.cfi_startproc
+ 1153              		@ args = 0, pretend = 0, frame = 8
+ 1154              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1155              		@ link register save eliminated.
+ 1156 0000 80B4     		push	{r7}
+ 1157              	.LCFI73:
+ 1158              		.cfi_def_cfa_offset 4
+ 1159              		.cfi_offset 7, -4
+ 1160 0002 83B0     		sub	sp, sp, #12
+ 1161              	.LCFI74:
+ 1162              		.cfi_def_cfa_offset 16
+ 1163 0004 00AF     		add	r7, sp, #0
+ 1164              	.LCFI75:
+ 1165              		.cfi_def_cfa_register 7
+ 199:la/sampling.c **** 	int i;
+ 200:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM / 4; i++)
+ 1166              		.loc 1 200 0
+ 1167 0006 0023     		movs	r3, #0
+ 1168 0008 7B60     		str	r3, [r7, #4]
+ 1169 000a 07E0     		b	.L65
+ 1170              	.L66:
+ 201:la/sampling.c **** 		samplingRam[i] = 0;
+ 1171              		.loc 1 201 0 discriminator 3
+ 1172 000c 104A     		ldr	r2, .L69
+ 1173 000e 7B68     		ldr	r3, [r7, #4]
+ 1174 0010 0021     		movs	r1, #0
+ 1175 0012 42F82310 		str	r1, [r2, r3, lsl #2]
+ARM GAS  /tmp/ccJjpe8F.s 			page 40
 
 
- 1178              	.L66:
  200:la/sampling.c **** 		samplingRam[i] = 0;
- 1179              		.loc 1 200 0 discriminator 3
- 1180 000c 084A     		ldr	r2, .L67
- 1181 000e 7B68     		ldr	r3, [r7, #4]
- 1182 0010 0021     		movs	r1, #0
- 1183 0012 42F82310 		str	r1, [r2, r3, lsl #2]
- 199:la/sampling.c **** 		samplingRam[i] = 0;
- 1184              		.loc 1 199 0 discriminator 3
- 1185 0016 7B68     		ldr	r3, [r7, #4]
- 1186 0018 0133     		adds	r3, r3, #1
- 1187 001a 7B60     		str	r3, [r7, #4]
- 1188              	.L65:
- 199:la/sampling.c **** 		samplingRam[i] = 0;
- 1189              		.loc 1 199 0 is_stmt 0 discriminator 1
- 1190 001c 7B68     		ldr	r3, [r7, #4]
- 1191 001e B3F5C05F 		cmp	r3, #6144
- 1192 0022 F3DB     		blt	.L66
- 201:la/sampling.c **** }
- 1193              		.loc 1 201 0 is_stmt 1
- 1194 0024 00BF     		nop
- 1195 0026 0C37     		adds	r7, r7, #12
- 1196              	.LCFI76:
- 1197              		.cfi_def_cfa_offset 4
- 1198 0028 BD46     		mov	sp, r7
- 1199              	.LCFI77:
- 1200              		.cfi_def_cfa_register 13
- 1201              		@ sp needed
- 1202 002a 5DF8047B 		ldr	r7, [sp], #4
- 1203              	.LCFI78:
- 1204              		.cfi_restore 7
- 1205              		.cfi_def_cfa_offset 0
- 1206 002e 7047     		bx	lr
- 1207              	.L68:
- 1208              		.align	2
- 1209              	.L67:
- 1210 0030 00000000 		.word	samplingRam
- 1211              		.cfi_endproc
- 1212              	.LFE147:
- 1214              		.section	.text.SamplingComplete,"ax",%progbits
- 1215              		.align	1
- 1216              		.global	SamplingComplete
- 1217              		.syntax unified
- 1218              		.thumb
- 1219              		.thumb_func
- 1220              		.fpu fpv4-sp-d16
- 1222              	SamplingComplete:
- 1223              	.LFB148:
- 202:la/sampling.c **** 
- 203:la/sampling.c **** void SamplingComplete()
- 204:la/sampling.c **** {
- 1224              		.loc 1 204 0
- 1225              		.cfi_startproc
- 1226              		@ args = 0, pretend = 0, frame = 0
- 1227              		@ frame_needed = 1, uses_anonymous_args = 0
- 1228              		@ link register save eliminated.
- 1229 0000 80B4     		push	{r7}
-ARM GAS  /tmp/ccJRbtUJ.s 			page 41
+ 1176              		.loc 1 200 0 discriminator 3
+ 1177 0016 7B68     		ldr	r3, [r7, #4]
+ 1178 0018 0133     		adds	r3, r3, #1
+ 1179 001a 7B60     		str	r3, [r7, #4]
+ 1180              	.L65:
+ 200:la/sampling.c **** 		samplingRam[i] = 0;
+ 1181              		.loc 1 200 0 is_stmt 0 discriminator 1
+ 1182 001c 7B68     		ldr	r3, [r7, #4]
+ 1183 001e B3F5C05F 		cmp	r3, #6144
+ 1184 0022 F3DB     		blt	.L66
+ 202:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM; i++)
+ 1185              		.loc 1 202 0 is_stmt 1
+ 1186 0024 0023     		movs	r3, #0
+ 1187 0026 7B60     		str	r3, [r7, #4]
+ 1188 0028 07E0     		b	.L67
+ 1189              	.L68:
+ 203:la/sampling.c **** 		arr[i] = 0;
+ 1190              		.loc 1 203 0 discriminator 3
+ 1191 002a 0A4A     		ldr	r2, .L69+4
+ 1192 002c 7B68     		ldr	r3, [r7, #4]
+ 1193 002e 1344     		add	r3, r3, r2
+ 1194 0030 0022     		movs	r2, #0
+ 1195 0032 1A70     		strb	r2, [r3]
+ 202:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM; i++)
+ 1196              		.loc 1 202 0 discriminator 3
+ 1197 0034 7B68     		ldr	r3, [r7, #4]
+ 1198 0036 0133     		adds	r3, r3, #1
+ 1199 0038 7B60     		str	r3, [r7, #4]
+ 1200              	.L67:
+ 202:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM; i++)
+ 1201              		.loc 1 202 0 is_stmt 0 discriminator 1
+ 1202 003a 7B68     		ldr	r3, [r7, #4]
+ 1203 003c B3F5C04F 		cmp	r3, #24576
+ 1204 0040 F3DB     		blt	.L68
+ 204:la/sampling.c **** }
+ 1205              		.loc 1 204 0 is_stmt 1
+ 1206 0042 00BF     		nop
+ 1207 0044 0C37     		adds	r7, r7, #12
+ 1208              	.LCFI76:
+ 1209              		.cfi_def_cfa_offset 4
+ 1210 0046 BD46     		mov	sp, r7
+ 1211              	.LCFI77:
+ 1212              		.cfi_def_cfa_register 13
+ 1213              		@ sp needed
+ 1214 0048 5DF8047B 		ldr	r7, [sp], #4
+ 1215              	.LCFI78:
+ 1216              		.cfi_restore 7
+ 1217              		.cfi_def_cfa_offset 0
+ 1218 004c 7047     		bx	lr
+ 1219              	.L70:
+ 1220 004e 00BF     		.align	2
+ 1221              	.L69:
+ 1222 0050 00000000 		.word	samplingRam
+ 1223 0054 00000000 		.word	arr
+ 1224              		.cfi_endproc
+ 1225              	.LFE147:
+ARM GAS  /tmp/ccJjpe8F.s 			page 41
 
 
- 1230              	.LCFI79:
- 1231              		.cfi_def_cfa_offset 4
- 1232              		.cfi_offset 7, -4
- 1233 0002 00AF     		add	r7, sp, #0
- 1234              	.LCFI80:
- 1235              		.cfi_def_cfa_register 7
- 205:la/sampling.c **** 	uint32_t i;
- 206:la/sampling.c **** 	
- 207:la/sampling.c **** 	//__disable_irq();
- 208:la/sampling.c **** 	//SUMP requests samples to be sent in reverse order: newest items first
- 209:la/sampling.c **** 	/*int BytesPerTransfer = GetBytesPerTransfer();
- 210:la/sampling.c **** 	if(BytesPerTransfer == 1)
- 211:la/sampling.c **** 	{
- 212:la/sampling.c **** 		uint8_t* ptr = GetBufferTail() - 1;
- 213:la/sampling.c **** 		//SUMP requests samples to be sent in reverse order: newest items first
- 214:la/sampling.c **** 		uint8_t a;
- 215:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i++)
+ 1227              		.section	.text.SamplingComplete,"ax",%progbits
+ 1228              		.align	1
+ 1229              		.global	SamplingComplete
+ 1230              		.syntax unified
+ 1231              		.thumb
+ 1232              		.thumb_func
+ 1233              		.fpu fpv4-sp-d16
+ 1235              	SamplingComplete:
+ 1236              	.LFB148:
+ 205:la/sampling.c **** 
+ 206:la/sampling.c **** void SamplingComplete()
+ 207:la/sampling.c **** {
+ 1237              		.loc 1 207 0
+ 1238              		.cfi_startproc
+ 1239              		@ args = 0, pretend = 0, frame = 16
+ 1240              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1241 0000 B0B5     		push	{r4, r5, r7, lr}
+ 1242              	.LCFI79:
+ 1243              		.cfi_def_cfa_offset 16
+ 1244              		.cfi_offset 4, -16
+ 1245              		.cfi_offset 5, -12
+ 1246              		.cfi_offset 7, -8
+ 1247              		.cfi_offset 14, -4
+ 1248 0002 84B0     		sub	sp, sp, #16
+ 1249              	.LCFI80:
+ 1250              		.cfi_def_cfa_offset 32
+ 1251 0004 00AF     		add	r7, sp, #0
+ 1252              	.LCFI81:
+ 1253              		.cfi_def_cfa_register 7
+ 1254              	.LBB20:
+ 1255              	.LBB21:
+ 142:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 1256              		.loc 2 142 0
+ 1257              		.syntax unified
+ 1258              	@ 142 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1259 0006 72B6     		cpsid i
+ 1260              	@ 0 "" 2
+ 1261              		.thumb
+ 1262              		.syntax unified
+ 1263              	.LBE21:
+ 1264              	.LBE20:
+ 208:la/sampling.c **** 	uint32_t i;
+ 209:la/sampling.c **** 	
+ 210:la/sampling.c **** 	__disable_irq();
+ 211:la/sampling.c **** 	//SUMP requests samples to be sent in reverse order: newest items first
+ 212:la/sampling.c **** 	if(GetBytesPerTransfer() == 1)
+ 1265              		.loc 1 212 0
+ 1266 0008 FFF7FEFF 		bl	GetBytesPerTransfer
+ 1267 000c 0346     		mov	r3, r0
+ 1268 000e 012B     		cmp	r3, #1
+ 1269 0010 45D1     		bne	.L72
+ 1270              	.LBB22:
+ 213:la/sampling.c **** 	{
+ 214:la/sampling.c **** 		uint8_t* ptr = GetBufferTail() - 1;
+ 1271              		.loc 1 214 0
+ 1272 0012 FFF7FEFF 		bl	GetBufferTail
+ 1273 0016 0346     		mov	r3, r0
+ARM GAS  /tmp/ccJjpe8F.s 			page 42
+
+
+ 1274 0018 013B     		subs	r3, r3, #1
+ 1275 001a BB60     		str	r3, [r7, #8]
+ 215:la/sampling.c **** 		//uint8_t arr[GetBufferSize()];
+ 216:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i++)
+ 1276              		.loc 1 216 0
+ 1277 001c 0023     		movs	r3, #0
+ 1278 001e FB60     		str	r3, [r7, #12]
+ 1279 0020 0CE0     		b	.L73
+ 1280              	.L74:
+ 217:la/sampling.c **** 		{
+ 218:la/sampling.c **** 			//while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+ 219:la/sampling.c **** 			arr[i] = *ptr;
+ 1281              		.loc 1 219 0 discriminator 3
+ 1282 0022 BB68     		ldr	r3, [r7, #8]
+ 1283 0024 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 1284 0026 474A     		ldr	r2, .L83
+ 1285 0028 FB68     		ldr	r3, [r7, #12]
+ 1286 002a 1344     		add	r3, r3, r2
+ 1287 002c 0A46     		mov	r2, r1
+ 1288 002e 1A70     		strb	r2, [r3]
+ 220:la/sampling.c **** 			ptr--;
+ 1289              		.loc 1 220 0 discriminator 3
+ 1290 0030 BB68     		ldr	r3, [r7, #8]
+ 1291 0032 013B     		subs	r3, r3, #1
+ 1292 0034 BB60     		str	r3, [r7, #8]
  216:la/sampling.c **** 		{
- 217:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
- 218:la/sampling.c **** 			ptr--;
- 219:la/sampling.c **** 		}
- 220:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - 1;
- 221:la/sampling.c **** 		for(; i < GetBufferSize(); i++)
- 222:la/sampling.c **** 		{
- 223:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
- 224:la/sampling.c **** 			ptr--;
- 225:la/sampling.c **** 		}
- 226:la/sampling.c **** 	}
- 227:la/sampling.c **** 	else if(GetBytesPerTransfer() == 2)
- 228:la/sampling.c **** 	{
- 229:la/sampling.c **** 		uint8_t *ptr = GetBufferTail() - GetBytesPerTransfer();
- 230:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i += GetBytesPerTransfer())
- 231:la/sampling.c **** 		{
- 232:la/sampling.c **** 			CDC_Transmit_FS((uint8_t*)ptr, 2);
- 233:la/sampling.c **** 			ptr -= GetBytesPerTransfer();
- 234:la/sampling.c **** 		}
- 235:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - GetBytesPerTransfer();
- 236:la/sampling.c **** 		for(; i < GetBufferSize(); i += GetBytesPerTransfer())
- 237:la/sampling.c **** 		{
- 238:la/sampling.c **** 			CDC_Transmit_FS((uint8_t*)ptr, 2);
- 239:la/sampling.c **** 			ptr -= GetBytesPerTransfer();
- 240:la/sampling.c **** 		}
- 241:la/sampling.c **** 	}
- 242:la/sampling.c **** 	__enable_irq();*/
- 243:la/sampling.c **** 	
- 244:la/sampling.c **** }
- 1236              		.loc 1 244 0
- 1237 0004 00BF     		nop
- 1238 0006 BD46     		mov	sp, r7
- 1239              	.LCFI81:
- 1240              		.cfi_def_cfa_register 13
- 1241              		@ sp needed
- 1242 0008 5DF8047B 		ldr	r7, [sp], #4
- 1243              	.LCFI82:
- 1244              		.cfi_restore 7
- 1245              		.cfi_def_cfa_offset 0
- 1246 000c 7047     		bx	lr
-ARM GAS  /tmp/ccJRbtUJ.s 			page 42
+ 1293              		.loc 1 216 0 discriminator 3
+ 1294 0036 FB68     		ldr	r3, [r7, #12]
+ 1295 0038 0133     		adds	r3, r3, #1
+ 1296 003a FB60     		str	r3, [r7, #12]
+ 1297              	.L73:
+ 216:la/sampling.c **** 		{
+ 1298              		.loc 1 216 0 is_stmt 0 discriminator 1
+ 1299 003c FFF7FEFF 		bl	GetBufferTailSize
+ 1300 0040 0246     		mov	r2, r0
+ 1301 0042 FB68     		ldr	r3, [r7, #12]
+ 1302 0044 9342     		cmp	r3, r2
+ 1303 0046 ECD3     		bcc	.L74
+ 221:la/sampling.c **** 		}
+ 222:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - 1;
+ 1304              		.loc 1 222 0 is_stmt 1
+ 1305 0048 FFF7FEFF 		bl	GetBuffer
+ 1306 004c 0446     		mov	r4, r0
+ 1307 004e FFF7FEFF 		bl	GetBufferSize
+ 1308 0052 0346     		mov	r3, r0
+ 1309 0054 013B     		subs	r3, r3, #1
+ 1310 0056 2344     		add	r3, r3, r4
+ 1311 0058 BB60     		str	r3, [r7, #8]
+ 223:la/sampling.c **** 		for(; i < GetBufferSize(); i++)
+ 1312              		.loc 1 223 0
+ 1313 005a 0CE0     		b	.L75
+ 1314              	.L76:
+ 224:la/sampling.c **** 		{
+ 225:la/sampling.c **** 			//while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+ 226:la/sampling.c **** 			arr[i] = *ptr;
+ 1315              		.loc 1 226 0 discriminator 2
+ 1316 005c BB68     		ldr	r3, [r7, #8]
+ARM GAS  /tmp/ccJjpe8F.s 			page 43
 
 
- 1247              		.cfi_endproc
- 1248              	.LFE148:
- 1250              		.section	.text.ActualTransferCount,"ax",%progbits
- 1251              		.align	1
- 1252              		.global	ActualTransferCount
- 1253              		.syntax unified
- 1254              		.thumb
- 1255              		.thumb_func
- 1256              		.fpu fpv4-sp-d16
- 1258              	ActualTransferCount:
- 1259              	.LFB149:
- 245:la/sampling.c **** 
- 246:la/sampling.c **** uint32_t ActualTransferCount()
- 247:la/sampling.c **** {
- 1260              		.loc 1 247 0
- 1261              		.cfi_startproc
- 1262              		@ args = 0, pretend = 0, frame = 0
- 1263              		@ frame_needed = 1, uses_anonymous_args = 0
- 1264              		@ link register save eliminated.
- 1265 0000 80B4     		push	{r7}
- 1266              	.LCFI83:
- 1267              		.cfi_def_cfa_offset 4
- 1268              		.cfi_offset 7, -4
- 1269 0002 00AF     		add	r7, sp, #0
- 1270              	.LCFI84:
- 1271              		.cfi_def_cfa_register 7
- 248:la/sampling.c **** 	return transferCount - (DMA2_Stream5->NDTR & ~3);
- 1272              		.loc 1 248 0
- 1273 0004 054B     		ldr	r3, .L72
- 1274 0006 1A68     		ldr	r2, [r3]
- 1275 0008 054B     		ldr	r3, .L72+4
- 1276 000a 5B68     		ldr	r3, [r3, #4]
- 1277 000c 23F00303 		bic	r3, r3, #3
- 1278 0010 D31A     		subs	r3, r2, r3
- 249:la/sampling.c **** }
- 1279              		.loc 1 249 0
- 1280 0012 1846     		mov	r0, r3
- 1281 0014 BD46     		mov	sp, r7
- 1282              	.LCFI85:
- 1283              		.cfi_def_cfa_register 13
- 1284              		@ sp needed
- 1285 0016 5DF8047B 		ldr	r7, [sp], #4
- 1286              	.LCFI86:
- 1287              		.cfi_restore 7
- 1288              		.cfi_def_cfa_offset 0
- 1289 001a 7047     		bx	lr
- 1290              	.L73:
- 1291              		.align	2
- 1292              	.L72:
- 1293 001c 00000000 		.word	transferCount
- 1294 0020 88640240 		.word	1073898632
- 1295              		.cfi_endproc
- 1296              	.LFE149:
- 1298              		.section	.text.GetBufferTail,"ax",%progbits
- 1299              		.align	1
- 1300              		.global	GetBufferTail
- 1301              		.syntax unified
-ARM GAS  /tmp/ccJRbtUJ.s 			page 43
+ 1317 005e 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 1318 0060 384A     		ldr	r2, .L83
+ 1319 0062 FB68     		ldr	r3, [r7, #12]
+ 1320 0064 1344     		add	r3, r3, r2
+ 1321 0066 0A46     		mov	r2, r1
+ 1322 0068 1A70     		strb	r2, [r3]
+ 227:la/sampling.c **** 			ptr--;
+ 1323              		.loc 1 227 0 discriminator 2
+ 1324 006a BB68     		ldr	r3, [r7, #8]
+ 1325 006c 013B     		subs	r3, r3, #1
+ 1326 006e BB60     		str	r3, [r7, #8]
+ 223:la/sampling.c **** 		for(; i < GetBufferSize(); i++)
+ 1327              		.loc 1 223 0 discriminator 2
+ 1328 0070 FB68     		ldr	r3, [r7, #12]
+ 1329 0072 0133     		adds	r3, r3, #1
+ 1330 0074 FB60     		str	r3, [r7, #12]
+ 1331              	.L75:
+ 223:la/sampling.c **** 		for(; i < GetBufferSize(); i++)
+ 1332              		.loc 1 223 0 is_stmt 0 discriminator 1
+ 1333 0076 FFF7FEFF 		bl	GetBufferSize
+ 1334 007a 0246     		mov	r2, r0
+ 1335 007c FB68     		ldr	r3, [r7, #12]
+ 1336 007e 9342     		cmp	r3, r2
+ 1337 0080 ECD3     		bcc	.L76
+ 228:la/sampling.c **** 		}
+ 229:la/sampling.c **** 		uint16_t Len_Arr = (uint16_t)GetBufferSize();
+ 1338              		.loc 1 229 0 is_stmt 1
+ 1339 0082 FFF7FEFF 		bl	GetBufferSize
+ 1340 0086 0346     		mov	r3, r0
+ 1341 0088 7B80     		strh	r3, [r7, #2]	@ movhi
+ 230:la/sampling.c **** 		while (CDC_Transmit_FS((uint8_t*)arr, Len_Arr) != 0){};
+ 1342              		.loc 1 230 0
+ 1343 008a 00BF     		nop
+ 1344              	.L77:
+ 1345              		.loc 1 230 0 is_stmt 0 discriminator 1
+ 1346 008c 7B88     		ldrh	r3, [r7, #2]
+ 1347 008e 1946     		mov	r1, r3
+ 1348 0090 2C48     		ldr	r0, .L83
+ 1349 0092 FFF7FEFF 		bl	CDC_Transmit_FS
+ 1350 0096 0346     		mov	r3, r0
+ 1351 0098 002B     		cmp	r3, #0
+ 1352 009a F7D1     		bne	.L77
+ 1353 009c 4DE0     		b	.L78
+ 1354              	.L72:
+ 1355              	.LBE22:
+ 231:la/sampling.c **** 
+ 232:la/sampling.c **** 		//SUMP requests samples to be sent in reverse order: newest items first
+ 233:la/sampling.c **** 		/*for(i = 0; i < GetBufferTailSize(); i++)
+ 234:la/sampling.c **** 		{
+ 235:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+ 236:la/sampling.c **** 			ptr--;
+ 237:la/sampling.c **** 		}
+ 238:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - 1;
+ 239:la/sampling.c **** 		for(; i < GetBufferSize(); i++)
+ 240:la/sampling.c **** 		{
+ 241:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
+ 242:la/sampling.c **** 			ptr--;
+ARM GAS  /tmp/ccJjpe8F.s 			page 44
 
 
- 1302              		.thumb
- 1303              		.thumb_func
- 1304              		.fpu fpv4-sp-d16
- 1306              	GetBufferTail:
- 1307              	.LFB150:
- 250:la/sampling.c **** 
- 251:la/sampling.c **** uint8_t* GetBufferTail()
- 252:la/sampling.c **** {
- 1308              		.loc 1 252 0
- 1309              		.cfi_startproc
- 1310              		@ args = 0, pretend = 0, frame = 0
- 1311              		@ frame_needed = 1, uses_anonymous_args = 0
- 1312 0000 80B5     		push	{r7, lr}
- 1313              	.LCFI87:
- 1314              		.cfi_def_cfa_offset 8
- 1315              		.cfi_offset 7, -8
- 1316              		.cfi_offset 14, -4
- 1317 0002 00AF     		add	r7, sp, #0
- 1318              	.LCFI88:
- 1319              		.cfi_def_cfa_register 7
- 253:la/sampling.c **** 	return (uint8_t*)(samplingRam) + ActualTransferCount() * transferSize;
- 1320              		.loc 1 253 0
- 1321 0004 FFF7FEFF 		bl	ActualTransferCount
- 1322 0008 0246     		mov	r2, r0
- 1323 000a 044B     		ldr	r3, .L76
- 1324 000c 1B68     		ldr	r3, [r3]
- 1325 000e 03FB02F3 		mul	r3, r3, r2
- 1326 0012 034A     		ldr	r2, .L76+4
- 1327 0014 1344     		add	r3, r3, r2
- 254:la/sampling.c **** }
- 1328              		.loc 1 254 0
- 1329 0016 1846     		mov	r0, r3
- 1330 0018 80BD     		pop	{r7, pc}
- 1331              	.L77:
- 1332 001a 00BF     		.align	2
- 1333              	.L76:
- 1334 001c 00000000 		.word	transferSize
- 1335 0020 00000000 		.word	samplingRam
- 1336              		.cfi_endproc
- 1337              	.LFE150:
- 1339              		.section	.text.GetBytesPerTransfer,"ax",%progbits
- 1340              		.align	1
- 1341              		.global	GetBytesPerTransfer
- 1342              		.syntax unified
- 1343              		.thumb
- 1344              		.thumb_func
- 1345              		.fpu fpv4-sp-d16
- 1347              	GetBytesPerTransfer:
- 1348              	.LFB151:
- 255:la/sampling.c **** 
- 256:la/sampling.c **** int GetBytesPerTransfer(){return transferSize;}
- 1349              		.loc 1 256 0
- 1350              		.cfi_startproc
- 1351              		@ args = 0, pretend = 0, frame = 0
- 1352              		@ frame_needed = 1, uses_anonymous_args = 0
- 1353              		@ link register save eliminated.
- 1354 0000 80B4     		push	{r7}
-ARM GAS  /tmp/ccJRbtUJ.s 			page 44
+ 243:la/sampling.c **** 		}*/
+ 244:la/sampling.c **** 	}
+ 245:la/sampling.c **** 	else if(GetBytesPerTransfer() == 2)
+ 1356              		.loc 1 245 0 is_stmt 1
+ 1357 009e FFF7FEFF 		bl	GetBytesPerTransfer
+ 1358 00a2 0346     		mov	r3, r0
+ 1359 00a4 022B     		cmp	r3, #2
+ 1360 00a6 48D1     		bne	.L78
+ 1361              	.LBB23:
+ 246:la/sampling.c **** 	{
+ 247:la/sampling.c **** 		uint8_t *ptr = GetBufferTail() - GetBytesPerTransfer();
+ 1362              		.loc 1 247 0
+ 1363 00a8 FFF7FEFF 		bl	GetBufferTail
+ 1364 00ac 0446     		mov	r4, r0
+ 1365 00ae FFF7FEFF 		bl	GetBytesPerTransfer
+ 1366 00b2 0346     		mov	r3, r0
+ 1367 00b4 5B42     		negs	r3, r3
+ 1368 00b6 2344     		add	r3, r3, r4
+ 1369 00b8 7B60     		str	r3, [r7, #4]
+ 248:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i += GetBytesPerTransfer())
+ 1370              		.loc 1 248 0
+ 1371 00ba 0023     		movs	r3, #0
+ 1372 00bc FB60     		str	r3, [r7, #12]
+ 1373 00be 11E0     		b	.L79
+ 1374              	.L80:
+ 249:la/sampling.c **** 		{
+ 250:la/sampling.c **** 			CDC_Transmit_FS((uint8_t*)ptr, 2);
+ 1375              		.loc 1 250 0 discriminator 3
+ 1376 00c0 0221     		movs	r1, #2
+ 1377 00c2 7868     		ldr	r0, [r7, #4]
+ 1378 00c4 FFF7FEFF 		bl	CDC_Transmit_FS
+ 251:la/sampling.c **** 			ptr -= GetBytesPerTransfer();
+ 1379              		.loc 1 251 0 discriminator 3
+ 1380 00c8 FFF7FEFF 		bl	GetBytesPerTransfer
+ 1381 00cc 0346     		mov	r3, r0
+ 1382 00ce 5B42     		negs	r3, r3
+ 1383 00d0 7A68     		ldr	r2, [r7, #4]
+ 1384 00d2 1344     		add	r3, r3, r2
+ 1385 00d4 7B60     		str	r3, [r7, #4]
+ 248:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i += GetBytesPerTransfer())
+ 1386              		.loc 1 248 0 discriminator 3
+ 1387 00d6 FFF7FEFF 		bl	GetBytesPerTransfer
+ 1388 00da 0346     		mov	r3, r0
+ 1389 00dc 1A46     		mov	r2, r3
+ 1390 00de FB68     		ldr	r3, [r7, #12]
+ 1391 00e0 1344     		add	r3, r3, r2
+ 1392 00e2 FB60     		str	r3, [r7, #12]
+ 1393              	.L79:
+ 248:la/sampling.c **** 		for(i = 0; i < GetBufferTailSize(); i += GetBytesPerTransfer())
+ 1394              		.loc 1 248 0 is_stmt 0 discriminator 1
+ 1395 00e4 FFF7FEFF 		bl	GetBufferTailSize
+ 1396 00e8 0246     		mov	r2, r0
+ 1397 00ea FB68     		ldr	r3, [r7, #12]
+ 1398 00ec 9342     		cmp	r3, r2
+ 1399 00ee E7D3     		bcc	.L80
+ 252:la/sampling.c **** 		}
+ 253:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - GetBytesPerTransfer();
+ARM GAS  /tmp/ccJjpe8F.s 			page 45
 
 
- 1355              	.LCFI89:
- 1356              		.cfi_def_cfa_offset 4
- 1357              		.cfi_offset 7, -4
- 1358 0002 00AF     		add	r7, sp, #0
- 1359              	.LCFI90:
- 1360              		.cfi_def_cfa_register 7
- 1361              		.loc 1 256 0
- 1362 0004 034B     		ldr	r3, .L80
- 1363 0006 1B68     		ldr	r3, [r3]
- 1364 0008 1846     		mov	r0, r3
- 1365 000a BD46     		mov	sp, r7
- 1366              	.LCFI91:
- 1367              		.cfi_def_cfa_register 13
- 1368              		@ sp needed
- 1369 000c 5DF8047B 		ldr	r7, [sp], #4
- 1370              	.LCFI92:
- 1371              		.cfi_restore 7
- 1372              		.cfi_def_cfa_offset 0
- 1373 0010 7047     		bx	lr
- 1374              	.L81:
- 1375 0012 00BF     		.align	2
- 1376              	.L80:
- 1377 0014 00000000 		.word	transferSize
- 1378              		.cfi_endproc
- 1379              	.LFE151:
- 1381              		.section	.text.GetBufferTailSize,"ax",%progbits
- 1382              		.align	1
- 1383              		.global	GetBufferTailSize
- 1384              		.syntax unified
- 1385              		.thumb
- 1386              		.thumb_func
- 1387              		.fpu fpv4-sp-d16
- 1389              	GetBufferTailSize:
- 1390              	.LFB152:
- 257:la/sampling.c **** 
- 258:la/sampling.c **** 
- 259:la/sampling.c **** uint32_t GetBufferTailSize()
- 260:la/sampling.c **** {
- 1391              		.loc 1 260 0
- 1392              		.cfi_startproc
- 1393              		@ args = 0, pretend = 0, frame = 0
- 1394              		@ frame_needed = 1, uses_anonymous_args = 0
- 1395 0000 80B5     		push	{r7, lr}
- 1396              	.LCFI93:
- 1397              		.cfi_def_cfa_offset 8
- 1398              		.cfi_offset 7, -8
- 1399              		.cfi_offset 14, -4
- 1400 0002 00AF     		add	r7, sp, #0
- 1401              	.LCFI94:
- 1402              		.cfi_def_cfa_register 7
- 261:la/sampling.c **** 	return ActualTransferCount() * transferSize;
- 1403              		.loc 1 261 0
- 1404 0004 FFF7FEFF 		bl	ActualTransferCount
- 1405 0008 0246     		mov	r2, r0
- 1406 000a 034B     		ldr	r3, .L84
- 1407 000c 1B68     		ldr	r3, [r3]
- 1408 000e 03FB02F3 		mul	r3, r3, r2
-ARM GAS  /tmp/ccJRbtUJ.s 			page 45
+ 1400              		.loc 1 253 0 is_stmt 1
+ 1401 00f0 FFF7FEFF 		bl	GetBuffer
+ 1402 00f4 0446     		mov	r4, r0
+ 1403 00f6 FFF7FEFF 		bl	GetBufferSize
+ 1404 00fa 0546     		mov	r5, r0
+ 1405 00fc FFF7FEFF 		bl	GetBytesPerTransfer
+ 1406 0100 0346     		mov	r3, r0
+ 1407 0102 EB1A     		subs	r3, r5, r3
+ 1408 0104 2344     		add	r3, r3, r4
+ 1409 0106 7B60     		str	r3, [r7, #4]
+ 254:la/sampling.c **** 		for(; i < GetBufferSize(); i += GetBytesPerTransfer())
+ 1410              		.loc 1 254 0
+ 1411 0108 11E0     		b	.L81
+ 1412              	.L82:
+ 255:la/sampling.c **** 		{
+ 256:la/sampling.c **** 			CDC_Transmit_FS((uint8_t*)ptr, 2);
+ 1413              		.loc 1 256 0 discriminator 2
+ 1414 010a 0221     		movs	r1, #2
+ 1415 010c 7868     		ldr	r0, [r7, #4]
+ 1416 010e FFF7FEFF 		bl	CDC_Transmit_FS
+ 257:la/sampling.c **** 			ptr -= GetBytesPerTransfer();
+ 1417              		.loc 1 257 0 discriminator 2
+ 1418 0112 FFF7FEFF 		bl	GetBytesPerTransfer
+ 1419 0116 0346     		mov	r3, r0
+ 1420 0118 5B42     		negs	r3, r3
+ 1421 011a 7A68     		ldr	r2, [r7, #4]
+ 1422 011c 1344     		add	r3, r3, r2
+ 1423 011e 7B60     		str	r3, [r7, #4]
+ 254:la/sampling.c **** 		for(; i < GetBufferSize(); i += GetBytesPerTransfer())
+ 1424              		.loc 1 254 0 discriminator 2
+ 1425 0120 FFF7FEFF 		bl	GetBytesPerTransfer
+ 1426 0124 0346     		mov	r3, r0
+ 1427 0126 1A46     		mov	r2, r3
+ 1428 0128 FB68     		ldr	r3, [r7, #12]
+ 1429 012a 1344     		add	r3, r3, r2
+ 1430 012c FB60     		str	r3, [r7, #12]
+ 1431              	.L81:
+ 254:la/sampling.c **** 		for(; i < GetBufferSize(); i += GetBytesPerTransfer())
+ 1432              		.loc 1 254 0 is_stmt 0 discriminator 1
+ 1433 012e FFF7FEFF 		bl	GetBufferSize
+ 1434 0132 0246     		mov	r2, r0
+ 1435 0134 FB68     		ldr	r3, [r7, #12]
+ 1436 0136 9342     		cmp	r3, r2
+ 1437 0138 E7D3     		bcc	.L82
+ 1438              	.L78:
+ 1439              	.LBE23:
+ 1440              	.LBB24:
+ 1441              	.LBB25:
+ 131:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 1442              		.loc 2 131 0 is_stmt 1
+ 1443              		.syntax unified
+ 1444              	@ 131 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1445 013a 62B6     		cpsie i
+ 1446              	@ 0 "" 2
+ 1447              		.thumb
+ 1448              		.syntax unified
+ 1449              	.LBE25:
+ARM GAS  /tmp/ccJjpe8F.s 			page 46
 
 
+ 1450              	.LBE24:
+ 258:la/sampling.c **** 		}
+ 259:la/sampling.c **** 	}
+ 260:la/sampling.c **** 	__enable_irq();
+ 261:la/sampling.c **** 	
  262:la/sampling.c **** }
- 1409              		.loc 1 262 0
- 1410 0012 1846     		mov	r0, r3
- 1411 0014 80BD     		pop	{r7, pc}
- 1412              	.L85:
- 1413 0016 00BF     		.align	2
- 1414              	.L84:
- 1415 0018 00000000 		.word	transferSize
- 1416              		.cfi_endproc
- 1417              	.LFE152:
- 1419              		.section	.text.GetBufferSize,"ax",%progbits
- 1420              		.align	1
- 1421              		.global	GetBufferSize
- 1422              		.syntax unified
- 1423              		.thumb
- 1424              		.thumb_func
- 1425              		.fpu fpv4-sp-d16
- 1427              	GetBufferSize:
- 1428              	.LFB153:
+ 1451              		.loc 1 262 0
+ 1452 013c 00BF     		nop
+ 1453 013e 1037     		adds	r7, r7, #16
+ 1454              	.LCFI82:
+ 1455              		.cfi_def_cfa_offset 16
+ 1456 0140 BD46     		mov	sp, r7
+ 1457              	.LCFI83:
+ 1458              		.cfi_def_cfa_register 13
+ 1459              		@ sp needed
+ 1460 0142 B0BD     		pop	{r4, r5, r7, pc}
+ 1461              	.L84:
+ 1462              		.align	2
+ 1463              	.L83:
+ 1464 0144 00000000 		.word	arr
+ 1465              		.cfi_endproc
+ 1466              	.LFE148:
+ 1468              		.section	.text.ActualTransferCount,"ax",%progbits
+ 1469              		.align	1
+ 1470              		.global	ActualTransferCount
+ 1471              		.syntax unified
+ 1472              		.thumb
+ 1473              		.thumb_func
+ 1474              		.fpu fpv4-sp-d16
+ 1476              	ActualTransferCount:
+ 1477              	.LFB149:
  263:la/sampling.c **** 
- 264:la/sampling.c **** uint32_t GetBufferSize()
+ 264:la/sampling.c **** uint32_t ActualTransferCount()
  265:la/sampling.c **** {
- 1429              		.loc 1 265 0
- 1430              		.cfi_startproc
- 1431              		@ args = 0, pretend = 0, frame = 0
- 1432              		@ frame_needed = 1, uses_anonymous_args = 0
- 1433              		@ link register save eliminated.
- 1434 0000 80B4     		push	{r7}
- 1435              	.LCFI95:
- 1436              		.cfi_def_cfa_offset 4
- 1437              		.cfi_offset 7, -4
- 1438 0002 00AF     		add	r7, sp, #0
- 1439              	.LCFI96:
- 1440              		.cfi_def_cfa_register 7
- 266:la/sampling.c **** 	return transferCount * transferSize;
- 1441              		.loc 1 266 0
- 1442 0004 054B     		ldr	r3, .L88
- 1443 0006 1B68     		ldr	r3, [r3]
- 1444 0008 054A     		ldr	r2, .L88+4
- 1445 000a 1268     		ldr	r2, [r2]
- 1446 000c 02FB03F3 		mul	r3, r2, r3
+ 1478              		.loc 1 265 0
+ 1479              		.cfi_startproc
+ 1480              		@ args = 0, pretend = 0, frame = 0
+ 1481              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1482              		@ link register save eliminated.
+ 1483 0000 80B4     		push	{r7}
+ 1484              	.LCFI84:
+ 1485              		.cfi_def_cfa_offset 4
+ 1486              		.cfi_offset 7, -4
+ 1487 0002 00AF     		add	r7, sp, #0
+ 1488              	.LCFI85:
+ 1489              		.cfi_def_cfa_register 7
+ 266:la/sampling.c **** 	return transferCount - (DMA2_Stream5->NDTR & ~3);
+ 1490              		.loc 1 266 0
+ 1491 0004 054B     		ldr	r3, .L87
+ 1492 0006 1A68     		ldr	r2, [r3]
+ 1493 0008 054B     		ldr	r3, .L87+4
+ 1494 000a 5B68     		ldr	r3, [r3, #4]
+ 1495 000c 23F00303 		bic	r3, r3, #3
+ 1496 0010 D31A     		subs	r3, r2, r3
  267:la/sampling.c **** }
- 1447              		.loc 1 267 0
- 1448 0010 1846     		mov	r0, r3
- 1449 0012 BD46     		mov	sp, r7
- 1450              	.LCFI97:
- 1451              		.cfi_def_cfa_register 13
- 1452              		@ sp needed
- 1453 0014 5DF8047B 		ldr	r7, [sp], #4
- 1454              	.LCFI98:
- 1455              		.cfi_restore 7
- 1456              		.cfi_def_cfa_offset 0
- 1457 0018 7047     		bx	lr
- 1458              	.L89:
- 1459 001a 00BF     		.align	2
- 1460              	.L88:
- 1461 001c 00000000 		.word	transferCount
-ARM GAS  /tmp/ccJRbtUJ.s 			page 46
+ 1497              		.loc 1 267 0
+ 1498 0012 1846     		mov	r0, r3
+ARM GAS  /tmp/ccJjpe8F.s 			page 47
 
 
- 1462 0020 00000000 		.word	transferSize
- 1463              		.cfi_endproc
- 1464              	.LFE153:
- 1466              		.section	.text.GetBuffer,"ax",%progbits
- 1467              		.align	1
- 1468              		.global	GetBuffer
- 1469              		.syntax unified
- 1470              		.thumb
- 1471              		.thumb_func
- 1472              		.fpu fpv4-sp-d16
- 1474              	GetBuffer:
- 1475              	.LFB154:
+ 1499 0014 BD46     		mov	sp, r7
+ 1500              	.LCFI86:
+ 1501              		.cfi_def_cfa_register 13
+ 1502              		@ sp needed
+ 1503 0016 5DF8047B 		ldr	r7, [sp], #4
+ 1504              	.LCFI87:
+ 1505              		.cfi_restore 7
+ 1506              		.cfi_def_cfa_offset 0
+ 1507 001a 7047     		bx	lr
+ 1508              	.L88:
+ 1509              		.align	2
+ 1510              	.L87:
+ 1511 001c 00000000 		.word	transferCount
+ 1512 0020 88640240 		.word	1073898632
+ 1513              		.cfi_endproc
+ 1514              	.LFE149:
+ 1516              		.section	.text.GetBufferTail,"ax",%progbits
+ 1517              		.align	1
+ 1518              		.global	GetBufferTail
+ 1519              		.syntax unified
+ 1520              		.thumb
+ 1521              		.thumb_func
+ 1522              		.fpu fpv4-sp-d16
+ 1524              	GetBufferTail:
+ 1525              	.LFB150:
  268:la/sampling.c **** 
- 269:la/sampling.c **** uint8_t* GetBuffer()
+ 269:la/sampling.c **** uint8_t* GetBufferTail()
  270:la/sampling.c **** {
- 1476              		.loc 1 270 0
- 1477              		.cfi_startproc
- 1478              		@ args = 0, pretend = 0, frame = 0
- 1479              		@ frame_needed = 1, uses_anonymous_args = 0
- 1480              		@ link register save eliminated.
- 1481 0000 80B4     		push	{r7}
- 1482              	.LCFI99:
- 1483              		.cfi_def_cfa_offset 4
- 1484              		.cfi_offset 7, -4
- 1485 0002 00AF     		add	r7, sp, #0
- 1486              	.LCFI100:
- 1487              		.cfi_def_cfa_register 7
- 271:la/sampling.c **** 	return (uint8_t*)samplingRam;
- 1488              		.loc 1 271 0
- 1489 0004 024B     		ldr	r3, .L92
+ 1526              		.loc 1 270 0
+ 1527              		.cfi_startproc
+ 1528              		@ args = 0, pretend = 0, frame = 0
+ 1529              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1530 0000 80B5     		push	{r7, lr}
+ 1531              	.LCFI88:
+ 1532              		.cfi_def_cfa_offset 8
+ 1533              		.cfi_offset 7, -8
+ 1534              		.cfi_offset 14, -4
+ 1535 0002 00AF     		add	r7, sp, #0
+ 1536              	.LCFI89:
+ 1537              		.cfi_def_cfa_register 7
+ 271:la/sampling.c **** 	return (uint8_t*)(samplingRam) + ActualTransferCount() * transferSize;
+ 1538              		.loc 1 271 0
+ 1539 0004 FFF7FEFF 		bl	ActualTransferCount
+ 1540 0008 0246     		mov	r2, r0
+ 1541 000a 044B     		ldr	r3, .L91
+ 1542 000c 1B68     		ldr	r3, [r3]
+ 1543 000e 03FB02F3 		mul	r3, r3, r2
+ 1544 0012 034A     		ldr	r2, .L91+4
+ 1545 0014 1344     		add	r3, r3, r2
  272:la/sampling.c **** }
- 1490              		.loc 1 272 0
- 1491 0006 1846     		mov	r0, r3
- 1492 0008 BD46     		mov	sp, r7
- 1493              	.LCFI101:
- 1494              		.cfi_def_cfa_register 13
- 1495              		@ sp needed
- 1496 000a 5DF8047B 		ldr	r7, [sp], #4
- 1497              	.LCFI102:
- 1498              		.cfi_restore 7
- 1499              		.cfi_def_cfa_offset 0
- 1500 000e 7047     		bx	lr
- 1501              	.L93:
- 1502              		.align	2
- 1503              	.L92:
- 1504 0010 00000000 		.word	samplingRam
- 1505              		.cfi_endproc
- 1506              	.LFE154:
- 1508              		.section	.text.EnableChannel,"ax",%progbits
- 1509              		.align	1
- 1510              		.global	EnableChannel
- 1511              		.syntax unified
- 1512              		.thumb
- 1513              		.thumb_func
- 1514              		.fpu fpv4-sp-d16
- 1516              	EnableChannel:
- 1517              	.LFB155:
-ARM GAS  /tmp/ccJRbtUJ.s 			page 47
+ 1546              		.loc 1 272 0
+ 1547 0016 1846     		mov	r0, r3
+ 1548 0018 80BD     		pop	{r7, pc}
+ 1549              	.L92:
+ 1550 001a 00BF     		.align	2
+ 1551              	.L91:
+ 1552 001c 00000000 		.word	transferSize
+ARM GAS  /tmp/ccJjpe8F.s 			page 48
 
 
+ 1553 0020 00000000 		.word	samplingRam
+ 1554              		.cfi_endproc
+ 1555              	.LFE150:
+ 1557              		.section	.text.GetBytesPerTransfer,"ax",%progbits
+ 1558              		.align	1
+ 1559              		.global	GetBytesPerTransfer
+ 1560              		.syntax unified
+ 1561              		.thumb
+ 1562              		.thumb_func
+ 1563              		.fpu fpv4-sp-d16
+ 1565              	GetBytesPerTransfer:
+ 1566              	.LFB151:
  273:la/sampling.c **** 
- 274:la/sampling.c **** 
- 275:la/sampling.c **** // Interrupts
+ 274:la/sampling.c **** int GetBytesPerTransfer(){return transferSize;}
+ 1567              		.loc 1 274 0
+ 1568              		.cfi_startproc
+ 1569              		@ args = 0, pretend = 0, frame = 0
+ 1570              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1571              		@ link register save eliminated.
+ 1572 0000 80B4     		push	{r7}
+ 1573              	.LCFI90:
+ 1574              		.cfi_def_cfa_offset 4
+ 1575              		.cfi_offset 7, -4
+ 1576 0002 00AF     		add	r7, sp, #0
+ 1577              	.LCFI91:
+ 1578              		.cfi_def_cfa_register 7
+ 1579              		.loc 1 274 0
+ 1580 0004 034B     		ldr	r3, .L95
+ 1581 0006 1B68     		ldr	r3, [r3]
+ 1582 0008 1846     		mov	r0, r3
+ 1583 000a BD46     		mov	sp, r7
+ 1584              	.LCFI92:
+ 1585              		.cfi_def_cfa_register 13
+ 1586              		@ sp needed
+ 1587 000c 5DF8047B 		ldr	r7, [sp], #4
+ 1588              	.LCFI93:
+ 1589              		.cfi_restore 7
+ 1590              		.cfi_def_cfa_offset 0
+ 1591 0010 7047     		bx	lr
+ 1592              	.L96:
+ 1593 0012 00BF     		.align	2
+ 1594              	.L95:
+ 1595 0014 00000000 		.word	transferSize
+ 1596              		.cfi_endproc
+ 1597              	.LFE151:
+ 1599              		.section	.text.GetBufferTailSize,"ax",%progbits
+ 1600              		.align	1
+ 1601              		.global	GetBufferTailSize
+ 1602              		.syntax unified
+ 1603              		.thumb
+ 1604              		.thumb_func
+ 1605              		.fpu fpv4-sp-d16
+ 1607              	GetBufferTailSize:
+ 1608              	.LFB152:
+ 275:la/sampling.c **** 
  276:la/sampling.c **** 
- 277:la/sampling.c **** 	void EnableChannel(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
- 278:la/sampling.c **** 	{
- 1518              		.loc 1 278 0
- 1519              		.cfi_startproc
- 1520              		@ args = 0, pretend = 0, frame = 8
- 1521              		@ frame_needed = 1, uses_anonymous_args = 0
- 1522 0000 80B5     		push	{r7, lr}
- 1523              	.LCFI103:
- 1524              		.cfi_def_cfa_offset 8
- 1525              		.cfi_offset 7, -8
- 1526              		.cfi_offset 14, -4
- 1527 0002 82B0     		sub	sp, sp, #8
- 1528              	.LCFI104:
- 1529              		.cfi_def_cfa_offset 16
- 1530 0004 00AF     		add	r7, sp, #0
- 1531              	.LCFI105:
- 1532              		.cfi_def_cfa_register 7
- 1533 0006 0346     		mov	r3, r0
- 1534 0008 FB71     		strb	r3, [r7, #7]
- 1535 000a 0B46     		mov	r3, r1
- 1536 000c BB71     		strb	r3, [r7, #6]
- 1537 000e 1346     		mov	r3, r2
- 1538 0010 7B71     		strb	r3, [r7, #5]
- 279:la/sampling.c **** 		//DisableChannel(irqChannel);
- 280:la/sampling.c **** 		HAL_NVIC_DisableIRQ(irqChannel);
- 1539              		.loc 1 280 0
- 1540 0012 97F90730 		ldrsb	r3, [r7, #7]
- 1541 0016 1846     		mov	r0, r3
- 1542 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
- 281:la/sampling.c **** 		//SetHandler(irqChannel, handler);
- 282:la/sampling.c **** 		//SetChannelPriority(irqChannel, priority, subpriority);
- 283:la/sampling.c **** 		HAL_NVIC_SetPriority(irqChannel, 0, 0);
- 1543              		.loc 1 283 0
- 1544 001c 97F90730 		ldrsb	r3, [r7, #7]
- 1545 0020 0022     		movs	r2, #0
- 1546 0022 0021     		movs	r1, #0
- 1547 0024 1846     		mov	r0, r3
- 1548 0026 FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 284:la/sampling.c **** 		//NVIC->ISER[irqChannel >> 0x05] =
- 285:la/sampling.c **** 	      //(uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
- 286:la/sampling.c **** 		HAL_NVIC_EnableIRQ(irqChannel);
- 1549              		.loc 1 286 0
- 1550 002a 97F90730 		ldrsb	r3, [r7, #7]
- 1551 002e 1846     		mov	r0, r3
- 1552 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 287:la/sampling.c **** 
- 288:la/sampling.c **** 	}
- 1553              		.loc 1 288 0
- 1554 0034 00BF     		nop
- 1555 0036 0837     		adds	r7, r7, #8
- 1556              	.LCFI106:
- 1557              		.cfi_def_cfa_offset 8
- 1558 0038 BD46     		mov	sp, r7
-ARM GAS  /tmp/ccJRbtUJ.s 			page 48
+ 277:la/sampling.c **** uint32_t GetBufferTailSize()
+ARM GAS  /tmp/ccJjpe8F.s 			page 49
 
 
- 1559              	.LCFI107:
- 1560              		.cfi_def_cfa_register 13
- 1561              		@ sp needed
- 1562 003a 80BD     		pop	{r7, pc}
- 1563              		.cfi_endproc
- 1564              	.LFE155:
- 1566              		.section	.text.DisableChannel,"ax",%progbits
- 1567              		.align	1
- 1568              		.global	DisableChannel
- 1569              		.syntax unified
- 1570              		.thumb
- 1571              		.thumb_func
- 1572              		.fpu fpv4-sp-d16
- 1574              	DisableChannel:
- 1575              	.LFB156:
- 289:la/sampling.c **** 	//Îòêëþ÷àåò ïðåðûâàíèå
- 290:la/sampling.c **** 	void DisableChannel(IRQn_Type irqChannel)
- 291:la/sampling.c **** 	{
- 1576              		.loc 1 291 0
- 1577              		.cfi_startproc
- 1578              		@ args = 0, pretend = 0, frame = 8
- 1579              		@ frame_needed = 1, uses_anonymous_args = 0
- 1580              		@ link register save eliminated.
- 1581 0000 80B4     		push	{r7}
- 1582              	.LCFI108:
- 1583              		.cfi_def_cfa_offset 4
- 1584              		.cfi_offset 7, -4
- 1585 0002 83B0     		sub	sp, sp, #12
- 1586              	.LCFI109:
- 1587              		.cfi_def_cfa_offset 16
- 1588 0004 00AF     		add	r7, sp, #0
- 1589              	.LCFI110:
- 1590              		.cfi_def_cfa_register 7
- 1591 0006 0346     		mov	r3, r0
- 1592 0008 FB71     		strb	r3, [r7, #7]
- 292:la/sampling.c **** 	    NVIC->ICER[irqChannel >> 0x05] =
- 293:la/sampling.c **** 	      (uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
- 1593              		.loc 1 293 0
- 1594 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 1595 000c 03F01F03 		and	r3, r3, #31
- 292:la/sampling.c **** 	    NVIC->ICER[irqChannel >> 0x05] =
- 1596              		.loc 1 292 0
- 1597 0010 0849     		ldr	r1, .L96
- 1598 0012 97F90720 		ldrsb	r2, [r7, #7]
- 1599 0016 5211     		asrs	r2, r2, #5
- 1600 0018 52B2     		sxtb	r2, r2
- 1601 001a 1046     		mov	r0, r2
- 1602              		.loc 1 293 0
- 1603 001c 0122     		movs	r2, #1
- 1604 001e 9A40     		lsls	r2, r2, r3
- 292:la/sampling.c **** 	    NVIC->ICER[irqChannel >> 0x05] =
- 1605              		.loc 1 292 0
- 1606 0020 00F12003 		add	r3, r0, #32
- 1607 0024 41F82320 		str	r2, [r1, r3, lsl #2]
- 294:la/sampling.c **** 	}
- 1608              		.loc 1 294 0
- 1609 0028 00BF     		nop
-ARM GAS  /tmp/ccJRbtUJ.s 			page 49
+ 278:la/sampling.c **** {
+ 1609              		.loc 1 278 0
+ 1610              		.cfi_startproc
+ 1611              		@ args = 0, pretend = 0, frame = 0
+ 1612              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1613 0000 80B5     		push	{r7, lr}
+ 1614              	.LCFI94:
+ 1615              		.cfi_def_cfa_offset 8
+ 1616              		.cfi_offset 7, -8
+ 1617              		.cfi_offset 14, -4
+ 1618 0002 00AF     		add	r7, sp, #0
+ 1619              	.LCFI95:
+ 1620              		.cfi_def_cfa_register 7
+ 279:la/sampling.c **** 	return ActualTransferCount() * transferSize;
+ 1621              		.loc 1 279 0
+ 1622 0004 FFF7FEFF 		bl	ActualTransferCount
+ 1623 0008 0246     		mov	r2, r0
+ 1624 000a 034B     		ldr	r3, .L99
+ 1625 000c 1B68     		ldr	r3, [r3]
+ 1626 000e 03FB02F3 		mul	r3, r3, r2
+ 280:la/sampling.c **** }
+ 1627              		.loc 1 280 0
+ 1628 0012 1846     		mov	r0, r3
+ 1629 0014 80BD     		pop	{r7, pc}
+ 1630              	.L100:
+ 1631 0016 00BF     		.align	2
+ 1632              	.L99:
+ 1633 0018 00000000 		.word	transferSize
+ 1634              		.cfi_endproc
+ 1635              	.LFE152:
+ 1637              		.section	.text.GetBufferSize,"ax",%progbits
+ 1638              		.align	1
+ 1639              		.global	GetBufferSize
+ 1640              		.syntax unified
+ 1641              		.thumb
+ 1642              		.thumb_func
+ 1643              		.fpu fpv4-sp-d16
+ 1645              	GetBufferSize:
+ 1646              	.LFB153:
+ 281:la/sampling.c **** 
+ 282:la/sampling.c **** uint32_t GetBufferSize()
+ 283:la/sampling.c **** {
+ 1647              		.loc 1 283 0
+ 1648              		.cfi_startproc
+ 1649              		@ args = 0, pretend = 0, frame = 0
+ 1650              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1651              		@ link register save eliminated.
+ 1652 0000 80B4     		push	{r7}
+ 1653              	.LCFI96:
+ 1654              		.cfi_def_cfa_offset 4
+ 1655              		.cfi_offset 7, -4
+ 1656 0002 00AF     		add	r7, sp, #0
+ 1657              	.LCFI97:
+ 1658              		.cfi_def_cfa_register 7
+ 284:la/sampling.c **** 	return transferCount * transferSize;
+ 1659              		.loc 1 284 0
+ 1660 0004 054B     		ldr	r3, .L103
+ARM GAS  /tmp/ccJjpe8F.s 			page 50
 
 
- 1610 002a 0C37     		adds	r7, r7, #12
- 1611              	.LCFI111:
- 1612              		.cfi_def_cfa_offset 4
- 1613 002c BD46     		mov	sp, r7
- 1614              	.LCFI112:
- 1615              		.cfi_def_cfa_register 13
- 1616              		@ sp needed
- 1617 002e 5DF8047B 		ldr	r7, [sp], #4
- 1618              	.LCFI113:
- 1619              		.cfi_restore 7
- 1620              		.cfi_def_cfa_offset 0
- 1621 0032 7047     		bx	lr
- 1622              	.L97:
- 1623              		.align	2
- 1624              	.L96:
- 1625 0034 00E100E0 		.word	-536813312
- 1626              		.cfi_endproc
- 1627              	.LFE156:
- 1629              		.section	.text.SetChannelPriority,"ax",%progbits
- 1630              		.align	1
- 1631              		.global	SetChannelPriority
- 1632              		.syntax unified
- 1633              		.thumb
- 1634              		.thumb_func
- 1635              		.fpu fpv4-sp-d16
- 1637              	SetChannelPriority:
- 1638              	.LFB157:
- 295:la/sampling.c **** 
- 296:la/sampling.c **** 	
- 297:la/sampling.c **** 	void SetChannelPriority(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
- 298:la/sampling.c **** 	{
- 1639              		.loc 1 298 0
- 1640              		.cfi_startproc
- 1641              		@ args = 0, pretend = 0, frame = 24
- 1642              		@ frame_needed = 1, uses_anonymous_args = 0
- 1643              		@ link register save eliminated.
- 1644 0000 80B4     		push	{r7}
- 1645              	.LCFI114:
- 1646              		.cfi_def_cfa_offset 4
- 1647              		.cfi_offset 7, -4
- 1648 0002 87B0     		sub	sp, sp, #28
- 1649              	.LCFI115:
- 1650              		.cfi_def_cfa_offset 32
- 1651 0004 00AF     		add	r7, sp, #0
- 1652              	.LCFI116:
- 1653              		.cfi_def_cfa_register 7
- 1654 0006 0346     		mov	r3, r0
- 1655 0008 FB71     		strb	r3, [r7, #7]
- 1656 000a 0B46     		mov	r3, r1
- 1657 000c BB71     		strb	r3, [r7, #6]
- 1658 000e 1346     		mov	r3, r2
- 1659 0010 7B71     		strb	r3, [r7, #5]
- 299:la/sampling.c **** 	#ifdef STM32L1XX
- 300:la/sampling.c **** 		NVIC->IP[(uint32_t)(irqChannel)] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff);
- 301:la/sampling.c **** 	#else
- 302:la/sampling.c **** 		uint32_t tmppriority = 0x00, tmppre = 0x00, tmpsub = 0x0F;
- 1660              		.loc 1 302 0
-ARM GAS  /tmp/ccJRbtUJ.s 			page 50
+ 1661 0006 1B68     		ldr	r3, [r3]
+ 1662 0008 054A     		ldr	r2, .L103+4
+ 1663 000a 1268     		ldr	r2, [r2]
+ 1664 000c 02FB03F3 		mul	r3, r2, r3
+ 285:la/sampling.c **** }
+ 1665              		.loc 1 285 0
+ 1666 0010 1846     		mov	r0, r3
+ 1667 0012 BD46     		mov	sp, r7
+ 1668              	.LCFI98:
+ 1669              		.cfi_def_cfa_register 13
+ 1670              		@ sp needed
+ 1671 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1672              	.LCFI99:
+ 1673              		.cfi_restore 7
+ 1674              		.cfi_def_cfa_offset 0
+ 1675 0018 7047     		bx	lr
+ 1676              	.L104:
+ 1677 001a 00BF     		.align	2
+ 1678              	.L103:
+ 1679 001c 00000000 		.word	transferCount
+ 1680 0020 00000000 		.word	transferSize
+ 1681              		.cfi_endproc
+ 1682              	.LFE153:
+ 1684              		.section	.text.GetBuffer,"ax",%progbits
+ 1685              		.align	1
+ 1686              		.global	GetBuffer
+ 1687              		.syntax unified
+ 1688              		.thumb
+ 1689              		.thumb_func
+ 1690              		.fpu fpv4-sp-d16
+ 1692              	GetBuffer:
+ 1693              	.LFB154:
+ 286:la/sampling.c **** 
+ 287:la/sampling.c **** uint8_t* GetBuffer()
+ 288:la/sampling.c **** {
+ 1694              		.loc 1 288 0
+ 1695              		.cfi_startproc
+ 1696              		@ args = 0, pretend = 0, frame = 0
+ 1697              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1698              		@ link register save eliminated.
+ 1699 0000 80B4     		push	{r7}
+ 1700              	.LCFI100:
+ 1701              		.cfi_def_cfa_offset 4
+ 1702              		.cfi_offset 7, -4
+ 1703 0002 00AF     		add	r7, sp, #0
+ 1704              	.LCFI101:
+ 1705              		.cfi_def_cfa_register 7
+ 289:la/sampling.c **** 	return (uint8_t*)samplingRam;
+ 1706              		.loc 1 289 0
+ 1707 0004 024B     		ldr	r3, .L107
+ 290:la/sampling.c **** }
+ 1708              		.loc 1 290 0
+ 1709 0006 1846     		mov	r0, r3
+ 1710 0008 BD46     		mov	sp, r7
+ 1711              	.LCFI102:
+ 1712              		.cfi_def_cfa_register 13
+ 1713              		@ sp needed
+ARM GAS  /tmp/ccJjpe8F.s 			page 51
 
 
- 1661 0012 0023     		movs	r3, #0
- 1662 0014 7B61     		str	r3, [r7, #20]
- 1663 0016 0023     		movs	r3, #0
- 1664 0018 3B61     		str	r3, [r7, #16]
- 1665 001a 0F23     		movs	r3, #15
- 1666 001c FB60     		str	r3, [r7, #12]
- 303:la/sampling.c **** 		/* Compute the Corresponding IRQ Priority --------------------------------*/
- 304:la/sampling.c **** 		tmppriority = (0x700 - ((SCB->AIRCR) & (uint32_t)0x700))>> 0x08;
- 1667              		.loc 1 304 0
- 1668 001e 164B     		ldr	r3, .L99
- 1669 0020 DB68     		ldr	r3, [r3, #12]
- 1670 0022 DB43     		mvns	r3, r3
- 1671 0024 1B0A     		lsrs	r3, r3, #8
- 1672 0026 03F00703 		and	r3, r3, #7
- 1673 002a 7B61     		str	r3, [r7, #20]
- 305:la/sampling.c **** 		tmppre = (0x4 - tmppriority);
- 1674              		.loc 1 305 0
- 1675 002c 7B69     		ldr	r3, [r7, #20]
- 1676 002e C3F10403 		rsb	r3, r3, #4
- 1677 0032 3B61     		str	r3, [r7, #16]
- 306:la/sampling.c **** 		tmpsub = tmpsub >> tmppriority;
- 1678              		.loc 1 306 0
- 1679 0034 FA68     		ldr	r2, [r7, #12]
- 1680 0036 7B69     		ldr	r3, [r7, #20]
- 1681 0038 22FA03F3 		lsr	r3, r2, r3
- 1682 003c FB60     		str	r3, [r7, #12]
- 307:la/sampling.c **** 
- 308:la/sampling.c **** 		tmppriority = (uint32_t)priority << tmppre;
- 1683              		.loc 1 308 0
- 1684 003e BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
- 1685 0040 3B69     		ldr	r3, [r7, #16]
- 1686 0042 02FA03F3 		lsl	r3, r2, r3
- 1687 0046 7B61     		str	r3, [r7, #20]
- 309:la/sampling.c **** 		tmppriority |=  subpriority & tmpsub;
- 1688              		.loc 1 309 0
- 1689 0048 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
- 1690 004a FB68     		ldr	r3, [r7, #12]
- 1691 004c 1340     		ands	r3, r3, r2
- 1692 004e 7A69     		ldr	r2, [r7, #20]
- 1693 0050 1343     		orrs	r3, r3, r2
- 1694 0052 7B61     		str	r3, [r7, #20]
- 310:la/sampling.c **** 		tmppriority = tmppriority << 0x04;
- 1695              		.loc 1 310 0
- 1696 0054 7B69     		ldr	r3, [r7, #20]
- 1697 0056 1B01     		lsls	r3, r3, #4
- 1698 0058 7B61     		str	r3, [r7, #20]
- 311:la/sampling.c **** 		NVIC->IP[irqChannel] = tmppriority;
- 1699              		.loc 1 311 0
- 1700 005a 084A     		ldr	r2, .L99+4
- 1701 005c 97F90730 		ldrsb	r3, [r7, #7]
- 1702 0060 7969     		ldr	r1, [r7, #20]
- 1703 0062 C9B2     		uxtb	r1, r1
- 1704 0064 1344     		add	r3, r3, r2
- 1705 0066 0A46     		mov	r2, r1
- 1706 0068 83F80023 		strb	r2, [r3, #768]
- 312:la/sampling.c **** 	#endif
- 313:la/sampling.c **** 	}
-ARM GAS  /tmp/ccJRbtUJ.s 			page 51
+ 1714 000a 5DF8047B 		ldr	r7, [sp], #4
+ 1715              	.LCFI103:
+ 1716              		.cfi_restore 7
+ 1717              		.cfi_def_cfa_offset 0
+ 1718 000e 7047     		bx	lr
+ 1719              	.L108:
+ 1720              		.align	2
+ 1721              	.L107:
+ 1722 0010 00000000 		.word	samplingRam
+ 1723              		.cfi_endproc
+ 1724              	.LFE154:
+ 1726              		.section	.text.EnableChannel,"ax",%progbits
+ 1727              		.align	1
+ 1728              		.global	EnableChannel
+ 1729              		.syntax unified
+ 1730              		.thumb
+ 1731              		.thumb_func
+ 1732              		.fpu fpv4-sp-d16
+ 1734              	EnableChannel:
+ 1735              	.LFB155:
+ 291:la/sampling.c **** 
+ 292:la/sampling.c **** 
+ 293:la/sampling.c **** // Interrupts
+ 294:la/sampling.c **** 
+ 295:la/sampling.c **** 	void EnableChannel(IRQn_Type irqChannel, uint8_t priority, uint8_t subpriority)
+ 296:la/sampling.c **** 	{
+ 1736              		.loc 1 296 0
+ 1737              		.cfi_startproc
+ 1738              		@ args = 0, pretend = 0, frame = 8
+ 1739              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1740 0000 80B5     		push	{r7, lr}
+ 1741              	.LCFI104:
+ 1742              		.cfi_def_cfa_offset 8
+ 1743              		.cfi_offset 7, -8
+ 1744              		.cfi_offset 14, -4
+ 1745 0002 82B0     		sub	sp, sp, #8
+ 1746              	.LCFI105:
+ 1747              		.cfi_def_cfa_offset 16
+ 1748 0004 00AF     		add	r7, sp, #0
+ 1749              	.LCFI106:
+ 1750              		.cfi_def_cfa_register 7
+ 1751 0006 0346     		mov	r3, r0
+ 1752 0008 FB71     		strb	r3, [r7, #7]
+ 1753 000a 0B46     		mov	r3, r1
+ 1754 000c BB71     		strb	r3, [r7, #6]
+ 1755 000e 1346     		mov	r3, r2
+ 1756 0010 7B71     		strb	r3, [r7, #5]
+ 297:la/sampling.c **** 		//DisableChannel(irqChannel);
+ 298:la/sampling.c **** 		HAL_NVIC_DisableIRQ(irqChannel);
+ 1757              		.loc 1 298 0
+ 1758 0012 97F90730 		ldrsb	r3, [r7, #7]
+ 1759 0016 1846     		mov	r0, r3
+ 1760 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 299:la/sampling.c **** 		//SetHandler(irqChannel, handler);
+ 300:la/sampling.c **** 		//SetChannelPriority(irqChannel, priority, subpriority);
+ 301:la/sampling.c **** 		HAL_NVIC_SetPriority(irqChannel, 0, 0);
+ 1761              		.loc 1 301 0
+ARM GAS  /tmp/ccJjpe8F.s 			page 52
 
 
- 1707              		.loc 1 313 0
- 1708 006c 00BF     		nop
- 1709 006e 1C37     		adds	r7, r7, #28
- 1710              	.LCFI117:
- 1711              		.cfi_def_cfa_offset 4
- 1712 0070 BD46     		mov	sp, r7
- 1713              	.LCFI118:
- 1714              		.cfi_def_cfa_register 13
- 1715              		@ sp needed
- 1716 0072 5DF8047B 		ldr	r7, [sp], #4
- 1717              	.LCFI119:
- 1718              		.cfi_restore 7
- 1719              		.cfi_def_cfa_offset 0
- 1720 0076 7047     		bx	lr
- 1721              	.L100:
- 1722              		.align	2
- 1723              	.L99:
- 1724 0078 00ED00E0 		.word	-536810240
- 1725 007c 00E100E0 		.word	-536813312
- 1726              		.cfi_endproc
- 1727              	.LFE157:
- 1729              		.section	.text.PriorityGroupConfig,"ax",%progbits
- 1730              		.align	1
- 1731              		.global	PriorityGroupConfig
- 1732              		.syntax unified
- 1733              		.thumb
- 1734              		.thumb_func
- 1735              		.fpu fpv4-sp-d16
- 1737              	PriorityGroupConfig:
- 1738              	.LFB158:
- 314:la/sampling.c **** 	
- 315:la/sampling.c **** 	#define AIRCR_VECTKEY_MASK		((uint32_t)0x05FA0000)
- 316:la/sampling.c **** 	#define AIRCR_SYSRESETREQ		((uint32_t)0x00000004)
- 317:la/sampling.c **** 
- 318:la/sampling.c **** 	void PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
- 319:la/sampling.c **** 	{
- 1739              		.loc 1 319 0
- 1740              		.cfi_startproc
- 1741              		@ args = 0, pretend = 0, frame = 8
- 1742              		@ frame_needed = 1, uses_anonymous_args = 0
- 1743              		@ link register save eliminated.
- 1744 0000 80B4     		push	{r7}
- 1745              	.LCFI120:
- 1746              		.cfi_def_cfa_offset 4
- 1747              		.cfi_offset 7, -4
- 1748 0002 83B0     		sub	sp, sp, #12
- 1749              	.LCFI121:
- 1750              		.cfi_def_cfa_offset 16
- 1751 0004 00AF     		add	r7, sp, #0
- 1752              	.LCFI122:
- 1753              		.cfi_def_cfa_register 7
- 1754 0006 7860     		str	r0, [r7, #4]
- 320:la/sampling.c **** 		SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
- 1755              		.loc 1 320 0
- 1756 0008 064A     		ldr	r2, .L102
- 1757 000a 7B68     		ldr	r3, [r7, #4]
- 1758 000c 43F0BF63 		orr	r3, r3, #100139008
-ARM GAS  /tmp/ccJRbtUJ.s 			page 52
-
-
- 1759 0010 43F40033 		orr	r3, r3, #131072
- 1760 0014 D360     		str	r3, [r2, #12]
- 321:la/sampling.c **** 	}
- 1761              		.loc 1 321 0
- 1762 0016 00BF     		nop
- 1763 0018 0C37     		adds	r7, r7, #12
- 1764              	.LCFI123:
- 1765              		.cfi_def_cfa_offset 4
- 1766 001a BD46     		mov	sp, r7
- 1767              	.LCFI124:
- 1768              		.cfi_def_cfa_register 13
- 1769              		@ sp needed
- 1770 001c 5DF8047B 		ldr	r7, [sp], #4
- 1771              	.LCFI125:
- 1772              		.cfi_restore 7
- 1773              		.cfi_def_cfa_offset 0
- 1774 0020 7047     		bx	lr
- 1775              	.L103:
- 1776 0022 00BF     		.align	2
- 1777              	.L102:
- 1778 0024 00ED00E0 		.word	-536810240
- 1779              		.cfi_endproc
- 1780              	.LFE158:
- 1782              		.section	.text.SystemReset,"ax",%progbits
- 1783              		.align	1
- 1784              		.syntax unified
- 1785              		.thumb
- 1786              		.thumb_func
- 1787              		.fpu fpv4-sp-d16
- 1789              	SystemReset:
- 1790              	.LFB159:
- 322:la/sampling.c **** 	static void SystemReset()
- 323:la/sampling.c **** 	{
- 1791              		.loc 1 323 0
- 1792              		.cfi_startproc
- 1793              		@ args = 0, pretend = 0, frame = 0
- 1794              		@ frame_needed = 1, uses_anonymous_args = 0
- 1795              		@ link register save eliminated.
- 1796 0000 80B4     		push	{r7}
- 1797              	.LCFI126:
- 1798              		.cfi_def_cfa_offset 4
- 1799              		.cfi_offset 7, -4
- 1800 0002 00AF     		add	r7, sp, #0
- 1801              	.LCFI127:
- 1802              		.cfi_def_cfa_register 7
- 324:la/sampling.c **** 		SCB->AIRCR = AIRCR_VECTKEY_MASK | AIRCR_SYSRESETREQ;
- 1803              		.loc 1 324 0
- 1804 0004 034B     		ldr	r3, .L105
- 1805 0006 044A     		ldr	r2, .L105+4
- 1806 0008 DA60     		str	r2, [r3, #12]
- 325:la/sampling.c **** 	}...
- 1807              		.loc 1 325 0
- 1808 000a 00BF     		nop
- 1809 000c BD46     		mov	sp, r7
- 1810              	.LCFI128:
- 1811              		.cfi_def_cfa_register 13
- 1812              		@ sp needed
-ARM GAS  /tmp/ccJRbtUJ.s 			page 53
-
-
- 1813 000e 5DF8047B 		ldr	r7, [sp], #4
- 1814              	.LCFI129:
- 1815              		.cfi_restore 7
- 1816              		.cfi_def_cfa_offset 0
- 1817 0012 7047     		bx	lr
- 1818              	.L106:
- 1819              		.align	2
- 1820              	.L105:
- 1821 0014 00ED00E0 		.word	-536810240
- 1822 0018 0400FA05 		.word	100270084
- 1823              		.cfi_endproc
- 1824              	.LFE159:
- 1826              		.text
- 1827              	.Letext0:
- 1828              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
- 1829              		.file 4 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 1830              		.file 5 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 1831              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
- 1832              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 1833              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
- 1834              		.file 9 "la/sampling.h"
- 1835              		.file 10 "/usr/arm-none-eabi/include/sys/lock.h"
- 1836              		.file 11 "/usr/arm-none-eabi/include/sys/_types.h"
- 1837              		.file 12 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
- 1838              		.file 13 "/usr/arm-none-eabi/include/sys/reent.h"
- 1839              		.file 14 "/usr/arm-none-eabi/include/stdlib.h"
- 1840              		.file 15 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 1841              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 1842              		.file 17 "Inc/usbd_cdc_if.h"
-ARM GAS  /tmp/ccJRbtUJ.s 			page 54
+ 1762 001c 97F90730 		ldrsb	r3, [r7, #7]
+ 1763 0020 0022     		movs	r2, #0
+ 1764 0022 0021     		movs	r1, #0
+ 1765 0024 1846     		mov	r0, r3
+ 1766 0026 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 302:la/sampling.c **** 		//NVIC->ISER[irqChannel >> 0x05] =
+ 303:la/sampling.c **** 	      //(uint32_t)0x01 << (irqChannel & (uint8_t)0x1F);
+ 304:la/sampling.c **** 		HAL_NVIC_EnableIRQ(irqChannel);
+ 1767              		.loc 1 304 0
+ 1768 002a 97F90730 		ldrsb	r3, [r7, #7]
+ 1769 002e 1846     		mov	r0, r3
+ 1770 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 305:la/sampling.c **** 
+ 306:la/sampling.c **** 	}...
+ 1771              		.loc 1 306 0
+ 1772 0034 00BF     		nop
+ 1773 0036 0837     		adds	r7, r7, #8
+ 1774              	.LCFI107:
+ 1775              		.cfi_def_cfa_offset 8
+ 1776 0038 BD46     		mov	sp, r7
+ 1777              	.LCFI108:
+ 1778              		.cfi_def_cfa_register 13
+ 1779              		@ sp needed
+ 1780 003a 80BD     		pop	{r7, pc}
+ 1781              		.cfi_endproc
+ 1782              	.LFE155:
+ 1784              		.text
+ 1785              	.Letext0:
+ 1786              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 1787              		.file 4 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 1788              		.file 5 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 1789              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
+ 1790              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 1791              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 1792              		.file 9 "la/sampling.h"
+ 1793              		.file 10 "/usr/arm-none-eabi/include/sys/lock.h"
+ 1794              		.file 11 "/usr/arm-none-eabi/include/sys/_types.h"
+ 1795              		.file 12 "/usr/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1796              		.file 13 "/usr/arm-none-eabi/include/sys/reent.h"
+ 1797              		.file 14 "/usr/arm-none-eabi/include/stdlib.h"
+ 1798              		.file 15 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 1799              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 1800              		.file 17 "Inc/usbd_cdc_if.h"
+ARM GAS  /tmp/ccJjpe8F.s 			page 53
 
 
 DEFINED SYMBOLS
@@ -3160,95 +3114,86 @@ DEFINED SYMBOLS
                             *COM*:0000000000000002 flags
                             *COM*:0000000000000002 period
                             *COM*:0000000000000004 transferSize
-     /tmp/ccJRbtUJ.s:23     .bss.transferCount:0000000000000000 $d
-     /tmp/ccJRbtUJ.s:26     .bss.transferCount:0000000000000000 transferCount
-     /tmp/ccJRbtUJ.s:29     .bss.delayCount:0000000000000000 $d
-     /tmp/ccJRbtUJ.s:32     .bss.delayCount:0000000000000000 delayCount
+     /tmp/ccJjpe8F.s:23     .bss.transferCount:0000000000000000 $d
+     /tmp/ccJjpe8F.s:26     .bss.transferCount:0000000000000000 transferCount
+     /tmp/ccJjpe8F.s:29     .bss.delayCount:0000000000000000 $d
+     /tmp/ccJjpe8F.s:32     .bss.delayCount:0000000000000000 delayCount
                             *COM*:0000000000006000 samplingRam
-     /tmp/ccJRbtUJ.s:36     .text.SetBufferSize:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:43     .text.SetBufferSize:0000000000000000 SetBufferSize
-     /tmp/ccJRbtUJ.s:83     .text.SetBufferSize:000000000000001c $d
-     /tmp/ccJRbtUJ.s:88     .text.SetDelayCount:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:95     .text.SetDelayCount:0000000000000000 SetDelayCount
-     /tmp/ccJRbtUJ.s:135    .text.SetDelayCount:0000000000000020 $d
-     /tmp/ccJRbtUJ.s:140    .text.SetTriggerMask:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:147    .text.SetTriggerMask:0000000000000000 SetTriggerMask
-     /tmp/ccJRbtUJ.s:186    .text.SetTriggerMask:000000000000001c $d
-     /tmp/ccJRbtUJ.s:191    .text.SetTriggerValue:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:198    .text.SetTriggerValue:0000000000000000 SetTriggerValue
-     /tmp/ccJRbtUJ.s:237    .text.SetTriggerValue:000000000000001c $d
-     /tmp/ccJRbtUJ.s:242    .text.SetFlags:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:249    .text.SetFlags:0000000000000000 SetFlags
-     /tmp/ccJRbtUJ.s:289    .text.SetFlags:000000000000001c $d
-     /tmp/ccJRbtUJ.s:294    .text.SetSamplingPeriod:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:301    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
-     /tmp/ccJRbtUJ.s:341    .text.SetSamplingPeriod:000000000000001c $d
-     /tmp/ccJRbtUJ.s:346    .text.Start:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:353    .text.Start:0000000000000000 Start
-     /tmp/ccJRbtUJ.s:532    .text.SetupSamplingTimer:0000000000000000 SetupSamplingTimer
-     /tmp/ccJRbtUJ.s:634    .text.SetupSamplingDMA:0000000000000000 SetupSamplingDMA
-     /tmp/ccJRbtUJ.s:720    .text.SetupDelayTimer:0000000000000000 SetupDelayTimer
-     /tmp/ccJRbtUJ.s:821    .text.SetupRegularEXTITrigger:0000000000000000 SetupRegularEXTITrigger
-     /tmp/ccJRbtUJ.s:401    .text.Start:0000000000000040 $d
-     /tmp/ccJRbtUJ.s:410    .text.Stop:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:417    .text.Stop:0000000000000000 Stop
-     /tmp/ccJRbtUJ.s:457    .text.Stop:0000000000000028 $d
-     /tmp/ccJRbtUJ.s:463    .text.Arm:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:470    .text.Arm:0000000000000000 Arm
-     /tmp/ccJRbtUJ.s:519    .text.Arm:0000000000000024 $d
-     /tmp/ccJRbtUJ.s:525    .text.SetupSamplingTimer:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:620    .text.SetupSamplingTimer:0000000000000070 $d
-     /tmp/ccJRbtUJ.s:627    .text.SetupSamplingDMA:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1067   .text.CalcDMATransferSize:0000000000000000 CalcDMATransferSize
-     /tmp/ccJRbtUJ.s:706    .text.SetupSamplingDMA:000000000000005c $d
-     /tmp/ccJRbtUJ.s:713    .text.SetupDelayTimer:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1516   .text.EnableChannel:0000000000000000 EnableChannel
-     /tmp/ccJRbtUJ.s:806    .text.SetupDelayTimer:0000000000000070 $d
-     /tmp/ccJRbtUJ.s:814    .text.SetupRegularEXTITrigger:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1051   .text.SetupRegularEXTITrigger:0000000000000158 $d
-     /tmp/ccJRbtUJ.s:1060   .text.CalcDMATransferSize:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1144   .text.CalcDMATransferSize:0000000000000050 $d
-     /tmp/ccJRbtUJ.s:1150   .text.SamplingClearBuffer:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1157   .text.SamplingClearBuffer:0000000000000000 SamplingClearBuffer
-ARM GAS  /tmp/ccJRbtUJ.s 			page 55
+                            *COM*:0000000000006000 arr
+     /tmp/ccJjpe8F.s:37     .text.SetBufferSize:0000000000000000 $t
+     /tmp/ccJjpe8F.s:44     .text.SetBufferSize:0000000000000000 SetBufferSize
+     /tmp/ccJjpe8F.s:84     .text.SetBufferSize:000000000000001c $d
+     /tmp/ccJjpe8F.s:89     .text.SetDelayCount:0000000000000000 $t
+     /tmp/ccJjpe8F.s:96     .text.SetDelayCount:0000000000000000 SetDelayCount
+     /tmp/ccJjpe8F.s:136    .text.SetDelayCount:0000000000000020 $d
+     /tmp/ccJjpe8F.s:141    .text.SetTriggerMask:0000000000000000 $t
+     /tmp/ccJjpe8F.s:148    .text.SetTriggerMask:0000000000000000 SetTriggerMask
+     /tmp/ccJjpe8F.s:187    .text.SetTriggerMask:000000000000001c $d
+     /tmp/ccJjpe8F.s:192    .text.SetTriggerValue:0000000000000000 $t
+     /tmp/ccJjpe8F.s:199    .text.SetTriggerValue:0000000000000000 SetTriggerValue
+     /tmp/ccJjpe8F.s:238    .text.SetTriggerValue:000000000000001c $d
+     /tmp/ccJjpe8F.s:243    .text.SetFlags:0000000000000000 $t
+     /tmp/ccJjpe8F.s:250    .text.SetFlags:0000000000000000 SetFlags
+     /tmp/ccJjpe8F.s:290    .text.SetFlags:000000000000001c $d
+     /tmp/ccJjpe8F.s:295    .text.SetSamplingPeriod:0000000000000000 $t
+     /tmp/ccJjpe8F.s:302    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
+     /tmp/ccJjpe8F.s:342    .text.SetSamplingPeriod:000000000000001c $d
+     /tmp/ccJjpe8F.s:347    .text.Start:0000000000000000 $t
+     /tmp/ccJjpe8F.s:354    .text.Start:0000000000000000 Start
+     /tmp/ccJjpe8F.s:533    .text.SetupSamplingTimer:0000000000000000 SetupSamplingTimer
+     /tmp/ccJjpe8F.s:635    .text.SetupSamplingDMA:0000000000000000 SetupSamplingDMA
+     /tmp/ccJjpe8F.s:712    .text.SetupDelayTimer:0000000000000000 SetupDelayTimer
+     /tmp/ccJjpe8F.s:813    .text.SetupRegularEXTITrigger:0000000000000000 SetupRegularEXTITrigger
+     /tmp/ccJjpe8F.s:402    .text.Start:0000000000000040 $d
+     /tmp/ccJjpe8F.s:411    .text.Stop:0000000000000000 $t
+     /tmp/ccJjpe8F.s:418    .text.Stop:0000000000000000 Stop
+     /tmp/ccJjpe8F.s:458    .text.Stop:0000000000000028 $d
+     /tmp/ccJjpe8F.s:464    .text.Arm:0000000000000000 $t
+     /tmp/ccJjpe8F.s:471    .text.Arm:0000000000000000 Arm
+     /tmp/ccJjpe8F.s:520    .text.Arm:0000000000000024 $d
+     /tmp/ccJjpe8F.s:526    .text.SetupSamplingTimer:0000000000000000 $t
+     /tmp/ccJjpe8F.s:621    .text.SetupSamplingTimer:0000000000000070 $d
+     /tmp/ccJjpe8F.s:628    .text.SetupSamplingDMA:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1059   .text.CalcDMATransferSize:0000000000000000 CalcDMATransferSize
+     /tmp/ccJjpe8F.s:698    .text.SetupSamplingDMA:000000000000004c $d
+     /tmp/ccJjpe8F.s:705    .text.SetupDelayTimer:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1734   .text.EnableChannel:0000000000000000 EnableChannel
+     /tmp/ccJjpe8F.s:798    .text.SetupDelayTimer:0000000000000070 $d
+     /tmp/ccJjpe8F.s:806    .text.SetupRegularEXTITrigger:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1043   .text.SetupRegularEXTITrigger:0000000000000158 $d
+     /tmp/ccJjpe8F.s:1052   .text.CalcDMATransferSize:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1136   .text.CalcDMATransferSize:0000000000000050 $d
+     /tmp/ccJjpe8F.s:1142   .text.SamplingClearBuffer:0000000000000000 $t
+ARM GAS  /tmp/ccJjpe8F.s 			page 54
 
 
-     /tmp/ccJRbtUJ.s:1210   .text.SamplingClearBuffer:0000000000000030 $d
-     /tmp/ccJRbtUJ.s:1215   .text.SamplingComplete:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1222   .text.SamplingComplete:0000000000000000 SamplingComplete
-     /tmp/ccJRbtUJ.s:1251   .text.ActualTransferCount:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1258   .text.ActualTransferCount:0000000000000000 ActualTransferCount
-     /tmp/ccJRbtUJ.s:1293   .text.ActualTransferCount:000000000000001c $d
-     /tmp/ccJRbtUJ.s:1299   .text.GetBufferTail:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1306   .text.GetBufferTail:0000000000000000 GetBufferTail
-     /tmp/ccJRbtUJ.s:1334   .text.GetBufferTail:000000000000001c $d
-     /tmp/ccJRbtUJ.s:1340   .text.GetBytesPerTransfer:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1347   .text.GetBytesPerTransfer:0000000000000000 GetBytesPerTransfer
-     /tmp/ccJRbtUJ.s:1377   .text.GetBytesPerTransfer:0000000000000014 $d
-     /tmp/ccJRbtUJ.s:1382   .text.GetBufferTailSize:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1389   .text.GetBufferTailSize:0000000000000000 GetBufferTailSize
-     /tmp/ccJRbtUJ.s:1415   .text.GetBufferTailSize:0000000000000018 $d
-     /tmp/ccJRbtUJ.s:1420   .text.GetBufferSize:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1427   .text.GetBufferSize:0000000000000000 GetBufferSize
-     /tmp/ccJRbtUJ.s:1461   .text.GetBufferSize:000000000000001c $d
-     /tmp/ccJRbtUJ.s:1467   .text.GetBuffer:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1474   .text.GetBuffer:0000000000000000 GetBuffer
-     /tmp/ccJRbtUJ.s:1504   .text.GetBuffer:0000000000000010 $d
-     /tmp/ccJRbtUJ.s:1509   .text.EnableChannel:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1567   .text.DisableChannel:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1574   .text.DisableChannel:0000000000000000 DisableChannel
-     /tmp/ccJRbtUJ.s:1625   .text.DisableChannel:0000000000000034 $d
-     /tmp/ccJRbtUJ.s:1630   .text.SetChannelPriority:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1637   .text.SetChannelPriority:0000000000000000 SetChannelPriority
-     /tmp/ccJRbtUJ.s:1724   .text.SetChannelPriority:0000000000000078 $d
-     /tmp/ccJRbtUJ.s:1730   .text.PriorityGroupConfig:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1737   .text.PriorityGroupConfig:0000000000000000 PriorityGroupConfig
-     /tmp/ccJRbtUJ.s:1778   .text.PriorityGroupConfig:0000000000000024 $d
-     /tmp/ccJRbtUJ.s:1783   .text.SystemReset:0000000000000000 $t
-     /tmp/ccJRbtUJ.s:1789   .text.SystemReset:0000000000000000 SystemReset
-     /tmp/ccJRbtUJ.s:1821   .text.SystemReset:0000000000000014 $d
+     /tmp/ccJjpe8F.s:1149   .text.SamplingClearBuffer:0000000000000000 SamplingClearBuffer
+     /tmp/ccJjpe8F.s:1222   .text.SamplingClearBuffer:0000000000000050 $d
+     /tmp/ccJjpe8F.s:1228   .text.SamplingComplete:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1235   .text.SamplingComplete:0000000000000000 SamplingComplete
+     /tmp/ccJjpe8F.s:1565   .text.GetBytesPerTransfer:0000000000000000 GetBytesPerTransfer
+     /tmp/ccJjpe8F.s:1524   .text.GetBufferTail:0000000000000000 GetBufferTail
+     /tmp/ccJjpe8F.s:1607   .text.GetBufferTailSize:0000000000000000 GetBufferTailSize
+     /tmp/ccJjpe8F.s:1692   .text.GetBuffer:0000000000000000 GetBuffer
+     /tmp/ccJjpe8F.s:1645   .text.GetBufferSize:0000000000000000 GetBufferSize
+     /tmp/ccJjpe8F.s:1464   .text.SamplingComplete:0000000000000144 $d
+     /tmp/ccJjpe8F.s:1469   .text.ActualTransferCount:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1476   .text.ActualTransferCount:0000000000000000 ActualTransferCount
+     /tmp/ccJjpe8F.s:1511   .text.ActualTransferCount:000000000000001c $d
+     /tmp/ccJjpe8F.s:1517   .text.GetBufferTail:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1552   .text.GetBufferTail:000000000000001c $d
+     /tmp/ccJjpe8F.s:1558   .text.GetBytesPerTransfer:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1595   .text.GetBytesPerTransfer:0000000000000014 $d
+     /tmp/ccJjpe8F.s:1600   .text.GetBufferTailSize:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1633   .text.GetBufferTailSize:0000000000000018 $d
+     /tmp/ccJjpe8F.s:1638   .text.GetBufferSize:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1679   .text.GetBufferSize:000000000000001c $d
+     /tmp/ccJjpe8F.s:1685   .text.GetBuffer:0000000000000000 $t
+     /tmp/ccJjpe8F.s:1722   .text.GetBuffer:0000000000000010 $d
+     /tmp/ccJjpe8F.s:1727   .text.EnableChannel:0000000000000000 $t
 
 UNDEFINED SYMBOLS
 HAL_NVIC_DisableIRQ
+CDC_Transmit_FS
 HAL_NVIC_SetPriority
 HAL_NVIC_EnableIRQ

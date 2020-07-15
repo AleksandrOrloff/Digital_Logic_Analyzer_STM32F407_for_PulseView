@@ -32,7 +32,7 @@ void SetSamplingPeriod(uint32_t);
 void Stop(void);
 void Arm(void);
 
-void Start();
+void Start(void);
 void SetupSamplingTimer(void);
 void SetupSamplingDMA(void *, uint32_t);
 void SetupDelayTimer(void);
@@ -56,8 +56,6 @@ void PriorityGroupConfig(uint32_t);
 // Interrupts
 
 void EnableChannel(IRQn_Type, uint8_t, uint8_t);
-void DisableChannel(IRQn_Type);
-void SetChannelPriority(IRQn_Type, uint8_t, uint8_t);
 
 
 //static void PriorityGroupConfig(uint32_t NVIC_PriorityGroup);

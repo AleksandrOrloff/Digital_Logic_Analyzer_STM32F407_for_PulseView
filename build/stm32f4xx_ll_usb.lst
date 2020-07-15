@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchFjZSQ.s 			page 1
+ARM GAS  /tmp/ccOmXAaN.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * All rights reserved.</center></h2>
   31:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   *
-ARM GAS  /tmp/cchFjZSQ.s 			page 2
+ARM GAS  /tmp/ccOmXAaN.s 			page 2
 
 
   32:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * This software component is licensed by ST under BSD 3-Clause license,
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
   30              		@ args = 56, pretend = 16, frame = 16
   31              		@ frame_needed = 1, uses_anonymous_args = 0
   32 0000 84B0     		sub	sp, sp, #16
-ARM GAS  /tmp/cchFjZSQ.s 			page 3
+ARM GAS  /tmp/ccOmXAaN.s 			page 3
 
 
   33              	.LCFI0:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
   75 0044 05D1     		bne	.L3
   96:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     {
   97:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx->GUSBCFG |= USB_OTG_GUSBCFG_ULPIEVBUSD;
-ARM GAS  /tmp/cchFjZSQ.s 			page 4
+ARM GAS  /tmp/ccOmXAaN.s 			page 4
 
 
   76              		.loc 1 97 0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  115:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     else
  116:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     {
  117:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       /* Deactivate the USB Transceiver */
-ARM GAS  /tmp/cchFjZSQ.s 			page 5
+ARM GAS  /tmp/ccOmXAaN.s 			page 5
 
 
  118:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx->GCCFG &= ~(USB_OTG_GCCFG_PWRDWN);
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  155              		.cfi_def_cfa_offset 0
  156 00c0 7047     		bx	lr
  157              		.cfi_endproc
-ARM GAS  /tmp/cchFjZSQ.s 			page 6
+ARM GAS  /tmp/ccOmXAaN.s 			page 6
 
 
  158              	.LFE130:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  194 0014 BB68     		ldr	r3, [r7, #8]
  195 0016 414A     		ldr	r2, .L23
  196 0018 9342     		cmp	r3, r2
-ARM GAS  /tmp/cchFjZSQ.s 			page 7
+ARM GAS  /tmp/ccOmXAaN.s 			page 7
 
 
  197 001a 06D9     		bls	.L10
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  163:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     }
  164:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     else if ((hclk >= 17200000U) && (hclk < 18500000U))
  238              		.loc 1 164 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 8
+ARM GAS  /tmp/ccOmXAaN.s 			page 8
 
 
  239 0056 BB68     		ldr	r3, [r7, #8]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  280 0094 7B61     		str	r3, [r7, #20]
  281 0096 2BE0     		b	.L20
  282              	.L16:
-ARM GAS  /tmp/cchFjZSQ.s 			page 9
+ARM GAS  /tmp/ccOmXAaN.s 			page 9
 
 
  178:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     }
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  192:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       UsbTrd = 0x7U;
  323              		.loc 1 192 0 is_stmt 1
  324 00d4 0723     		movs	r3, #7
-ARM GAS  /tmp/cchFjZSQ.s 			page 10
+ARM GAS  /tmp/ccOmXAaN.s 			page 10
 
 
  325 00d6 7B61     		str	r3, [r7, #20]
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  211:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
  212:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return HAL_OK;
  361              		.loc 1 212 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 11
+ARM GAS  /tmp/ccOmXAaN.s 			page 11
 
 
  362 010e 0023     		movs	r3, #0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  408 0000 80B4     		push	{r7}
  409              	.LCFI14:
  410              		.cfi_def_cfa_offset 4
-ARM GAS  /tmp/cchFjZSQ.s 			page 12
+ARM GAS  /tmp/ccOmXAaN.s 			page 12
 
 
  411              		.cfi_offset 7, -4
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  455              		.cfi_startproc
  456              		@ args = 0, pretend = 0, frame = 8
  457              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 13
+ARM GAS  /tmp/ccOmXAaN.s 			page 13
 
 
  458              		@ link register save eliminated.
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  244:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   *            @arg USB_DEVICE_MODE: Peripheral mode
  245:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   *            @arg USB_HOST_MODE: Host mode
  246:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   *            @arg USB_DRD_MODE: Dual Role Device mode
-ARM GAS  /tmp/cchFjZSQ.s 			page 14
+ARM GAS  /tmp/ccOmXAaN.s 			page 14
 
 
  247:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * @retval HAL status
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  546 0032 7B68     		ldr	r3, [r7, #4]
  547 0034 DB68     		ldr	r3, [r3, #12]
  548 0036 43F08042 		orr	r2, r3, #1073741824
-ARM GAS  /tmp/cchFjZSQ.s 			page 15
+ARM GAS  /tmp/ccOmXAaN.s 			page 15
 
 
  549 003a 7B68     		ldr	r3, [r7, #4]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  279:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** {
  586              		.loc 1 279 0
  587              		.cfi_startproc
-ARM GAS  /tmp/cchFjZSQ.s 			page 16
+ARM GAS  /tmp/ccOmXAaN.s 			page 16
 
 
  588              		@ args = 56, pretend = 16, frame = 24
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  633 0036 0E2B     		cmp	r3, #14
  634 0038 F2D9     		bls	.L36
  287:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   }
-ARM GAS  /tmp/cchFjZSQ.s 			page 17
+ARM GAS  /tmp/ccOmXAaN.s 			page 17
 
 
  288:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  318:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
  319:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     /* Enable HW VBUS sensing */
  320:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx->GOTGCTL &= ~USB_OTG_GCCFG_NOVBUSSENS;
-ARM GAS  /tmp/cchFjZSQ.s 			page 18
+ARM GAS  /tmp/ccOmXAaN.s 			page 18
 
 
  659              		.loc 1 320 0
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  697 00ac 7868     		ldr	r0, [r7, #4]
  698 00ae FFF7FEFF 		bl	USB_SetDevSpeed
  699 00b2 08E0     		b	.L42
-ARM GAS  /tmp/cchFjZSQ.s 			page 19
+ARM GAS  /tmp/ccOmXAaN.s 			page 19
 
 
  700              	.L40:
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  732              	.L44:
  359:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   }
  360:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
-ARM GAS  /tmp/cchFjZSQ.s 			page 20
+ARM GAS  /tmp/ccOmXAaN.s 			page 20
 
 
  361:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   /* Clear all pending Device Interrupts */
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  775 0138 03F51063 		add	r3, r3, #2304
  776 013c 1A46     		mov	r2, r3
  777 013e 4FF00063 		mov	r3, #134217728
-ARM GAS  /tmp/cchFjZSQ.s 			page 21
+ARM GAS  /tmp/ccOmXAaN.s 			page 21
 
 
  778 0142 1360     		str	r3, [r2]
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  819 0192 9360     		str	r3, [r2, #8]
  366:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
  820              		.loc 1 366 0 discriminator 2
-ARM GAS  /tmp/cchFjZSQ.s 			page 22
+ARM GAS  /tmp/ccOmXAaN.s 			page 22
 
 
  821 0194 3B69     		ldr	r3, [r7, #16]
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  861 01dc 3B69     		ldr	r3, [r7, #16]
  862 01de 5A01     		lsls	r2, r3, #5
  863 01e0 FB68     		ldr	r3, [r7, #12]
-ARM GAS  /tmp/cchFjZSQ.s 			page 23
+ARM GAS  /tmp/ccOmXAaN.s 			page 23
 
 
  864 01e2 1344     		add	r3, r3, r2
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  907 0234 9A42     		cmp	r2, r3
  908 0236 B7D3     		bcc	.L56
  408:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   }
-ARM GAS  /tmp/cchFjZSQ.s 			page 24
+ARM GAS  /tmp/ccOmXAaN.s 			page 24
 
 
  409:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  944 0282 5A61     		str	r2, [r3, #20]
  428:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
  429:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   /* Enable the common interrupts */
-ARM GAS  /tmp/cchFjZSQ.s 			page 25
+ARM GAS  /tmp/ccOmXAaN.s 			page 25
 
 
  430:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   if (cfg.dma_enable == 0U)
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  980 02bc 9B69     		ldr	r3, [r3, #24]
  981 02be 43F08043 		orr	r3, r3, #1073741824
  982 02c2 43F00403 		orr	r3, r3, #4
-ARM GAS  /tmp/cchFjZSQ.s 			page 26
+ARM GAS  /tmp/ccOmXAaN.s 			page 26
 
 
  983 02c6 7A68     		ldr	r2, [r7, #4]
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1024              		.loc 1 463 0
  1025              		.cfi_startproc
  1026              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  /tmp/cchFjZSQ.s 			page 27
+ARM GAS  /tmp/ccOmXAaN.s 			page 27
 
 
  1027              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  476:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
  477:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return HAL_OK;
  1069              		.loc 1 477 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 28
+ARM GAS  /tmp/ccOmXAaN.s 			page 28
 
 
  1070 0038 0023     		movs	r3, #0
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1117              		.cfi_def_cfa_register 7
  1118 0006 7860     		str	r0, [r7, #4]
  487:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   uint32_t count = 0;
-ARM GAS  /tmp/cchFjZSQ.s 			page 29
+ARM GAS  /tmp/ccOmXAaN.s 			page 29
 
 
  1119              		.loc 1 487 0
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1159              		.cfi_restore 7
  1160              		.cfi_def_cfa_offset 0
  1161 003c 7047     		bx	lr
-ARM GAS  /tmp/cchFjZSQ.s 			page 30
+ARM GAS  /tmp/ccOmXAaN.s 			page 30
 
 
  1162              	.L75:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1201 0010 FB68     		ldr	r3, [r7, #12]
  1202 0012 03F50063 		add	r3, r3, #2048
  1203 0016 1A68     		ldr	r2, [r3]
-ARM GAS  /tmp/cchFjZSQ.s 			page 31
+ARM GAS  /tmp/ccOmXAaN.s 			page 31
 
 
  1204 0018 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1247 0002 87B0     		sub	sp, sp, #28
  1248              	.LCFI58:
  1249              		.cfi_def_cfa_offset 32
-ARM GAS  /tmp/cchFjZSQ.s 			page 32
+ARM GAS  /tmp/ccOmXAaN.s 			page 32
 
 
  1250 0004 00AF     		add	r7, sp, #0
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1288 003a FB75     		strb	r3, [r7, #23]
  1289              	.L80:
  548:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   }
-ARM GAS  /tmp/cchFjZSQ.s 			page 33
+ARM GAS  /tmp/ccOmXAaN.s 			page 33
 
 
  549:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1334 0006 7860     		str	r0, [r7, #4]
  1335 0008 3960     		str	r1, [r7]
  561:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   uint32_t USBx_BASE = (uint32_t)USBx;
-ARM GAS  /tmp/cchFjZSQ.s 			page 34
+ARM GAS  /tmp/ccOmXAaN.s 			page 34
 
 
  1336              		.loc 1 561 0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1381 0066 C3F30A01 		ubfx	r1, r3, #0, #11
  571:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                                    ((uint32_t)ep->type << 18) | (epnum << 22) |
  1382              		.loc 1 571 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 35
+ARM GAS  /tmp/ccOmXAaN.s 			page 35
 
 
  1383 006a 3B68     		ldr	r3, [r7]
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1426 00c6 002B     		cmp	r3, #0
  1427 00c8 1AD1     		bne	.L87
  581:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     {
-ARM GAS  /tmp/cchFjZSQ.s 			page 36
+ARM GAS  /tmp/ccOmXAaN.s 			page 36
 
 
  582:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx_OUTEP(epnum)->DOEPCTL |= (ep->maxpacket & USB_OTG_DOEPCTL_MPSIZ) |
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1474              		.align	1
  1475              		.global	USB_ActivateDedicatedEndpoint
  1476              		.syntax unified
-ARM GAS  /tmp/cchFjZSQ.s 			page 37
+ARM GAS  /tmp/ccOmXAaN.s 			page 37
 
 
  1477              		.thumb
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1516 0022 1344     		add	r3, r3, r2
  1517 0024 03F51063 		add	r3, r3, #2304
  1518 0028 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/cchFjZSQ.s 			page 38
+ARM GAS  /tmp/ccOmXAaN.s 			page 38
 
 
  1519 002a 03F40043 		and	r3, r3, #32768
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1563 0086 F968     		ldr	r1, [r7, #12]
  1564 0088 01F50061 		add	r1, r1, #2048
  1565 008c 1343     		orrs	r3, r3, r2
-ARM GAS  /tmp/cchFjZSQ.s 			page 39
+ARM GAS  /tmp/ccOmXAaN.s 			page 39
 
 
  1566 008e CB63     		str	r3, [r1, #60]
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  623:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
  624:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx_DEVICE->DEACHMSK |= USB_OTG_DAINTMSK_OEPM & ((uint32_t)(1UL << (ep->num & EP_ADDR_MSK)) <<
  1609              		.loc 1 624 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 40
+ARM GAS  /tmp/ccOmXAaN.s 			page 40
 
 
  1610 00e0 FB68     		ldr	r3, [r7, #12]
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1653              		.loc 1 637 0
  1654              		.cfi_startproc
  1655              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  /tmp/cchFjZSQ.s 			page 41
+ARM GAS  /tmp/ccOmXAaN.s 			page 41
 
 
  1656              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1702 004a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  1703 004c 03F00F03 		and	r3, r3, #15
  1704 0050 0121     		movs	r1, #1
-ARM GAS  /tmp/cchFjZSQ.s 			page 42
+ARM GAS  /tmp/ccOmXAaN.s 			page 42
 
 
  1705 0052 01FA03F3 		lsl	r3, r1, r3
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1749 00b4 3B68     		ldr	r3, [r7]
  1750 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  1751 00b8 03F00F03 		and	r3, r3, #15
-ARM GAS  /tmp/cchFjZSQ.s 			page 43
+ARM GAS  /tmp/ccOmXAaN.s 			page 43
 
 
  1752 00bc 0121     		movs	r1, #1
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1798              		.cfi_endproc
  1799              	.LFE142:
  1801              		.section	.text.USB_DeactivateDedicatedEndpoint,"ax",%progbits
-ARM GAS  /tmp/cchFjZSQ.s 			page 44
+ARM GAS  /tmp/ccOmXAaN.s 			page 44
 
 
  1802              		.align	1
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1841 001c BB68     		ldr	r3, [r7, #8]
  1842 001e 5A01     		lsls	r2, r3, #5
  1843 0020 FB68     		ldr	r3, [r7, #12]
-ARM GAS  /tmp/cchFjZSQ.s 			page 45
+ARM GAS  /tmp/ccOmXAaN.s 			page 45
 
 
  1844 0022 1344     		add	r3, r3, r2
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1892 0092 0121     		movs	r1, #1
  1893 0094 01FA03F3 		lsl	r3, r1, r3
  1894 0098 1B04     		lsls	r3, r3, #16
-ARM GAS  /tmp/cchFjZSQ.s 			page 46
+ARM GAS  /tmp/ccOmXAaN.s 			page 46
 
 
  1895 009a DB43     		mvns	r3, r3
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1934 0000 80B5     		push	{r7, lr}
  1935              	.LCFI87:
  1936              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/cchFjZSQ.s 			page 47
+ARM GAS  /tmp/ccOmXAaN.s 			page 47
 
 
  1937              		.cfi_offset 7, -8
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  1980 004c 1361     		str	r3, [r2, #16]
  714:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx_INEP(epnum)->DIEPTSIZ |= (USB_OTG_DIEPTSIZ_PKTCNT & (1U << 19));
  1981              		.loc 1 714 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 48
+ARM GAS  /tmp/ccOmXAaN.s 			page 48
 
 
  1982 004e BB69     		ldr	r3, [r7, #24]
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2026 00ae 1361     		str	r3, [r2, #16]
  725:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx_INEP(epnum)->DIEPTSIZ &= ~(USB_OTG_DIEPTSIZ_PKTCNT);
  2027              		.loc 1 725 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 49
+ARM GAS  /tmp/ccOmXAaN.s 			page 49
 
 
  2028 00b0 BB69     		ldr	r3, [r7, #24]
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2080 0126 F969     		ldr	r1, [r7, #28]
  2081 0128 0144     		add	r1, r1, r0
  2082 012a 01F51061 		add	r1, r1, #2304
-ARM GAS  /tmp/cchFjZSQ.s 			page 50
+ARM GAS  /tmp/ccOmXAaN.s 			page 50
 
 
  2083 012e 1343     		orrs	r3, r3, r2
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2126 0184 002B     		cmp	r3, #0
  2127 0186 09D0     		beq	.L110
  739:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       {
-ARM GAS  /tmp/cchFjZSQ.s 			page 51
+ARM GAS  /tmp/ccOmXAaN.s 			page 51
 
 
  740:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         USBx_INEP(epnum)->DIEPDMA = (uint32_t)(ep->dma_addr);
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2170 01da FB69     		ldr	r3, [r7, #28]
  2171 01dc 1344     		add	r3, r3, r2
  2172 01de 03F51063 		add	r3, r3, #2304
-ARM GAS  /tmp/cchFjZSQ.s 			page 52
+ARM GAS  /tmp/ccOmXAaN.s 			page 52
 
 
  2173 01e2 1B68     		ldr	r3, [r3]
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2215 023c 012B     		cmp	r3, #1
  2216 023e 15D0     		beq	.L114
  764:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       {
-ARM GAS  /tmp/cchFjZSQ.s 			page 53
+ARM GAS  /tmp/ccOmXAaN.s 			page 53
 
 
  765:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         /* Enable the Tx FIFO Empty Interrupt for this EP */
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  776:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         }
  777:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         else
  778:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         {
-ARM GAS  /tmp/cchFjZSQ.s 			page 54
+ARM GAS  /tmp/ccOmXAaN.s 			page 54
 
 
  779:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****           USBx_INEP(epnum)->DIEPCTL |= USB_OTG_DIEPCTL_SD0PID_SEVNFRM;
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2300 02ee 0A44     		add	r2, r2, r1
  2301 02f0 02F53062 		add	r2, r2, #2816
  2302 02f4 DB0C     		lsrs	r3, r3, #19
-ARM GAS  /tmp/cchFjZSQ.s 			page 55
+ARM GAS  /tmp/ccOmXAaN.s 			page 55
 
 
  2303 02f6 DB04     		lsls	r3, r3, #19
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2351 035e FA69     		ldr	r2, [r7, #28]
  2352 0360 0A44     		add	r2, r2, r1
  2353 0362 02F53062 		add	r2, r2, #2816
-ARM GAS  /tmp/cchFjZSQ.s 			page 56
+ARM GAS  /tmp/ccOmXAaN.s 			page 56
 
 
  2354 0366 43F40023 		orr	r3, r3, #524288
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2402 03c8 C3F31203 		ubfx	r3, r3, #0, #19
  2403 03cc B969     		ldr	r1, [r7, #24]
  2404 03ce 4801     		lsls	r0, r1, #5
-ARM GAS  /tmp/cchFjZSQ.s 			page 57
+ARM GAS  /tmp/ccOmXAaN.s 			page 57
 
 
  2405 03d0 F969     		ldr	r1, [r7, #28]
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2444 0416 BB69     		ldr	r3, [r7, #24]
  2445 0418 5A01     		lsls	r2, r3, #5
  2446 041a FB69     		ldr	r3, [r7, #28]
-ARM GAS  /tmp/cchFjZSQ.s 			page 58
+ARM GAS  /tmp/ccOmXAaN.s 			page 58
 
 
  2447 041c 1344     		add	r3, r3, r2
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2490 0478 0023     		movs	r3, #0
  831:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** }
  2491              		.loc 1 831 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 59
+ARM GAS  /tmp/ccOmXAaN.s 			page 59
 
 
  2492 047a 1846     		mov	r0, r3
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2535 000a 1346     		mov	r3, r2
  2536 000c FB71     		strb	r3, [r7, #7]
  845:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   uint32_t USBx_BASE = (uint32_t)USBx;
-ARM GAS  /tmp/cchFjZSQ.s 			page 60
+ARM GAS  /tmp/ccOmXAaN.s 			page 60
 
 
  2537              		.loc 1 845 0
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2581 0068 43F40023 		orr	r3, r3, #524288
  2582 006c 1361     		str	r3, [r2, #16]
  856:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx_INEP(epnum)->DIEPTSIZ &= ~(USB_OTG_DIEPTSIZ_XFRSIZ);
-ARM GAS  /tmp/cchFjZSQ.s 			page 61
+ARM GAS  /tmp/ccOmXAaN.s 			page 61
 
 
  2583              		.loc 1 856 0
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2627 00ca 23F0FF53 		bic	r3, r3, #534773760
  2628 00ce 23F4C013 		bic	r3, r3, #1572864
  2629 00d2 1361     		str	r3, [r2, #16]
-ARM GAS  /tmp/cchFjZSQ.s 			page 62
+ARM GAS  /tmp/ccOmXAaN.s 			page 62
 
 
  867:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  876:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     if (dma == 1U)
  2675              		.loc 1 876 0
  2676 012e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
-ARM GAS  /tmp/cchFjZSQ.s 			page 63
+ARM GAS  /tmp/ccOmXAaN.s 			page 63
 
 
  2677 0130 012B     		cmp	r3, #1
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2718 0180 3A69     		ldr	r2, [r7, #16]
  2719 0182 5101     		lsls	r1, r2, #5
  2720 0184 7A69     		ldr	r2, [r7, #20]
-ARM GAS  /tmp/cchFjZSQ.s 			page 64
+ARM GAS  /tmp/ccOmXAaN.s 			page 64
 
 
  2721 0186 0A44     		add	r2, r2, r1
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  905:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx_OUTEP(epnum)->DOEPTSIZ &= ~(USB_OTG_DOEPTSIZ_PKTCNT);
  2760              		.loc 1 905 0
  2761 01dc 3B69     		ldr	r3, [r7, #16]
-ARM GAS  /tmp/cchFjZSQ.s 			page 65
+ARM GAS  /tmp/ccOmXAaN.s 			page 65
 
 
  2762 01de 5A01     		lsls	r2, r3, #5
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2808 0240 9B68     		ldr	r3, [r3, #8]
  2809 0242 C3F31203 		ubfx	r3, r3, #0, #19
  2810 0246 3969     		ldr	r1, [r7, #16]
-ARM GAS  /tmp/cchFjZSQ.s 			page 66
+ARM GAS  /tmp/ccOmXAaN.s 			page 66
 
 
  2811 0248 4801     		lsls	r0, r1, #5
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  927:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return HAL_OK;
  2852              		.loc 1 927 0
  2853 0298 0023     		movs	r3, #0
-ARM GAS  /tmp/cchFjZSQ.s 			page 67
+ARM GAS  /tmp/ccOmXAaN.s 			page 67
 
 
  928:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** }
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2893 0004 00AF     		add	r7, sp, #0
  2894              	.LCFI100:
  2895              		.cfi_def_cfa_register 7
-ARM GAS  /tmp/cchFjZSQ.s 			page 68
+ARM GAS  /tmp/ccOmXAaN.s 			page 68
 
 
  2896 0006 F860     		str	r0, [r7, #12]
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2938              		.loc 1 952 0 discriminator 3
  2939 004e BB69     		ldr	r3, [r7, #24]
  2940 0050 0133     		adds	r3, r3, #1
-ARM GAS  /tmp/cchFjZSQ.s 			page 69
+ARM GAS  /tmp/ccOmXAaN.s 			page 69
 
 
  2941 0052 BB61     		str	r3, [r7, #24]
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  2981              		@ frame_needed = 1, uses_anonymous_args = 0
  2982              		@ link register save eliminated.
  2983 0000 80B4     		push	{r7}
-ARM GAS  /tmp/cchFjZSQ.s 			page 70
+ARM GAS  /tmp/ccOmXAaN.s 			page 70
 
 
  2984              	.LCFI104:
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  976:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
  3028              		.loc 1 976 0 is_stmt 0 discriminator 1
  3029 003c BA69     		ldr	r2, [r7, #24]
-ARM GAS  /tmp/cchFjZSQ.s 			page 71
+ARM GAS  /tmp/ccOmXAaN.s 			page 71
 
 
  3030 003e 3B69     		ldr	r3, [r7, #16]
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3073              		.cfi_def_cfa_offset 24
  3074 0004 00AF     		add	r7, sp, #0
  3075              	.LCFI112:
-ARM GAS  /tmp/cchFjZSQ.s 			page 72
+ARM GAS  /tmp/ccOmXAaN.s 			page 72
 
 
  3076              		.cfi_def_cfa_register 7
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3120 0054 BB68     		ldr	r3, [r7, #8]
  3121 0056 5A01     		lsls	r2, r3, #5
  3122 0058 FB68     		ldr	r3, [r7, #12]
-ARM GAS  /tmp/cchFjZSQ.s 			page 73
+ARM GAS  /tmp/ccOmXAaN.s 			page 73
 
 
  3123 005a 1344     		add	r3, r3, r2
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3169 00ba 1B68     		ldr	r3, [r3]
  3170 00bc BA68     		ldr	r2, [r7, #8]
  3171 00be 5101     		lsls	r1, r2, #5
-ARM GAS  /tmp/cchFjZSQ.s 			page 74
+ARM GAS  /tmp/ccOmXAaN.s 			page 74
 
 
  3172 00c0 FA68     		ldr	r2, [r7, #12]
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3215              		.cfi_offset 7, -4
  3216 0002 85B0     		sub	sp, sp, #20
  3217              	.LCFI117:
-ARM GAS  /tmp/cchFjZSQ.s 			page 75
+ARM GAS  /tmp/ccOmXAaN.s 			page 75
 
 
  3218              		.cfi_def_cfa_offset 24
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3263 004e 5A01     		lsls	r2, r3, #5
  3264 0050 FB68     		ldr	r3, [r7, #12]
  3265 0052 1344     		add	r3, r3, r2
-ARM GAS  /tmp/cchFjZSQ.s 			page 76
+ARM GAS  /tmp/ccOmXAaN.s 			page 76
 
 
  3266 0054 03F51063 		add	r3, r3, #2304
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3312 00b2 0A44     		add	r2, r2, r1
  3313 00b4 02F53062 		add	r2, r2, #2816
  3314 00b8 43F08053 		orr	r3, r3, #268435456
-ARM GAS  /tmp/cchFjZSQ.s 			page 77
+ARM GAS  /tmp/ccOmXAaN.s 			page 77
 
 
  3315 00bc 1360     		str	r3, [r2]
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3359              	.LCFI124:
  3360              		.cfi_def_cfa_register 7
  3361 0006 7860     		str	r0, [r7, #4]
-ARM GAS  /tmp/cchFjZSQ.s 			page 78
+ARM GAS  /tmp/ccOmXAaN.s 			page 78
 
 
 1053:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   HAL_StatusTypeDef ret;
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3401 004e 0023     		movs	r3, #0
  3402 0050 1361     		str	r3, [r2, #16]
 1066:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   USBx_DEVICE->DOEPMSK  = 0U;
-ARM GAS  /tmp/cchFjZSQ.s 			page 79
+ARM GAS  /tmp/ccOmXAaN.s 			page 79
 
 
  3403              		.loc 1 1066 0
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1082:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return ret;
  3442              		.loc 1 1082 0
  3443 0094 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
-ARM GAS  /tmp/cchFjZSQ.s 			page 80
+ARM GAS  /tmp/ccOmXAaN.s 			page 80
 
 
  3444              	.L167:
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3488 000e FB60     		str	r3, [r7, #12]
 1095:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
 1096:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   USBx_DEVICE->DCFG &= ~(USB_OTG_DCFG_DAD);
-ARM GAS  /tmp/cchFjZSQ.s 			page 81
+ARM GAS  /tmp/ccOmXAaN.s 			page 81
 
 
  3489              		.loc 1 1096 0
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1105:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * @retval HAL status
 1106:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   */
 1107:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** HAL_StatusTypeDef  USB_DevConnect(USB_OTG_GlobalTypeDef *USBx)
-ARM GAS  /tmp/cchFjZSQ.s 			page 82
+ARM GAS  /tmp/ccOmXAaN.s 			page 82
 
 
 1108:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** {
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3584              		.global	USB_DevDisconnect
  3585              		.syntax unified
  3586              		.thumb
-ARM GAS  /tmp/cchFjZSQ.s 			page 83
+ARM GAS  /tmp/ccOmXAaN.s 			page 83
 
 
  3587              		.thumb_func
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3627              	.LCFI141:
  3628              		.cfi_def_cfa_offset 8
  3629 002c BD46     		mov	sp, r7
-ARM GAS  /tmp/cchFjZSQ.s 			page 84
+ARM GAS  /tmp/ccOmXAaN.s 			page 84
 
 
  3630              	.LCFI142:
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1144:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return tmpreg;
  3673              		.loc 1 1144 0
  3674 0018 FB68     		ldr	r3, [r7, #12]
-ARM GAS  /tmp/cchFjZSQ.s 			page 85
+ARM GAS  /tmp/ccOmXAaN.s 			page 85
 
 
 1145:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** }
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1155:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   uint32_t tmpreg;
 1156:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
 1157:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   tmpreg  = USBx_DEVICE->DAINT;
-ARM GAS  /tmp/cchFjZSQ.s 			page 86
+ARM GAS  /tmp/ccOmXAaN.s 			page 86
 
 
  3721              		.loc 1 1157 0
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3765              		@ args = 0, pretend = 0, frame = 16
  3766              		@ frame_needed = 1, uses_anonymous_args = 0
  3767              		@ link register save eliminated.
-ARM GAS  /tmp/cchFjZSQ.s 			page 87
+ARM GAS  /tmp/ccOmXAaN.s 			page 87
 
 
  3768 0000 80B4     		push	{r7}
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3815              		.align	1
  3816              		.global	USB_ReadDevOutEPInterrupt
  3817              		.syntax unified
-ARM GAS  /tmp/cchFjZSQ.s 			page 88
+ARM GAS  /tmp/ccOmXAaN.s 			page 88
 
 
  3818              		.thumb
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3858 002a 1340     		ands	r3, r3, r2
  3859 002c BB60     		str	r3, [r7, #8]
 1193:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
-ARM GAS  /tmp/cchFjZSQ.s 			page 89
+ARM GAS  /tmp/ccOmXAaN.s 			page 89
 
 
 1194:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return tmpreg;
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3904 0006 7860     		str	r0, [r7, #4]
  3905 0008 0B46     		mov	r3, r1
  3906 000a FB70     		strb	r3, [r7, #3]
-ARM GAS  /tmp/cchFjZSQ.s 			page 90
+ARM GAS  /tmp/ccOmXAaN.s 			page 90
 
 
 1206:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   uint32_t USBx_BASE = (uint32_t)USBx;
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3951 0056 5DF8047B 		ldr	r7, [sp], #4
  3952              	.LCFI172:
  3953              		.cfi_restore 7
-ARM GAS  /tmp/cchFjZSQ.s 			page 91
+ARM GAS  /tmp/ccOmXAaN.s 			page 91
 
 
  3954              		.cfi_def_cfa_offset 0
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  3999              	.LCFI177:
  4000              		.cfi_def_cfa_register 13
  4001              		@ sp needed
-ARM GAS  /tmp/cchFjZSQ.s 			page 92
+ARM GAS  /tmp/ccOmXAaN.s 			page 92
 
 
  4002 001c 5DF8047B 		ldr	r7, [sp], #4
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4045 0014 BD46     		mov	sp, r7
  4046              	.LCFI183:
  4047              		.cfi_def_cfa_register 13
-ARM GAS  /tmp/cchFjZSQ.s 			page 93
+ARM GAS  /tmp/ccOmXAaN.s 			page 93
 
 
  4048              		@ sp needed
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4092 001a 23F4FF63 		bic	r3, r3, #2040
  4093 001e 23F00703 		bic	r3, r3, #7
  4094 0022 1360     		str	r3, [r2]
-ARM GAS  /tmp/cchFjZSQ.s 			page 94
+ARM GAS  /tmp/ccOmXAaN.s 			page 94
 
 
 1252:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4141              		.syntax unified
  4142              		.thumb
  4143              		.thumb_func
-ARM GAS  /tmp/cchFjZSQ.s 			page 95
+ARM GAS  /tmp/ccOmXAaN.s 			page 95
 
 
  4144              		.fpu fpv4-sp-d16
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1279:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     if ((USBx_OUTEP(0U)->DOEPCTL & USB_OTG_DOEPCTL_EPENA) == USB_OTG_DOEPCTL_EPENA)
  4181              		.loc 1 1279 0
  4182 0024 7B69     		ldr	r3, [r7, #20]
-ARM GAS  /tmp/cchFjZSQ.s 			page 96
+ARM GAS  /tmp/ccOmXAaN.s 			page 96
 
 
  4183 0026 03F53063 		add	r3, r3, #2816
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1291:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
 1292:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx_OUTEP(0U)->DOEPDMA = (uint32_t)psetup;
  4226              		.loc 1 1292 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 97
+ARM GAS  /tmp/ccOmXAaN.s 			page 97
 
 
  4227 0088 7B69     		ldr	r3, [r7, #20]
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1302:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * @param  USBx  Selected device
 1303:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * @retval HAL status
 1304:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   */
-ARM GAS  /tmp/cchFjZSQ.s 			page 98
+ARM GAS  /tmp/ccOmXAaN.s 			page 98
 
 
 1305:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** static HAL_StatusTypeDef USB_CoreReset(USB_OTG_GlobalTypeDef *USBx)
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4312 0026 0023     		movs	r3, #0
  4313 0028 FB60     		str	r3, [r7, #12]
 1321:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   USBx->GRSTCTL |= USB_OTG_GRSTCTL_CSRST;
-ARM GAS  /tmp/cchFjZSQ.s 			page 99
+ARM GAS  /tmp/ccOmXAaN.s 			page 99
 
 
  4314              		.loc 1 1321 0
@@ -5938,7 +5938,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4356              	.L204:
  4357 0062 00BF     		.align	2
  4358              	.L203:
-ARM GAS  /tmp/cchFjZSQ.s 			page 100
+ARM GAS  /tmp/ccOmXAaN.s 			page 100
 
 
  4359 0064 400D0300 		.word	200000
@@ -5998,7 +5998,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4399 0018 03F56063 		add	r3, r3, #3584
  4400 001c 1A46     		mov	r2, r3
  4401 001e 0023     		movs	r3, #0
-ARM GAS  /tmp/cchFjZSQ.s 			page 101
+ARM GAS  /tmp/ccOmXAaN.s 			page 101
 
 
  4402 0020 1360     		str	r3, [r2]
@@ -6058,7 +6058,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4432 0058 BB68     		ldr	r3, [r7, #8]
  4433 005a 03F58063 		add	r3, r3, #1024
  4434 005e 1B68     		ldr	r3, [r3]
-ARM GAS  /tmp/cchFjZSQ.s 			page 102
+ARM GAS  /tmp/ccOmXAaN.s 			page 102
 
 
  4435 0060 BA68     		ldr	r2, [r7, #8]
@@ -6118,7 +6118,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4470 00aa 15E0     		b	.L210
  4471              	.L211:
 1393:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
-ARM GAS  /tmp/cchFjZSQ.s 			page 103
+ARM GAS  /tmp/ccOmXAaN.s 			page 103
 
 
 1394:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx_HC(i)->HCINT = 0xFFFFFFFFU;
@@ -6178,7 +6178,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1407:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   USBx->GINTSTS = 0xFFFFFFFFU;
  4511              		.loc 1 1407 0
  4512 00f4 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/cchFjZSQ.s 			page 104
+ARM GAS  /tmp/ccOmXAaN.s 			page 104
 
 
  4513 00f6 4FF0FF32 		mov	r2, #-1
@@ -6238,7 +6238,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4549 0134 BB6A     		ldr	r3, [r7, #40]
  4550 0136 002B     		cmp	r3, #0
  4551 0138 05D1     		bne	.L214
-ARM GAS  /tmp/cchFjZSQ.s 			page 105
+ARM GAS  /tmp/ccOmXAaN.s 			page 105
 
 
 1426:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
@@ -6298,7 +6298,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4595              	.LFE164:
  4597              		.section	.text.USB_InitFSLSPClkSel,"ax",%progbits
  4598              		.align	1
-ARM GAS  /tmp/cchFjZSQ.s 			page 106
+ARM GAS  /tmp/ccOmXAaN.s 			page 106
 
 
  4599              		.global	USB_InitFSLSPClkSel
@@ -6358,7 +6358,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4637 0024 FB68     		ldr	r3, [r7, #12]
  4638 0026 03F58063 		add	r3, r3, #1024
  4639 002a 1A68     		ldr	r2, [r3]
-ARM GAS  /tmp/cchFjZSQ.s 			page 107
+ARM GAS  /tmp/ccOmXAaN.s 			page 107
 
 
  4640 002c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
@@ -6418,7 +6418,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4678              		.cfi_def_cfa_register 13
  4679              		@ sp needed
  4680 006e 5DF8047B 		ldr	r7, [sp], #4
-ARM GAS  /tmp/cchFjZSQ.s 			page 108
+ARM GAS  /tmp/ccOmXAaN.s 			page 108
 
 
  4681              	.LCFI216:
@@ -6478,7 +6478,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4722 0012 03F58863 		add	r3, r3, #1088
  4723 0016 1B68     		ldr	r3, [r3]
  4724 0018 BB60     		str	r3, [r7, #8]
-ARM GAS  /tmp/cchFjZSQ.s 			page 109
+ARM GAS  /tmp/ccOmXAaN.s 			page 109
 
 
 1485:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -6538,7 +6538,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4770              	USB_DriveVbus:
  4771              	.LFB167:
 1496:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
-ARM GAS  /tmp/cchFjZSQ.s 			page 110
+ARM GAS  /tmp/ccOmXAaN.s 			page 110
 
 
 1497:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** /**
@@ -6598,7 +6598,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4807 0028 03F48053 		and	r3, r3, #4096
  4808 002c 002B     		cmp	r3, #0
  4809 002e 09D1     		bne	.L225
-ARM GAS  /tmp/cchFjZSQ.s 			page 111
+ARM GAS  /tmp/ccOmXAaN.s 			page 111
 
 
  4810              		.loc 1 1515 0 is_stmt 0 discriminator 1
@@ -6658,7 +6658,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4856              		.section	.text.USB_GetHostSpeed,"ax",%progbits
  4857              		.align	1
  4858              		.global	USB_GetHostSpeed
-ARM GAS  /tmp/cchFjZSQ.s 			page 112
+ARM GAS  /tmp/ccOmXAaN.s 			page 112
 
 
  4859              		.syntax unified
@@ -6718,7 +6718,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1542:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** }
  4897              		.loc 1 1542 0
  4898 0022 1846     		mov	r0, r3
-ARM GAS  /tmp/cchFjZSQ.s 			page 113
+ARM GAS  /tmp/ccOmXAaN.s 			page 113
 
 
  4899 0024 1437     		adds	r7, r7, #20
@@ -6778,7 +6778,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  4944 000c FB68     		ldr	r3, [r7, #12]
  4945 000e 03F58063 		add	r3, r3, #1024
  4946 0012 9B68     		ldr	r3, [r3, #8]
-ARM GAS  /tmp/cchFjZSQ.s 			page 114
+ARM GAS  /tmp/ccOmXAaN.s 			page 114
 
 
  4947 0014 9BB2     		uxth	r3, r3
@@ -6838,7 +6838,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1582:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                               uint8_t epnum,
 1583:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                               uint8_t dev_address,
 1584:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                               uint8_t speed,
-ARM GAS  /tmp/cchFjZSQ.s 			page 115
+ARM GAS  /tmp/ccOmXAaN.s 			page 115
 
 
 1585:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                               uint8_t ep_type,
@@ -6898,7 +6898,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5017 003a 032B     		cmp	r3, #3
  5018 003c 7ED8     		bhi	.L233
  5019 003e 01A2     		adr	r2, .L235
-ARM GAS  /tmp/cchFjZSQ.s 			page 116
+ARM GAS  /tmp/ccOmXAaN.s 			page 116
 
 
  5020 0040 52F823F0 		ldr	pc, [r2, r3, lsl #2]
@@ -6958,7 +6958,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1615:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****           USBx_HC((uint32_t)ch_num)->HCINTMSK |= (USB_OTG_HCINTMSK_NYET | USB_OTG_HCINTMSK_ACKM);
 1616:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         }
 1617:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       }
-ARM GAS  /tmp/cchFjZSQ.s 			page 117
+ARM GAS  /tmp/ccOmXAaN.s 			page 117
 
 
 1618:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       break;
@@ -7018,7 +7018,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1631:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         USBx_HC((uint32_t)ch_num)->HCINTMSK |= USB_OTG_HCINTMSK_BBERRM;
  5095              		.loc 1 1631 0
  5096 00dc FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
-ARM GAS  /tmp/cchFjZSQ.s 			page 118
+ARM GAS  /tmp/ccOmXAaN.s 			page 118
 
 
  5097 00de 5A01     		lsls	r2, r3, #5
@@ -7078,7 +7078,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5138 0138 D360     		str	r3, [r2, #12]
 1645:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       }
 1646:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       break;
-ARM GAS  /tmp/cchFjZSQ.s 			page 119
+ARM GAS  /tmp/ccOmXAaN.s 			page 119
 
 
  5139              		.loc 1 1646 0
@@ -7138,7 +7138,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1660:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   if ((epnum & 0x80U) == 0x80U)
  5177              		.loc 1 1660 0
  5178 0176 97F90230 		ldrsb	r3, [r7, #2]
-ARM GAS  /tmp/cchFjZSQ.s 			page 120
+ARM GAS  /tmp/ccOmXAaN.s 			page 120
 
 
  5179 017a 002B     		cmp	r3, #0
@@ -7198,7 +7198,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1680:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                                       (((uint32_t)ep_type << 18) & USB_OTG_HCCHAR_EPTYP) |
  5213              		.loc 1 1680 0
  5214 01b0 97F82430 		ldrb	r3, [r7, #36]	@ zero_extendqisi2
-ARM GAS  /tmp/cchFjZSQ.s 			page 121
+ARM GAS  /tmp/ccOmXAaN.s 			page 121
 
 
  5215 01b4 9B04     		lsls	r3, r3, #18
@@ -7258,7 +7258,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1688:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   return ret;
  5258              		.loc 1 1688 0
  5259 0204 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
-ARM GAS  /tmp/cchFjZSQ.s 			page 122
+ARM GAS  /tmp/ccOmXAaN.s 			page 122
 
 
 1689:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** }
@@ -7318,7 +7318,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5302 0006 F860     		str	r0, [r7, #12]
  5303 0008 B960     		str	r1, [r7, #8]
  5304 000a 1346     		mov	r3, r2
-ARM GAS  /tmp/cchFjZSQ.s 			page 123
+ARM GAS  /tmp/ccOmXAaN.s 			page 123
 
 
  5305 000c FB71     		strb	r3, [r7, #7]
@@ -7378,7 +7378,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5345              	.L254:
 1717:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     }
 1718:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     else if (dma == 1U)
-ARM GAS  /tmp/cchFjZSQ.s 			page 124
+ARM GAS  /tmp/ccOmXAaN.s 			page 124
 
 
  5346              		.loc 1 1718 0
@@ -7438,7 +7438,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1734:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     if (num_packets > max_hc_pkt_count)
  5385              		.loc 1 1734 0
  5386 009a FA8C     		ldrh	r2, [r7, #38]
-ARM GAS  /tmp/cchFjZSQ.s 			page 125
+ARM GAS  /tmp/ccOmXAaN.s 			page 125
 
 
  5387 009c 7B8B     		ldrh	r3, [r7, #26]
@@ -7498,7 +7498,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5424 00d8 FB8C     		ldrh	r3, [r7, #38]
  5425 00da D904     		lsls	r1, r3, #19
  5426 00dc 684B     		ldr	r3, .L274
-ARM GAS  /tmp/cchFjZSQ.s 			page 126
+ARM GAS  /tmp/ccOmXAaN.s 			page 126
 
 
  5427 00de 0B40     		ands	r3, r3, r1
@@ -7558,7 +7558,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5468 0128 0023     		movne	r3, #0
  5469 012a DBB2     		uxtb	r3, r3
  5470 012c 7B76     		strb	r3, [r7, #25]
-ARM GAS  /tmp/cchFjZSQ.s 			page 127
+ARM GAS  /tmp/ccOmXAaN.s 			page 127
 
 
 1761:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   USBx_HC(ch_num)->HCCHAR &= ~USB_OTG_HCCHAR_ODDFRM;
@@ -7618,7 +7618,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5516              		.loc 1 1769 0
  5517 018e BB68     		ldr	r3, [r7, #8]
  5518 0190 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
-ARM GAS  /tmp/cchFjZSQ.s 			page 128
+ARM GAS  /tmp/ccOmXAaN.s 			page 128
 
 
  5519 0192 002B     		cmp	r3, #0
@@ -7678,7 +7678,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5560 01dc 4AD1     		bne	.L263
  5561              		.loc 1 1782 0 is_stmt 0 discriminator 1
  5562 01de BB68     		ldr	r3, [r7, #8]
-ARM GAS  /tmp/cchFjZSQ.s 			page 129
+ARM GAS  /tmp/ccOmXAaN.s 			page 129
 
 
  5563 01e0 1B69     		ldr	r3, [r3, #16]
@@ -7738,7 +7738,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5601 0226 15E0     		b	.L272
  5602              	.L267:
 1799:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
-ARM GAS  /tmp/cchFjZSQ.s 			page 130
+ARM GAS  /tmp/ccOmXAaN.s 			page 130
 
 
 1800:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         /* Periodic transfer */
@@ -7798,7 +7798,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5637              		.loc 1 1817 0
  5638 025a BB68     		ldr	r3, [r7, #8]
  5639 025c D968     		ldr	r1, [r3, #12]
-ARM GAS  /tmp/cchFjZSQ.s 			page 131
+ARM GAS  /tmp/ccOmXAaN.s 			page 131
 
 
  5640 025e BB68     		ldr	r3, [r7, #8]
@@ -7858,7 +7858,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5683              		.cfi_startproc
  5684              		@ args = 0, pretend = 0, frame = 16
  5685              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  /tmp/cchFjZSQ.s 			page 132
+ARM GAS  /tmp/ccOmXAaN.s 			page 132
 
 
  5686              		@ link register save eliminated.
@@ -7918,7 +7918,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1840:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   *         This parameter can be a value from 1 to 15
 1841:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   * @retval HAL state
 1842:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   */
-ARM GAS  /tmp/cchFjZSQ.s 			page 133
+ARM GAS  /tmp/ccOmXAaN.s 			page 133
 
 
 1843:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** HAL_StatusTypeDef USB_HC_Halt(USB_OTG_GlobalTypeDef *USBx, uint8_t hc_num)
@@ -7978,7 +7978,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5778              	.L279:
 1852:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
 1853:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx_HC(hcnum)->HCCHAR |= USB_OTG_HCCHAR_CHDIS;
-ARM GAS  /tmp/cchFjZSQ.s 			page 134
+ARM GAS  /tmp/ccOmXAaN.s 			page 134
 
 
  5779              		.loc 1 1853 0 is_stmt 1
@@ -8038,7 +8038,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5827              		.loc 1 1859 0
  5828 00a6 FB68     		ldr	r3, [r7, #12]
  5829 00a8 5A01     		lsls	r2, r3, #5
-ARM GAS  /tmp/cchFjZSQ.s 			page 135
+ARM GAS  /tmp/ccOmXAaN.s 			page 135
 
 
  5830 00aa 3B69     		ldr	r3, [r7, #16]
@@ -8098,7 +8098,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5871 0100 3A69     		ldr	r2, [r7, #16]
  5872 0102 0A44     		add	r2, r2, r1
  5873 0104 02F5A062 		add	r2, r2, #1280
-ARM GAS  /tmp/cchFjZSQ.s 			page 136
+ARM GAS  /tmp/ccOmXAaN.s 			page 136
 
 
  5874 0108 43F00043 		orr	r3, r3, #-2147483648
@@ -8158,7 +8158,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5916 015a 02F5A062 		add	r2, r2, #1280
  5917 015e 23F00043 		bic	r3, r3, #-2147483648
  5918 0162 1360     		str	r3, [r2]
-ARM GAS  /tmp/cchFjZSQ.s 			page 137
+ARM GAS  /tmp/ccOmXAaN.s 			page 137
 
 
 1881:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       USBx_HC(hcnum)->HCCHAR |= USB_OTG_HCCHAR_CHENA;
@@ -8218,7 +8218,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  5963 01c4 B3F1004F 		cmp	r3, #-2147483648
  5964 01c8 ECD0     		beq	.L290
  5965 01ca 11E0     		b	.L286
-ARM GAS  /tmp/cchFjZSQ.s 			page 138
+ARM GAS  /tmp/ccOmXAaN.s 			page 138
 
 
  5966              	.L287:
@@ -8278,7 +8278,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6011              		.fpu fpv4-sp-d16
  6013              	USB_DoPing:
  6014              	.LFB174:
-ARM GAS  /tmp/cchFjZSQ.s 			page 139
+ARM GAS  /tmp/ccOmXAaN.s 			page 139
 
 
 1900:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
@@ -8338,7 +8338,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6053 0030 1361     		str	r3, [r2, #16]
 1916:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****                            USB_OTG_HCTSIZ_DOPING;
 1917:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
-ARM GAS  /tmp/cchFjZSQ.s 			page 140
+ARM GAS  /tmp/ccOmXAaN.s 			page 140
 
 
 1918:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   /* Set host channel enable */
@@ -8398,7 +8398,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6100              	.LFE174:
  6102              		.section	.text.USB_StopHost,"ax",%progbits
  6103              		.align	1
-ARM GAS  /tmp/cchFjZSQ.s 			page 141
+ARM GAS  /tmp/ccOmXAaN.s 			page 141
 
 
  6104              		.global	USB_StopHost
@@ -8458,7 +8458,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1944:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   (void)USB_FlushRxFifo(USBx);
  6141              		.loc 1 1944 0
  6142 001e 7868     		ldr	r0, [r7, #4]
-ARM GAS  /tmp/cchFjZSQ.s 			page 142
+ARM GAS  /tmp/ccOmXAaN.s 			page 142
 
 
  6143 0020 FFF7FEFF 		bl	USB_FlushRxFifo
@@ -8518,7 +8518,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6186 006e DCD9     		bls	.L301
 1954:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   }
 1955:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c **** 
-ARM GAS  /tmp/cchFjZSQ.s 			page 143
+ARM GAS  /tmp/ccOmXAaN.s 			page 143
 
 
 1956:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   /* Halt all channels to put them into a known state. */
@@ -8578,7 +8578,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1968:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       {
 1969:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****         break;
 1970:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****       }
-ARM GAS  /tmp/cchFjZSQ.s 			page 144
+ARM GAS  /tmp/ccOmXAaN.s 			page 144
 
 
 1971:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     }
@@ -8638,7 +8638,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6269 0104 1846     		mov	r0, r3
  6270 0106 1837     		adds	r7, r7, #24
  6271              	.LCFI272:
-ARM GAS  /tmp/cchFjZSQ.s 			page 145
+ARM GAS  /tmp/ccOmXAaN.s 			page 145
 
 
  6272              		.cfi_def_cfa_offset 8
@@ -8698,7 +8698,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
 1993:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****   {
 1994:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     /* active Remote wakeup signalling */
 1995:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c ****     USBx_DEVICE->DCTL |= USB_OTG_DCTL_RWUSIG;
-ARM GAS  /tmp/cchFjZSQ.s 			page 146
+ARM GAS  /tmp/ccOmXAaN.s 			page 146
 
 
  6317              		.loc 1 1995 0
@@ -8758,7 +8758,7 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6361              	.LCFI280:
  6362              		.cfi_def_cfa_offset 4
  6363              		.cfi_offset 7, -4
-ARM GAS  /tmp/cchFjZSQ.s 			page 147
+ARM GAS  /tmp/ccOmXAaN.s 			page 147
 
 
  6364 0002 85B0     		sub	sp, sp, #20
@@ -8818,136 +8818,136 @@ ARM GAS  /tmp/cchFjZSQ.s 			page 1
  6414              		.file 7 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
  6415              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  6416              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h"
-ARM GAS  /tmp/cchFjZSQ.s 			page 148
+ARM GAS  /tmp/ccOmXAaN.s 			page 148
 
 
  6417              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-ARM GAS  /tmp/cchFjZSQ.s 			page 149
+ARM GAS  /tmp/ccOmXAaN.s 			page 149
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32f4xx_ll_usb.c
-     /tmp/cchFjZSQ.s:18     .text.USB_CoreInit:0000000000000000 $t
-     /tmp/cchFjZSQ.s:25     .text.USB_CoreInit:0000000000000000 USB_CoreInit
-     /tmp/cchFjZSQ.s:4272   .text.USB_CoreReset:0000000000000000 USB_CoreReset
-     /tmp/cchFjZSQ.s:161    .text.USB_SetTurnaroundTime:0000000000000000 $t
-     /tmp/cchFjZSQ.s:168    .text.USB_SetTurnaroundTime:0000000000000000 USB_SetTurnaroundTime
-     /tmp/cchFjZSQ.s:380    .text.USB_SetTurnaroundTime:000000000000011c $d
-     /tmp/cchFjZSQ.s:394    .text.USB_EnableGlobalInt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:401    .text.USB_EnableGlobalInt:0000000000000000 USB_EnableGlobalInt
-     /tmp/cchFjZSQ.s:445    .text.USB_DisableGlobalInt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:452    .text.USB_DisableGlobalInt:0000000000000000 USB_DisableGlobalInt
-     /tmp/cchFjZSQ.s:496    .text.USB_SetCurrentMode:0000000000000000 $t
-     /tmp/cchFjZSQ.s:503    .text.USB_SetCurrentMode:0000000000000000 USB_SetCurrentMode
-     /tmp/cchFjZSQ.s:577    .text.USB_DevInit:0000000000000000 $t
-     /tmp/cchFjZSQ.s:584    .text.USB_DevInit:0000000000000000 USB_DevInit
-     /tmp/cchFjZSQ.s:1177   .text.USB_SetDevSpeed:0000000000000000 USB_SetDevSpeed
-     /tmp/cchFjZSQ.s:1022   .text.USB_FlushTxFifo:0000000000000000 USB_FlushTxFifo
-     /tmp/cchFjZSQ.s:1101   .text.USB_FlushRxFifo:0000000000000000 USB_FlushRxFifo
-     /tmp/cchFjZSQ.s:1009   .text.USB_DevInit:00000000000002dc $d
-     /tmp/cchFjZSQ.s:1015   .text.USB_FlushTxFifo:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1089   .text.USB_FlushTxFifo:0000000000000048 $d
-     /tmp/cchFjZSQ.s:1094   .text.USB_FlushRxFifo:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1165   .text.USB_FlushRxFifo:0000000000000040 $d
-     /tmp/cchFjZSQ.s:1170   .text.USB_SetDevSpeed:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1229   .text.USB_GetDevSpeed:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1236   .text.USB_GetDevSpeed:0000000000000000 USB_GetDevSpeed
-     /tmp/cchFjZSQ.s:1310   .text.USB_ActivateEndpoint:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1317   .text.USB_ActivateEndpoint:0000000000000000 USB_ActivateEndpoint
-     /tmp/cchFjZSQ.s:1474   .text.USB_ActivateDedicatedEndpoint:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1481   .text.USB_ActivateDedicatedEndpoint:0000000000000000 USB_ActivateDedicatedEndpoint
-     /tmp/cchFjZSQ.s:1644   .text.USB_DeactivateEndpoint:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1651   .text.USB_DeactivateEndpoint:0000000000000000 USB_DeactivateEndpoint
-     /tmp/cchFjZSQ.s:1796   .text.USB_DeactivateEndpoint:0000000000000100 $d
-     /tmp/cchFjZSQ.s:1802   .text.USB_DeactivateDedicatedEndpoint:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1809   .text.USB_DeactivateDedicatedEndpoint:0000000000000000 USB_DeactivateDedicatedEndpoint
-     /tmp/cchFjZSQ.s:1921   .text.USB_EPStartXfer:0000000000000000 $t
-     /tmp/cchFjZSQ.s:1928   .text.USB_EPStartXfer:0000000000000000 USB_EPStartXfer
-     /tmp/cchFjZSQ.s:2879   .text.USB_WritePacket:0000000000000000 USB_WritePacket
-     /tmp/cchFjZSQ.s:2360   .text.USB_EPStartXfer:0000000000000370 $d
-     /tmp/cchFjZSQ.s:2363   .text.USB_EPStartXfer:0000000000000374 $t
-     /tmp/cchFjZSQ.s:2504   .text.USB_EPStartXfer:0000000000000484 $d
-     /tmp/cchFjZSQ.s:2509   .text.USB_EP0StartXfer:0000000000000000 $t
-     /tmp/cchFjZSQ.s:2516   .text.USB_EP0StartXfer:0000000000000000 USB_EP0StartXfer
-     /tmp/cchFjZSQ.s:2872   .text.USB_WritePacket:0000000000000000 $t
-     /tmp/cchFjZSQ.s:2969   .text.USB_ReadPacket:0000000000000000 $t
-     /tmp/cchFjZSQ.s:2976   .text.USB_ReadPacket:0000000000000000 USB_ReadPacket
-     /tmp/cchFjZSQ.s:3053   .text.USB_EPSetStall:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3060   .text.USB_EPSetStall:0000000000000000 USB_EPSetStall
-     /tmp/cchFjZSQ.s:3198   .text.USB_EPClearStall:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3205   .text.USB_EPClearStall:0000000000000000 USB_EPClearStall
-     /tmp/cchFjZSQ.s:3337   .text.USB_StopDevice:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3344   .text.USB_StopDevice:0000000000000000 USB_StopDevice
-     /tmp/cchFjZSQ.s:3459   .text.USB_SetDevAddress:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3466   .text.USB_SetDevAddress:0000000000000000 USB_SetDevAddress
-     /tmp/cchFjZSQ.s:3528   .text.USB_DevConnect:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3535   .text.USB_DevConnect:0000000000000000 USB_DevConnect
-ARM GAS  /tmp/cchFjZSQ.s 			page 150
+     /tmp/ccOmXAaN.s:18     .text.USB_CoreInit:0000000000000000 $t
+     /tmp/ccOmXAaN.s:25     .text.USB_CoreInit:0000000000000000 USB_CoreInit
+     /tmp/ccOmXAaN.s:4272   .text.USB_CoreReset:0000000000000000 USB_CoreReset
+     /tmp/ccOmXAaN.s:161    .text.USB_SetTurnaroundTime:0000000000000000 $t
+     /tmp/ccOmXAaN.s:168    .text.USB_SetTurnaroundTime:0000000000000000 USB_SetTurnaroundTime
+     /tmp/ccOmXAaN.s:380    .text.USB_SetTurnaroundTime:000000000000011c $d
+     /tmp/ccOmXAaN.s:394    .text.USB_EnableGlobalInt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:401    .text.USB_EnableGlobalInt:0000000000000000 USB_EnableGlobalInt
+     /tmp/ccOmXAaN.s:445    .text.USB_DisableGlobalInt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:452    .text.USB_DisableGlobalInt:0000000000000000 USB_DisableGlobalInt
+     /tmp/ccOmXAaN.s:496    .text.USB_SetCurrentMode:0000000000000000 $t
+     /tmp/ccOmXAaN.s:503    .text.USB_SetCurrentMode:0000000000000000 USB_SetCurrentMode
+     /tmp/ccOmXAaN.s:577    .text.USB_DevInit:0000000000000000 $t
+     /tmp/ccOmXAaN.s:584    .text.USB_DevInit:0000000000000000 USB_DevInit
+     /tmp/ccOmXAaN.s:1177   .text.USB_SetDevSpeed:0000000000000000 USB_SetDevSpeed
+     /tmp/ccOmXAaN.s:1022   .text.USB_FlushTxFifo:0000000000000000 USB_FlushTxFifo
+     /tmp/ccOmXAaN.s:1101   .text.USB_FlushRxFifo:0000000000000000 USB_FlushRxFifo
+     /tmp/ccOmXAaN.s:1009   .text.USB_DevInit:00000000000002dc $d
+     /tmp/ccOmXAaN.s:1015   .text.USB_FlushTxFifo:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1089   .text.USB_FlushTxFifo:0000000000000048 $d
+     /tmp/ccOmXAaN.s:1094   .text.USB_FlushRxFifo:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1165   .text.USB_FlushRxFifo:0000000000000040 $d
+     /tmp/ccOmXAaN.s:1170   .text.USB_SetDevSpeed:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1229   .text.USB_GetDevSpeed:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1236   .text.USB_GetDevSpeed:0000000000000000 USB_GetDevSpeed
+     /tmp/ccOmXAaN.s:1310   .text.USB_ActivateEndpoint:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1317   .text.USB_ActivateEndpoint:0000000000000000 USB_ActivateEndpoint
+     /tmp/ccOmXAaN.s:1474   .text.USB_ActivateDedicatedEndpoint:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1481   .text.USB_ActivateDedicatedEndpoint:0000000000000000 USB_ActivateDedicatedEndpoint
+     /tmp/ccOmXAaN.s:1644   .text.USB_DeactivateEndpoint:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1651   .text.USB_DeactivateEndpoint:0000000000000000 USB_DeactivateEndpoint
+     /tmp/ccOmXAaN.s:1796   .text.USB_DeactivateEndpoint:0000000000000100 $d
+     /tmp/ccOmXAaN.s:1802   .text.USB_DeactivateDedicatedEndpoint:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1809   .text.USB_DeactivateDedicatedEndpoint:0000000000000000 USB_DeactivateDedicatedEndpoint
+     /tmp/ccOmXAaN.s:1921   .text.USB_EPStartXfer:0000000000000000 $t
+     /tmp/ccOmXAaN.s:1928   .text.USB_EPStartXfer:0000000000000000 USB_EPStartXfer
+     /tmp/ccOmXAaN.s:2879   .text.USB_WritePacket:0000000000000000 USB_WritePacket
+     /tmp/ccOmXAaN.s:2360   .text.USB_EPStartXfer:0000000000000370 $d
+     /tmp/ccOmXAaN.s:2363   .text.USB_EPStartXfer:0000000000000374 $t
+     /tmp/ccOmXAaN.s:2504   .text.USB_EPStartXfer:0000000000000484 $d
+     /tmp/ccOmXAaN.s:2509   .text.USB_EP0StartXfer:0000000000000000 $t
+     /tmp/ccOmXAaN.s:2516   .text.USB_EP0StartXfer:0000000000000000 USB_EP0StartXfer
+     /tmp/ccOmXAaN.s:2872   .text.USB_WritePacket:0000000000000000 $t
+     /tmp/ccOmXAaN.s:2969   .text.USB_ReadPacket:0000000000000000 $t
+     /tmp/ccOmXAaN.s:2976   .text.USB_ReadPacket:0000000000000000 USB_ReadPacket
+     /tmp/ccOmXAaN.s:3053   .text.USB_EPSetStall:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3060   .text.USB_EPSetStall:0000000000000000 USB_EPSetStall
+     /tmp/ccOmXAaN.s:3198   .text.USB_EPClearStall:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3205   .text.USB_EPClearStall:0000000000000000 USB_EPClearStall
+     /tmp/ccOmXAaN.s:3337   .text.USB_StopDevice:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3344   .text.USB_StopDevice:0000000000000000 USB_StopDevice
+     /tmp/ccOmXAaN.s:3459   .text.USB_SetDevAddress:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3466   .text.USB_SetDevAddress:0000000000000000 USB_SetDevAddress
+     /tmp/ccOmXAaN.s:3528   .text.USB_DevConnect:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3535   .text.USB_DevConnect:0000000000000000 USB_DevConnect
+ARM GAS  /tmp/ccOmXAaN.s 			page 150
 
 
-     /tmp/cchFjZSQ.s:3583   .text.USB_DevDisconnect:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3590   .text.USB_DevDisconnect:0000000000000000 USB_DevDisconnect
-     /tmp/cchFjZSQ.s:3638   .text.USB_ReadInterrupts:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3645   .text.USB_ReadInterrupts:0000000000000000 USB_ReadInterrupts
-     /tmp/cchFjZSQ.s:3693   .text.USB_ReadDevAllOutEpInterrupt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3700   .text.USB_ReadDevAllOutEpInterrupt:0000000000000000 USB_ReadDevAllOutEpInterrupt
-     /tmp/cchFjZSQ.s:3754   .text.USB_ReadDevAllInEpInterrupt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3761   .text.USB_ReadDevAllInEpInterrupt:0000000000000000 USB_ReadDevAllInEpInterrupt
-     /tmp/cchFjZSQ.s:3815   .text.USB_ReadDevOutEPInterrupt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3822   .text.USB_ReadDevOutEPInterrupt:0000000000000000 USB_ReadDevOutEPInterrupt
-     /tmp/cchFjZSQ.s:3880   .text.USB_ReadDevInEPInterrupt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3887   .text.USB_ReadDevInEPInterrupt:0000000000000000 USB_ReadDevInEPInterrupt
-     /tmp/cchFjZSQ.s:3960   .text.USB_ClearInterrupts:0000000000000000 $t
-     /tmp/cchFjZSQ.s:3967   .text.USB_ClearInterrupts:0000000000000000 USB_ClearInterrupts
-     /tmp/cchFjZSQ.s:4011   .text.USB_GetMode:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4018   .text.USB_GetMode:0000000000000000 USB_GetMode
-     /tmp/cchFjZSQ.s:4058   .text.USB_ActivateSetup:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4065   .text.USB_ActivateSetup:0000000000000000 USB_ActivateSetup
-     /tmp/cchFjZSQ.s:4139   .text.USB_EP0_OutStart:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4146   .text.USB_EP0_OutStart:0000000000000000 USB_EP0_OutStart
-     /tmp/cchFjZSQ.s:4261   .text.USB_EP0_OutStart:00000000000000b8 $d
-     /tmp/cchFjZSQ.s:4266   .text.USB_CoreReset:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4359   .text.USB_CoreReset:0000000000000064 $d
-     /tmp/cchFjZSQ.s:4364   .text.USB_HostInit:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4371   .text.USB_HostInit:0000000000000000 USB_HostInit
-     /tmp/cchFjZSQ.s:4770   .text.USB_DriveVbus:0000000000000000 USB_DriveVbus
-     /tmp/cchFjZSQ.s:4589   .text.USB_HostInit:0000000000000164 $d
-     /tmp/cchFjZSQ.s:4598   .text.USB_InitFSLSPClkSel:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4605   .text.USB_InitFSLSPClkSel:0000000000000000 USB_InitFSLSPClkSel
-     /tmp/cchFjZSQ.s:4689   .text.USB_ResetPort:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4696   .text.USB_ResetPort:0000000000000000 USB_ResetPort
-     /tmp/cchFjZSQ.s:4763   .text.USB_DriveVbus:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4857   .text.USB_GetHostSpeed:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4864   .text.USB_GetHostSpeed:0000000000000000 USB_GetHostSpeed
-     /tmp/cchFjZSQ.s:4915   .text.USB_GetCurrentFrame:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4922   .text.USB_GetCurrentFrame:0000000000000000 USB_GetCurrentFrame
-     /tmp/cchFjZSQ.s:4966   .text.USB_HC_Init:0000000000000000 $t
-     /tmp/cchFjZSQ.s:4973   .text.USB_HC_Init:0000000000000000 USB_HC_Init
-     /tmp/cchFjZSQ.s:5023   .text.USB_HC_Init:0000000000000044 $d
-     /tmp/cchFjZSQ.s:5027   .text.USB_HC_Init:0000000000000054 $t
-     /tmp/cchFjZSQ.s:5278   .text.USB_HC_StartXfer:0000000000000000 $t
-     /tmp/cchFjZSQ.s:5285   .text.USB_HC_StartXfer:0000000000000000 USB_HC_StartXfer
-     /tmp/cchFjZSQ.s:6013   .text.USB_DoPing:0000000000000000 USB_DoPing
-     /tmp/cchFjZSQ.s:5575   .text.USB_HC_StartXfer:00000000000001f4 $d
-     /tmp/cchFjZSQ.s:5579   .text.USB_HC_StartXfer:0000000000000204 $t
-     /tmp/cchFjZSQ.s:5667   .text.USB_HC_StartXfer:0000000000000280 $d
-     /tmp/cchFjZSQ.s:6405   .bss.tmpreg.8004:0000000000000000 tmpreg.8004
-     /tmp/cchFjZSQ.s:5673   .text.USB_HC_ReadInterrupt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:5680   .text.USB_HC_ReadInterrupt:0000000000000000 USB_HC_ReadInterrupt
-     /tmp/cchFjZSQ.s:5724   .text.USB_HC_Halt:0000000000000000 $t
-     /tmp/cchFjZSQ.s:5731   .text.USB_HC_Halt:0000000000000000 USB_HC_Halt
-     /tmp/cchFjZSQ.s:6006   .text.USB_DoPing:0000000000000000 $t
-     /tmp/cchFjZSQ.s:6098   .text.USB_DoPing:0000000000000074 $d
-     /tmp/cchFjZSQ.s:6103   .text.USB_StopHost:0000000000000000 $t
-     /tmp/cchFjZSQ.s:6110   .text.USB_StopHost:0000000000000000 USB_StopHost
-     /tmp/cchFjZSQ.s:6282   .text.USB_ActivateRemoteWakeup:0000000000000000 $t
-     /tmp/cchFjZSQ.s:6289   .text.USB_ActivateRemoteWakeup:0000000000000000 USB_ActivateRemoteWakeup
-ARM GAS  /tmp/cchFjZSQ.s 			page 151
+     /tmp/ccOmXAaN.s:3583   .text.USB_DevDisconnect:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3590   .text.USB_DevDisconnect:0000000000000000 USB_DevDisconnect
+     /tmp/ccOmXAaN.s:3638   .text.USB_ReadInterrupts:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3645   .text.USB_ReadInterrupts:0000000000000000 USB_ReadInterrupts
+     /tmp/ccOmXAaN.s:3693   .text.USB_ReadDevAllOutEpInterrupt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3700   .text.USB_ReadDevAllOutEpInterrupt:0000000000000000 USB_ReadDevAllOutEpInterrupt
+     /tmp/ccOmXAaN.s:3754   .text.USB_ReadDevAllInEpInterrupt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3761   .text.USB_ReadDevAllInEpInterrupt:0000000000000000 USB_ReadDevAllInEpInterrupt
+     /tmp/ccOmXAaN.s:3815   .text.USB_ReadDevOutEPInterrupt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3822   .text.USB_ReadDevOutEPInterrupt:0000000000000000 USB_ReadDevOutEPInterrupt
+     /tmp/ccOmXAaN.s:3880   .text.USB_ReadDevInEPInterrupt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3887   .text.USB_ReadDevInEPInterrupt:0000000000000000 USB_ReadDevInEPInterrupt
+     /tmp/ccOmXAaN.s:3960   .text.USB_ClearInterrupts:0000000000000000 $t
+     /tmp/ccOmXAaN.s:3967   .text.USB_ClearInterrupts:0000000000000000 USB_ClearInterrupts
+     /tmp/ccOmXAaN.s:4011   .text.USB_GetMode:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4018   .text.USB_GetMode:0000000000000000 USB_GetMode
+     /tmp/ccOmXAaN.s:4058   .text.USB_ActivateSetup:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4065   .text.USB_ActivateSetup:0000000000000000 USB_ActivateSetup
+     /tmp/ccOmXAaN.s:4139   .text.USB_EP0_OutStart:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4146   .text.USB_EP0_OutStart:0000000000000000 USB_EP0_OutStart
+     /tmp/ccOmXAaN.s:4261   .text.USB_EP0_OutStart:00000000000000b8 $d
+     /tmp/ccOmXAaN.s:4266   .text.USB_CoreReset:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4359   .text.USB_CoreReset:0000000000000064 $d
+     /tmp/ccOmXAaN.s:4364   .text.USB_HostInit:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4371   .text.USB_HostInit:0000000000000000 USB_HostInit
+     /tmp/ccOmXAaN.s:4770   .text.USB_DriveVbus:0000000000000000 USB_DriveVbus
+     /tmp/ccOmXAaN.s:4589   .text.USB_HostInit:0000000000000164 $d
+     /tmp/ccOmXAaN.s:4598   .text.USB_InitFSLSPClkSel:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4605   .text.USB_InitFSLSPClkSel:0000000000000000 USB_InitFSLSPClkSel
+     /tmp/ccOmXAaN.s:4689   .text.USB_ResetPort:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4696   .text.USB_ResetPort:0000000000000000 USB_ResetPort
+     /tmp/ccOmXAaN.s:4763   .text.USB_DriveVbus:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4857   .text.USB_GetHostSpeed:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4864   .text.USB_GetHostSpeed:0000000000000000 USB_GetHostSpeed
+     /tmp/ccOmXAaN.s:4915   .text.USB_GetCurrentFrame:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4922   .text.USB_GetCurrentFrame:0000000000000000 USB_GetCurrentFrame
+     /tmp/ccOmXAaN.s:4966   .text.USB_HC_Init:0000000000000000 $t
+     /tmp/ccOmXAaN.s:4973   .text.USB_HC_Init:0000000000000000 USB_HC_Init
+     /tmp/ccOmXAaN.s:5023   .text.USB_HC_Init:0000000000000044 $d
+     /tmp/ccOmXAaN.s:5027   .text.USB_HC_Init:0000000000000054 $t
+     /tmp/ccOmXAaN.s:5278   .text.USB_HC_StartXfer:0000000000000000 $t
+     /tmp/ccOmXAaN.s:5285   .text.USB_HC_StartXfer:0000000000000000 USB_HC_StartXfer
+     /tmp/ccOmXAaN.s:6013   .text.USB_DoPing:0000000000000000 USB_DoPing
+     /tmp/ccOmXAaN.s:5575   .text.USB_HC_StartXfer:00000000000001f4 $d
+     /tmp/ccOmXAaN.s:5579   .text.USB_HC_StartXfer:0000000000000204 $t
+     /tmp/ccOmXAaN.s:5667   .text.USB_HC_StartXfer:0000000000000280 $d
+     /tmp/ccOmXAaN.s:6405   .bss.tmpreg.8004:0000000000000000 tmpreg.8004
+     /tmp/ccOmXAaN.s:5673   .text.USB_HC_ReadInterrupt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:5680   .text.USB_HC_ReadInterrupt:0000000000000000 USB_HC_ReadInterrupt
+     /tmp/ccOmXAaN.s:5724   .text.USB_HC_Halt:0000000000000000 $t
+     /tmp/ccOmXAaN.s:5731   .text.USB_HC_Halt:0000000000000000 USB_HC_Halt
+     /tmp/ccOmXAaN.s:6006   .text.USB_DoPing:0000000000000000 $t
+     /tmp/ccOmXAaN.s:6098   .text.USB_DoPing:0000000000000074 $d
+     /tmp/ccOmXAaN.s:6103   .text.USB_StopHost:0000000000000000 $t
+     /tmp/ccOmXAaN.s:6110   .text.USB_StopHost:0000000000000000 USB_StopHost
+     /tmp/ccOmXAaN.s:6282   .text.USB_ActivateRemoteWakeup:0000000000000000 $t
+     /tmp/ccOmXAaN.s:6289   .text.USB_ActivateRemoteWakeup:0000000000000000 USB_ActivateRemoteWakeup
+ARM GAS  /tmp/ccOmXAaN.s 			page 151
 
 
-     /tmp/cchFjZSQ.s:6346   .text.USB_DeActivateRemoteWakeup:0000000000000000 $t
-     /tmp/cchFjZSQ.s:6353   .text.USB_DeActivateRemoteWakeup:0000000000000000 USB_DeActivateRemoteWakeup
-     /tmp/cchFjZSQ.s:6402   .bss.tmpreg.8004:0000000000000000 $d
+     /tmp/ccOmXAaN.s:6346   .text.USB_DeActivateRemoteWakeup:0000000000000000 $t
+     /tmp/ccOmXAaN.s:6353   .text.USB_DeActivateRemoteWakeup:0000000000000000 USB_DeActivateRemoteWakeup
+     /tmp/ccOmXAaN.s:6402   .bss.tmpreg.8004:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_Delay

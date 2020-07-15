@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccgSgShH.s 			page 1
+ARM GAS  /tmp/cciTHAML.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
   24:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
   25:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** /** @addtogroup STM32_USBD_STATE_DEVICE_LIBRARY
   26:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   * @{
-ARM GAS  /tmp/ccgSgShH.s 			page 2
+ARM GAS  /tmp/cciTHAML.s 			page 2
 
 
   27:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
   81:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****                            USBD_SetupReqTypedef *req);
   82:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
   83:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** static void USBD_GetStatus(USBD_HandleTypeDef *pdev ,
-ARM GAS  /tmp/ccgSgShH.s 			page 3
+ARM GAS  /tmp/cciTHAML.s 			page 3
 
 
   84:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****                            USBD_SetupReqTypedef *req);
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
   55 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
   56 0012 03F06003 		and	r3, r3, #96
   57 0016 202B     		cmp	r3, #32
-ARM GAS  /tmp/ccgSgShH.s 			page 4
+ARM GAS  /tmp/cciTHAML.s 			page 4
 
 
   58 0018 04D0     		beq	.L3
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
   99 006e 7868     		ldr	r0, [r7, #4]
  100 0070 FFF7FEFF 		bl	USBD_GetDescriptor
  129:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       break;
-ARM GAS  /tmp/ccgSgShH.s 			page 5
+ARM GAS  /tmp/cciTHAML.s 			page 5
 
 
  101              		.loc 1 129 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  135 00a2 FFF7FEFF 		bl	USBD_SetFeature
  150:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       break;
  136              		.loc 1 150 0
-ARM GAS  /tmp/ccgSgShH.s 			page 6
+ARM GAS  /tmp/cciTHAML.s 			page 6
 
 
  137 00a6 09E0     		b	.L15
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  173              		@ sp needed
  174 00d0 80BD     		pop	{r7, pc}
  175              		.cfi_endproc
-ARM GAS  /tmp/ccgSgShH.s 			page 7
+ARM GAS  /tmp/cciTHAML.s 			page 7
 
 
  176              	.LFE133:
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  182:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   {
  183:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   case USB_REQ_TYPE_CLASS:
  184:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   case USB_REQ_TYPE_VENDOR:
-ARM GAS  /tmp/ccgSgShH.s 			page 8
+ARM GAS  /tmp/cciTHAML.s 			page 8
 
 
  185:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   case USB_REQ_TYPE_STANDARD:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  205:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       break;
  253              		.loc 1 205 0
  254 005e 09E0     		b	.L30
-ARM GAS  /tmp/ccgSgShH.s 			page 9
+ARM GAS  /tmp/cciTHAML.s 			page 9
 
 
  255              	.L23:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  293              		@ sp needed
  294 008a 80BD     		pop	{r7, pc}
  295              		.cfi_endproc
-ARM GAS  /tmp/ccgSgShH.s 			page 10
+ARM GAS  /tmp/cciTHAML.s 			page 10
 
 
  296              	.LFE134:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  335 0018 03F06003 		and	r3, r3, #96
  336 001c 202B     		cmp	r3, #32
  337 001e 04D0     		beq	.L33
-ARM GAS  /tmp/ccgSgShH.s 			page 11
+ARM GAS  /tmp/cciTHAML.s 			page 11
 
 
  338 0020 402B     		cmp	r3, #64
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  375              		.loc 1 253 0
  376 005c 3B68     		ldr	r3, [r7]
  377 005e 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
-ARM GAS  /tmp/ccgSgShH.s 			page 12
+ARM GAS  /tmp/cciTHAML.s 			page 12
 
 
  378 0060 012B     		cmp	r3, #1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  268:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****         }
  415              		.loc 1 268 0
  416 009e 3968     		ldr	r1, [r7]
-ARM GAS  /tmp/ccgSgShH.s 			page 13
+ARM GAS  /tmp/cciTHAML.s 			page 13
 
 
  417 00a0 7868     		ldr	r0, [r7, #4]
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  286:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****         break;
  456              		.loc 1 286 0
  457 00de 00BF     		nop
-ARM GAS  /tmp/ccgSgShH.s 			page 14
+ARM GAS  /tmp/cciTHAML.s 			page 14
 
 
  458              	.L47:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  493 0114 7868     		ldr	r0, [r7, #4]
  494 0116 FFF7FEFF 		bl	USBD_CtlError
  495              		.loc 1 304 0
-ARM GAS  /tmp/ccgSgShH.s 			page 15
+ARM GAS  /tmp/cciTHAML.s 			page 15
 
 
  496 011a 17E0     		b	.L55
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  532              	.L41:
  322:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
  323:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     case USB_REQ_GET_STATUS:
-ARM GAS  /tmp/ccgSgShH.s 			page 16
+ARM GAS  /tmp/cciTHAML.s 			page 16
 
 
  324:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       switch (pdev->dev_state)
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  332:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****           &pdev->ep_out[ep_addr & 0x7FU];
  577              		.loc 1 332 0 discriminator 2
  578 019a 1346     		mov	r3, r2
-ARM GAS  /tmp/ccgSgShH.s 			page 17
+ARM GAS  /tmp/cciTHAML.s 			page 17
 
 
  579 019c 9B00     		lsls	r3, r3, #2
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  620 01e4 7868     		ldr	r0, [r7, #4]
  621 01e6 FFF7FEFF 		bl	USBD_CtlError
  346:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****             break;
-ARM GAS  /tmp/ccgSgShH.s 			page 18
+ARM GAS  /tmp/cciTHAML.s 			page 18
 
 
  622              		.loc 1 346 0
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  663 0232 BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
  664 0234 03F07F02 		and	r2, r3, #127
  358:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****           &pdev->ep_out[ep_addr & 0x7FU];
-ARM GAS  /tmp/ccgSgShH.s 			page 19
+ARM GAS  /tmp/cciTHAML.s 			page 19
 
 
  665              		.loc 1 358 0 discriminator 2
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  706 0276 BB68     		ldr	r3, [r7, #8]
  707 0278 0022     		movs	r2, #0
  708 027a 1A60     		str	r2, [r3]
-ARM GAS  /tmp/ccgSgShH.s 			page 20
+ARM GAS  /tmp/cciTHAML.s 			page 20
 
 
  709              	.L71:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  743              		.loc 1 391 0
  744 02aa 00BF     		nop
  745              	.L35:
-ARM GAS  /tmp/ccgSgShH.s 			page 21
+ARM GAS  /tmp/cciTHAML.s 			page 21
 
 
  392:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   }
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  406:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   uint16_t len;
  407:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   uint8_t *pbuf;
  408:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
-ARM GAS  /tmp/ccgSgShH.s 			page 22
+ARM GAS  /tmp/cciTHAML.s 			page 22
 
 
  409:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  423:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     {
  424:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       pbuf   = (uint8_t *)pdev->pClass->GetHSConfigDescriptor(&len);
  828              		.loc 1 424 0
-ARM GAS  /tmp/ccgSgShH.s 			page 23
+ARM GAS  /tmp/cciTHAML.s 			page 23
 
 
  829 005c 7B68     		ldr	r3, [r7, #4]
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  870              		.p2align 2
  871              	.L92:
  872 00a4 BD000000 		.word	.L91+1
-ARM GAS  /tmp/ccgSgShH.s 			page 24
+ARM GAS  /tmp/cciTHAML.s 			page 24
 
 
  873 00a8 D5000000 		.word	.L93+1
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  916 00fe 9847     		blx	r3
  917              	.LVL9:
  918 0100 F860     		str	r0, [r7, #12]
-ARM GAS  /tmp/ccgSgShH.s 			page 25
+ARM GAS  /tmp/cciTHAML.s 			page 25
 
 
  447:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       break;
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  459:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       break;
  961              		.loc 1 459 0
  962 014a 04E0     		b	.L98
-ARM GAS  /tmp/ccgSgShH.s 			page 26
+ARM GAS  /tmp/cciTHAML.s 			page 26
 
 
  963              	.L90:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  995              		.loc 1 481 0
  996 017c 37E0     		b	.L79
  997              	.L86:
-ARM GAS  /tmp/ccgSgShH.s 			page 27
+ARM GAS  /tmp/cciTHAML.s 			page 27
 
 
  482:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     }
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  500:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   }
  501:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
  502:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   if((len != 0U) && (req->wLength != 0U))
-ARM GAS  /tmp/ccgSgShH.s 			page 28
+ARM GAS  /tmp/cciTHAML.s 			page 28
 
 
  1034              		.loc 1 502 0
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1076 01f2 80BD     		pop	{r7, pc}
  1077              		.cfi_endproc
  1078              	.LFE136:
-ARM GAS  /tmp/ccgSgShH.s 			page 29
+ARM GAS  /tmp/cciTHAML.s 			page 29
 
 
  1080              		.section	.text.USBD_SetAddress,"ax",%progbits
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  529:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   {
  530:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     dev_addr = (uint8_t)(req->wValue) & 0x7FU;
  1121              		.loc 1 530 0 is_stmt 1
-ARM GAS  /tmp/ccgSgShH.s 			page 30
+ARM GAS  /tmp/cciTHAML.s 			page 30
 
 
  1122 0022 3B68     		ldr	r3, [r7]
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1160 0068 08E0     		b	.L110
  1161              	.L109:
  545:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       }
-ARM GAS  /tmp/ccgSgShH.s 			page 31
+ARM GAS  /tmp/cciTHAML.s 			page 31
 
 
  546:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       else
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1196              		.loc 1 566 0
  1197              		.cfi_startproc
  1198              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  /tmp/ccgSgShH.s 			page 32
+ARM GAS  /tmp/cciTHAML.s 			page 32
 
 
  1199              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1239              		.loc 1 580 0
  1240 0036 384B     		ldr	r3, .L125
  1241 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccgSgShH.s 			page 33
+ARM GAS  /tmp/cciTHAML.s 			page 33
 
 
  1242 003a 002B     		cmp	r3, #0
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1280 007a 4AE0     		b	.L111
  1281              	.L116:
  596:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
-ARM GAS  /tmp/ccgSgShH.s 			page 34
+ARM GAS  /tmp/cciTHAML.s 			page 34
 
 
  597:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     case USBD_STATE_CONFIGURED:
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  605:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       {
  1309              		.loc 1 605 0
  1310 00aa 1B4B     		ldr	r3, .L125
-ARM GAS  /tmp/ccgSgShH.s 			page 35
+ARM GAS  /tmp/cciTHAML.s 			page 35
 
 
  1311 00ac 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  624:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
  625:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     default:
  626:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       USBD_CtlError(pdev, req);
-ARM GAS  /tmp/ccgSgShH.s 			page 36
+ARM GAS  /tmp/cciTHAML.s 			page 36
 
 
  1358              		.loc 1 626 0
@@ -2131,7 +2131,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1380              	.L126:
  1381              		.align	2
  1382              	.L125:
- 1383 0118 00000000 		.word	cfgidx.9784
+ 1383 0118 00000000 		.word	cfgidx.9779
  1384              		.cfi_endproc
  1385              	.LFE138:
  1387              		.section	.text.USBD_GetConfig,"ax",%progbits
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1399              		@ frame_needed = 1, uses_anonymous_args = 0
  1400 0000 80B5     		push	{r7, lr}
  1401              	.LCFI30:
-ARM GAS  /tmp/ccgSgShH.s 			page 37
+ARM GAS  /tmp/cciTHAML.s 			page 37
 
 
  1402              		.cfi_def_cfa_offset 8
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1431 0028 02DD     		ble	.L131
  1432 002a 032B     		cmp	r3, #3
  1433 002c 0BD0     		beq	.L132
-ARM GAS  /tmp/ccgSgShH.s 			page 38
+ARM GAS  /tmp/cciTHAML.s 			page 38
 
 
  1434 002e 12E0     		b	.L130
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1482              		.align	1
  1483              		.syntax unified
  1484              		.thumb
-ARM GAS  /tmp/ccgSgShH.s 			page 39
+ARM GAS  /tmp/cciTHAML.s 			page 39
 
 
  1485              		.thumb_func
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  684:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       break;
  1522              		.loc 1 684 0
  1523 0026 1AE0     		b	.L138
-ARM GAS  /tmp/ccgSgShH.s 			page 40
+ARM GAS  /tmp/cciTHAML.s 			page 40
 
 
  1524              	.L137:
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  705:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** }
  1558              		.loc 1 705 0
  1559 005e 00BF     		nop
-ARM GAS  /tmp/ccgSgShH.s 			page 41
+ARM GAS  /tmp/cciTHAML.s 			page 41
 
 
  1560 0060 0837     		adds	r7, r7, #8
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  720:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   {
  721:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****     pdev->dev_remote_wakeup = 1U;
  1602              		.loc 1 721 0
-ARM GAS  /tmp/ccgSgShH.s 			page 42
+ARM GAS  /tmp/cciTHAML.s 			page 42
 
 
  1603 0012 7B68     		ldr	r3, [r7, #4]
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1643              		.cfi_def_cfa_offset 16
  1644 0004 00AF     		add	r7, sp, #0
  1645              	.LCFI47:
-ARM GAS  /tmp/ccgSgShH.s 			page 43
+ARM GAS  /tmp/cciTHAML.s 			page 43
 
 
  1646              		.cfi_def_cfa_register 7
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1682 003c 0837     		adds	r7, r7, #8
  1683              	.LCFI48:
  1684              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/ccgSgShH.s 			page 44
+ARM GAS  /tmp/cciTHAML.s 			page 44
 
 
  1685 003e BD46     		mov	sp, r7
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1728 0016 7B68     		ldr	r3, [r7, #4]
  1729 0018 5A70     		strb	r2, [r3, #1]
  768:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   req->wValue        = SWAPBYTE      (pdata +  2);
-ARM GAS  /tmp/ccgSgShH.s 			page 45
+ARM GAS  /tmp/cciTHAML.s 			page 45
 
 
  1730              		.loc 1 768 0
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1780 0072 BD46     		mov	sp, r7
  1781              	.LCFI54:
  1782              		.cfi_def_cfa_register 13
-ARM GAS  /tmp/ccgSgShH.s 			page 46
+ARM GAS  /tmp/cciTHAML.s 			page 46
 
 
  1783              		@ sp needed
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1825 0014 7868     		ldr	r0, [r7, #4]
  1826 0016 FFF7FEFF 		bl	USBD_LL_StallEP
  787:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** }
-ARM GAS  /tmp/ccgSgShH.s 			page 47
+ARM GAS  /tmp/cciTHAML.s 			page 47
 
 
  1827              		.loc 1 787 0
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1870 000e FB75     		strb	r3, [r7, #23]
  801:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c **** 
  802:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****   if (desc != NULL)
-ARM GAS  /tmp/ccgSgShH.s 			page 48
+ARM GAS  /tmp/cciTHAML.s 			page 48
 
 
  1871              		.loc 1 802 0
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1917 0060 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  1918 0062 1370     		strb	r3, [r2]
  811:Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c ****       unicode[idx++] =  0U;
-ARM GAS  /tmp/ccgSgShH.s 			page 49
+ARM GAS  /tmp/cciTHAML.s 			page 49
 
 
  1919              		.loc 1 811 0
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  1962 0000 80B4     		push	{r7}
  1963              	.LCFI66:
  1964              		.cfi_def_cfa_offset 4
-ARM GAS  /tmp/ccgSgShH.s 			page 50
+ARM GAS  /tmp/cciTHAML.s 			page 50
 
 
  1965              		.cfi_offset 7, -4
@@ -2998,11 +2998,11 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  2008 002e 7047     		bx	lr
  2009              		.cfi_endproc
  2010              	.LFE146:
-ARM GAS  /tmp/ccgSgShH.s 			page 51
+ARM GAS  /tmp/cciTHAML.s 			page 51
 
 
- 2012              		.section	.bss.cfgidx.9784,"aw",%nobits
- 2015              	cfgidx.9784:
+ 2012              		.section	.bss.cfgidx.9779,"aw",%nobits
+ 2015              	cfgidx.9779:
  2016 0000 00       		.space	1
  2017              		.text
  2018              	.Letext0:
@@ -3018,7 +3018,7 @@ ARM GAS  /tmp/ccgSgShH.s 			page 1
  2028              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  2029              		.file 12 "la/sampling.h"
  2030              		.file 13 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
-ARM GAS  /tmp/ccgSgShH.s 			page 52
+ARM GAS  /tmp/cciTHAML.s 			page 52
 
 
 DEFINED SYMBOLS
@@ -3028,43 +3028,43 @@ DEFINED SYMBOLS
                             *COM*:0000000000000002 flags
                             *COM*:0000000000000002 period
                             *COM*:0000000000000004 transferSize
-     /tmp/ccgSgShH.s:23     .text.USBD_StdDevReq:0000000000000000 $t
-     /tmp/ccgSgShH.s:30     .text.USBD_StdDevReq:0000000000000000 USBD_StdDevReq
-     /tmp/ccgSgShH.s:85     .text.USBD_StdDevReq:0000000000000044 $d
-     /tmp/ccgSgShH.s:95     .text.USBD_StdDevReq:000000000000006c $t
-     /tmp/ccgSgShH.s:769    .text.USBD_GetDescriptor:0000000000000000 USBD_GetDescriptor
-     /tmp/ccgSgShH.s:1087   .text.USBD_SetAddress:0000000000000000 USBD_SetAddress
-     /tmp/ccgSgShH.s:1194   .text.USBD_SetConfig:0000000000000000 USBD_SetConfig
-     /tmp/ccgSgShH.s:1394   .text.USBD_GetConfig:0000000000000000 USBD_GetConfig
-     /tmp/ccgSgShH.s:1488   .text.USBD_GetStatus:0000000000000000 USBD_GetStatus
-     /tmp/ccgSgShH.s:1578   .text.USBD_SetFeature:0000000000000000 USBD_SetFeature
-     /tmp/ccgSgShH.s:1630   .text.USBD_ClrFeature:0000000000000000 USBD_ClrFeature
-     /tmp/ccgSgShH.s:1800   .text.USBD_CtlError:0000000000000000 USBD_CtlError
-     /tmp/ccgSgShH.s:179    .text.USBD_StdItfReq:0000000000000000 $t
-     /tmp/ccgSgShH.s:186    .text.USBD_StdItfReq:0000000000000000 USBD_StdItfReq
-     /tmp/ccgSgShH.s:299    .text.USBD_StdEPReq:0000000000000000 $t
-     /tmp/ccgSgShH.s:306    .text.USBD_StdEPReq:0000000000000000 USBD_StdEPReq
-     /tmp/ccgSgShH.s:763    .text.USBD_GetDescriptor:0000000000000000 $t
-     /tmp/ccgSgShH.s:800    .text.USBD_GetDescriptor:0000000000000020 $d
-     /tmp/ccgSgShH.s:807    .text.USBD_GetDescriptor:000000000000003c $t
-     /tmp/ccgSgShH.s:872    .text.USBD_GetDescriptor:00000000000000a4 $d
-     /tmp/ccgSgShH.s:878    .text.USBD_GetDescriptor:00000000000000bc $t
-     /tmp/ccgSgShH.s:1081   .text.USBD_SetAddress:0000000000000000 $t
-     /tmp/ccgSgShH.s:1188   .text.USBD_SetConfig:0000000000000000 $t
-     /tmp/ccgSgShH.s:1383   .text.USBD_SetConfig:0000000000000118 $d
-     /tmp/ccgSgShH.s:2015   .bss.cfgidx.9784:0000000000000000 cfgidx.9784
-     /tmp/ccgSgShH.s:1388   .text.USBD_GetConfig:0000000000000000 $t
-     /tmp/ccgSgShH.s:1482   .text.USBD_GetStatus:0000000000000000 $t
-     /tmp/ccgSgShH.s:1572   .text.USBD_SetFeature:0000000000000000 $t
-     /tmp/ccgSgShH.s:1624   .text.USBD_ClrFeature:0000000000000000 $t
-     /tmp/ccgSgShH.s:1694   .text.USBD_ParseSetupRequest:0000000000000000 $t
-     /tmp/ccgSgShH.s:1701   .text.USBD_ParseSetupRequest:0000000000000000 USBD_ParseSetupRequest
-     /tmp/ccgSgShH.s:1793   .text.USBD_CtlError:0000000000000000 $t
-     /tmp/ccgSgShH.s:1841   .text.USBD_GetString:0000000000000000 $t
-     /tmp/ccgSgShH.s:1848   .text.USBD_GetString:0000000000000000 USBD_GetString
-     /tmp/ccgSgShH.s:1955   .text.USBD_GetLen:0000000000000000 USBD_GetLen
-     /tmp/ccgSgShH.s:1949   .text.USBD_GetLen:0000000000000000 $t
-     /tmp/ccgSgShH.s:2016   .bss.cfgidx.9784:0000000000000000 $d
+     /tmp/cciTHAML.s:23     .text.USBD_StdDevReq:0000000000000000 $t
+     /tmp/cciTHAML.s:30     .text.USBD_StdDevReq:0000000000000000 USBD_StdDevReq
+     /tmp/cciTHAML.s:85     .text.USBD_StdDevReq:0000000000000044 $d
+     /tmp/cciTHAML.s:95     .text.USBD_StdDevReq:000000000000006c $t
+     /tmp/cciTHAML.s:769    .text.USBD_GetDescriptor:0000000000000000 USBD_GetDescriptor
+     /tmp/cciTHAML.s:1087   .text.USBD_SetAddress:0000000000000000 USBD_SetAddress
+     /tmp/cciTHAML.s:1194   .text.USBD_SetConfig:0000000000000000 USBD_SetConfig
+     /tmp/cciTHAML.s:1394   .text.USBD_GetConfig:0000000000000000 USBD_GetConfig
+     /tmp/cciTHAML.s:1488   .text.USBD_GetStatus:0000000000000000 USBD_GetStatus
+     /tmp/cciTHAML.s:1578   .text.USBD_SetFeature:0000000000000000 USBD_SetFeature
+     /tmp/cciTHAML.s:1630   .text.USBD_ClrFeature:0000000000000000 USBD_ClrFeature
+     /tmp/cciTHAML.s:1800   .text.USBD_CtlError:0000000000000000 USBD_CtlError
+     /tmp/cciTHAML.s:179    .text.USBD_StdItfReq:0000000000000000 $t
+     /tmp/cciTHAML.s:186    .text.USBD_StdItfReq:0000000000000000 USBD_StdItfReq
+     /tmp/cciTHAML.s:299    .text.USBD_StdEPReq:0000000000000000 $t
+     /tmp/cciTHAML.s:306    .text.USBD_StdEPReq:0000000000000000 USBD_StdEPReq
+     /tmp/cciTHAML.s:763    .text.USBD_GetDescriptor:0000000000000000 $t
+     /tmp/cciTHAML.s:800    .text.USBD_GetDescriptor:0000000000000020 $d
+     /tmp/cciTHAML.s:807    .text.USBD_GetDescriptor:000000000000003c $t
+     /tmp/cciTHAML.s:872    .text.USBD_GetDescriptor:00000000000000a4 $d
+     /tmp/cciTHAML.s:878    .text.USBD_GetDescriptor:00000000000000bc $t
+     /tmp/cciTHAML.s:1081   .text.USBD_SetAddress:0000000000000000 $t
+     /tmp/cciTHAML.s:1188   .text.USBD_SetConfig:0000000000000000 $t
+     /tmp/cciTHAML.s:1383   .text.USBD_SetConfig:0000000000000118 $d
+     /tmp/cciTHAML.s:2015   .bss.cfgidx.9779:0000000000000000 cfgidx.9779
+     /tmp/cciTHAML.s:1388   .text.USBD_GetConfig:0000000000000000 $t
+     /tmp/cciTHAML.s:1482   .text.USBD_GetStatus:0000000000000000 $t
+     /tmp/cciTHAML.s:1572   .text.USBD_SetFeature:0000000000000000 $t
+     /tmp/cciTHAML.s:1624   .text.USBD_ClrFeature:0000000000000000 $t
+     /tmp/cciTHAML.s:1694   .text.USBD_ParseSetupRequest:0000000000000000 $t
+     /tmp/cciTHAML.s:1701   .text.USBD_ParseSetupRequest:0000000000000000 USBD_ParseSetupRequest
+     /tmp/cciTHAML.s:1793   .text.USBD_CtlError:0000000000000000 $t
+     /tmp/cciTHAML.s:1841   .text.USBD_GetString:0000000000000000 $t
+     /tmp/cciTHAML.s:1848   .text.USBD_GetString:0000000000000000 USBD_GetString
+     /tmp/cciTHAML.s:1955   .text.USBD_GetLen:0000000000000000 USBD_GetLen
+     /tmp/cciTHAML.s:1949   .text.USBD_GetLen:0000000000000000 $t
+     /tmp/cciTHAML.s:2016   .bss.cfgidx.9779:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 USBD_CtlSendStatus

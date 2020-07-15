@@ -255,17 +255,10 @@ void TIM8_UP_TIM13_IRQHandler(void)
 	TIM8->CR1 &= ~TIM_CR1_CEN;
 	TIM8->SR  &= ~TIM_SR_UIF;
 	DMA2_Stream5->CR &= ~(DMA_SxCR_TCIE | DMA_SxCR_EN);
-	while (CDC_Transmit_FS((uint8_t *)"tessst", 6) != 0);
+	//while (CDC_Transmit_FS((uint8_t *)"tessst", 6) != 0);
   //Completion of transfer
   SamplingComplete();
 
-}
-
-void TIM8_TRG_COM_TIM14_IRQHandler()
-{
-  TIM8->SR &= ~TIM_SR_TIF;
-	TIM8->DIER &= ~TIM_DIER_TIE;
-  Handler();
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
