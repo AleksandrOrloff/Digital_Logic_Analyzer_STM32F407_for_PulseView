@@ -34,14 +34,14 @@ Archive member included to satisfy reference by file (symbol)
 Allocating common symbols
 Common symbol       size              file
 
-arr                 0x6000            build/sampling.o
+arr                 0x8000            build/sampling.o
 hUsbDeviceFS        0x29c             build/usb_device.o
 errno               0x4               /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
 hpcd_USB_OTG_FS     0x408             build/usbd_conf.o
 uwTick              0x4               build/stm32f4xx_hal.o
 pFlash              0x20              build/stm32f4xx_hal_flash.o
 UserRxBufferFS      0x40              build/usbd_cdc_if.o
-samplingRam         0x6000            build/sampling.o
+samplingRam         0x8000            build/sampling.o
 UserTxBufferFS      0x40              build/usbd_cdc_if.o
 triggerValue        0x4               build/main.o
 period              0x2               build/main.o
@@ -1690,7 +1690,7 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
                 0x0000000010000000                _eccmram = .
                 0x0000000010000000                . = ALIGN (0x4)
 
-.bss            0x0000000020000224     0xc974
+.bss            0x0000000020000224    0x10974
                 0x0000000020000224                _sbss = .
                 0x0000000020000224                __bss_start__ = _sbss
  *(.bss)
@@ -1729,25 +1729,25 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
                 0x0000000020000b50                UserTxBufferFS
  COMMON         0x0000000020000b90        0x4 build/stm32f4xx_hal.o
                 0x0000000020000b90                uwTick
- COMMON         0x0000000020000b94     0xc000 build/sampling.o
+ COMMON         0x0000000020000b94    0x10000 build/sampling.o
                 0x0000000020000b94                arr
-                0x0000000020006b94                samplingRam
- COMMON         0x000000002000cb94        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
-                0x000000002000cb94                errno
-                0x000000002000cb98                . = ALIGN (0x4)
-                0x000000002000cb98                _ebss = .
-                0x000000002000cb98                __bss_end__ = _ebss
+                0x0000000020008b94                samplingRam
+ COMMON         0x0000000020010b94        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-reent.o)
+                0x0000000020010b94                errno
+                0x0000000020010b98                . = ALIGN (0x4)
+                0x0000000020010b98                _ebss = .
+                0x0000000020010b98                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x000000002000cb98      0xa00
-                0x000000002000cb98                . = ALIGN (0x8)
-                0x000000002000cb98                PROVIDE (end = .)
+                0x0000000020010b98      0xa00
+                0x0000000020010b98                . = ALIGN (0x8)
+                0x0000000020010b98                PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
-                0x000000002000d198                . = (. + _Min_Heap_Size)
- *fill*         0x000000002000cb98      0x600 
-                0x000000002000d598                . = (. + _Min_Stack_Size)
- *fill*         0x000000002000d198      0x400 
-                0x000000002000d598                . = ALIGN (0x8)
+                0x0000000020011198                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020010b98      0x600 
+                0x0000000020011598                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020011198      0x400 
+                0x0000000020011598                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)

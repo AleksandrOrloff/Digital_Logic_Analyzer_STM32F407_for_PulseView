@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccJjpe8F.s 			page 1
+ARM GAS  /tmp/cclCY9HP.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -30,8 +30,8 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
   29              		.align	2
   32              	delayCount:
   33 0000 00000000 		.space	4
-  34              		.comm	samplingRam,24576,4
-  35              		.comm	arr,24576,4
+  34              		.comm	samplingRam,32768,4
+  35              		.comm	arr,32768,4
   36              		.section	.text.SetBufferSize,"ax",%progbits
   37              		.align	1
   38              		.global	SetBufferSize
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
   50              		@ frame_needed = 1, uses_anonymous_args = 0
   51              		@ link register save eliminated.
   52 0000 80B4     		push	{r7}
-ARM GAS  /tmp/ccJjpe8F.s 			page 2
+ARM GAS  /tmp/cclCY9HP.s 			page 2
 
 
   53              	.LCFI0:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  105              		.cfi_def_cfa_offset 4
  106              		.cfi_offset 7, -4
  107 0002 83B0     		sub	sp, sp, #12
-ARM GAS  /tmp/ccJjpe8F.s 			page 3
+ARM GAS  /tmp/cclCY9HP.s 			page 3
 
 
  108              	.LCFI7:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  160              	.LCFI13:
  161              		.cfi_def_cfa_offset 16
  162 0004 00AF     		add	r7, sp, #0
-ARM GAS  /tmp/ccJjpe8F.s 			page 4
+ARM GAS  /tmp/cclCY9HP.s 			page 4
 
 
  163              	.LCFI14:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  215              		.cfi_def_cfa_register 7
  216 0006 7860     		str	r0, [r7, #4]
   23:la/sampling.c ****     triggerValue = value;
-ARM GAS  /tmp/ccJjpe8F.s 			page 5
+ARM GAS  /tmp/cclCY9HP.s 			page 5
 
 
  217              		.loc 1 23 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  269 0008 7B68     		ldr	r3, [r7, #4]
  270 000a 9AB2     		uxth	r2, r3
  271 000c 034B     		ldr	r3, .L14
-ARM GAS  /tmp/ccJjpe8F.s 			page 6
+ARM GAS  /tmp/cclCY9HP.s 			page 6
 
 
  272 000e 1A80     		strh	r2, [r3]	@ movhi
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  324 000e 1A80     		strh	r2, [r3]	@ movhi
   32:la/sampling.c ****     }
  325              		.loc 1 32 0
-ARM GAS  /tmp/ccJjpe8F.s 			page 7
+ARM GAS  /tmp/cclCY9HP.s 			page 7
 
 
  326 0010 00BF     		nop
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  376              		.loc 1 38 0
  377 0014 FFF7FEFF 		bl	SetupDelayTimer
   39:la/sampling.c **** 	SetupRegularEXTITrigger();
-ARM GAS  /tmp/ccJjpe8F.s 			page 8
+ARM GAS  /tmp/cclCY9HP.s 			page 8
 
 
  378              		.loc 1 39 0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  427              		.cfi_def_cfa_offset 4
  428              		.cfi_offset 7, -4
  429 0002 00AF     		add	r7, sp, #0
-ARM GAS  /tmp/ccJjpe8F.s 			page 9
+ARM GAS  /tmp/cclCY9HP.s 			page 9
 
 
  430              	.LCFI39:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  480              		.cfi_def_cfa_offset 4
  481              		.cfi_offset 7, -4
  482 0002 00AF     		add	r7, sp, #0
-ARM GAS  /tmp/ccJjpe8F.s 			page 10
+ARM GAS  /tmp/cclCY9HP.s 			page 10
 
 
  483              	.LCFI43:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
   45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
   47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
-ARM GAS  /tmp/ccJjpe8F.s 			page 11
+ARM GAS  /tmp/cclCY9HP.s 			page 11
 
 
   48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
  103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
  104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-ARM GAS  /tmp/ccJjpe8F.s 			page 12
+ARM GAS  /tmp/cclCY9HP.s 			page 12
 
 
  105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  159:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  160:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  161:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccJjpe8F.s 			page 13
+ARM GAS  /tmp/cclCY9HP.s 			page 13
 
 
  162:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  216:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
  217:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               APSR Register value
  218:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccJjpe8F.s 			page 14
+ARM GAS  /tmp/cclCY9HP.s 			page 14
 
 
  219:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_APSR(void)
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  273:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
  274:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
  275:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
-ARM GAS  /tmp/ccJjpe8F.s 			page 15
+ARM GAS  /tmp/cclCY9HP.s 			page 15
 
 
  276:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  330:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  331:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
  332:Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccJjpe8F.s 			page 16
+ARM GAS  /tmp/cclCY9HP.s 			page 16
 
 
  333:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0" : : "r" (topOfMainStack) : );
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  387:Drivers/CMSIS/Include/cmsis_gcc.h ****   return(result);
  388:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  389:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccJjpe8F.s 			page 17
+ARM GAS  /tmp/cclCY9HP.s 			page 17
 
 
  390:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  444:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  445:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  446:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable FIQ
-ARM GAS  /tmp/ccJjpe8F.s 			page 18
+ARM GAS  /tmp/cclCY9HP.s 			page 18
 
 
  447:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  501:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
  502:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  503:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri)
-ARM GAS  /tmp/ccJjpe8F.s 			page 19
+ARM GAS  /tmp/cclCY9HP.s 			page 19
 
 
  504:Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  558:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  559:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
  560:Drivers/CMSIS/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccJjpe8F.s 			page 20
+ARM GAS  /tmp/cclCY9HP.s 			page 20
 
 
  561:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  615:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  616:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
  617:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
-ARM GAS  /tmp/ccJjpe8F.s 			page 21
+ARM GAS  /tmp/cclCY9HP.s 			page 21
 
 
  618:Drivers/CMSIS/Include/cmsis_gcc.h ****   return 0U;
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  672:Drivers/CMSIS/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  673:Drivers/CMSIS/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
  674:Drivers/CMSIS/Include/cmsis_gcc.h ****   mode.
-ARM GAS  /tmp/ccJjpe8F.s 			page 22
+ARM GAS  /tmp/cclCY9HP.s 			page 22
 
 
  675:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  729:Drivers/CMSIS/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
  730:Drivers/CMSIS/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
  731:Drivers/CMSIS/Include/cmsis_gcc.h **** #else
-ARM GAS  /tmp/ccJjpe8F.s 			page 23
+ARM GAS  /tmp/cclCY9HP.s 			page 23
 
 
  732:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim, %0" : : "r" (MainStackPtrLimit));
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  786:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  787:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  788:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set FPSCR
-ARM GAS  /tmp/ccJjpe8F.s 			page 24
+ARM GAS  /tmp/cclCY9HP.s 			page 24
 
 
  789:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Floating Point Status/Control register.
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  843:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  844:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  845:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccJjpe8F.s 			page 25
+ARM GAS  /tmp/cclCY9HP.s 			page 25
 
 
  846:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Wait For Event
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  507 0018 00BF     		nop
  508 001a BD46     		mov	sp, r7
  509              	.LCFI44:
-ARM GAS  /tmp/ccJjpe8F.s 			page 26
+ARM GAS  /tmp/cclCY9HP.s 			page 26
 
 
  510              		.cfi_def_cfa_register 13
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  561 001a 03F00103 		and	r3, r3, #1
  562 001e 7B60     		str	r3, [r7, #4]
  563 0020 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccJjpe8F.s 			page 27
+ARM GAS  /tmp/cclCY9HP.s 			page 27
 
 
  564              	.LBE15:
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  607              	.LCFI49:
  608              		.cfi_def_cfa_offset 4
  609 0066 BD46     		mov	sp, r7
-ARM GAS  /tmp/ccJjpe8F.s 			page 28
+ARM GAS  /tmp/cclCY9HP.s 			page 28
 
 
  610              	.LCFI50:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  660              		.loc 1 80 0
  661 0016 FFF7FEFF 		bl	CalcDMATransferSize
  662 001a F860     		str	r0, [r7, #12]
-ARM GAS  /tmp/ccJjpe8F.s 			page 29
+ARM GAS  /tmp/cclCY9HP.s 			page 29
 
 
   81:la/sampling.c **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  702              	.LFE143:
  704              		.section	.text.SetupDelayTimer,"ax",%progbits
  705              		.align	1
-ARM GAS  /tmp/ccJjpe8F.s 			page 30
+ARM GAS  /tmp/cclCY9HP.s 			page 30
 
 
  706              		.global	SetupDelayTimer
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  752              		.loc 1 104 0
  753 002e 114A     		ldr	r2, .L35+4
  754 0030 114B     		ldr	r3, .L35+8
-ARM GAS  /tmp/ccJjpe8F.s 			page 31
+ARM GAS  /tmp/cclCY9HP.s 			page 31
 
 
  755 0032 1B68     		ldr	r3, [r3]
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  800 0078 00000000 		.word	delayCount
  801 007c 00000140 		.word	1073807360
  802              		.cfi_endproc
-ARM GAS  /tmp/ccJjpe8F.s 			page 32
+ARM GAS  /tmp/cclCY9HP.s 			page 32
 
 
  803              	.LFE144:
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  851 002c FB60     		str	r3, [r7, #12]
  122:la/sampling.c **** 	uint32_t falling = triggerMask & ~triggerValue;
  852              		.loc 1 122 0
-ARM GAS  /tmp/ccJjpe8F.s 			page 33
+ARM GAS  /tmp/cclCY9HP.s 			page 33
 
 
  853 002e 4C4B     		ldr	r3, .L53+8
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  143:la/sampling.c **** 	EXTI->PR = 0xffffffff;
  887              		.loc 1 143 0
  888 0066 404B     		ldr	r3, .L53+16
-ARM GAS  /tmp/ccJjpe8F.s 			page 34
+ARM GAS  /tmp/cclCY9HP.s 			page 34
 
 
  889 0068 4FF0FF32 		mov	r2, #-1
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  935 00aa 0021     		movs	r1, #0
  936 00ac 0720     		movs	r0, #7
  937 00ae FFF7FEFF 		bl	EnableChannel
-ARM GAS  /tmp/ccJjpe8F.s 			page 35
+ARM GAS  /tmp/cclCY9HP.s 			page 35
 
 
  938 00b2 02E0     		b	.L41
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  986 0104 0021     		movs	r1, #0
  987 0106 0A20     		movs	r0, #10
  988 0108 FFF7FEFF 		bl	EnableChannel
-ARM GAS  /tmp/ccJjpe8F.s 			page 36
+ARM GAS  /tmp/cclCY9HP.s 			page 36
 
 
  989 010c 02E0     		b	.L47
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1027 014a 2820     		movs	r0, #40
  1028 014c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
  1029              	.L52:
-ARM GAS  /tmp/ccJjpe8F.s 			page 37
+ARM GAS  /tmp/cclCY9HP.s 			page 37
 
 
  1030              		.loc 1 172 0
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1080 000a 114B     		ldr	r3, .L62
  1081 000c 1B88     		ldrh	r3, [r3]
  1082 000e 03F03C03 		and	r3, r3, #60
-ARM GAS  /tmp/ccJjpe8F.s 			page 38
+ARM GAS  /tmp/cclCY9HP.s 			page 38
 
 
  1083 0012 002B     		cmp	r3, #0
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1120 0044 1846     		mov	r0, r3
  1121 0046 0C37     		adds	r7, r7, #12
  1122              	.LCFI70:
-ARM GAS  /tmp/ccJjpe8F.s 			page 39
+ARM GAS  /tmp/cclCY9HP.s 			page 39
 
 
  1123              		.cfi_def_cfa_offset 4
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1173 000e 7B68     		ldr	r3, [r7, #4]
  1174 0010 0021     		movs	r1, #0
  1175 0012 42F82310 		str	r1, [r2, r3, lsl #2]
-ARM GAS  /tmp/ccJjpe8F.s 			page 40
+ARM GAS  /tmp/cclCY9HP.s 			page 40
 
 
  200:la/sampling.c **** 		samplingRam[i] = 0;
@@ -2350,7 +2350,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  200:la/sampling.c **** 		samplingRam[i] = 0;
  1181              		.loc 1 200 0 is_stmt 0 discriminator 1
  1182 001c 7B68     		ldr	r3, [r7, #4]
- 1183 001e B3F5C05F 		cmp	r3, #6144
+ 1183 001e B3F5005F 		cmp	r3, #8192
  1184 0022 F3DB     		blt	.L66
  202:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM; i++)
  1185              		.loc 1 202 0 is_stmt 1
@@ -2374,7 +2374,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  202:la/sampling.c **** 	for(i = 0; i < MAX_SAMPLING_RAM; i++)
  1201              		.loc 1 202 0 is_stmt 0 discriminator 1
  1202 003a 7B68     		ldr	r3, [r7, #4]
- 1203 003c B3F5C04F 		cmp	r3, #24576
+ 1203 003c B3F5004F 		cmp	r3, #32768
  1204 0040 F3DB     		blt	.L68
  204:la/sampling.c **** }
  1205              		.loc 1 204 0 is_stmt 1
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1223 0054 00000000 		.word	arr
  1224              		.cfi_endproc
  1225              	.LFE147:
-ARM GAS  /tmp/ccJjpe8F.s 			page 41
+ARM GAS  /tmp/cclCY9HP.s 			page 41
 
 
  1227              		.section	.text.SamplingComplete,"ax",%progbits
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1271              		.loc 1 214 0
  1272 0012 FFF7FEFF 		bl	GetBufferTail
  1273 0016 0346     		mov	r3, r0
-ARM GAS  /tmp/ccJjpe8F.s 			page 42
+ARM GAS  /tmp/cclCY9HP.s 			page 42
 
 
  1274 0018 013B     		subs	r3, r3, #1
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  226:la/sampling.c **** 			arr[i] = *ptr;
  1315              		.loc 1 226 0 discriminator 2
  1316 005c BB68     		ldr	r3, [r7, #8]
-ARM GAS  /tmp/ccJjpe8F.s 			page 43
+ARM GAS  /tmp/cclCY9HP.s 			page 43
 
 
  1317 005e 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  240:la/sampling.c **** 		{
  241:la/sampling.c **** 			while (CDC_Transmit_FS((uint8_t*)ptr, 1) != 0){};
  242:la/sampling.c **** 			ptr--;
-ARM GAS  /tmp/ccJjpe8F.s 			page 44
+ARM GAS  /tmp/cclCY9HP.s 			page 44
 
 
  243:la/sampling.c **** 		}*/
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1399 00ee E7D3     		bcc	.L80
  252:la/sampling.c **** 		}
  253:la/sampling.c **** 		ptr = GetBuffer() + GetBufferSize() - GetBytesPerTransfer();
-ARM GAS  /tmp/ccJjpe8F.s 			page 45
+ARM GAS  /tmp/cclCY9HP.s 			page 45
 
 
  1400              		.loc 1 253 0 is_stmt 1
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1447              		.thumb
  1448              		.syntax unified
  1449              	.LBE25:
-ARM GAS  /tmp/ccJjpe8F.s 			page 46
+ARM GAS  /tmp/cclCY9HP.s 			page 46
 
 
  1450              	.LBE24:
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  267:la/sampling.c **** }
  1497              		.loc 1 267 0
  1498 0012 1846     		mov	r0, r3
-ARM GAS  /tmp/ccJjpe8F.s 			page 47
+ARM GAS  /tmp/cclCY9HP.s 			page 47
 
 
  1499 0014 BD46     		mov	sp, r7
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1550 001a 00BF     		.align	2
  1551              	.L91:
  1552 001c 00000000 		.word	transferSize
-ARM GAS  /tmp/ccJjpe8F.s 			page 48
+ARM GAS  /tmp/cclCY9HP.s 			page 48
 
 
  1553 0020 00000000 		.word	samplingRam
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  275:la/sampling.c **** 
  276:la/sampling.c **** 
  277:la/sampling.c **** uint32_t GetBufferTailSize()
-ARM GAS  /tmp/ccJjpe8F.s 			page 49
+ARM GAS  /tmp/cclCY9HP.s 			page 49
 
 
  278:la/sampling.c **** {
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  284:la/sampling.c **** 	return transferCount * transferSize;
  1659              		.loc 1 284 0
  1660 0004 054B     		ldr	r3, .L103
-ARM GAS  /tmp/ccJjpe8F.s 			page 50
+ARM GAS  /tmp/cclCY9HP.s 			page 50
 
 
  1661 0006 1B68     		ldr	r3, [r3]
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1711              	.LCFI102:
  1712              		.cfi_def_cfa_register 13
  1713              		@ sp needed
-ARM GAS  /tmp/ccJjpe8F.s 			page 51
+ARM GAS  /tmp/cclCY9HP.s 			page 51
 
 
  1714 000a 5DF8047B 		ldr	r7, [sp], #4
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  300:la/sampling.c **** 		//SetChannelPriority(irqChannel, priority, subpriority);
  301:la/sampling.c **** 		HAL_NVIC_SetPriority(irqChannel, 0, 0);
  1761              		.loc 1 301 0
-ARM GAS  /tmp/ccJjpe8F.s 			page 52
+ARM GAS  /tmp/cclCY9HP.s 			page 52
 
 
  1762 001c 97F90730 		ldrsb	r3, [r7, #7]
@@ -3104,7 +3104,7 @@ ARM GAS  /tmp/ccJjpe8F.s 			page 1
  1798              		.file 15 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
  1799              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
  1800              		.file 17 "Inc/usbd_cdc_if.h"
-ARM GAS  /tmp/ccJjpe8F.s 			page 53
+ARM GAS  /tmp/cclCY9HP.s 			page 53
 
 
 DEFINED SYMBOLS
@@ -3114,83 +3114,83 @@ DEFINED SYMBOLS
                             *COM*:0000000000000002 flags
                             *COM*:0000000000000002 period
                             *COM*:0000000000000004 transferSize
-     /tmp/ccJjpe8F.s:23     .bss.transferCount:0000000000000000 $d
-     /tmp/ccJjpe8F.s:26     .bss.transferCount:0000000000000000 transferCount
-     /tmp/ccJjpe8F.s:29     .bss.delayCount:0000000000000000 $d
-     /tmp/ccJjpe8F.s:32     .bss.delayCount:0000000000000000 delayCount
-                            *COM*:0000000000006000 samplingRam
-                            *COM*:0000000000006000 arr
-     /tmp/ccJjpe8F.s:37     .text.SetBufferSize:0000000000000000 $t
-     /tmp/ccJjpe8F.s:44     .text.SetBufferSize:0000000000000000 SetBufferSize
-     /tmp/ccJjpe8F.s:84     .text.SetBufferSize:000000000000001c $d
-     /tmp/ccJjpe8F.s:89     .text.SetDelayCount:0000000000000000 $t
-     /tmp/ccJjpe8F.s:96     .text.SetDelayCount:0000000000000000 SetDelayCount
-     /tmp/ccJjpe8F.s:136    .text.SetDelayCount:0000000000000020 $d
-     /tmp/ccJjpe8F.s:141    .text.SetTriggerMask:0000000000000000 $t
-     /tmp/ccJjpe8F.s:148    .text.SetTriggerMask:0000000000000000 SetTriggerMask
-     /tmp/ccJjpe8F.s:187    .text.SetTriggerMask:000000000000001c $d
-     /tmp/ccJjpe8F.s:192    .text.SetTriggerValue:0000000000000000 $t
-     /tmp/ccJjpe8F.s:199    .text.SetTriggerValue:0000000000000000 SetTriggerValue
-     /tmp/ccJjpe8F.s:238    .text.SetTriggerValue:000000000000001c $d
-     /tmp/ccJjpe8F.s:243    .text.SetFlags:0000000000000000 $t
-     /tmp/ccJjpe8F.s:250    .text.SetFlags:0000000000000000 SetFlags
-     /tmp/ccJjpe8F.s:290    .text.SetFlags:000000000000001c $d
-     /tmp/ccJjpe8F.s:295    .text.SetSamplingPeriod:0000000000000000 $t
-     /tmp/ccJjpe8F.s:302    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
-     /tmp/ccJjpe8F.s:342    .text.SetSamplingPeriod:000000000000001c $d
-     /tmp/ccJjpe8F.s:347    .text.Start:0000000000000000 $t
-     /tmp/ccJjpe8F.s:354    .text.Start:0000000000000000 Start
-     /tmp/ccJjpe8F.s:533    .text.SetupSamplingTimer:0000000000000000 SetupSamplingTimer
-     /tmp/ccJjpe8F.s:635    .text.SetupSamplingDMA:0000000000000000 SetupSamplingDMA
-     /tmp/ccJjpe8F.s:712    .text.SetupDelayTimer:0000000000000000 SetupDelayTimer
-     /tmp/ccJjpe8F.s:813    .text.SetupRegularEXTITrigger:0000000000000000 SetupRegularEXTITrigger
-     /tmp/ccJjpe8F.s:402    .text.Start:0000000000000040 $d
-     /tmp/ccJjpe8F.s:411    .text.Stop:0000000000000000 $t
-     /tmp/ccJjpe8F.s:418    .text.Stop:0000000000000000 Stop
-     /tmp/ccJjpe8F.s:458    .text.Stop:0000000000000028 $d
-     /tmp/ccJjpe8F.s:464    .text.Arm:0000000000000000 $t
-     /tmp/ccJjpe8F.s:471    .text.Arm:0000000000000000 Arm
-     /tmp/ccJjpe8F.s:520    .text.Arm:0000000000000024 $d
-     /tmp/ccJjpe8F.s:526    .text.SetupSamplingTimer:0000000000000000 $t
-     /tmp/ccJjpe8F.s:621    .text.SetupSamplingTimer:0000000000000070 $d
-     /tmp/ccJjpe8F.s:628    .text.SetupSamplingDMA:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1059   .text.CalcDMATransferSize:0000000000000000 CalcDMATransferSize
-     /tmp/ccJjpe8F.s:698    .text.SetupSamplingDMA:000000000000004c $d
-     /tmp/ccJjpe8F.s:705    .text.SetupDelayTimer:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1734   .text.EnableChannel:0000000000000000 EnableChannel
-     /tmp/ccJjpe8F.s:798    .text.SetupDelayTimer:0000000000000070 $d
-     /tmp/ccJjpe8F.s:806    .text.SetupRegularEXTITrigger:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1043   .text.SetupRegularEXTITrigger:0000000000000158 $d
-     /tmp/ccJjpe8F.s:1052   .text.CalcDMATransferSize:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1136   .text.CalcDMATransferSize:0000000000000050 $d
-     /tmp/ccJjpe8F.s:1142   .text.SamplingClearBuffer:0000000000000000 $t
-ARM GAS  /tmp/ccJjpe8F.s 			page 54
+     /tmp/cclCY9HP.s:23     .bss.transferCount:0000000000000000 $d
+     /tmp/cclCY9HP.s:26     .bss.transferCount:0000000000000000 transferCount
+     /tmp/cclCY9HP.s:29     .bss.delayCount:0000000000000000 $d
+     /tmp/cclCY9HP.s:32     .bss.delayCount:0000000000000000 delayCount
+                            *COM*:0000000000008000 samplingRam
+                            *COM*:0000000000008000 arr
+     /tmp/cclCY9HP.s:37     .text.SetBufferSize:0000000000000000 $t
+     /tmp/cclCY9HP.s:44     .text.SetBufferSize:0000000000000000 SetBufferSize
+     /tmp/cclCY9HP.s:84     .text.SetBufferSize:000000000000001c $d
+     /tmp/cclCY9HP.s:89     .text.SetDelayCount:0000000000000000 $t
+     /tmp/cclCY9HP.s:96     .text.SetDelayCount:0000000000000000 SetDelayCount
+     /tmp/cclCY9HP.s:136    .text.SetDelayCount:0000000000000020 $d
+     /tmp/cclCY9HP.s:141    .text.SetTriggerMask:0000000000000000 $t
+     /tmp/cclCY9HP.s:148    .text.SetTriggerMask:0000000000000000 SetTriggerMask
+     /tmp/cclCY9HP.s:187    .text.SetTriggerMask:000000000000001c $d
+     /tmp/cclCY9HP.s:192    .text.SetTriggerValue:0000000000000000 $t
+     /tmp/cclCY9HP.s:199    .text.SetTriggerValue:0000000000000000 SetTriggerValue
+     /tmp/cclCY9HP.s:238    .text.SetTriggerValue:000000000000001c $d
+     /tmp/cclCY9HP.s:243    .text.SetFlags:0000000000000000 $t
+     /tmp/cclCY9HP.s:250    .text.SetFlags:0000000000000000 SetFlags
+     /tmp/cclCY9HP.s:290    .text.SetFlags:000000000000001c $d
+     /tmp/cclCY9HP.s:295    .text.SetSamplingPeriod:0000000000000000 $t
+     /tmp/cclCY9HP.s:302    .text.SetSamplingPeriod:0000000000000000 SetSamplingPeriod
+     /tmp/cclCY9HP.s:342    .text.SetSamplingPeriod:000000000000001c $d
+     /tmp/cclCY9HP.s:347    .text.Start:0000000000000000 $t
+     /tmp/cclCY9HP.s:354    .text.Start:0000000000000000 Start
+     /tmp/cclCY9HP.s:533    .text.SetupSamplingTimer:0000000000000000 SetupSamplingTimer
+     /tmp/cclCY9HP.s:635    .text.SetupSamplingDMA:0000000000000000 SetupSamplingDMA
+     /tmp/cclCY9HP.s:712    .text.SetupDelayTimer:0000000000000000 SetupDelayTimer
+     /tmp/cclCY9HP.s:813    .text.SetupRegularEXTITrigger:0000000000000000 SetupRegularEXTITrigger
+     /tmp/cclCY9HP.s:402    .text.Start:0000000000000040 $d
+     /tmp/cclCY9HP.s:411    .text.Stop:0000000000000000 $t
+     /tmp/cclCY9HP.s:418    .text.Stop:0000000000000000 Stop
+     /tmp/cclCY9HP.s:458    .text.Stop:0000000000000028 $d
+     /tmp/cclCY9HP.s:464    .text.Arm:0000000000000000 $t
+     /tmp/cclCY9HP.s:471    .text.Arm:0000000000000000 Arm
+     /tmp/cclCY9HP.s:520    .text.Arm:0000000000000024 $d
+     /tmp/cclCY9HP.s:526    .text.SetupSamplingTimer:0000000000000000 $t
+     /tmp/cclCY9HP.s:621    .text.SetupSamplingTimer:0000000000000070 $d
+     /tmp/cclCY9HP.s:628    .text.SetupSamplingDMA:0000000000000000 $t
+     /tmp/cclCY9HP.s:1059   .text.CalcDMATransferSize:0000000000000000 CalcDMATransferSize
+     /tmp/cclCY9HP.s:698    .text.SetupSamplingDMA:000000000000004c $d
+     /tmp/cclCY9HP.s:705    .text.SetupDelayTimer:0000000000000000 $t
+     /tmp/cclCY9HP.s:1734   .text.EnableChannel:0000000000000000 EnableChannel
+     /tmp/cclCY9HP.s:798    .text.SetupDelayTimer:0000000000000070 $d
+     /tmp/cclCY9HP.s:806    .text.SetupRegularEXTITrigger:0000000000000000 $t
+     /tmp/cclCY9HP.s:1043   .text.SetupRegularEXTITrigger:0000000000000158 $d
+     /tmp/cclCY9HP.s:1052   .text.CalcDMATransferSize:0000000000000000 $t
+     /tmp/cclCY9HP.s:1136   .text.CalcDMATransferSize:0000000000000050 $d
+     /tmp/cclCY9HP.s:1142   .text.SamplingClearBuffer:0000000000000000 $t
+ARM GAS  /tmp/cclCY9HP.s 			page 54
 
 
-     /tmp/ccJjpe8F.s:1149   .text.SamplingClearBuffer:0000000000000000 SamplingClearBuffer
-     /tmp/ccJjpe8F.s:1222   .text.SamplingClearBuffer:0000000000000050 $d
-     /tmp/ccJjpe8F.s:1228   .text.SamplingComplete:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1235   .text.SamplingComplete:0000000000000000 SamplingComplete
-     /tmp/ccJjpe8F.s:1565   .text.GetBytesPerTransfer:0000000000000000 GetBytesPerTransfer
-     /tmp/ccJjpe8F.s:1524   .text.GetBufferTail:0000000000000000 GetBufferTail
-     /tmp/ccJjpe8F.s:1607   .text.GetBufferTailSize:0000000000000000 GetBufferTailSize
-     /tmp/ccJjpe8F.s:1692   .text.GetBuffer:0000000000000000 GetBuffer
-     /tmp/ccJjpe8F.s:1645   .text.GetBufferSize:0000000000000000 GetBufferSize
-     /tmp/ccJjpe8F.s:1464   .text.SamplingComplete:0000000000000144 $d
-     /tmp/ccJjpe8F.s:1469   .text.ActualTransferCount:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1476   .text.ActualTransferCount:0000000000000000 ActualTransferCount
-     /tmp/ccJjpe8F.s:1511   .text.ActualTransferCount:000000000000001c $d
-     /tmp/ccJjpe8F.s:1517   .text.GetBufferTail:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1552   .text.GetBufferTail:000000000000001c $d
-     /tmp/ccJjpe8F.s:1558   .text.GetBytesPerTransfer:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1595   .text.GetBytesPerTransfer:0000000000000014 $d
-     /tmp/ccJjpe8F.s:1600   .text.GetBufferTailSize:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1633   .text.GetBufferTailSize:0000000000000018 $d
-     /tmp/ccJjpe8F.s:1638   .text.GetBufferSize:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1679   .text.GetBufferSize:000000000000001c $d
-     /tmp/ccJjpe8F.s:1685   .text.GetBuffer:0000000000000000 $t
-     /tmp/ccJjpe8F.s:1722   .text.GetBuffer:0000000000000010 $d
-     /tmp/ccJjpe8F.s:1727   .text.EnableChannel:0000000000000000 $t
+     /tmp/cclCY9HP.s:1149   .text.SamplingClearBuffer:0000000000000000 SamplingClearBuffer
+     /tmp/cclCY9HP.s:1222   .text.SamplingClearBuffer:0000000000000050 $d
+     /tmp/cclCY9HP.s:1228   .text.SamplingComplete:0000000000000000 $t
+     /tmp/cclCY9HP.s:1235   .text.SamplingComplete:0000000000000000 SamplingComplete
+     /tmp/cclCY9HP.s:1565   .text.GetBytesPerTransfer:0000000000000000 GetBytesPerTransfer
+     /tmp/cclCY9HP.s:1524   .text.GetBufferTail:0000000000000000 GetBufferTail
+     /tmp/cclCY9HP.s:1607   .text.GetBufferTailSize:0000000000000000 GetBufferTailSize
+     /tmp/cclCY9HP.s:1692   .text.GetBuffer:0000000000000000 GetBuffer
+     /tmp/cclCY9HP.s:1645   .text.GetBufferSize:0000000000000000 GetBufferSize
+     /tmp/cclCY9HP.s:1464   .text.SamplingComplete:0000000000000144 $d
+     /tmp/cclCY9HP.s:1469   .text.ActualTransferCount:0000000000000000 $t
+     /tmp/cclCY9HP.s:1476   .text.ActualTransferCount:0000000000000000 ActualTransferCount
+     /tmp/cclCY9HP.s:1511   .text.ActualTransferCount:000000000000001c $d
+     /tmp/cclCY9HP.s:1517   .text.GetBufferTail:0000000000000000 $t
+     /tmp/cclCY9HP.s:1552   .text.GetBufferTail:000000000000001c $d
+     /tmp/cclCY9HP.s:1558   .text.GetBytesPerTransfer:0000000000000000 $t
+     /tmp/cclCY9HP.s:1595   .text.GetBytesPerTransfer:0000000000000014 $d
+     /tmp/cclCY9HP.s:1600   .text.GetBufferTailSize:0000000000000000 $t
+     /tmp/cclCY9HP.s:1633   .text.GetBufferTailSize:0000000000000018 $d
+     /tmp/cclCY9HP.s:1638   .text.GetBufferSize:0000000000000000 $t
+     /tmp/cclCY9HP.s:1679   .text.GetBufferSize:000000000000001c $d
+     /tmp/cclCY9HP.s:1685   .text.GetBuffer:0000000000000000 $t
+     /tmp/cclCY9HP.s:1722   .text.GetBuffer:0000000000000010 $d
+     /tmp/cclCY9HP.s:1727   .text.EnableChannel:0000000000000000 $t
 
 UNDEFINED SYMBOLS
 HAL_NVIC_DisableIRQ

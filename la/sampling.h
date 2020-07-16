@@ -1,5 +1,5 @@
 #include "main.h"
-#define MAX_SAMPLING_RAM (24*1024)
+#define MAX_SAMPLING_RAM (32*1024)
 //#define MAX_RLE_SAMPLE_COUNT	(64)
 #define MAX_RLE_SAMPLE_COUNT	(128)
 //#define SAMPLING_FSMC
