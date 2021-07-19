@@ -3,7 +3,7 @@
 
 ## How to use
 
-1. Plug your board to host by USB-cable.
+1. Plug your board to the host by USB-cable.
 2. Launch the PulseView and click **Connect to device**.
 3. Choose the driver and interface in the pop-up window as shown in the picture:
 ![picture](./pic/connect.png)
